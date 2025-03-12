@@ -10,7 +10,7 @@ export default function Navbar() {
           <img src={logo} alt="Logo" className="navbar-logo-image" />
         </div>
       </div>
-      <div className="navbar-brand" style={{ fontFamily: "Abhaya Libre" }}>
+      <div className="navbar-brand">
         Виножито
       </div>
 
