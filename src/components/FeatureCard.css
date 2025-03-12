@@ -1,0 +1,37 @@
+.feature-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 14rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /*flex: 0 0 auto; Prevent cards from shrinking or growing*/
+    /*width: 250px; */
+    /* scroll-snap-align: start; */
+    list-style: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card-image {
+    height: 4rem;
+    width: 6rem;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+/* .feature-card-title {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    color: #333;
+} */
+
+.feature-card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}

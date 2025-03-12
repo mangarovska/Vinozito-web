@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+}
+
+.navbar-logo-container {
+  position: absolute;
+  left: -8px;
+  top: 62%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-circle {
+  height: 90px;
+  width: 95px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-logo-image {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.navbar-logo-image:hover {
+  transform: rotate(360deg); /* rotate 360 */
+}
+
+.navbar-brand {
+  color: #353535;
+  font-size: 24px;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-left: 80px;
+  /* position: absolute;
+  left: 75px;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* Push buttons to the right */
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.navbar-links li {
+  margin-left: 10px;
+}
+
+.navbar-links a {
+  color: #353535;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 22px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.navbar-links a:hover {
+  background-color: #f0f0f0;
+}
+
+.navbar-links .login-button a {
+  padding: 7px 16px;
+  height: 40px;
+  border-radius: 22px;
+  border-bottom: 6px solid #00738e;
+  background: #0098a8;
+  color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-links .login-button a:hover {
+  background: #94d6dd;
+  border-bottom: 6px solid #62b4bd;
+  color: #00738e;
+}
+
+/* responsive -> makes buttons move closer together on smaller screens */
+@media (max-width: 768px) {
+  .navbar-links {
+    gap: 2px;
+  }
+
+  .navbar-links li {
+    margin-left: 5px;
+  }
+}
