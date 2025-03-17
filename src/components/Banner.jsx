@@ -1,5 +1,6 @@
 import React from "react";
 import "./Banner.css";
+import Phone from "./Phone.jsx";
 
 const Banner = () => {
   return (
@@ -20,8 +21,10 @@ const Banner = () => {
             <button className="banner-button">Преземи</button>
           </div>
         </div>
+
         <div className="banner-right">
-          <img src="/phone.png" alt="Banner" />
+          {/* <img src="/phone.png" alt="Banner" /> */}
+          <Phone />
         </div>
       </div>
     </div>
