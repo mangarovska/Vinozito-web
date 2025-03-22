@@ -65,7 +65,7 @@ body {
   display: flex;
   margin: 0;
   padding: 0;
-  margin-left: auto; /* Push buttons to the right */
+  margin-left: auto; /* push buttons to the right */
   gap: 5px;
   flex-wrap: nowrap;
 }
@@ -110,6 +110,6 @@ body {
   }
 
   .navbar-links li {
-    margin-left: 5px;
+    margin-left: 4px;
   }
 }

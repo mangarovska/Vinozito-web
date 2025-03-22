@@ -6,6 +6,7 @@ const Banner = () => {
   return (
     <div className="banner">
       <div className="banner-content">
+        
         <div className="banner-left">
           <h1 className="banner-title">Говори. Играј. Учи.</h1>
           <p className="banner-description">
@@ -25,6 +26,9 @@ const Banner = () => {
         <div className="banner-right">
           {/* <img src="/phone.png" alt="Banner" /> */}
           <Phone />
+          <div class="small-circle-1"></div>
+          <div class="small-circle-2"></div>
+          <div class="small-circle-3"></div>
         </div>
       </div>
     </div>

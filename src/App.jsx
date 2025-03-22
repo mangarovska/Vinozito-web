@@ -6,6 +6,8 @@ import React, { Fragment } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Cards from "./components/Cards.jsx";
 import Banner from "./components/Banner.jsx";
+import MainFeatures from "./components/MainFeatures.jsx";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
       <main>
         <Banner />
         <Cards />
+        <MainFeatures/>
       </main>
+      <Footer/>
     </Fragment>
   );
 }
