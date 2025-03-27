@@ -31,7 +31,7 @@
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center */
+  justify-content: center; /* vertically center */
   height: 100%;
 }
 
@@ -73,7 +73,7 @@
 .banner-button:hover {
   background: #ffffff;
   color: #7391d1;
-  box-shadow: inset 0px -6px 0px #7391d1, 0px 4px 4px rgba(0, 0, 0, 0.25); /* Adjust box shadow to touch edges */
+  box-shadow: inset 0px -6px 0px #7391d1, 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .banner-button:focus {

@@ -5,13 +5,15 @@
   gap: 40px;
   padding: 20px;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* allow wrapping on smaller screens */
+   flex-wrap: nowrap; /*prevent wrapping until small screen */
+  /*flex-wrap: wrap;  allow wrapping on smaller screens */
 }
 
 .features {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* flex-shrink: 0; */
 }
 
 .left-features .feature-item {
@@ -104,11 +106,13 @@
 }
 
 /* 768px */
-@media (max-width: 768px) {
+@media (max-width: 945px) {
   .feature-container {
     flex-direction: column;
     gap: 20px;
+    /* flex-wrap: wrap; */
   }
+  
 
   .features {
     flex-direction: row;
@@ -139,3 +143,5 @@
     gap: 15px;
   }
 }
+
+
