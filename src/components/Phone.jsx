@@ -5,7 +5,7 @@ const Phone = ({ image, background }) => {
   const defaultScreen = loading;
 
   return (
-    <div className="relative flex justify-center items-center h-[400px] w-[200px] overflow-visible">
+    <div className="relative flex justify-center items-center h-[510px] w-[300px] overflow-visible">
       {background && (
         <div className="absolute inset-0 z-0 flex justify-center items-center overflow-visible">
           <img
@@ -21,7 +21,7 @@ const Phone = ({ image, background }) => {
       )}
 
       <div
-        className={`relative flex justify-center h-[325px] w-[150px] border border-4 border-black rounded-2xl bg-gray-50 ${
+        className={`relative flex justify-center h-[430px] w-[200px] border border-4 border-black rounded-2xl bg-gray-50 ${
           (image || defaultScreen)&& `bg-cover bg-center bg-no-repeat`
         }`}
         style={{

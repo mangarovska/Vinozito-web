@@ -1,8 +1,11 @@
 import React from "react";
 import "./Banner.css";
 import Phone from "./Phone.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="banner">
       <div className="banner-content">
@@ -14,7 +17,7 @@ const Banner = () => {
             комуникацијата преку симболи и развој преку забавни игри.
           </p>
           <div className="banner-buttons">
-            <button className="banner-button">
+            <button className="banner-button" onClick={() => navigate("/vinozhito")}>
               Отвори
               <br />
               Виножито

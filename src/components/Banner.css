@@ -19,7 +19,7 @@
 
 .banner-content {
   width: 100%;
-  max-width: 950px;
+  max-width: 1024px;
   display: grid;
   grid-template-columns: 2fr 1fr; /* left side twice as wide as right side */
   gap: 2.5rem; /* space between */
@@ -96,10 +96,10 @@
 .banner-right::before {
   content: "";
   position: absolute;
-  width: 40vw;
-  height: 40vw; 
-  max-width: 300px;
-  max-height: 300px;
+  width: 50vw;
+  height: 50vw; 
+  max-width: 400px;
+  max-height: 400px;
   border-radius: 50%;
   background-color: #92bff5;
   z-index: 0;
@@ -119,22 +119,23 @@
 }
 
 .banner-right .small-circle-1 {/* golem dole */
-  width: 18%;
-  bottom: -5%;
-  left: -25%;
+  width: 15%;
+  bottom: 2%;
+  left: -15%;
 }
 
 .banner-right .small-circle-2 {/* mal dole */
-  width: 10%; 
-  bottom: 5%;
-  left: -3%; 
+  width: 9%; 
+  bottom: 10%;
+  left: 5%; 
 }
 
 .banner-right .small-circle-3 { /* goren */
-  width: 20%; 
-  top: -5%;
-  right: -10%; 
+  width: 17%; 
+  top: 0%;
+  right: -5%; 
 }
+
 
 .banner-right img {
   width: 70%;
@@ -144,7 +145,9 @@
   /* min-width: 50px; Prevents the phone from getting too small */
 }
 
-@media (max-width: 768px) {
+
+
+@media (max-width: 900px) {
   .banner-content {
     display: flex;
     flex-direction: column;
@@ -159,6 +162,7 @@
 
   .banner-description {
     font-size: 1.2rem;
+    padding-bottom: 10px;
   }
 
   .banner-right {
@@ -168,10 +172,10 @@
   .banner-right::before {
     content: "";
     position: absolute;
-    width: 60vw; /* bigger container for better scaling */
-    height: 60vw;
-    max-width: 300px;
-    max-height: 300px;
+    width: 80vw; /* bigger container for better scaling */
+    height: 80vw;
+    max-width: 380px;
+    max-height: 380px;
     aspect-ratio: 1/1; 
     height: 100%;
     background-color: #92bff5;
@@ -181,26 +185,27 @@
   .banner-right .small-circle-1,
   .banner-right .small-circle-2,
   .banner-right .small-circle-3 {
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 15px;
+    min-height: 15px;
   }
 
-  .banner-right .small-circle-1 {
-    width: 25%;
-    bottom: -5%;
-    left: -48%;
-  }
 
-  .banner-right .small-circle-2 {/* mal dole*/
-    width: 10%; 
+  .banner-right .small-circle-1 {/* golem dole */
+    width: 15%;
     bottom: 2%;
-    left: -20%; 
+    left: -15%;
   }
-
+  
+  .banner-right .small-circle-2 {/* mal dole */
+    width: 9%; 
+    bottom: 10%;
+    left: 5%; 
+  }
+  
   .banner-right .small-circle-3 { /* goren */
-    width: 20%; 
-    top: -5%;
-    right: -30%; 
+    width: 17%; 
+    top: 0%;
+    right: -5%; 
   }
 
 

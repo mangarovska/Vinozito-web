@@ -4,7 +4,7 @@
 }
 
 .features-container {
-  max-width: 1200px;
+  max-width: 1024px;
   margin: 0 auto; /* center the container */
   display: flex;
   flex-wrap: wrap; /* go to next line */

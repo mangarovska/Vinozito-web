@@ -1,25 +1,33 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-import React, { Fragment } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Cards from "./components/Cards.jsx";
 import Banner from "./components/Banner.jsx";
 import MainFeatures from "./components/MainFeatures.jsx";
 import Footer from "./components/Footer";
+import Communication from "./pages/Communication.jsx"; // New Page
 
 function App() {
   return (
-    <Fragment>
+    <Router>
       <Navbar />
       <main>
-        <Banner />
-        <Cards />
-        <MainFeatures/>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Banner />
+                <Cards />
+                <MainFeatures />
+              </>
+            }
+          />
+          <Route path="/vinozhito" element={<Communication />} />
+        </Routes>
       </main>
-      <Footer/>
-    </Fragment>
+      <Footer />
+    </Router>
   );
 }
 
