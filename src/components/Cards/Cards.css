@@ -1,5 +1,5 @@
 #features {
-  padding: 3rem 1rem;
+  padding: 6rem 1rem 4rem; /* top, left & right, bottom*/
   text-align: center;
 }
 
@@ -12,16 +12,6 @@
   justify-content: center;
 }
 
-/* .features-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-} */
-
 .features-list {
   display: flex;
   flex-wrap: nowrap; /* all in one line */
@@ -29,14 +19,11 @@
   overflow-x: auto; /* horizontal scrolling if needed */
   padding: 1rem;
   width: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-snap-align: start; /* snap cards to the start of the container */
 }
 
 .features-list:-webkit-scrollbar {
   display: none;
-}
-
-.features-list {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  scroll-snap-align: start; /* snap cards to the start of the container */
 }

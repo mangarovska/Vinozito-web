@@ -1,46 +1,26 @@
-/* ==================== */
-/* Main Layout Styles */
-/* ==================== */
+/* === Layout Styles === */
 .feature-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 40px;
   padding: 30px;
-  margin-bottom: 30px;
-  flex-wrap: nowrap;
+  margin-bottom: 90px;
 }
 
 .phone-container {
   position: relative;
 }
 
-/* ==================== */
-/* Desktop Feature Styles */
-/* ==================== */
 .features {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.left-features .feature-item,
-.right-features .feature-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-}
-
-.left-features .feature-item:nth-child(2) {
-  transform: translateX(-40px);
-}
-
-.right-features .feature-item:nth-child(2) {
-  transform: translateX(40px);
-}
-
 .feature-item {
+  display: flex;
   align-items: center;
   gap: 15px;
   padding: 15px;
@@ -48,25 +28,48 @@
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-icon {
-  width: 85px;
-  height: 85px;
+/* Adjust middle item spacing */
+.left-features .feature-item:nth-child(2) {
+  transform: translateX(-40px);
+}
+.right-features .feature-item:nth-child(2) {
+  transform: translateX(40px);
+}
+
+/* === Icon Styles === */
+.feature-icon, .mobile-feature-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
   border: 3px solid #ddd;
-  font-size: 24px;
-  flex-shrink: 0;
+  border-radius: 50%;
   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  flex-shrink: 0;
 }
 
-.feature-item:hover .feature-icon {
-  transform: scale(1.1);
-  background-color: inherit;
+.feature-icon {
+  width: 85px;
+  height: 85px;
+  font-size: 24px;
 }
 
-.icon-image {
+.mobile-feature-icon {
+  width: 75px;
+  height: 75px;
+  border: 3px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.mobile-icon-image {
+  width: 60px;
+  height: 60px;
+}
+
+.icon-image, .mobile-icon-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -75,10 +78,12 @@
   transition: transform 0.2s ease;
 }
 
+.feature-item:hover .feature-icon,
 .feature-item:hover .icon-image {
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
+/* === Text Styles === */
 .feature-text {
   max-width: 200px;
 }
@@ -94,48 +99,46 @@
   color: #555;
 }
 
-/* ==================== */
-/* Mobile Carousel Styles */
-/* ==================== */
+/* === Mobile Styles === */
 .mobile-feature-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   width: 100%;
+  padding: 20px;
+  margin-bottom: 60px;
 }
 
 .mobile-carousel {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   width: 100%;
   margin-bottom: 20px;
-  gap: 10px;
 }
 
-.mobile-features-viewport,
-.mobile-features-container {
-  width: 300px;
+.mobile-features-viewport, .mobile-features-container {
+  width: 330px;
+  height: 120px;
   overflow: hidden;
   position: relative;
-  height: 120px;
 }
 
 .mobile-features-track {
   display: flex;
+  justify-content: center;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: transform 0.3s ease-in-out; /* smooth transition for sliding */
-  gap: 20px;
+  gap: 35px;
   height: 100%;
-  justify-content: center;
   will-change: transform;
+  transition: transform 0.3s ease-in-out;
 }
 
 .mobile-features-track.transitioning {
-  transition: transform 2s ease-in-out; /* transition happens during scrolling */
+  transition: transform 2s ease-in-out;
 }
 
 .mobile-feature-item {
@@ -146,77 +149,50 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  transform: scale(1);
 }
 
 .mobile-feature-item.center {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1.25);
   z-index: 2;
-}
-
-.mobile-feature-item.selected {
-  transform: scale(1.2);
-}
-
-.mobile-feature-icon {
-  width: 70px;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border: 3px solid #ddd;
-  transition: all 0.3s ease;
-}
-
-.mobile-feature-item.selected .mobile-feature-icon {
-  background-color: inherit;
-}
-
-.mobile-icon-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
 }
 
 .carousel-arrow {
   background: none;
   border: none;
   font-size: 24px;
-  cursor: pointer;
   color: #555;
+  cursor: pointer;
   padding: 10px;
   z-index: 1;
   flex-shrink: 0;
 }
 
 .mobile-phone-container {
-  margin-top: 20px;
+  margin-top: 50px;
   width: 100%;
   max-width: 300px;
   display: flex;
   justify-content: center;
 }
 
-/* ==================== */
-/* Mobile Text Styles */
-/* ==================== */
 .mobile-feature-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 80%;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .mobile-feature-title {
@@ -224,22 +200,16 @@
   font-weight: bold;
   color: #333;
   margin-bottom: 5px;
-  text-align: center;
-  line-height: 1.4;
 }
 
 .mobile-feature-description {
   font-size: 1rem;
   color: #666;
-  text-align: center;
-  line-height: 1.4;
   margin-top: 5px;
   max-width: 500px;
 }
 
-/* ==================== */
-/* Responsive Styles */
-/* ==================== */
+/* === Responsive === */
 @media (max-width: 1024px) {
   .feature-container {
     flex-direction: column;
@@ -254,9 +224,9 @@
 
   .feature-item {
     flex-direction: column;
-    text-align: center;
     width: 50%;
     min-width: 400px;
+    text-align: center;
   }
 
   .feature-text {
@@ -264,19 +234,17 @@
     text-align: left;
   }
 
-  .phone-container {
-    order: -1;
-  }
-
   .right-features .feature-item {
-    display: flex;
     flex-direction: row-reverse;
     text-align: left;
-    gap: 15px;
   }
 
   .left-features .feature-item:nth-child(2),
   .right-features .feature-item:nth-child(2) {
     transform: translateX(0);
+  }
+
+  .phone-container {
+    order: -1;
   }
 }

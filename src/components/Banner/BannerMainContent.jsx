@@ -1,15 +1,17 @@
 import React from "react";
+import Navbar from "../Navigation Bar/Navbar.jsx";
+import Banner from "./Banner.jsx";
 import "./Banner.css";
-import Phone from "./Phone.jsx";
+import Phone from "../Phone.jsx";
 import { useNavigate } from "react-router-dom";
 
-const Banner = () => {
+const BannerMainContent = () => {
+
   const navigate = useNavigate();
 
   return (
     <div className="banner">
       <div className="banner-content">
-        
         <div className="banner-left">
           <h1 className="banner-title">Говори. Играј. Учи.</h1>
           <p className="banner-description">
@@ -17,7 +19,10 @@ const Banner = () => {
             комуникацијата преку симболи и развој преку забавни игри.
           </p>
           <div className="banner-buttons">
-            <button className="banner-button" onClick={() => navigate("/vinozhito")}>
+            <button
+              className="banner-button"
+              onClick={() => navigate("/menu")}
+            >
               Отвори
               <br />
               Виножито
@@ -38,4 +43,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default BannerMainContent;

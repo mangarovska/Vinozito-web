@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MainFeatures.css";
-import Phone from "./Phone";
-import { MainFeatures } from "../data";
+import Phone from "../Phone";
+import { MainFeatures } from "../../data";
 import grey from "/grey.svg";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -36,7 +36,8 @@ const FeatureSelector = () => {
   const handlePrev = () => {
     if (transitioning) return;
     setTransitioning(true);
-    const newIndex = (carouselIndex - 1 + MainFeatures.length) % MainFeatures.length;
+    const newIndex =
+      (carouselIndex - 1 + MainFeatures.length) % MainFeatures.length;
     setCarouselIndex(newIndex);
     if (hasSelected) setSelectedFeature(MainFeatures[newIndex].id);
     setTimeout(() => setTransitioning(false), 300);
@@ -53,12 +54,14 @@ const FeatureSelector = () => {
 
   const getVisibleFeatures = () => {
     return [-1, 0, 1].map((offset) => {
-      const index = (carouselIndex + offset + MainFeatures.length) % MainFeatures.length;
+      const index =
+        (carouselIndex + offset + MainFeatures.length) % MainFeatures.length;
       return { ...MainFeatures[index], position: offset };
     });
   };
 
-  const selectedFeatureData = MainFeatures.find((f) => f.id === selectedFeature) || {};
+  const selectedFeatureData =
+    MainFeatures.find((f) => f.id === selectedFeature) || {};
 
   if (isMobile) {
     const visibleFeatures = getVisibleFeatures();
@@ -71,11 +74,19 @@ const FeatureSelector = () => {
           </button>
 
           <div className="mobile-features-viewport">
-            <div className={`mobile-features-track ${transitioning ? 'transitioning' : ''}`}>
-              {visibleFeatures.map((feature) => (
+            <div
+              className={`mobile-features-track ${
+                transitioning ? "transitioning" : ""
+              }`}
+            >
+              {visibleFeatures.map((feature, index) => (
                 <div
                   key={`${feature.id}-${feature.position}`}
-                  className={`mobile-feature-item ${feature.position === 0 ? 'center' : ''}`}
+                  className={`mobile-feature-item ${
+                    hasSelected && selectedFeature === feature.id
+                      ? "center"
+                      : ""
+                  }`}
                   onClick={() => {
                     if (!hasSelected) setHasSelected(true);
                     setSelectedFeature(feature.id);
@@ -85,7 +96,10 @@ const FeatureSelector = () => {
                     className="mobile-feature-icon"
                     style={{
                       borderColor: feature.borderColor,
-                      backgroundColor: selectedFeature === feature.id ? feature.borderColor : "#ffffff",
+                      backgroundColor:
+                        selectedFeature === feature.id
+                          ? feature.borderColor
+                          : "#ffffff",
                     }}
                   >
                     <img
@@ -93,10 +107,14 @@ const FeatureSelector = () => {
                       alt={feature.name}
                       className="mobile-icon-image"
                       style={{
-                        width: `${feature.size}px`,
-                        height: `${feature.size}px`,
-                        paddingLeft: feature.paddingLeft ? `${feature.paddingLeft}px` : "0",
-                        paddingTop: feature.paddingTop ? `${feature.paddingTop}px` : "0",
+                        // width: `${feature.size}px`,
+                        // height: `${feature.size}px`,
+                        paddingLeft: feature.paddingLeft
+                          ? `${feature.paddingLeft}px`
+                          : "0",
+                        paddingTop: feature.paddingTop
+                          ? `${feature.paddingTop}px`
+                          : "0",
                       }}
                     />
                   </div>

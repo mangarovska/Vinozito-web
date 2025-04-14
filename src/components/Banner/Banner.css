@@ -10,11 +10,52 @@
   padding: 4rem;
   position: relative;
 
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
+  /* background-image: url('data:image/svg+xml,\
+  <svg xmlns="http://www.w3.org/2000/svg" width="184" height="70" viewBox="0 0 160 70">\
+    <defs>\
+      <filter id="topShadow" x="-50%" y="-100%" width="200%" height="300%">\
+        <feDropShadow dx="1.5" dy="-1.5" stdDeviation="1.5" flood-color="black" flood-opacity="0.08"/>\
+      </filter>\
+    </defs>\
+    <circle cx="13" cy="40" r="25" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="55" cy="35" r="28" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="90" cy="42" r="22" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="125" cy="40" r="22" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="156" cy="50" r="21" fill="white" filter="url(%23topShadow)"/>\
+  </svg>'); */
+
+  /* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
   background-size: 250px auto;
   background-repeat: repeat-x;
-  background-position: center bottom -45px;
+  background-position: center bottom -45px; */
   overflow: hidden;
+}
+
+.banner::before,
+.banner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background-repeat: repeat-x;
+  background-size: 450px auto;
+  background-position: center bottom -85px;
+  /* z-index: 1; */
+}
+
+.banner::before {
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
+}
+
+.banner::after {
+  height: 200%;
+  bottom: 0px;
+  opacity: 0.6;
+  background-size: 550px auto;
+  background-repeat: repeat-x;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
 }
 
 .banner-content {
@@ -25,6 +66,7 @@
   gap: 2.5rem; /* space between */
   position: relative; 
   z-index: 1;
+  padding-bottom: 70px;
 }
 
 .banner-left {

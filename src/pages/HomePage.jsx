@@ -1,19 +1,18 @@
-// import React, { Fragment } from "react";
-// import { Cards } from "./components/Cards.jsx";
+import React from "react";
+import BannerMainContent from "../components/Banner/BannerMainContent.jsx";
+import Cards from "../components/Cards/Cards.jsx";
+import MainFeatures from "../components/Features/MainFeatures.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 
-// export default function HomePage() {
-//   return (
-//     <Fragment>
-//       <header>
-//         <h1>HELLO</h1>
-//         <p>ajhdh aidhq idoq hod iqwosidh qohd</p>
-//         <button className="button-33">Hello World</button>
-//       </header>
+const HomePage = () => {
+  return (
+    <>
+      <BannerMainContent />
+      <Cards />
+      <MainFeatures />
+      <Footer />
+    </>
+  );
+};
 
-//       <main>
-//         <Cards />
-//       </main>
-
-//     </Fragment>
-//   );
-// }
+export default HomePage;

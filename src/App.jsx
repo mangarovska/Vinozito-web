@@ -1,11 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
-import Cards from "./components/Cards.jsx";
-import Banner from "./components/Banner.jsx";
-import MainFeatures from "./components/MainFeatures.jsx";
-import Footer from "./components/Footer";
-import Communication from "./pages/Communication.jsx"; // New Page
+import Navbar from "./components/Navigation Bar/Navbar.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import Menu from "./pages/Menu Page/Menu.jsx";
 
 function App() {
   return (
@@ -13,20 +10,10 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Banner />
-                <Cards />
-                <MainFeatures />
-              </>
-            }
-          />
-          <Route path="/vinozhito" element={<Communication />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/menu" element={<Menu />} />
         </Routes>
       </main>
-      <Footer />
     </Router>
   );
 }

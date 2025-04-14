@@ -1,0 +1,26 @@
+
+/* .blob-container {
+  transition: transform 0.3s ease-in-out;
+} 
+
+.blob-container:hover {
+  transform: scale(1.05);
+} */
+
+/* 
+@media (max-width: 1024px) {
+
+  .blob-container {
+    width: 180px !important;
+  }
+} */
+
+/* @media (max-width: 640px) {
+
+  .blob-container:nth-child(3),
+  .blob-container:nth-child(4) {
+    flex-basis: 100%;
+    justify-content: center;
+    display: flex;
+  }
+} */
