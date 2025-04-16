@@ -1,0 +1,42 @@
+/* body, html {
+  height: 100%;
+  overflow-y: auto;
+} */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
+.menu-page {
+  min-height: 100vh; /* Ensures the content fills the height */
+  width: 100%;
+  /* left: 0; */
+  padding: 40px 40px 0px 40px;
+  /* position: absolute; */
+  background-color: #fefefe;
+
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 20 C21 16, 23 16, 24 20 C24 22, 22 24, 20 22 Z' fill='%23F7A8AE' fill-opacity='0.3'/%3E%3Cpath d='M60 30 C61 26, 63 26, 64 30 C64 32, 62 34, 60 32 Z' fill='%23FAE2A4' fill-opacity='0.3'/%3E%3Cpath d='M40 60 C41 56, 43 56, 44 60 C44 62, 42 64, 40 62 Z' fill='%23BCE3B4' fill-opacity='0.3'/%3E%3Cpath d='M70 50 C71 46, 73 46, 74 50 C74 52, 72 54, 70 52 Z' fill='%23B8D6FA' fill-opacity='0.3'/%3E%3Cpath d='M30 80 C31 76, 33 76, 34 80 C34 82, 32 84, 30 82 Z' fill='%2391D3DA' fill-opacity='0.3'/%3E%3C/svg%3E"); */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='20' r='2' fill='%23F7A8AE' fill-opacity='0.3'/%3E%3Ccircle cx='60' cy='30' r='2.5' fill='%23FAE2A4' fill-opacity='0.3'/%3E%3Ccircle cx='40' cy='60' r='2' fill='%23BCE3B4' fill-opacity='0.3'/%3E%3Ccircle cx='70' cy='50' r='2' fill='%23B8D6FA' fill-opacity='0.3'/%3E%3Ccircle cx='30' cy='80' r='2.5' fill='%2391D3DA' fill-opacity='0.3'/%3E%3C/svg%3E");
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='20' r='2' fill='%23F7A8AE' fill-opacity='0.3'/%3E%3Ccircle cx='80' cy='30' r='2.5' fill='%23FAE2A4' fill-opacity='0.3'/%3E%3Ccircle cx='50' cy='70' r='2' fill='%23BCE3B4' fill-opacity='0.3'/%3E%3Cpath d='M20 40 Q25 35, 30 40 T40 40' stroke='%2391D3DB' stroke-width='0.6' stroke-opacity='0.3' fill='none'/%3E%3Cpath d='M60 20 Q65 25, 70 20 T80 20' stroke='%23C6A7EF' stroke-width='0.6' stroke-opacity='0.3' fill='none'/%3E%3Cpath d='M70 80 Q65 85, 60 80 T50 80' stroke='%23FCB573' stroke-width='0.6' stroke-opacity='0.3' fill='none'/%3E%3C/svg%3E"); */
+
+  background-position: 0 -20px;
+  background-repeat: repeat;
+  background-size: 200px 200px; /* kolkavi topcinja */
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .menu-page {
+    padding: 20px; /* Adjust padding on smaller screens */
+  }
+  
+  /* html, body {
+    height: 100%;
+    overflow: visible;
+  } */
+}

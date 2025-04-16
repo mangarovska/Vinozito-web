@@ -1,0 +1,271 @@
+.banner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b8d6fa;
+
+  color: white;
+  padding: 2rem 4rem 3rem 4rem;
+  position: relative;
+
+  /* background-image: url('data:image/svg+xml,\
+  <svg xmlns="http://www.w3.org/2000/svg" width="184" height="70" viewBox="0 0 160 70">\
+    <defs>\
+      <filter id="topShadow" x="-50%" y="-100%" width="200%" height="300%">\
+        <feDropShadow dx="1.5" dy="-1.5" stdDeviation="1.5" flood-color="black" flood-opacity="0.08"/>\
+      </filter>\
+    </defs>\
+    <circle cx="13" cy="40" r="25" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="55" cy="35" r="28" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="90" cy="42" r="22" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="125" cy="40" r="22" fill="white" filter="url(%23topShadow)"/>\
+    <circle cx="156" cy="50" r="21" fill="white" filter="url(%23topShadow)"/>\
+  </svg>'); */
+
+  /* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
+  background-size: 250px auto;
+  background-repeat: repeat-x;
+  background-position: center bottom -45px; */
+  overflow: hidden;
+}
+
+.banner::before,
+.banner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background-repeat: repeat-x;
+  background-size: 450px auto;
+  background-position: center bottom -85px;
+  /* z-index: 1; */
+}
+
+.banner::before {
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
+}
+
+.banner::after {
+  height: 200%;
+  bottom: 0px;
+  opacity: 0.6;
+  background-size: 550px auto;
+  background-repeat: repeat-x;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="183" height="70" viewBox="0 0 160 70"><circle cx="14" cy="40" r="25" fill="white"/><circle cx="55" cy="30" r="28" fill="white"/><circle cx="90" cy="42" r="22" fill="white"/><circle cx="125" cy="40" r="22" fill="white"/><circle cx="153" cy="50" r="21" fill="white"/></svg>');
+}
+
+.banner-content {
+  width: 100%;
+  max-width: 1024px;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left side twice as wide as right side */
+  gap: 2.5rem; /* space between */
+  position: relative;
+  z-index: 1;
+  padding-bottom: 70px;
+}
+
+.banner-left {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center */
+  height: 100%;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.banner-description {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  color: #30436b;
+}
+
+.banner-buttons {
+  padding: 0 0rem;
+  display: flex;
+  position: relative;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.banner-button {
+  padding: 7px 16px;
+  height: 56px;
+  width: 170px;
+  border-radius: 20px;
+  line-height: 1.3;
+  border: none;
+  outline: none;
+  background: #ffffff;
+  color: #525252;
+  box-shadow: inset 0px -6px 0px #d9d9d9, 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+
+.banner-button:hover {
+  background: #ffffff;
+  color: #7391d1;
+  box-shadow: inset 0px -6px 0px #7391d1, 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.banner-button:focus {
+  outline: none;
+}
+
+.banner-button:active {
+  transform: translateY(2px); /* click effect */
+}
+
+.banner-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+/* the circle behind the image */
+.banner-right::before {
+  content: "";
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  /* background-color: #92bff5; */
+  background-image: url("C:/Users/ana_m/OneDrive/Desktop/vinozito_web/public/circles.png");
+  background-size: cover; /* or 'contain' or specific values */
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+  aspect-ratio: 1/1;
+}
+
+.banner-right .small-circle-1,
+.banner-right .small-circle-2,
+.banner-right .small-circle-3 {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #92bff5;
+  z-index: -1;
+  aspect-ratio: 1/1;
+  min-width: 15px;
+  min-height: 15px;
+}
+
+.banner-right .small-circle-1 {
+  /* golem dole */
+  width: 15%;
+  bottom: 2%;
+  left: -15%;
+}
+
+.banner-right .small-circle-2 {
+  /* mal dole */
+  width: 9%;
+  bottom: 10%;
+  left: 5%;
+}
+
+.banner-right .small-circle-3 {
+  /* goren */
+  width: 17%;
+  top: 0%;
+  right: -5%;
+}
+
+.banner-right img {
+  width: 70%;
+  height: auto;
+  position: relative;
+  z-index: 1; /* above the circle */
+  /* min-width: 50px; Prevents the phone from getting too small */
+}
+
+@media (max-width: 900px) {
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-description {
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+  }
+
+  .banner-right {
+    order: 3;
+  }
+
+  .banner-right::before {
+    content: "";
+    position: absolute;
+    width: 80vw; /* bigger container for better scaling */
+    height: 80vw;
+    max-width: 380px;
+    max-height: 380px;
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-color: #92bff5;
+    z-index: 0;
+  }
+
+  .banner-right .small-circle-1,
+  .banner-right .small-circle-2,
+  .banner-right .small-circle-3 {
+    min-width: 15px;
+    min-height: 15px;
+  }
+
+  .banner-right .small-circle-1 {
+    /* golem dole */
+    width: 15%;
+    bottom: 2%;
+    left: -15%;
+  }
+
+  .banner-right .small-circle-2 {
+    /* mal dole */
+    width: 9%;
+    bottom: 10%;
+    left: 5%;
+  }
+
+  .banner-right .small-circle-3 {
+    /* goren */
+    width: 17%;
+    top: 0%;
+    right: -5%;
+  }
+
+  .banner-buttons {
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .banner-right img {
+    width: 60vw; /* larger on mobile for visibility */
+    max-width: 250px;
+  }
+}

@@ -1,0 +1,48 @@
+.title-heading {
+  font-weight: 750;
+  font-size: 80px;
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding-bottom: 100px;
+  padding-top: 80px;
+  /* text-transform: lowercase; */
+}
+
+.banner {
+  background-color: #d5e7fd;
+}
+
+/**
+ * 
+ * sm: >= 640px
+ * md: >= 768px
+ * lg: >= 1024px
+ * xl: >= 1280px
+ * 
+ */
+ 
+@media (max-width: 1280px) {
+  .title-heading {
+    font-size: 70px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .title-heading {
+    font-size: 65px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-heading {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title-heading {
+    font-size: 55px;
+  }
+}
