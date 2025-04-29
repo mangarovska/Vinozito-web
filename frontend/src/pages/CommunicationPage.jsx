@@ -1,21 +1,39 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../components/Navigation Bar/Navbar";
 import Banner from "../components/Banner/Banner";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./CommunicationPage.css";
 
-const categories = ["Животни", "Овошје", "Возила", "Боја"];
+const categories = [
+  "Разговор",
+  "Чувства",
+  "Луѓеeee",
+  "Пијалоци",
+  "Храна",
+  "Зеленчук",
+  "Овошје",
+  "Активности",
+  "Животни",
+  "Облека",
+  "Боииии",
+];
 const allCards = [
   { id: 1, name: "Мачка", category: "Животни", img: "/placeholder.png" },
   { id: 2, name: "Куче", category: "Животни", img: "/placeholder.png" },
   { id: 3, name: "Јаболко", category: "Овошје", img: "/placeholder.png" },
-  { id: 4, name: "Автомобил", category: "Возила", img: "/placeholder.png" },
-  { id: 5, name: "Црвена", category: "Боја", img: "/placeholder.png" },
+  { id: 4, name: "Банана", category: "Овошје", img: "/placeholder.png" },
+  { id: 5, name: "Круша", category: "Овошје", img: "/placeholder.png" },
+  { id: 7, name: "Црвена", category: "Боја", img: "/placeholder.png" },
 ];
 
 const CommunicationPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("Животни");
   const [selectedCards, setSelectedCards] = useState([]);
+
   const slotsRef = useRef(null);
+  const [showArrows, setShowArrows] = useState(false);
+  const categoriesRef = useRef(null);
+  const categoryItemRef = useRef(null);
 
   const filteredCards = allCards.filter(
     (card) => card.category === selectedCategory
@@ -25,13 +43,56 @@ const CommunicationPage = () => {
     setSelectedCards([...selectedCards, card]);
   };
 
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(true);
+
+  const checkScrollPosition = () => {
+    if (categoriesRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = categoriesRef.current;
+      setShowLeftFade(scrollLeft > 0);
+      setShowRightFade(scrollLeft < scrollWidth - clientWidth);
+      setShowArrows(scrollWidth > clientWidth);
+    }
+  };
+
+  const scrollCategories = (direction) => {
+    if (categoriesRef.current && categoryItemRef.current) {
+      const categoryWidth = categoryItemRef.current.offsetWidth;
+      const padding = 18; // Match your gap value
+      const scrollAmount = categoryWidth + padding;
+
+      categoriesRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const container = categoriesRef.current;
+    const handleResize = () => {
+      checkScrollPosition();
+    };
+
+    if (container) {
+      container.addEventListener("scroll", checkScrollPosition);
+      window.addEventListener("resize", handleResize);
+      checkScrollPosition(); // Initial check
+
+      return () => {
+        container.removeEventListener("scroll", checkScrollPosition);
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
+
   useEffect(() => {
     if (slotsRef.current && selectedCards.length > 0) {
       const lastCard = slotsRef.current.lastElementChild;
       lastCard?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
-        inline: "end"
+        inline: "end",
       });
     }
   }, [selectedCards]);
@@ -40,38 +101,65 @@ const CommunicationPage = () => {
     <div className="aac-page">
       <Navbar />
 
-      <Banner>
-        <div className="slots">
-          {selectedCards.length > 0 && (
-            <div className="selected-cards" ref={slotsRef}>
-              {selectedCards.map((card, index) => (
-                <img
-                  key={`${card.id}-${index}`}  // Unique key for duplicates
-                  className="card"
-                  src={card.img}
-                  alt={card.name}
-                />
-              ))}
+      <div className="fixed-top-container">
+        <Banner className="communication-banner">
+          <div className="communication-top-content">
+            <div className="slots">
+              {selectedCards.length > 0 && (
+                <div className="selected-cards" ref={slotsRef}>
+                  {selectedCards.map((card, index) => (
+                    <img
+                      key={`${card.id}-${index}`}
+                      className="card"
+                      src={card.img}
+                      alt={card.name}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </Banner>
+
+            <div className="category-scroller-container">
+              {showArrows && (
+                <button
+                  className={`scroll-button ${!showLeftFade ? "hidden" : ""}`}
+                  onClick={() => scrollCategories("left")}
+                  aria-label="Scroll categories left"
+                >
+                  <FaChevronLeft className="arrow-icon" />
+                </button>
+              )}
+
+              <div className="category-buttons" ref={categoriesRef}>
+                {categories.map((cat, index) => (
+                  <button
+                    key={cat}
+                    ref={index === 0 ? categoryItemRef : null}
+                    className={`category-circle ${
+                      cat === selectedCategory ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {showArrows && (
+                <button
+                  className={`scroll-button ${!showRightFade ? "hidden" : ""}`}
+                  onClick={() => scrollCategories("right")}
+                  aria-label="Scroll categories right"
+                >
+                  <FaChevronRight className="arrow-icon" />
+                </button>
+              )}
+            </div>
+          </div>
+        </Banner>
+      </div>
 
       <div className="aac-container">
-        <div className="category-buttons">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`category-circle ${
-                cat === selectedCategory ? "active" : ""
-              }`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
         <div className="category-card-rectangle">
           {filteredCards.map((card) => (
             <div

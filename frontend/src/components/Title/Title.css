@@ -1,17 +1,27 @@
+body, html {
+  overflow-y: auto;
+  height: 100vh;
+}
+
 .title-heading {
   font-weight: 750;
-  font-size: 80px;
-  display: flex;
+  /* font-size: 80px; */
+  font-size: clamp(36px, 8vw, 80px);
+  /* display: flex; */
   text-align: center;
-  font-weight: bold;
+  /* font-weight: bold; */
   letter-spacing: 5px;
-  padding-bottom: 100px;
-  padding-top: 80px;
+  margin: 0; /* Prevent default h1 margin */
+  line-height: 1.2;
+  word-break: break-word;
+  padding-top: clamp(40px, 10vh, 80px);
+  padding-bottom: clamp(100px, 12vh, 100px);
   /* text-transform: lowercase; */
 }
 
 .banner {
   background-color: #d5e7fd;
+  overflow-y: hidden; /* if it's just decorative */
 }
 
 /**
@@ -46,3 +56,7 @@
     font-size: 55px;
   }
 }
+
+/* .title-heading {
+  outline: 1px solid red;
+} */

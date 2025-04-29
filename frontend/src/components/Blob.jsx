@@ -7,7 +7,7 @@ const generateBlobPath = () =>
     seed: Math.random(),
     extraPoints: 8,
     randomness: 4,
-    size: 190,
+    size: 230,
   });
 
 const Blob = ({
@@ -16,8 +16,10 @@ const Blob = ({
   imageUrl = "",
   hoverVideo = null,
   pauseTime = null,
-  size = 250, // default if not specified
+  size = 200, // Base blob size
+  contentSize = 1, // Relative size of content (0-1)
   bottomPadding = "0px",
+  overflowVisible = true,
 }) => {
   const [path1] = useState(generateBlobPath());
   const [path2] = useState(generateBlobPath());
@@ -25,9 +27,8 @@ const Blob = ({
   const controls = useAnimation();
   const videoRef = useRef(null);
   const [hovering, setHovering] = useState(false);
-  //const pauseTime = 1.8; // Time (in seconds) to pause
 
-  // Blob morphing animation loop
+  // Blob morphing loop
   useEffect(() => {
     const loop = async () => {
       while (true) {
@@ -41,7 +42,7 @@ const Blob = ({
     loop();
   }, [path1, path2, current, controls]);
 
-  // Pause logic loop
+  // Pause hover video logic
   useEffect(() => {
     let checkInterval = null;
 
@@ -64,42 +65,40 @@ const Blob = ({
 
   const handleMouseEnter = () => {
     setHovering(true);
-    // if (hoverVideo && videoRef.current) {
-    //   videoRef.current.currentTime = 0;
-    //   videoRef.current.play();
-    // }
   };
 
   const handleMouseLeave = () => {
     setHovering(false);
     if (videoRef.current) {
-      // Speed up the video to finish quickly
-      videoRef.current.playbackRate = 3.0; // or 4.0 for super fast
+      videoRef.current.playbackRate = 3.0;
       videoRef.current.play();
-  
+
       const handleEnd = () => {
         videoRef.current.currentTime = 0;
         videoRef.current.pause();
-        videoRef.current.playbackRate = 1.0; // reset speed
+        videoRef.current.playbackRate = 1.0;
         videoRef.current.removeEventListener("ended", handleEnd);
       };
-  
+
       videoRef.current.addEventListener("ended", handleEnd);
     }
   };
-  
+
+  // const contentWidth = `${contentSize * 100}%`;
+  // const contentHeight = `${contentSize * 100}%`;
 
   return (
-    <div className="group flex flex-col items-center max-w-[300px] w-full h-full">
+    <div className="group flex flex-col items-center w-full max-w-[300px] max-h-[300px]">
       <div
-        className="relative w-full aspect-[1/1.1] max-w-[220px] sm:max-w-[240px] md:max-w-[260px]" // max-w-[220px] max-h-[240px]
+        className="relative w-full aspect-square max-w-[250px] min-w-[170px]"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        style={overflowVisible ? { overflow: "visible" } : {}}
       >
         <svg
-          viewBox="0 0 200 230"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full pointer-events-none"
+          viewBox="0 0 240 270"
+          className="w-full h-full block pointer-ev ents-none"
+          style={overflowVisible ? { overflow: "visible" } : {}}
         >
           <defs>
             <filter
@@ -129,41 +128,50 @@ const Blob = ({
           className="absolute inset-0 flex items-center justify-center"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
+          style={overflowVisible ? { overflow: "visible" } : {}}
         >
           <div
-            style={{ width: size, height: size }}
-            className="sm:w-[80%] md:w-[70%] lg:w-[60%]"
-          ></div>
-          {hoverVideo ? (
-            <video
-              ref={videoRef}
-              src={hoverVideo}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain pointer-events-none"
-              muted
-              playsInline
-              preload="auto"
-              style={{
-                paddingBottom: bottomPadding,
-                width: size * 1.5,
-                height: size * 1.5,
-                position: "absolute",
-
-                // transform: "translate(-50%, -50%)",
-                zIndex: 10,
-              }}
-            />
-          ) : (
-            <img
-              src={imageUrl}
-              alt={label}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-              draggable={false}
-              style={{
-                width: size,
-                height: size,
-              }}
-            />
-          )}
+            className="flex items-center justify-center"
+            style={{
+              width: `${contentSize * 100}%`,
+              height: `${contentSize * 100}%`,
+              // Remove maxWidth/maxHeight constraints when contentSize > 1
+              ...(contentSize > 1
+                ? {
+                    maxWidth: "none",
+                    maxHeight: "none",
+                    transform: "translateZ(0)", // Prevent clipping in some browsers
+                  }
+                : {}),
+            }}
+          >
+            {hoverVideo ? (
+              <video
+                ref={videoRef}
+                src={hoverVideo}
+                className="w-full h-full object-contain z-10"
+                style={{
+                  paddingBottom: bottomPadding,
+                  // Scale up if contentSize > 1
+                  transform: contentSize > 1 ? `scale(${contentSize})` : "none",
+                }}
+                muted
+                playsInline
+                preload="auto"
+              />
+            ) : (
+              <img
+                src={imageUrl}
+                alt={label}
+                className="w-full h-full object-contain"
+                draggable={false}
+                style={{
+                  // Scale up if contentSize > 1
+                  transform: contentSize > 1 ? `scale(${contentSize})` : "none",
+                }}
+              />
+            )}
+          </div>
         </motion.div>
       </div>
 

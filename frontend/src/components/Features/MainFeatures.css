@@ -25,7 +25,7 @@
   gap: 15px;
   padding: 15px;
   cursor: pointer;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 /* Adjust middle item spacing */
@@ -43,7 +43,7 @@
   align-items: center;
   border: 3px solid #ddd;
   border-radius: 50%;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   flex-shrink: 0;
 }
 
@@ -63,7 +63,6 @@
   align-items: center;
 }
 
-
 .mobile-icon-image {
   width: 60px;
   height: 60px;
@@ -75,12 +74,12 @@
   object-fit: contain;
   display: block;
   margin: auto;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .feature-item:hover .feature-icon,
 .feature-item:hover .icon-image {
-  transform: scale(1);
+  transform: scale(1.15);
 }
 
 /* === Text Styles === */
@@ -92,11 +91,23 @@
   font-size: 1rem;
   font-weight: bold;
   color: #555;
+  transition: color 0.2s ease;
 }
 
 .feature-description {
   font-size: 0.875rem;
   color: #555;
+  transition: color 0.2s ease;
+}
+
+.feature-item:hover .feature-title,
+.feature-item:hover .feature-description {
+  color: #333;
+}
+
+/* === Selected State === */
+.feature-item.selected .feature-icon {
+  transform: scale(1.1);
 }
 
 /* === Mobile Styles === */
@@ -138,7 +149,7 @@
 }
 
 .mobile-features-track.transitioning {
-  transition: transform 2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .mobile-feature-item {
@@ -156,6 +167,10 @@
   opacity: 1;
   transform: scale(1.25);
   z-index: 2;
+}
+
+.mobile-feature-item:not(.center):hover {
+  transform: scale(1.1);
 }
 
 .carousel-arrow {
@@ -177,22 +192,9 @@
   justify-content: center;
 }
 
-.mobile-feature-text {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 80%;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.mobile-feature-text-container {
   text-align: center;
-  line-height: 1.4;
+  margin-top: 20px;
 }
 
 .mobile-feature-title {

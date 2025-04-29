@@ -1,0 +1,65 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .bubble-screen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to top, #287c9e 0%, #bfe8f5 100%);
+  }
+  
+  .bubble-screen::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    z-index: 1;
+    background-repeat: repeat-x;
+    background-size: auto 100px;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'><rect width='200' height='40' y='60' fill='%23f4d29c'/><path d='M10,60 C15,40 25,40 30,60' fill='%239fc5a8'/><path d='M40,60 C45,30 55,30 60,60' fill='%239fc5a8'/><circle cx='80' cy='70' r='6' fill='%23f7c59f'/><ellipse cx='120' cy='75' rx='8' ry='4' fill='%237c7c7c'/><path d='M150,60 C153,45 160,45 165,60' fill='%239fc5a8'/></svg>");
+  }
+
+  .bubble-screen::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 280px;
+    bottom: 0;  
+    z-index: 0;
+    opacity: 0.2;
+    background-repeat: repeat-x;
+    background-size: 400px auto;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Ccircle cx='50' cy='180' r='10' fill='white'/%3E%3Ccircle cx='120' cy='150' r='6' fill='white'/%3E%3Ccircle cx='200' cy='170' r='8' fill='white'/%3E%3Ccircle cx='280' cy='130' r='7' fill='white'/%3E%3Ccircle cx='350' cy='160' r='5' fill='white'/%3E%3C/svg%3E");
+  }
+  
+  
+  .top-controls {
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+  }
+  
+  .bubble {
+    position: absolute;
+    background: url('/images/bubble.png') no-repeat center/contain;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .bubble.popped {
+    background: url('/images/bubble-pop.gif') no-repeat center/contain;
+  }
+  

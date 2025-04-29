@@ -1,3 +1,9 @@
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
 body {
   font-family: "Rubik", Arial, sans-serif;
   margin: 0;
@@ -116,6 +122,11 @@ body {
   border-bottom: 6px solid rgb(245, 145, 158);
   color: #ee4f64;
 }
+
+/* * {
+  outline: 1px solid red;
+}
+  */
 
 @media (max-width: 768px) {
   .navbar {
