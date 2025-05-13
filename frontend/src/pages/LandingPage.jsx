@@ -4,7 +4,7 @@ import Cards from "../components/Cards/Cards.jsx";
 import MainFeatures from "../components/Features/MainFeatures.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 
-const HomePage = () => {
+const LandingPage = () => {
   return (
     <>
       <BannerMainContent />
@@ -15,4 +15,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;

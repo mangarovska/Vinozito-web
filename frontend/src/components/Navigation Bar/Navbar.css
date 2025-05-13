@@ -1,8 +1,8 @@
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden;
 }
-
 
 body {
   font-family: "Rubik", Arial, sans-serif;
@@ -17,6 +17,9 @@ body {
   background-color: white; /* to hide the unfilled corner */
   top: 0;
   left: 0;
+  
+  /* width: calc(100vw - 15px);
+  right: auto; */
   width: 100%;
   height: 60px;
   z-index: 1000;
@@ -39,6 +42,8 @@ body {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 20px;
+
+  
 }
 
 .navbar-logo-container {
@@ -128,11 +133,34 @@ body {
 }
   */
 
+/* Transparent background only */
+.relax-navbar {
+  /* opacity: 0.6; */
+  background-color: rgba(255, 255, 255, 0.431);
+  backdrop-filter: blur(15px);
+  /* box-shadow: none; */
+}
+
+.relax-navbar {
+  background: transparent;
+  box-shadow: none;
+}
+
+.relax-navbar .navbar-brand,
+.relax-navbar .navbar-logo-image {
+  display: none;
+}
+
+/* Optional: remove the top curve */
+/* .relax-navbar-container .navbar-shape {
+  display: none;
+} */
+
 @media (max-width: 768px) {
   .navbar {
     padding: 10px 10px;
   }
-  
+
   .navbar-links {
     gap: 1px;
   }
@@ -155,9 +183,8 @@ body {
     transition: none;
     height: 45px;
     width: 45px;
-
   }
-  
+
   .navbar-logo-image:hover {
     transform: none;
   }

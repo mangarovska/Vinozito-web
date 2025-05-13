@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import AnimatedBlob from "./Blob";
+import Blob from "./Blob.jsx";
 import "./BlobRow.css";
+
+import ErrorBoundary from "./ErrorBoundary.jsx"; // adjust the path as needed
 
 import speak_hover from "/speakerNew.webm";
 import staticImage from "/speakerImg_start.png";
 
-import paint from "/p.png";
-import paint_hover from "/p.webm";
+import paint from "/paint_start.png";
+import paint_hover from "/paint_fin.webm";
 
 import connect from "/bee3d.png";
 import connect_hover from "/bee4.webm";
@@ -23,7 +25,7 @@ const blobsData = [
     hoverVideo: speak_hover,
     pauseTime: 1.4,
     size: 300,
-    contentSize: 1,
+    contentSize: 0.95,
     bottomPadding: "20px",
   },
   {
@@ -31,10 +33,11 @@ const blobsData = [
     label: "боење",
     imageUrl: paint,
     hoverVideo: paint_hover,
-    pauseTime: 0.4,
+    pauseTime: 0.8,
     size: 200,
-    contentSize: 1.87,
+    contentSize: 1.65,
     bottomPadding: "0px",
+    leftPadding: "10px",
   },
   {
     color: "#81C184",
@@ -67,7 +70,11 @@ const BlobsRow = () => {
       navigate("/communication");
     }
     if (index === 3) {
+      
       navigate("/relax");
+    }
+    if (index === 1) {
+      navigate("/coloring");
     }
   };
 
@@ -82,7 +89,9 @@ const BlobsRow = () => {
               onClick={() => handleBlobClick(idx)}
               style={{ cursor: "pointer" }}
             >
-              <AnimatedBlob {...blob} />
+              <ErrorBoundary>
+                <Blob {...blob} />
+              </ErrorBoundary>
             </div>
           ))}
         </div>

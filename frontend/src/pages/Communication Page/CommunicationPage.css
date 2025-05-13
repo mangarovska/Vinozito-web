@@ -1,0 +1,370 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+/* * {
+  outline: 1px solid red;
+} */
+
+.communication-top-content {
+  position: sticky;
+  top: 0;
+  /* background: linear-gradient(to bottom, #b8d6fa, #d2e3f7, #ffffff); */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+
+.banner.communication-banner {
+  background: linear-gradient(to bottom, #b8d6fa, #d2e3f7, #ffffff);
+  padding-bottom: 0px;
+  /* background-size: cover;
+  position: relative;
+  
+  background-position: center bottom; */
+}
+
+.banner.communication-banner::before,
+.banner.communication-banner::after {
+  background-image: none;
+
+  /* bottom: 50px; */
+}
+
+.aac-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* .communication-banner {
+  flex-shrink: 0;
+  background: linear-gradient(to bottom, #b8d6fa, #ffffff);
+  padding-bottom: 20px;
+} */
+
+.fixed-communication-elements {
+  z-index: 100;
+  /* position: sticky;
+  top: 0;
+
+  background: linear-gradient(to bottom, #b8d6fa, #ffffff);
+  padding-bottom: 20px; */
+}
+
+.scrollable-cards-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='20' r='2' fill='%23F7A8AE' fill-opacity='0.3'/%3E%3Ccircle cx='60' cy='30' r='2.5' fill='%23FAE2A4' fill-opacity='0.3'/%3E%3Ccircle cx='40' cy='60' r='2' fill='%23BCE3B4' fill-opacity='0.3'/%3E%3Ccircle cx='70' cy='50' r='2' fill='%23B8D6FA' fill-opacity='0.3'/%3E%3Ccircle cx='30' cy='80' r='2.5' fill='%2391D3DA' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-position: 0 -20px;
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+.empty-slots {
+  color: #999;
+  margin: auto;
+  /* font-style: italic; */
+}
+
+.aac-container {
+  flex: 1;
+  /* background-color: #fefefe; */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='20' r='2' fill='%23F7A8AE' fill-opacity='0.3'/%3E%3Ccircle cx='60' cy='30' r='2.5' fill='%23FAE2A4' fill-opacity='0.3'/%3E%3Ccircle cx='40' cy='60' r='2' fill='%23BCE3B4' fill-opacity='0.3'/%3E%3Ccircle cx='70' cy='50' r='2' fill='%23B8D6FA' fill-opacity='0.3'/%3E%3Ccircle cx='30' cy='80' r='2.5' fill='%2391D3DA' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-position: 0 -20px;
+  background-repeat: repeat;
+  align-items: left;
+  background-size: 200px 200px;
+
+  overflow: hidden; /* Prevent scroll from wrapper */
+  display: flex;
+  flex-direction: column;
+}
+
+/* .aac-body {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+} */
+
+.slots {
+  z-index: 10;
+  background: #ffffff;
+  scroll-snap-type: x mandatory; /* Enables snap, but doesn’t block scrolling */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto; /* allows horizontal scroll */
+  overflow-y: hidden;
+  white-space: nowrap;
+  gap: 18px;
+  font-weight: bold;
+  margin-top: 65px;
+  margin-bottom: 20px;
+  padding: 20px 20px;
+  border-radius: 20px;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 150px;
+  scroll-behavior: smooth; /* Smooth scrolling */
+
+  scrollbar-width: thin; /* Firefox scrollbar */
+  scrollbar-color: #bbb #eee; /* Scrollbar color */
+}
+
+.slots::-webkit-scrollbar {
+  /* Webkit (Chrome, Safari, Edge) scrollbar styles */
+  height: 10px; /* Horizontal scrollbar height */
+}
+
+.slots::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 5px;
+}
+
+.slots::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+.slots:empty::before {
+  content: "Нема избрани картички";
+  color: #999;
+  margin: auto;
+}
+
+.selected-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 18px;
+}
+
+.card {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  width: 110px;
+  height: 110px;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background: white;
+  object-fit: contain;
+}
+
+.fade-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.category-scroller-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 0 20px;
+}
+
+.scroll-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  z-index: 2;
+  opacity: 1;
+}
+
+.scroll-button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-button .arrow-icon {
+  color: #555;
+  font-size: 24px;
+  transition: transform 0.2s;
+}
+
+.scroll-button:hover .arrow-icon {
+  transform: scale(1.2);
+}
+
+.category-buttons {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  gap: 18px;
+  padding: 10px 40px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
+}
+
+.category-buttons::-webkit-scrollbar {
+  display: none;
+}
+
+.category-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: rgb(224, 224, 224);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-circle.active {
+  border-color: #0077ff;
+  background-color: #e6f0ff;
+}
+
+.category-card-rectangle {
+  display: grid;
+  overflow-y: auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Start with big cards */
+  margin: 0 auto;
+  gap: 20px;
+  padding: 10px 50px 50px 50px;
+  width: 100%;
+}
+
+.category-card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.category-card div {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #555;
+  font-size: 16px;
+}
+
+/* At smaller screens, let the cards resize gracefully */
+@media (max-width: 1024px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Medium screen size */
+    padding: 10px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Small screen size */
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Very small screen size */
+    padding: 10px 10px;
+  }
+}
+
+
+@media (min-width: 1300px) {
+
+  .category-buttons {
+    justify-content: center;
+    mask-image: none;
+    padding: 10px 20px;
+  }
+
+  .scroll-button {
+    display: none;
+  }
+
+  .category-buttons {
+    padding: 10px 20px;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20px,
+      black calc(100% - 20px),
+      transparent 100%
+    );
+  }
+
+  .scroll-button {
+    display: none;
+  }
+
+  .category-buttons {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+
+  .category-circle.active {
+    border-color: #007bff;
+    background-color: #e6f0ff;
+  }
+}

@@ -1,14 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import * as blobs2 from "blobs/v2";
+// import * as blobs2 from "blobs/v2";
+import { svgPath } from "blobs/v2";
 
-const generateBlobPath = () =>
-  blobs2.svgPath({
-    seed: Math.random(),
-    extraPoints: 8,
-    randomness: 4,
-    size: 230,
-  });
+const generateBlobPath = () => {
+  try {
+    const path = svgPath({
+      seed: Math.random(),
+      extraPoints: 8,
+      randomness: 4,
+      size: 230,
+    });
+
+    if (typeof path === "string" && /^M\s*\d/.test(path)) {
+      return path;
+    }
+  } catch (e) {
+    console.error("Error generating blob path:", e);
+  }
+
+  return "M 0 0 L 100 0 L 100 100 L 0 100 Z";
+};
 
 const Blob = ({
   color = "#F7A7B6",
@@ -19,6 +31,7 @@ const Blob = ({
   size = 200, // Base blob size
   contentSize = 1, // Relative size of content (0-1)
   bottomPadding = "0px",
+  leftPadding = "0px",
   overflowVisible = true,
 }) => {
   const [path1] = useState(generateBlobPath());
@@ -27,26 +40,49 @@ const Blob = ({
   const controls = useAnimation();
   const videoRef = useRef(null);
   const [hovering, setHovering] = useState(false);
+  const isMountedRef = useRef(true); // Track mount state with ref
 
-  // Blob morphing loop
+  // Blob morphing loop - prevent memory leak
   useEffect(() => {
+    isMountedRef.current = true;
+    const currentRef = { current }; // Capture current value in ref
+
     const loop = async () => {
-      while (true) {
-        await controls.start({
-          d: current ? path2 : path1,
-          transition: { duration: 6, ease: "easeInOut" },
-        });
-        setCurrent((prev) => !prev);
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
+      while (isMountedRef.current) {
+        const targetPath = currentRef.current ? path2 : path1;
+
+        if (typeof targetPath === "string" && targetPath.startsWith("M")) {
+          await controls
+            .start({
+              d: targetPath,
+              transition: { duration: 6, ease: "easeInOut" },
+            })
+            .catch(() => {}); // Silence cancellation errors
+        }
+
+        if (isMountedRef.current) {
+          setCurrent((prev) => {
+            currentRef.current = !prev; // Update ref with new value
+            return !prev;
+          });
+        }
       }
     };
-    loop();
-  }, [path1, path2, current, controls]);
 
-  // Pause hover video logic
+    loop();
+
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, [path1, path2, controls]); // Remove 'current' from dependencies
+
+  // Pause hover video logic - guard against null pauseTime
   useEffect(() => {
     let checkInterval = null;
 
-    if (hovering && videoRef.current) {
+    if (hovering && videoRef.current && typeof pauseTime === "number") {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
 
@@ -61,7 +97,7 @@ const Blob = ({
     return () => {
       clearInterval(checkInterval);
     };
-  }, [hovering]);
+  }, [hovering, pauseTime]);
 
   const handleMouseEnter = () => {
     setHovering(true);
@@ -86,6 +122,15 @@ const Blob = ({
 
   // const contentWidth = `${contentSize * 100}%`;
   // const contentHeight = `${contentSize * 100}%`;
+
+  //console.log({ path1, path2, pauseTime, imageUrl, hoverVideo }); // for testing
+
+  const selectedPath = current ? path1 : path2;
+
+  // Ensure valid path
+  const isValidPath =
+    typeof selectedPath === "string" && selectedPath.startsWith("M");
+  const fallbackPath = "M 0 0 L 100 0 L 100 100 L 0 100 Z";
 
   return (
     <div className="group flex flex-col items-center w-full max-w-[300px] max-h-[300px]">
@@ -118,7 +163,14 @@ const Blob = ({
           </defs>
           <motion.path
             fill={color}
-            d={current ? path1 : path2}
+            d={
+              typeof (current ? path1 : path2) === "string" &&
+              (current ? path1 : path2).startsWith("M")
+                ? current
+                  ? path1
+                  : path2
+                : "M 0 0 L 100 0 L 100 100 L 0 100 Z"
+            }
             animate={controls}
             filter="url(#blobShadow)"
           />
@@ -149,11 +201,13 @@ const Blob = ({
               <video
                 ref={videoRef}
                 src={hoverVideo}
-                className="w-full h-full object-contain z-10"
+                className=" object-contain z-10"
                 style={{
                   paddingBottom: bottomPadding,
+                  paddingLeft: leftPadding,
                   // Scale up if contentSize > 1
-                  transform: contentSize > 1 ? `scale(${contentSize})` : "none",
+                  transform:
+                    contentSize >= 1 ? `scale(${contentSize})` : "none",
                 }}
                 muted
                 playsInline
@@ -167,7 +221,8 @@ const Blob = ({
                 draggable={false}
                 style={{
                   // Scale up if contentSize > 1
-                  transform: contentSize > 1 ? `scale(${contentSize})` : "none",
+                  transform:
+                    contentSize >= 1 ? `scale(${contentSize})` : "none",
                 }}
               />
             )}

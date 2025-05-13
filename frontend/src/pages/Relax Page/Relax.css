@@ -1,0 +1,462 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* .banner{
+  backdrop-filter: blur(6px);
+
+} */
+
+.relax-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to top, #216783 0%, rgb(191, 232, 245) 100%);
+  padding-top: 60px; /* Space for top controls */
+  padding-bottom: 100px; /* Space for bottom decoration */
+  overflow: hidden; /* Prevent overflow */
+  z-index: 0;
+}
+
+.relax-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  z-index: 1;
+  background-repeat: repeat-x;
+  background-size: auto 100px;
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' viewBox='0 0 400 100'%3E%3Cpath d='M10,60 C15,40 25,40 30,60' fill='%239fc5a8'/%3E%3Cpath d='M40,60 C45,30 55,30 60,60' fill='%239fc5a8'/%3E%3Ccircle cx='80' cy='70' r='6' fill='%23f7c59f'/%3E%3Cpath d='M149,70 C155,50 160,40 170,70' fill='%239fc5a8'/%3E%3Cpath d='M0,60 Q50,50 100,60 T200,60 T300,60 T400,60 V100 H0 Z' fill='%23f4d29c'/%3E%3Cpolygon points='250,70 252,75 258,75 254,79 256,85 250,81 244,85 246,79 242,75 248,75' fill='%23fcbf49'/%3E%3Cpolygon points='290,73 292,77 298,77 294,81 296,85 290,82 284,85 286,81 282,77 288,77' fill='%23f3af4d'/%3E%3C/svg%3E"); */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' viewBox='0 0 400 100'%3E%3Cpath d='M10,60 C15,40 25,40 30,60' fill='%239fc5a8'/%3E%3Cpath d='M40,60 C45,30 55,30 60,60' fill='%239fc5a8'/%3E%3Ccircle cx='80' cy='70' r='6' fill='%23f7c59f'/%3E%3Cpath d='M149,70 C155,50 160,40 170,70' fill='%239fc5a8'/%3E%3Cpath d='M0,60 Q50,50 100,60 T200,60 T300,60 T400,60 V100 H0 Z' fill='%23f4d29c'/%3E%3C/svg%3E");
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='100' viewBox='0 0 400 100'%3E%3Cpath d='M10,60 C15,40 25,40 30,60' fill='%239fc5a8'/%3E%3Cpath d='M40,60 C45,30 55,30 60,60' fill='%239fc5a8'/%3E%3Ccircle cx='80' cy='70' r='6' fill='%23f7c59f'/%3E%3Cellipse cx='120' cy='75' rx='8' ry='4' fill='%237c7c7c'/%3E%3Cpath d='M149,70 C155,50 160,40 170,70' fill='%239fc5a8'/%3E%3Cpath d='M0,60 Q50,50 100,60 T200,60 T300,60 T400,60 V100 H0 Z' fill='%23f4d29c'/%3E%3Cellipse cx='120' cy='75' rx='8' ry='5' fill='%238c8c8c'/%3E%3Cellipse cx='170' cy='80' rx='10' ry='6' fill='%23999999'/%3E%3Cellipse cx='210' cy='73' rx='7' ry='4' fill='%23707070'/%3E%3Cpolygon points='250,70 252,75 258,75 254,79 256,85 250,81 244,85 246,79 242,75 248,75' fill='%23fcbf49'/%3E%3Cpolygon points='290,73 292,77 298,77 294,81 296,85 290,82 284,85 286,81 282,77 288,77' fill='%23f3af4d'/%3E%3C/svg%3E"); */
+}
+
+/* .relax-container::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 35%;
+  bottom: 0;
+  z-index: 0;
+  opacity: 0.1;
+  filter: blur(1px);
+  background-repeat: repeat-x;
+  background-size: 400px auto;
+  pointer-events: none;
+} */
+ 
+
+.sound-select {
+  background-color: #ffffff;
+  color: #4e4e4e;
+  padding: 12px 50px 12px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s, background-color 0.2s;
+  outline: none;
+  min-width: 200px;
+  
+  /* Reset default arrow */
+  /* appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+  
+  /* Custom arrow using ::after pseudo-element */
+  position: relative;
+}
+
+/* Create custom arrow using ::after */
+.sound-select::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #4e4e4e;
+  pointer-events: none;
+}
+
+.sound-select:focus {
+  box-shadow: 0 0 0 2px #8b5cf6;
+}
+
+.sound-select option {
+  background: #ffffff;
+  color: #515151;
+}
+
+.sound-select option:hover {
+  background-color: #4b4b4b;
+}
+
+.top-controls {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  padding: 15px 25px; /* Increased padding */
+  min-width: 350px; /* Increased minimum width */
+  justify-content: center; /* Centers the select */
+}
+
+
+/* .top-controls {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  padding: 15px 20px;
+  min-width: 300px;
+} */
+
+/* .top-controls button,
+.top-controls select {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.top-controls button:hover,
+.top-controls select:hover {
+  background: white;
+  transform: translateY(-1px);
+} */
+
+/* .top-controls select {
+  appearance: none;
+  padding-right: 25px;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}  */
+
+.bubble-screen {
+  position: absolute;
+  top: 130px;
+  left: 0;
+  right: 0;
+  bottom: 150px;
+  overflow: hidden;
+  background-color: transparent;
+  z-index: 2;
+}
+
+.bubble {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+  will-change: transform;
+  z-index: 3;
+  transform-origin: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bubble:hover {
+  z-index: 4;
+  transform: scale(1.15);
+}
+
+.bubble-screen::before,
+.bubble-screen::after {
+  z-index: 0; /* Background elements */
+  pointer-events: none; /* Don't interfere with clicks */
+}
+
+/* .bubble-screen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(
+      circle at 10% 90%,
+      rgba(255, 255, 255, 0.3) 4%,
+      transparent 5%
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      rgba(255, 255, 255, 0.2) 3%,
+      transparent 4%
+    ),
+    radial-gradient(
+      circle at 50% 85%,
+      rgba(255, 255, 255, 0.25) 5%,
+      transparent 6%
+    ),
+    radial-gradient(
+      circle at 70% 95%,
+      rgba(255, 255, 255, 0.2) 4%,
+      transparent 5%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 255, 255, 0.3) 5%,
+      transparent 6%
+    );
+  background-size: 100% 100%;
+  animation: bubbles-float 5s ease-in-out infinite;
+} */
+
+/* Add to your CSS */
+.bubble-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1; /* Between background and bubble-screen */
+  pointer-events: none;
+}
+
+.bubble-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  animation: float-up linear infinite;
+  filter: blur(1px);
+}
+
+@keyframes float-up {
+  from {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(-20vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.sunrays {
+  position: fixed;
+  top: 0;
+  left: -60px;
+  width: 3000px;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.sunray {
+  position: absolute;
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.15) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  mix-blend-mode: screen;
+  transform-origin: top;
+  animation: ray-pulse ease-in-out infinite;
+}
+
+.sunray.darker {
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 125, 158, 0.4) 0%,
+    rgba(40, 125, 158, 0.2) 70%,
+    rgba(40, 125, 158, 0) 100%
+  );
+}
+
+@keyframes ray-pulse {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-20deg) scaleY(1);
+  }
+  50% {
+    transform: translateX(-50%) rotate(-20deg) scaleY(1.3);
+  }
+}
+
+.seaweed-field {
+  position: absolute;
+  bottom: 35px;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.seaweed-container {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  /* margin-left: 150px;
+  margin-right: 70px; */
+  height: 150px;
+}
+
+.seaweed {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  background: linear-gradient(to top, #2e8b57, #3cb371);
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+  animation: sway 3s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.blade1 {
+  left: 0;
+  height: 110px;
+  animation-delay: 0s;
+}
+.blade2 {
+  left: 20px;
+  height: 140px;
+  animation-delay: 0.4s;
+}
+.blade3 {
+  left: 40px;
+  height: 120px;
+  animation-delay: 0.8s;
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.underwater-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.layer1 {
+  background-image: url("/fin.png"); /*corals_final4*/
+  background-size: 600px auto; /* to scale down wiidth*/
+  width: 100%;
+  height: 100vh;
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  z-index: 5;
+}
+
+/* .layer2 {
+  background-image: url("https://cee-r.github.io/etc/underwater/water_2.png");
+  z-index: 2;
+} */
+
+/* .layer3 {
+  background-image: url("https://cee-r.github.io/etc/underwater/water_3.png");
+  z-index: 3;
+} */
+
+/* .layer4 {
+  background-image: url("https://cee-r.github.io/etc/underwater/water_1.png");
+  z-index: -1;
+} */
+
+.fish {
+  position: absolute;
+  width: 235px;
+  height: 104px;
+  z-index: 0;
+  animation: swim-left 30s linear infinite; /* default animation */
+  transform-origin: center center;
+  overflow: visible;
+  transition: transform 800ms ease-in-out;
+}
+
+.fish.reverse {
+  transform: scaleX(-1);
+  animation: swim-right 35s linear infinite;
+}
+
+@keyframes swim-left {
+  0% {
+    transform: translateX(-20vw) scale(1.5);
+  }
+  25% {
+    transform: translateX(20vw) scale(1);
+  }
+  50% {
+    transform: translateX(60vw) scale(0.8);
+  }
+  75% {
+    transform: translateX(90vw) scale(1.2);
+  }
+  100% {
+    transform: translateX(120vw) scale(1.5);
+  }
+}
+
+@keyframes swim-right {
+  0% {
+    transform: translateX(120vw) scaleX(-1) scale(1.5);
+  }
+  25% {
+    transform: translateX(90vw) scaleX(-1) scale(1.2);
+  }
+  50% {
+    transform: translateX(60vw) scaleX(-1) scale(0.8);
+  }
+  75% {
+    transform: translateX(20vw) scaleX(-1) scale(1);
+  }
+  100% {
+    transform: translateX(-20vw) scaleX(-1) scale(1.5);
+  }
+}

@@ -5,9 +5,9 @@ const Phone = ({ image, background }) => {
   const defaultScreen = loading;
 
   return (
-    <div className="relative flex justify-center items-center h-[510px] w-[300px] overflow-visible">
+    <div className="relative flex justify-center items-center h-[510px] w-[300px]">
       {background && (
-        <div className="absolute inset-0 z-0 flex justify-center items-center overflow-visible">
+        <div className="absolute inset-0 z-0 flex justify-center items-center">
           <img
             src={background}
             alt="Feature Background"
@@ -22,7 +22,7 @@ const Phone = ({ image, background }) => {
 
       <div
         className={`relative flex justify-center h-[430px] w-[200px] border border-4 border-black rounded-2xl bg-gray-50 ${
-          (image || defaultScreen)&& `bg-cover bg-center bg-no-repeat`
+          (image || defaultScreen) && `bg-cover bg-center bg-no-repeat`
         }`}
         style={{
           backgroundImage: `url(${image || defaultScreen})`,

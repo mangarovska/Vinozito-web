@@ -7,6 +7,7 @@ export default function Navbar() {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const isAbout = location.pathname === "/about";
+  const isRelaxPage = location.pathname === "/relax";
 
   const logoElement = (
     <div className="navbar-logo-container">
@@ -19,18 +20,28 @@ export default function Navbar() {
   const brandElement = <div className="navbar-brand">Виножито</div>;
 
   return (
-    <div className="navbar-container">
-      <svg
-        className="navbar-shape"
-        viewBox="0 0 100 10"
-        preserveAspectRatio="none"
-      >
-        <path d="M5,0 L100,0 L100,10 L5,10 A5,5 0 0,1 5,0 Z" fill="white" />
-      </svg>
+    <div className={`navbar-container ${isRelaxPage ? "relax-navbar-container" : ""}`}>
+      {!isRelaxPage && (
+        <svg
+          className="navbar-shape"
+          viewBox="0 0 100 10"
+          preserveAspectRatio="none"
+        >
+          <path d="M5,0 L100,0 L100,10 L5,10 A5,5 0 0,1 5,0 Z" fill="white" />
+        </svg>
+      )}
 
-      <nav className="navbar">
+      <nav className={`navbar ${isRelaxPage ? "relax-navbar" : ""}`}>
         {isAbout ? <Link to="/">{logoElement}</Link> : logoElement}
-        {isAbout ? <Link to="/" className="navbar-brand">Виножито</Link> : brandElement}
+
+        {/* Hide brand only on Relax */}
+        {!isRelaxPage && (
+          isAbout ? (
+            <Link to="/" className="navbar-brand">Виножито</Link>
+          ) : (
+            brandElement
+          )
+        )}
 
         <ul className="navbar-links">
           {(isLandingPage || isAbout) && (

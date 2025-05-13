@@ -27,9 +27,9 @@ const BannerMainContent = () => {
 
         <div className="banner-right">
           <Phone />
-          <div class="small-circle-1"></div>
-          <div class="small-circle-2"></div>
-          <div class="small-circle-3"></div>
+          <div className="small-circle-1"></div>
+          <div className="small-circle-2"></div>
+          <div className="small-circle-3"></div>
         </div>
       </div>
     </Banner>

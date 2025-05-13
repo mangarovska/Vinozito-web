@@ -1,4 +1,4 @@
-import reactLogo from "./assets/react.svg";
+// import reactLogo from "./assets/react.svg";
 import feature1 from "/f1.png";
 import feature2 from "/f2.png";
 import feature3 from "/f3.png";

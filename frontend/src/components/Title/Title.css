@@ -1,7 +1,7 @@
-body, html {
-  overflow-y: auto;
-  height: 100vh;
-}
+/* body, html {
+  overflow-y: auto; */
+  /* height: 100vh;
+} */
 
 .title-heading {
   font-weight: 750;
@@ -21,7 +21,7 @@ body, html {
 
 .banner {
   background-color: #d5e7fd;
-  overflow-y: hidden; /* if it's just decorative */
+  /* overflow-y: hidden; */
 }
 
 /**

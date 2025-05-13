@@ -1,0 +1,200 @@
+.coloring-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px;
+  padding-top: 100px;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  align-items: center;
+}
+
+.coloring-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* .canvas-area {
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  background: white;
+  display: block;
+} */
+
+.canvas-area {
+  position: relative;
+  /* margin: 0 auto; */
+  line-height: 0; /* Fixes any vertical spacing */
+}
+
+canvas {
+  image-rendering: crisp-edges; /* Prevents anti-aliasing */
+  background-color: white; /* Ensures consistent background */
+}
+
+.brush-sizes-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between brush sizes */
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* margin-right: 20px; */
+}
+
+
+.brush-size {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.brush-size.active {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+/* Add this to create some spacing around each brush size */
+.brush-size::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; /* Maintain aspect ratio */
+}
+
+/* Visual indicator for selected brush size */
+/* .brush-size.active {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px #333;
+} */
+
+/* Hover effect */
+.brush-size:hover {
+  transform: scale(1.1);
+}
+
+.action-buttons-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.brush-sizes-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.brush-sizes-column.hidden {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.action-button,
+.tool-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #e2e2e2;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.action-button:hover,
+.tool-button:hover {
+  background: #c4e4ff;
+}
+
+.tool-button.active {
+  background: #ffe676;
+}
+
+.action-button img,
+.tool-button img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.color-palette-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #eee;
+  transition: transform 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.color-option.selected {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px #6f6f6f;
+}
+
+@media (max-width: 768px) {
+  .coloring-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* .brush-sizes-column {
+    flex-direction: row;
+    order: 1;
+  } */
+
+  .action-buttons-column {
+    flex-direction: row;
+    order: 3;
+  }
+
+  .canvas-area {
+    order: 2;
+    margin: 15px 0;
+  }
+}
