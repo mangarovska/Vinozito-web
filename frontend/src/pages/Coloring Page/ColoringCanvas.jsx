@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate, useLocation  } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 import "./ColoringCanvas.css";
 
@@ -42,7 +42,7 @@ export default function ColoringCanvas() {
   const navigate = useNavigate();
   const wasClearedRef = useRef(false);
   const location = useLocation();
-const hasSavedRef = useRef(false); // new
+  const hasSavedRef = useRef(false);
 
   const [selectedColor, setSelectedColor] = useState("#FF4D4D");
   const [isDrawing, setIsDrawing] = useState(false);
@@ -64,9 +64,9 @@ const hasSavedRef = useRef(false); // new
   const [history, setHistory] = useState([]);
   const [historyPointer, setHistoryPointer] = useState(-1);
 
-  //const [svgPadding, setSvgPadding] = useState(50); 
+  //const [svgPadding, setSvgPadding] = useState(50);
   const [svgPadding] = useState(-35);
-  const isDrawingRef = useRef(false); 
+  const isDrawingRef = useRef(false);
 
   const colors = [
     "#FF4D4D",
@@ -101,7 +101,6 @@ const hasSavedRef = useRef(false); // new
   //   freehandPathsRef.current = freehandPaths;
   // }, [freehandPaths]);
 
-
   useEffect(() => {
     return () => {
       saveProgress(true); // silent save -> save progress on unmount
@@ -117,7 +116,7 @@ const hasSavedRef = useRef(false); // new
         const backgroundPath = {
           id: "background",
           d: `M0 0 H${svgData.width} V${svgData.height} H0 Z`,
-          fill: "#ffffff", // default background 
+          fill: "#ffffff", // default background
           isBackground: true, // custom flag so you know it's the background
         };
 
@@ -200,7 +199,6 @@ const hasSavedRef = useRef(false); // new
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
     const availableWidth = canvas.width - svgPadding * 2; // calculate scale and offset
     const availableHeight = canvas.height - svgPadding * 2;
     const scale = Math.min(
@@ -210,7 +208,8 @@ const hasSavedRef = useRef(false); // new
     const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
     const yOffset = svgPadding + (availableHeight - svgData.height * scale) / 2;
 
-    if (coloredPaths.background) { // draw background with mask
+    if (coloredPaths.background) {
+      // draw background with mask
       ctx.save();
 
       // 1. Draw background color first
@@ -609,22 +608,21 @@ const hasSavedRef = useRef(false); // new
     }
   };
 
+  useEffect(() => {
+    const handleSaveRequest = () => saveProgress();
+    window.addEventListener("save-coloring-progress", handleSaveRequest);
 
-useEffect(() => {
-  const handleSaveRequest = () => saveProgress();
-  window.addEventListener("save-coloring-progress", handleSaveRequest);
+    const handlePopState = () => {
+      window.dispatchEvent(new Event("save-coloring-progress")); // Dispatch the same save event when user clicks browser back - not working
+    };
 
-  const handlePopState = () => {
-    window.dispatchEvent(new Event("save-coloring-progress")); // Dispatch the same save event when user clicks browser back - not working
-  };
+    window.addEventListener("popstate", handlePopState);
 
-  window.addEventListener("popstate", handlePopState);
-
-  return () => {
-    window.removeEventListener("save-coloring-progress", handleSaveRequest);
-    window.removeEventListener("popstate", handlePopState);
-  };
-}, [coloredPaths, freehandPaths]);
+    return () => {
+      window.removeEventListener("save-coloring-progress", handleSaveRequest);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [coloredPaths, freehandPaths]);
 
   return (
     <div className="coloring-page">
