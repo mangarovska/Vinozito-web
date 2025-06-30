@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import Navbar from "../../components/Navigation Bar/Navbar";
+// import Navbar from "../../components/Navigation Bar/Navbar";
 import Banner from "../../components/Banner/Banner";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./CommunicationPage.css";
@@ -58,7 +58,7 @@ const CommunicationPage = () => {
   const scrollCategories = (direction) => {
     if (categoriesRef.current && categoryItemRef.current) {
       const categoryWidth = categoryItemRef.current.offsetWidth;
-      const padding = 18; // Match your gap value
+      const padding = 18; // gap value
       const scrollAmount = categoryWidth + padding;
 
       categoriesRef.current.scrollBy({
@@ -67,6 +67,16 @@ const CommunicationPage = () => {
       });
     }
   };
+
+  const handleBackspace = () => {
+    setSelectedCards((prev) => prev.slice(0, -1));
+  };
+
+  const handleClearAll = () => {
+    setSelectedCards([]);
+  };
+
+  const handlePlaySound = () => {};
 
   useEffect(() => {
     const container = categoriesRef.current;
@@ -77,7 +87,7 @@ const CommunicationPage = () => {
     if (container) {
       container.addEventListener("scroll", checkScrollPosition);
       window.addEventListener("resize", handleResize);
-      checkScrollPosition(); // Initial check
+      checkScrollPosition();
 
       return () => {
         container.removeEventListener("scroll", checkScrollPosition);
@@ -104,19 +114,45 @@ const CommunicationPage = () => {
       <div className="fixed-top-container">
         <Banner className="communication-banner">
           <div className="communication-top-content">
-            <div className="slots">
-              {selectedCards.length > 0 && (
-                <div className="selected-cards" ref={slotsRef}>
-                  {selectedCards.map((card, index) => (
-                    <img
-                      key={`${card.id}-${index}`}
-                      className="card"
-                      src={card.img}
-                      alt={card.name}
-                    />
-                  ))}
-                </div>
-              )}
+            <div className="slots-controls">
+              <div className="slots-buttons-row">
+                <button
+                  onClick={handlePlaySound}
+                  disabled={selectedCards.length === 0}
+                  className="icon-button"
+                >
+                  <img src="/play.png" alt="Play Sound" />
+                </button>
+                <button
+                  onClick={handleBackspace}
+                  disabled={selectedCards.length === 0}
+                  className="icon-button"
+                >
+                  <img src="/delete.png" alt="Backspace" />
+                </button>
+                <button
+                  onClick={handleClearAll}
+                  disabled={selectedCards.length === 0}
+                  className="icon-button"
+                >
+                  <img src="/clear.png" alt="Clear All" />
+                </button>
+              </div>
+
+              <div className="slots">
+                {selectedCards.length > 0 && (
+                  <div className="selected-cards" ref={slotsRef}>
+                    {selectedCards.map((card, index) => (
+                      <img
+                        key={`${card.id}-${index}`}
+                        className="card"
+                        src={card.img}
+                        alt={card.name}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="category-scroller-container">

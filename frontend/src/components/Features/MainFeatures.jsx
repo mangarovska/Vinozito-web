@@ -11,6 +11,25 @@ const FeatureSelector = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [hasSelected, setHasSelected] = useState(false);
+  const [imageAnimationKey, setImageAnimationKey] = useState(0);
+  const [slideDirection, setSlideDirection] = useState("slide-top-left");
+  const [carouselDirection, setCarouselDirection] = useState(null);
+
+  const directionMap = {
+    feature1: "slide-top-left",
+    feature2: "slide-left",
+    feature3: "slide-bottom-left",
+    feature4: "slide-top-right",
+    feature5: "slide-right",
+    feature6: "slide-bottom-right",
+  };
+
+  useEffect(() => {
+    if (selectedFeature) {
+      setImageAnimationKey((prev) => prev + 1);
+      setSlideDirection(directionMap[selectedFeature] || "slide-top-left");
+    }
+  }, [selectedFeature]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,6 +47,16 @@ const FeatureSelector = () => {
     }
   }, [selectedFeature]);
 
+  useEffect(() => {
+    if (transitioning) {
+      const timeout = setTimeout(() => {
+        setTransitioning(false);
+        setCarouselDirection(null);
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [transitioning]);
+
   const handleSelect = (id) => {
     setSelectedFeature(id);
     setHasSelected(true);
@@ -36,20 +65,20 @@ const FeatureSelector = () => {
   const handlePrev = () => {
     if (transitioning) return;
     setTransitioning(true);
+    setCarouselDirection("left");
     const newIndex =
       (carouselIndex - 1 + MainFeatures.length) % MainFeatures.length;
     setCarouselIndex(newIndex);
     if (hasSelected) setSelectedFeature(MainFeatures[newIndex].id);
-    setTimeout(() => setTransitioning(false), 300);
   };
 
   const handleNext = () => {
     if (transitioning) return;
     setTransitioning(true);
+    setCarouselDirection("right");
     const newIndex = (carouselIndex + 1) % MainFeatures.length;
     setCarouselIndex(newIndex);
     if (hasSelected) setSelectedFeature(MainFeatures[newIndex].id);
-    setTimeout(() => setTransitioning(false), 300);
   };
 
   const getVisibleFeatures = () => {
@@ -76,10 +105,10 @@ const FeatureSelector = () => {
           <div className="mobile-features-viewport">
             <div
               className={`mobile-features-track ${
-                transitioning ? "transitioning" : ""
+                transitioning ? `transitioning ${carouselDirection}` : ""
               }`}
             >
-              {visibleFeatures.map((feature, index) => (
+              {visibleFeatures.map((feature) => (
                 <div
                   key={`${feature.id}-${feature.position}`}
                   className={`mobile-feature-item ${
@@ -107,8 +136,6 @@ const FeatureSelector = () => {
                       alt={feature.name}
                       className="mobile-icon-image"
                       style={{
-                        // width: `${feature.size}px`,
-                        // height: `${feature.size}px`,
                         paddingLeft: feature.paddingLeft
                           ? `${feature.paddingLeft}px`
                           : "0",
@@ -139,13 +166,14 @@ const FeatureSelector = () => {
           <Phone
             image={selectedFeatureData?.screen}
             background={selectedFeatureData?.background || grey}
+            animationKey={imageAnimationKey}
+            animationClass={slideDirection}
           />
         </div>
       </div>
     );
   }
 
-  // Desktop layout
   return (
     <div className="feature-container">
       <div className="features left-features">
@@ -205,6 +233,8 @@ const FeatureSelector = () => {
         <Phone
           image={selectedFeatureData?.screen}
           background={selectedFeatureData?.background || grey}
+          animationKey={imageAnimationKey}
+          animationClass={slideDirection}
         />
       </div>
 
@@ -253,7 +283,7 @@ const FeatureSelector = () => {
                     : "0",
                   paddingTop: feature.paddingTop
                     ? `${feature.paddingTop}px`
-                    : "0", // paddingTop
+                    : "0",
                 }}
               />
             </div>

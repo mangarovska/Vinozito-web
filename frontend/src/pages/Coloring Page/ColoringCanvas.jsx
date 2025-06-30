@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation  } from "react-router-dom";
+
 import "./ColoringCanvas.css";
 
 function BrushPreview({ brushSize }) {
@@ -38,49 +39,92 @@ function BrushPreview({ brushSize }) {
 export default function ColoringCanvas() {
   const { imageSrc } = useParams();
   const canvasRef = useRef(null);
-  const [selectedColor, setSelectedColor] = useState("#FF0000");
+  const navigate = useNavigate();
+  const wasClearedRef = useRef(false);
+  const location = useLocation();
+const hasSavedRef = useRef(false); // new
+
+  const [selectedColor, setSelectedColor] = useState("#FF4D4D");
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushSize, setBrushSize] = useState(10);
   const [isBucketFill, setIsBucketFill] = useState(false);
-  const [svgPaths, setSvgPaths] = useState([]);
+  const [svgData, setSvgData] = useState({
+    paths: [],
+    width: 0,
+    height: 0,
+  });
   const [coloredPaths, setColoredPaths] = useState({});
-  const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 });
+  const [canvasSize, setCanvasSize] = useState({
+    width: 800.16,
+    height: 590.16,
+  });
   const [freehandPaths, setFreehandPaths] = useState([]);
-  const [currentPath, setCurrentPath] = useState(null);
+  // const [currentPath, setCurrentPath] = useState(null);
+  const currentPathRef = useRef(null);
+  const [history, setHistory] = useState([]);
+  const [historyPointer, setHistoryPointer] = useState(-1);
+
+  //const [svgPadding, setSvgPadding] = useState(50); 
+  const [svgPadding] = useState(-35);
+  const isDrawingRef = useRef(false); 
 
   const colors = [
-    "#FF0000",
-    "#FF7F00",
-    "#FFFF00",
-    "#00FF00",
-    "#0000FF",
-    "#4B0082",
-    "#9400D3",
+    "#FF4D4D",
+    "#FFB733",
+    "#FFFF80",
+    "#99FF99",
+    "#CAE4EB",
+    "#8080FF",
+    // "#4B0082",
+    "#FFC0CB",
+    "#BF40BF",
     "#28282B",
-    "#FFFFFF",
+    // "#FFFFFF",
     "#C0C0C0",
-    "#808080",
-    "#FF69B4",
-    "#FFA500",
-    "#A52A2A",
-    "#008000",
-    "#00FFFF",
+    // "#808080",
+    // "#FFA500",
+    "#FFFFFF",
+    // "#808080",
+    "#8F6D51",
   ];
 
   const brushSizes = [10, 15, 20, 25, 30];
 
+  // const coloredPathsRef = useRef(coloredPaths);
+  // const freehandPathsRef = useRef(freehandPaths);
+
+  // useEffect(() => {
+  //   coloredPathsRef.current = coloredPaths;
+  // }, [coloredPaths]);
+
+  // useEffect(() => {
+  //   freehandPathsRef.current = freehandPaths;
+  // }, [freehandPaths]);
+
+
+  useEffect(() => {
+    return () => {
+      saveProgress(true); // silent save -> save progress on unmount
+    };
+  }, []);
+
   useEffect(() => {
     const loadSvgAndInitCanvas = async () => {
       try {
-        const response = await fetch(`/${imageSrc}`); // load SVG
+        const response = await fetch(`/${imageSrc}`);
         const svgText = await response.text();
-        const paths = extractPathsFromSvg(svgText);
-        setSvgPaths(paths);
+        const { paths, width, height } = extractPathsFromSvg(svgText);
+        const backgroundPath = {
+          id: "background",
+          d: `M0 0 H${svgData.width} V${svgData.height} H0 Z`,
+          fill: "#ffffff", // default background 
+          isBackground: true, // custom flag so you know it's the background
+        };
 
-        const canvas = canvasRef.current; // init canvas
+        setSvgData({ paths, width, height });
+
         resizeCanvas();
 
-        // Load saved progress if requested
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get("continue")) {
           const saved = loadProgress();
@@ -89,6 +133,8 @@ export default function ColoringCanvas() {
             setFreehandPaths(saved.freehandPaths || []);
           }
         }
+
+        svgData.paths = [backgroundPath, ...svgData.paths];
       } catch (error) {
         console.error("Initialization error:", error);
       }
@@ -101,14 +147,14 @@ export default function ColoringCanvas() {
 
   useEffect(() => {
     drawCanvas();
-  }, [coloredPaths, svgPaths, freehandPaths, canvasSize]);
+  }, [coloredPaths, svgData, freehandPaths, canvasSize]);
 
   const resizeCanvas = () => {
     const container = document.querySelector(".coloring-container");
     if (container && canvasRef.current) {
-      const containerWidth = container.clientWidth - 120; // Account for tool column
-      const width = Math.min(800, Math.floor(containerWidth)); // Integer width
-      const height = Math.floor(width * 0.75); // Integer height, 4:3 ratio
+      const containerWidth = container.clientWidth - 120;
+      const width = Math.min(800, Math.floor(containerWidth));
+      const height = Math.floor(width * 0.75);
 
       if (canvasSize.width !== width || canvasSize.height !== height) {
         setCanvasSize({ width, height });
@@ -116,86 +162,153 @@ export default function ColoringCanvas() {
     }
   };
 
-  // In the return statement, update the color palette grid:
-  <div className="color-palette">
-    {colors.map((color, index) => (
-      <div
-        key={index}
-        className={`color-option ${selectedColor === color ? "selected" : ""}`}
-        style={{
-          backgroundColor: color,
-          flex: "0 0 40px", // Fixed size but flexible in row
-          width: "40px",
-          height: "40px",
-        }}
-        onClick={() => setSelectedColor(color)}
-      />
-    ))}
-  </div>;
-
   const extractPathsFromSvg = (svgText) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(svgText, "image/svg+xml");
+    const svgElement = doc.querySelector("svg");
     const paths = doc.querySelectorAll("path");
 
-    return Array.from(paths).map((path, index) => ({
-      id: path.id || `path-${index}`,
-      d: path.getAttribute("d"),
-      fill: path.getAttribute("fill") || "none",
-      stroke: path.getAttribute("stroke") || "black",
-      strokeWidth: path.getAttribute("stroke-width") || "1",
-    }));
+    let svgWidth = parseFloat(svgElement.getAttribute("width"));
+    let svgHeight = parseFloat(svgElement.getAttribute("height"));
+    const viewBox = svgElement.getAttribute("viewBox");
+
+    if (viewBox) {
+      const parts = viewBox.split(" ");
+      svgWidth = parseFloat(parts[2]) || svgWidth;
+      svgHeight = parseFloat(parts[3]) || svgHeight;
+    }
+
+    return {
+      paths: Array.from(paths).map((path, index) => ({
+        id: path.id || `path-${index}`,
+        d: path.getAttribute("d"),
+        fill: path.getAttribute("fill") || "none",
+        stroke: imageSrc.includes("candy")
+          ? "black"
+          : path.getAttribute("stroke") || "black",
+        strokeWidth: path.getAttribute("stroke-width") || "1",
+      })),
+      width: svgWidth,
+      height: svgHeight,
+    };
   };
 
   const drawCanvas = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !svgData.paths.length) return;
 
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Fill background if specified
-    if (coloredPaths.background) {
+
+    const availableWidth = canvas.width - svgPadding * 2; // calculate scale and offset
+    const availableHeight = canvas.height - svgPadding * 2;
+    const scale = Math.min(
+      availableWidth / svgData.width,
+      availableHeight / svgData.height
+    );
+    const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
+    const yOffset = svgPadding + (availableHeight - svgData.height * scale) / 2;
+
+    if (coloredPaths.background) { // draw background with mask
+      ctx.save();
+
+      // 1. Draw background color first
       ctx.fillStyle = coloredPaths.background;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Erase areas covered by SVG paths
+      ctx.globalCompositeOperation = "destination-out";
+
+      // Draw all SVG paths to create mask
+      ctx.save();
+      ctx.translate(xOffset, yOffset);
+      ctx.scale(scale, scale);
+      svgData.paths.forEach((path) => {
+        const path2D = new Path2D(path.d);
+        ctx.fill(path2D);
+      });
+      ctx.restore();
+
+      // Reset composite operation
+      ctx.globalCompositeOperation = "source-over";
+      ctx.restore();
+    } else {
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    // Draw SVG paths with their colors
-    svgPaths.forEach((path) => {
+    // Draw SVG artwork normally
+    ctx.save();
+    ctx.translate(xOffset, yOffset);
+    ctx.scale(scale, scale);
+
+    svgData.paths.forEach((path) => {
       const path2D = new Path2D(path.d);
       ctx.fillStyle = coloredPaths[path.id] || path.fill;
       ctx.strokeStyle = path.stroke;
       ctx.lineWidth = path.strokeWidth;
+
       ctx.fill(path2D);
       ctx.stroke(path2D);
     });
 
-    // Redraw freehand paths
+    ctx.restore();
+    // Draw stored paths
     freehandPaths.forEach((path) => {
+      ctx.save();
+      ctx.translate(xOffset, yOffset);
+      ctx.scale(scale, scale);
+
+      // Apply clipping if SVG path ID exists
+      if (path.svgPathId) {
+        const svgPath = svgData.paths.find((p) => p.id === path.svgPathId);
+        if (svgPath) {
+          const clipPath = new Path2D(svgPath.d);
+          ctx.clip(clipPath);
+        }
+      }
+
+      // Draw the path
       ctx.beginPath();
       ctx.moveTo(path.points[0].x, path.points[0].y);
-      for (let i = 1; i < path.points.length; i++) {
-        ctx.lineTo(path.points[i].x, path.points[i].y);
-      }
+      path.points.forEach((point) => ctx.lineTo(point.x, point.y));
       ctx.strokeStyle = path.color;
-      ctx.lineWidth = path.size;
+      ctx.lineWidth = path.size / scale; // Adjust line width for current scale
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.stroke();
+
+      ctx.restore();
     });
 
-    // Draw current path if exists
-    if (currentPath && currentPath.points.length > 1) {
-      ctx.beginPath();
-      ctx.moveTo(currentPath.points[0].x, currentPath.points[0].y);
-      for (let i = 1; i < currentPath.points.length; i++) {
-        ctx.lineTo(currentPath.points[i].x, currentPath.points[i].y);
+    // Draw current path if it exists
+    if (currentPathRef.current) {
+      const path = currentPathRef.current;
+      ctx.save();
+      ctx.translate(xOffset, yOffset);
+      ctx.scale(scale, scale);
+
+      // Apply clipping if SVG path ID exists
+      if (path.svgPathId) {
+        const svgPath = svgData.paths.find((p) => p.id === path.svgPathId);
+        if (svgPath) {
+          const clipPath = new Path2D(svgPath.d);
+          ctx.clip(clipPath);
+        }
       }
-      ctx.strokeStyle = currentPath.color;
-      ctx.lineWidth = currentPath.size;
+
+      // draw path
+      ctx.beginPath();
+      ctx.moveTo(path.points[0].x, path.points[0].y);
+      path.points.forEach((point) => ctx.lineTo(point.x, point.y));
+      ctx.strokeStyle = path.color;
+      ctx.lineWidth = path.size / scale;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.stroke();
+
+      ctx.restore();
     }
   };
 
@@ -211,104 +324,15 @@ export default function ColoringCanvas() {
     };
   };
 
-  const floodFill = (x, y, targetColor, fillColor) => {
-    x = Math.floor(x); // Ensure integer coordinates
-    y = Math.floor(y);
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const pixelData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = pixelData.data;
-    const width = canvas.width;
-    const height = canvas.height;
-
-    const getPixelIndex = (x, y) => (y * width + x) * 4;
-    const targetRgba = hexToRgba(targetColor);
-    const fillRgba = hexToRgba(fillColor);
-
-    const stack = [{ x, y }];
-    const visited = new Set();
-
-    while (stack.length > 0) {
-      const { x, y } = stack.pop();
-      const index = getPixelIndex(x, y);
-
-      // Boundary checks
-      if (x < 0 || x >= width || y < 0 || y >= height) continue;
-      if (visited.has(`${x},${y}`)) continue;
-
-      visited.add(`${x},${y}`);
-
-      // Skip if pixel is black (outline)
-      if (isBlack(data, index)) continue;
-
-      // Check if pixel matches target color (with tolerance)
-      if (!colorsMatch(data, index, targetRgba)) continue;
-
-      // Fill the pixel
-      data[index] = fillRgba.r;
-      data[index + 1] = fillRgba.g;
-      data[index + 2] = fillRgba.b;
-      data[index + 3] = fillRgba.a;
-
-      // Add neighbors to stack
-      stack.push({ x: x + 1, y });
-      stack.push({ x: x - 1, y });
-      stack.push({ x, y: y + 1 });
-      stack.push({ x, y: y - 1 });
-    }
-
-    ctx.putImageData(pixelData, 0, 0);
-  };
-
-const isBlack = (data, index) => {
-  return (
-    data[index] < 30 && // R
-    data[index + 1] < 30 && // G
-    data[index + 2] < 30 && // B
-    data[index + 3] > 200 // Alpha (not transparent)
-  );
-};
-
-  const hexToRgba = (hex) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return { r, g, b, a: 255 };
-  };
-
-  const colorsMatch = (data, index, target) => {
-    const r = data[index];
-    const g = data[index + 1];
-    const b = data[index + 2];
-    const a = data[index + 3];
-
-    // Simple color matching with some tolerance
-    return (
-      Math.abs(r - target.r) < 50 &&
-      Math.abs(g - target.g) < 50 &&
-      Math.abs(b - target.b) < 50
-    );
-  };
-
-  // State for tracking all operations
-  const [history, setHistory] = useState([]);
-  const [historyPointer, setHistoryPointer] = useState(-1);
-
-  // Modified startDrawing for bucket fill
   const startDrawing = (e) => {
     const { x, y } = getCanvasMousePosition(e);
+    const clickedPath = findClickedPath(x, y);
 
     if (isBucketFill) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const pixel = ctx.getImageData(x, y, 1, 1).data;
-      if (isBlack(pixel, 0)) return;
-
-      const targetColor = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-      const clickedPath = findClickedPath(x, y);
+      // Bucket fill already works correctly
+      if (clickedPath?.isOutline) return;
 
       if (clickedPath) {
-        // Fill a specific path
         saveToHistory({
           type: "fill",
           pathId: clickedPath.id,
@@ -320,13 +344,11 @@ const isBlack = (data, index) => {
           [clickedPath.id]: selectedColor,
         }));
       } else {
-        // Fill the background
         saveToHistory({
           type: "fillBackground",
           prevColor: coloredPaths.background,
           newColor: selectedColor,
         });
-        floodFill(Math.round(x), Math.round(y), targetColor, selectedColor);
         setColoredPaths((prev) => ({
           ...prev,
           background: selectedColor,
@@ -335,17 +357,40 @@ const isBlack = (data, index) => {
       return;
     }
 
-    // For drawing mode
-    setIsDrawing(true);
-    setCurrentPath({
-      points: [{ x, y }],
+    // Prevent drawing on outlines or outside all paths
+    if (clickedPath?.isOutline || !clickedPath) return; // Add !clickedPath check
+
+    // ✅ Normal drawing inside fill areas
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    const availableWidth = canvas.width - svgPadding * 2;
+    const availableHeight = canvas.height - svgPadding * 2;
+    const scale = Math.min(
+      availableWidth / svgData.width,
+      availableHeight / svgData.height
+    );
+    const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
+    const yOffset = svgPadding + (availableHeight - svgData.height * scale) / 2;
+
+    const svgX = (x - xOffset) / scale;
+    const svgY = (y - yOffset) / scale;
+
+    currentPathRef.current = {
+      points: [{ x: svgX, y: svgY }],
       color: selectedColor,
       size: brushSize,
       id: `drawing-${Date.now()}`,
-    });
+      svgPathId: clickedPath?.id || null,
+    };
+
+    isDrawingRef.current = true;
+    setIsDrawing(true);
+
+    window.addEventListener("mousemove", draw);
+    window.addEventListener("mouseup", stopDrawing);
   };
 
-  // Helper to save operations to history
   const saveToHistory = (operation) => {
     setHistory((prev) => [...prev.slice(0, historyPointer + 1), operation]);
     setHistoryPointer((prev) => prev + 1);
@@ -353,69 +398,160 @@ const isBlack = (data, index) => {
 
   const findClickedPath = (x, y) => {
     const canvas = canvasRef.current;
+    if (!canvas) return null;
+
     const ctx = canvas.getContext("2d");
 
-    // Check each path to see if the point is inside
-    for (const path of svgPaths) {
+    const availableWidth = canvas.width - svgPadding * 2;
+    const availableHeight = canvas.height - svgPadding * 2;
+    const scale = Math.min(
+      availableWidth / svgData.width,
+      availableHeight / svgData.height
+    );
+    const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
+    const yOffset = svgPadding + (availableHeight - svgData.height * scale) / 2;
+
+    const svgX = (x - xOffset) / scale;
+    const svgY = (y - yOffset) / scale;
+
+    for (const path of svgData.paths) {
       const path2D = new Path2D(path.d);
-      if (ctx.isPointInPath(path2D, x, y)) {
-        return path;
+      const isBlackFill = path.fill === "#000000" || path.fill === "black";
+      const isStrokeOnly = !path.fill && path.stroke;
+
+      if (isBlackFill || isStrokeOnly) {
+        ctx.save(); // Save current context state
+        ctx.lineWidth = parseFloat(path.strokeWidth) || 1; // Set correct stroke width
+        const isInStroke = ctx.isPointInStroke(path2D, svgX, svgY);
+        ctx.restore(); // Restore context
+
+        if (isInStroke) {
+          return { ...path, isOutline: true };
+        }
+        continue;
+      }
+
+      // For normal fill areas
+      if (ctx.isPointInPath(path2D, svgX, svgY)) {
+        return { ...path, isOutline: false };
       }
     }
+
     return null;
   };
 
   const draw = (e) => {
-    if (!isDrawing || isBucketFill) return;
+    if (!isDrawing || !currentPathRef.current) return;
+
+    const canvas = canvasRef.current;
+    const { width, height } = canvas;
+
+    const availableWidth = width - svgPadding * 2;
+    const availableHeight = height - svgPadding * 2;
+    const scale = Math.min(
+      availableWidth / svgData.width,
+      availableHeight / svgData.height
+    );
+    const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
+    const yOffset = svgPadding + (availableHeight - svgData.height * scale) / 2;
 
     const { x, y } = getCanvasMousePosition(e);
-    setCurrentPath((prev) => ({
-      ...prev,
-      points: [...prev.points, { x, y }],
-    }));
+    const svgX = (x - xOffset) / scale;
+    const svgY = (y - yOffset) / scale;
+
+    // currentPathRef.current.points.push({ x: svgX, y: svgY });
+    currentPathRef.current.points.push({ x: svgX, y: svgY, moveTo: true });
+
+    drawCanvas();
   };
 
   const stopDrawing = () => {
-    if (isDrawing && currentPath && currentPath.points.length > 1) {
-      // Save to history before adding to paths
-      saveToHistory({
-        type: "draw",
-        path: currentPath,
-      });
-
-      setFreehandPaths((prev) => [...prev, currentPath]);
+    if (isDrawingRef.current && currentPathRef.current?.points?.length > 1) {
+      const completedPath = { ...currentPathRef.current };
+      saveToHistory({ type: "draw", path: completedPath });
+      setFreehandPaths((prev) => [...prev, completedPath]);
     }
+
+    currentPathRef.current = null;
+    isDrawingRef.current = false;
     setIsDrawing(false);
-    setCurrentPath(null);
+
+    window.removeEventListener("mousemove", draw); // detach global listeners
+    window.removeEventListener("mouseup", stopDrawing);
   };
 
-  const saveProgress = () => {
+  const saveProgress = (silent = false) => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Use current state values directly
     const data = {
-      paths: coloredPaths,
-      freehandPaths: freehandPaths,
+      paths: coloredPaths, // Direct state value
+      freehandPaths: freehandPaths, // Direct state value
       drawing: canvas.toDataURL("image/png"),
+      cleared: wasClearedRef.current, // store the cleared flag
     };
 
     localStorage.setItem(`saved_${imageSrc}`, JSON.stringify(data));
-    alert("Progress saved!");
+
+    if (!silent) {
+      // alert("Прогрес зачуван!");
+    }
   };
+
+  // Update cleanup effect to use current state
+  useEffect(() => {
+    return () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      // Save using current state values
+      const data = {
+        paths: coloredPaths,
+        freehandPaths: freehandPaths,
+        drawing: canvas.toDataURL("image/png"),
+      };
+
+      localStorage.setItem(
+        `saved_${imageName}`,
+        JSON.stringify({
+          drawing: canvas.toDataURL(), // likely empty/transparent
+          cleared: true,
+        })
+      );
+    };
+  }, [imageSrc]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      saveProgress(true);
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [coloredPaths, freehandPaths]);
 
   const loadProgress = () => {
     const saved = localStorage.getItem(`saved_${imageSrc}`);
     return saved ? JSON.parse(saved) : null;
   };
 
-  // Modified clearAll
   const clearAll = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     setHistory([]);
     setHistoryPointer(-1);
     setFreehandPaths([]);
     setColoredPaths({});
+
+    wasClearedRef.current = true; // mark as cleared
   };
+
   const saveToPC = () => {
     const canvas = canvasRef.current;
     const link = document.createElement("a");
@@ -424,67 +560,116 @@ const isBlack = (data, index) => {
     link.click();
   };
 
-  // const handleColorPath = (pathId, color) => {
-  //   setOperations((prev) => [...prev, currentOperation]);
+  const handleUndo = () => {
+    if (historyPointer < 0) return;
 
-  //   setColoredPaths((prev) => ({
-  //     ...prev,
-  //     [pathId]: color,
-  //   }));
+    const lastAction = history[historyPointer];
 
-  //   setCurrentOperation(null);
-  // };
+    if (lastAction.type === "fill") {
+      setColoredPaths((prev) => ({
+        ...prev,
+        [lastAction.pathId]: lastAction.prevColor,
+      }));
+    } else if (lastAction.type === "fillBackground") {
+      setColoredPaths((prev) => ({
+        ...prev,
+        background: lastAction.prevColor,
+      }));
+    } else if (lastAction.type === "draw") {
+      setFreehandPaths((prev) =>
+        prev.filter((p) => p.id !== lastAction.path.id)
+      );
+    }
 
-const handleUndo = () => {
-  if (historyPointer < 0) return;
+    setHistoryPointer((prev) => prev - 1);
+    drawCanvas();
+  };
 
-  const lastAction = history[historyPointer];
+  const handleMouseEnter = (e) => {
+    if (e.buttons === 1 && currentPathRef.current) {
+      const { x, y } = getCanvasMousePosition(e);
 
-  if (lastAction.type === "fill") {
-    setColoredPaths((prev) => ({
-      ...prev,
-      [lastAction.pathId]: lastAction.prevColor,
-    }));
-  } else if (lastAction.type === "fillBackground") {
-    setColoredPaths((prev) => ({
-      ...prev,
-      background: lastAction.prevColor,
-    }));
-  } else if (lastAction.type === "draw") {
-    setFreehandPaths((prev) => prev.filter((p) => p.id !== lastAction.path.id));
-  }
+      const canvas = canvasRef.current;
+      const availableWidth = canvas.width - svgPadding * 2;
+      const availableHeight = canvas.height - svgPadding * 2;
+      const scale = Math.min(
+        availableWidth / svgData.width,
+        availableHeight / svgData.height
+      );
+      const xOffset = svgPadding + (availableWidth - svgData.width * scale) / 2;
+      const yOffset =
+        svgPadding + (availableHeight - svgData.height * scale) / 2;
 
-  setHistoryPointer((prev) => prev - 1);
-  drawCanvas();
-};
+      const svgX = (x - xOffset) / scale;
+      const svgY = (y - yOffset) / scale;
+
+      currentPathRef.current.points.push({ x: svgX, y: svgY }); // add the current position to the existing path's points
+
+      setIsDrawing(true);
+    }
+  };
+
+
+useEffect(() => {
+  const handleSaveRequest = () => saveProgress();
+  window.addEventListener("save-coloring-progress", handleSaveRequest);
+
+  const handlePopState = () => {
+    window.dispatchEvent(new Event("save-coloring-progress")); // Dispatch the same save event when user clicks browser back - not working
+  };
+
+  window.addEventListener("popstate", handlePopState);
+
+  return () => {
+    window.removeEventListener("save-coloring-progress", handleSaveRequest);
+    window.removeEventListener("popstate", handlePopState);
+  };
+}, [coloredPaths, freehandPaths]);
 
   return (
     <div className="coloring-page">
       {!isBucketFill && <BrushPreview brushSize={brushSize} />}
 
-      <div className="coloring-container">
-        <div
-          className="canvas-area"
-          style={{
-            width: `${canvasSize.width}px`,
-            height: `${canvasSize.height}px`,
-          }}
-        >
-          <canvas
-            ref={canvasRef}
-            width={canvasSize.width}
-            height={canvasSize.height}
-            onMouseDown={startDrawing}
-            onMouseMove={draw}
-            onMouseUp={stopDrawing}
-            onMouseLeave={stopDrawing}
+      <div className="canvas-and-controls">
+        <div className="canvas-palette-container">
+          <div
+            className="canvas-area"
             style={{
-              cursor: isBucketFill ? "pointer" : "crosshair",
-              width: "100%",
-              height: "100%",
-              display: "block", // Removes inline element spacing
+              aspectRatio: `${canvasSize.width} / ${canvasSize.height}`,
+              maxWidth: "100%",
+              maxHeight: "70vh",
             }}
-          />
+          >
+            <canvas
+              ref={canvasRef}
+              width={canvasSize.width}
+              height={canvasSize.height}
+              onMouseDown={startDrawing}
+              onMouseMove={draw}
+              onMouseUp={stopDrawing}
+              onMouseEnter={handleMouseEnter}
+              style={{
+                cursor: isBucketFill ? "pointer" : "crosshair",
+                width: "100%",
+                height: "100%",
+                display: "block",
+                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+              }}
+            />
+          </div>
+
+          <div className="color-palette-bottom">
+            {colors.map((color, index) => (
+              <div
+                key={index}
+                className={`color-option ${
+                  selectedColor === color ? "selected" : ""
+                }`}
+                style={{ backgroundColor: color }}
+                onClick={() => setSelectedColor(color)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="action-buttons-column">
@@ -499,7 +684,8 @@ const handleUndo = () => {
           <button onClick={clearAll} className="action-button">
             <img src="/trash.png" alt="Clear All" />
           </button>
-          <button onClick={saveProgress} className="action-button">
+
+          <button onClick={() => saveProgress()} className="action-button">
             <img src="/check.png" alt="Save Progress" />
           </button>
           <button onClick={saveToPC} className="action-button">
@@ -520,17 +706,6 @@ const handleUndo = () => {
             <img src="/pencil.png" alt="Pencil Draw" />
           </button>
 
-          {/* <button
-            onClick={() => setIsBucketFill(!isBucketFill)}
-            className={`tool-button ${isBucketFill ? "active" : ""}`}
-          >
-            <img
-              src={isBucketFill ? "/bucket.png" : "/pencil.png"}
-              alt={isBucketFill ? "Bucket Fill" : "Pencil Draw"}
-            />
-          </button> */}
-
-          {/* Brush sizes - only visible when pencil is active */}
           <div className={`brush-sizes-column ${isBucketFill ? "hidden" : ""}`}>
             {brushSizes.map((size) => (
               <button
@@ -538,8 +713,8 @@ const handleUndo = () => {
                 className={`brush-size ${brushSize === size ? "active" : ""}`}
                 onClick={() => setBrushSize(size)}
                 style={{
-                  width: `${size + 20}px`,
-                  height: `${size + 20}px`,
+                  width: `${size + 18}px`,
+                  height: `${size + 18}px`,
                   backgroundColor: "transparent",
                 }}
                 title={`Brush size: ${size}px`}
@@ -560,19 +735,6 @@ const handleUndo = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="color-palette-bottom">
-        {colors.map((color, index) => (
-          <div
-            key={index}
-            className={`color-option ${
-              selectedColor === color ? "selected" : ""
-            }`}
-            style={{ backgroundColor: color }}
-            onClick={() => setSelectedColor(color)}
-          />
-        ))}
       </div>
     </div>
   );

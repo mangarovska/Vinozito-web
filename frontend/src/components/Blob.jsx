@@ -28,11 +28,12 @@ const Blob = ({
   imageUrl = "",
   hoverVideo = null,
   pauseTime = null,
-  size = 200, // Base blob size
-  contentSize = 1, // Relative size of content (0-1)
+  size = 200,
+  contentSize = 1,
   bottomPadding = "0px",
   leftPadding = "0px",
   overflowVisible = true,
+  noShadow = false,
 }) => {
   const [path1] = useState(generateBlobPath());
   const [path2] = useState(generateBlobPath());
@@ -40,12 +41,12 @@ const Blob = ({
   const controls = useAnimation();
   const videoRef = useRef(null);
   const [hovering, setHovering] = useState(false);
-  const isMountedRef = useRef(true); // Track mount state with ref
+  const isMountedRef = useRef(true); // track mount state with ref
 
-  // Blob morphing loop - prevent memory leak
+  // blob morphing loop -> prevent memory leak
   useEffect(() => {
     isMountedRef.current = true;
-    const currentRef = { current }; // Capture current value in ref
+    const currentRef = { current }; // capture current value in ref
 
     const loop = async () => {
       await new Promise((resolve) => requestAnimationFrame(resolve));
@@ -59,12 +60,12 @@ const Blob = ({
               d: targetPath,
               transition: { duration: 6, ease: "easeInOut" },
             })
-            .catch(() => {}); // Silence cancellation errors
+            .catch(() => {}); // silence cancellation errors
         }
 
         if (isMountedRef.current) {
           setCurrent((prev) => {
-            currentRef.current = !prev; // Update ref with new value
+            currentRef.current = !prev; // update ref with new value
             return !prev;
           });
         }
@@ -76,9 +77,9 @@ const Blob = ({
     return () => {
       isMountedRef.current = false;
     };
-  }, [path1, path2, controls]); // Remove 'current' from dependencies
+  }, [path1, path2, controls]);
 
-  // Pause hover video logic - guard against null pauseTime
+  // pause hover video logic
   useEffect(() => {
     let checkInterval = null;
 
@@ -127,9 +128,8 @@ const Blob = ({
 
   const selectedPath = current ? path1 : path2;
 
-  // Ensure valid path
   const isValidPath =
-    typeof selectedPath === "string" && selectedPath.startsWith("M");
+    typeof selectedPath === "string" && selectedPath.startsWith("M"); // ensure valid path
   const fallbackPath = "M 0 0 L 100 0 L 100 100 L 0 100 Z";
 
   return (
@@ -145,34 +145,30 @@ const Blob = ({
           className="w-full h-full block pointer-ev ents-none"
           style={overflowVisible ? { overflow: "visible" } : {}}
         >
-          <defs>
-            <filter
-              id="blobShadow"
-              x="-50%"
-              y="-50%"
-              width="200%"
-              height="200%"
-            >
-              <feDropShadow
-                dx="4"
-                dy="6"
-                stdDeviation="6"
-                floodColor="rgba(0,0,0,0.25)"
-              />
-            </filter>
-          </defs>
+          {!noShadow && (
+            <defs>
+              <filter
+                id="blobShadow"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feDropShadow
+                  dx="4"
+                  dy="6"
+                  stdDeviation="6"
+                  floodColor="rgba(0,0,0,0.25)"
+                />
+              </filter>
+            </defs>
+          )}
+
           <motion.path
             fill={color}
-            d={
-              typeof (current ? path1 : path2) === "string" &&
-              (current ? path1 : path2).startsWith("M")
-                ? current
-                  ? path1
-                  : path2
-                : "M 0 0 L 100 0 L 100 100 L 0 100 Z"
-            }
+            d={isValidPath ? selectedPath : fallbackPath}
             animate={controls}
-            filter="url(#blobShadow)"
+            filter={noShadow ? undefined : "url(#blobShadow)"}
           />
         </svg>
 
@@ -187,12 +183,11 @@ const Blob = ({
             style={{
               width: `${contentSize * 100}%`,
               height: `${contentSize * 100}%`,
-              // Remove maxWidth/maxHeight constraints when contentSize > 1
               ...(contentSize > 1
                 ? {
                     maxWidth: "none",
                     maxHeight: "none",
-                    transform: "translateZ(0)", // Prevent clipping in some browsers
+                    transform: "translateZ(0)", // prevent clipping in some browsers
                   }
                 : {}),
             }}
@@ -201,13 +196,12 @@ const Blob = ({
               <video
                 ref={videoRef}
                 src={hoverVideo}
-                className=" object-contain z-10"
+                className="w-full h-full max-w-full max-h-full object-contain z-10"
                 style={{
                   paddingBottom: bottomPadding,
                   paddingLeft: leftPadding,
-                  // Scale up if contentSize > 1
                   transform:
-                    contentSize >= 1 ? `scale(${contentSize})` : "none",
+                    contentSize >= 1 ? `scale(${contentSize})` : "none", // scale up if contentSize > 1
                 }}
                 muted
                 playsInline
@@ -220,7 +214,6 @@ const Blob = ({
                 className="w-full h-full object-contain"
                 draggable={false}
                 style={{
-                  // Scale up if contentSize > 1
                   transform:
                     contentSize >= 1 ? `scale(${contentSize})` : "none",
                 }}

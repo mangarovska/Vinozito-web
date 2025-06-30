@@ -1,3 +1,10 @@
+.continue-button{
+  border-radius: 200px;
+  background-color: rgb(215, 215, 215);
+  bottom:-20px;
+  width: 150px;
+}
+
 .custom-gradient {
     background: linear-gradient(to bottom, #dce6ff, #f0f5ff);
   }

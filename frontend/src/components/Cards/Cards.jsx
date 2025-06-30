@@ -1,5 +1,5 @@
 import React from "react";
-import FeatureCard from "./FeatureCard.jsx"; // default export
+// import FeatureCard from "./FeatureCard.jsx"; 
 import { FEATURES } from '../../data.js';
 import './Cards.css';
 

@@ -1,27 +1,27 @@
 #features {
-  padding: 5rem 1rem 4rem; /* top, left & right, bottom*/
+  padding: 5rem 1rem 4rem;
   text-align: center;
 }
 
 .features-container {
   max-width: 1024px;
-  margin: 0 auto; /* center the container */
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap; /* go to next line */
+  flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
 }
 
 .features-list {
   display: flex;
-  flex-wrap: nowrap; /* all in one line */
+  flex-wrap: nowrap;
   gap: 3rem;
-  overflow-x: auto; /* horizontal scrolling if needed */
+  overflow-x: auto;
   padding: 1rem;
   width: 100%;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  scroll-snap-align: start; /* snap cards to the start of the container */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-align: start;
 }
 
 .features-list:-webkit-scrollbar {

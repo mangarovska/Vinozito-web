@@ -1,21 +1,15 @@
-/* body, html {
-  height: 100%;
-  overflow-y: auto;
-} */
-
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-   /*overflow-x: hidden; Prevent horizontal scroll */
   width: 100%;
 }
 
 .menu-page {
-  min-height: 55vh; /* Ensures the content fills the height */
+  min-height: 55vh;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   /* left: 0; */
   padding: 40px 40px 0px 40px;
   /* position: absolute; */
@@ -35,9 +29,4 @@ body {
   .menu-page {
     padding: 20px; /* Adjust padding on smaller screens */
   }
-  
-  /* html, body {
-    height: 100%;
-    overflow: visible;
-  } */
 }

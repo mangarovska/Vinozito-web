@@ -11,8 +11,11 @@ import staticImage from "/speakerImg_start.png";
 import paint from "/paint_start.png";
 import paint_hover from "/paint_fin.webm";
 
-import connect from "/bee3d.png";
-import connect_hover from "/bee4.webm";
+// import connect from "/bee3d.png";
+// import connect_hover from "/bee4.webm";
+
+import connect from "/puzzle_start.png";
+import connect_hover from "/puzzle2.webm";
 
 import relax from "/jelly.png";
 import relax_hover from "/jelly3.webm";
@@ -37,17 +40,18 @@ const blobsData = [
     size: 200,
     contentSize: 1.65,
     bottomPadding: "0px",
-    leftPadding: "10px",
+    leftPadding: "8px",
   },
   {
-    color: "#81C184",
-    label: "поврзување",
+    color: "#c6a6ee",
+    label: "забава",
     imageUrl: connect,
     hoverVideo: connect_hover,
     pauseTime: 0.65,
     size: 220,
-    contentSize: 1.7, // Relative size of content (0-1)
-    bottomPadding: "0px",
+    contentSize: 1.75, // relative size of content
+    bottomPadding: "25px",
+    leftPadding: "12 px",
   },
   {
     color: "#91D3DA",
@@ -69,8 +73,10 @@ const BlobsRow = () => {
     if (index === 0) {
       navigate("/communication");
     }
+    if (index === 2) {
+      navigate("/games");
+    }
     if (index === 3) {
-      
       navigate("/relax");
     }
     if (index === 1) {

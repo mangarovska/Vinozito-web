@@ -1,17 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Howl } from "howler";
+import { useSounds } from "../../SoundProvider"; // adjust path as needed
+import { useLoading } from "../../LoadingContext"; // update the path as needed
 
 import "./Relax.css";
-import bubbleImage from "/bubble_pop_frame_01.png"; // Your bubble image
-import popAnimation from "/bubble-pop.webm"; // Your WebM animation
-import CustomSelect from "./CustomSelect";
+import bubbleImage from "/bubble_pop_frame_01.png";
+import popAnimation from "/bubble-pop.webm";
 import LoadingScreen from "../LoadingScreen.jsx";
 
 import useSound from "use-sound";
-import popSfx from "/pop.m4a";
-import calmMusic from "../../assets/calm.mp3";
-import happyMusic from "../../assets/veselo.mp3";
-import noiseMusic from "../../assets/whitenoise.mp3";
+import popSfx from "/audio/pop.m4a";
+
+import happyNote from "../../assets/relax-assets/happy.png";
+import happyBack from "../../assets/relax-assets/happy_back.png";
+import calmNote from "../../assets/relax-assets/calm.png";
+import calmBack from "../../assets/relax-assets/calm_back.png";
+import wnNote from "../../assets/relax-assets/wn.png";
+import wnBack from "../../assets/relax-assets/wn_back.png";
+import muteNote from "../../assets/relax-assets/mute.png";
+import muteBack from "../../assets/relax-assets/mute_back.png";
+import layer1Img from "../../assets/relax-assets/fin.png";
 
 const Bubble = ({ x, y, size }) => {
   const [isPopped, setIsPopped] = useState(false);
@@ -295,7 +303,18 @@ const UnderwaterScene = () => {
       <div className="layer layer4"></div>
       <div className="layer layer3"></div>
       <div className="layer layer2"></div>
-      <div className="layer1"></div>
+      <div
+        className="layer1"
+        style={{
+          backgroundImage: `url(${layer1Img})`,
+          backgroundSize: "600px auto",
+          width: "100%",
+          height: "100vh",
+          backgroundRepeat: "repeat-x",
+          backgroundPosition: "bottom left",
+          zIndex: 5,
+        }}
+      />
     </div>
   );
 };
@@ -367,52 +386,18 @@ const SeaweedField = () => {
 };
 
 const Relax = () => {
+  const { sounds, isLoaded } = useSounds();
+  const { incrementLoading, decrementLoading } = useLoading(); // Use global methods
+  const [localLoading, setLocalLoading] = useState(true);
+  const currentSoundKeyRef = useRef(null);
+
   const soundOptions = [
     { value: "silent", label: "Без музика" },
     { value: "happy", label: "Весело" },
     { value: "calm", label: "Мирно" },
     { value: "noise", label: "Шум" },
   ];
-
   const [selectedSound, setSelectedSound] = useState(soundOptions[0]);
-  const [isLoading, setIsLoading] = useState(true);
-  const soundsRef = useRef({});
-  const currentSoundKeyRef = useRef(null);
-
-  // Initialize and preload Howl instances once
-  useEffect(() => {
-    soundsRef.current = {
-      calm: new Howl({
-        src: [calmMusic],
-        loop: true,
-        volume: 0.3,
-        preload: true,
-      }),
-      happy: new Howl({
-        src: [happyMusic],
-        loop: true,
-        volume: 0.3,
-        preload: true,
-      }),
-      noise: new Howl({
-        src: [noiseMusic],
-        loop: true,
-        volume: 0.3,
-        preload: true,
-      }),
-    };
-
-    // Preload all
-    Object.values(soundsRef.current).forEach((sound) => sound.load());
-
-    return () => {
-      // Cleanup: stop and unload all on unmount
-      Object.values(soundsRef.current).forEach((sound) => {
-        sound.stop();
-        sound.unload();
-      });
-    };
-  }, []);
 
   const [bubbles, setBubbles] = useState(() => {
     const count = getResponsiveBubbleCount();
@@ -423,79 +408,120 @@ const Relax = () => {
     }));
   });
 
-  const repositionBubbles = () => {
-    const positions = generateBubblePositions(bubbles.length);
-    setBubbles((prev) =>
-      prev.map((bubble, i) => ({
-        ...bubble,
-        x: positions[i].x,
-        y: positions[i].y,
-        size: positions[i].size,
-      }))
-    );
-  };
+  useEffect(() => {
+    if (!isLoaded) return;
+    setLocalLoading(false);
+  }, [isLoaded]);
+
+  useEffect(() => {
+    if (localLoading) {
+      incrementLoading(); // Show global loading
+    } else {
+      decrementLoading(); // Hide global loading
+    }
+
+    return () => {
+      if (localLoading) {
+        decrementLoading(); // Cleanup if unmounted
+      }
+    };
+  }, [localLoading, incrementLoading, decrementLoading]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    let currentSound = null;
+
+    // Play new sound
+    if (selectedSound.value !== "silent") {
+      sounds[selectedSound.value]?.play();
+      currentSound = selectedSound.value;
+    }
+
+    // Cleanup function to stop sound on unmount or sound change
+    return () => {
+      if (currentSound && sounds[currentSound]) {
+        sounds[currentSound].stop();
+      }
+    };
+  }, [selectedSound, sounds, isLoaded]); // Add isLoaded to dependencies
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    // Set up loading state
+    setLocalLoading(false);
+    
+    // Cleanup all sounds when unmounting
+    return () => {
+      Object.values(sounds).forEach(sound => {
+        if (sound && typeof sound.stop === 'function') {
+          sound.stop();
+        }
+      });
+    };
+  }, [sounds, isLoaded]);
 
   useEffect(() => {
     let timeout;
     const handleResize = () => {
       clearTimeout(timeout);
-      timeout = setTimeout(() => repositionBubbles(), 200);
+      timeout = setTimeout(() => {
+        const positions = generateBubblePositions(bubbles.length);
+        setBubbles((prev) =>
+          prev.map((bubble, i) => ({
+            ...bubble,
+            x: positions[i].x,
+            y: positions[i].y,
+            size: positions[i].size,
+          }))
+        );
+      }, 200);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [bubbles.length]);
 
-  // const addBubble = () => {
-  //   const newPosition = generateBubblePositions(1)[0];
-  //   setBubbles((prev) => [
-  //     ...prev,
-  //     {
-  //       id: Date.now() + Math.random(),
-  //       ...newPosition,
-  //     },
-  //   ]);
-  // };
+  const SoundButtons = ({ selectedSound, onSelect }) => {
+    const buttons = [
+      { value: "silent", bg: muteBack, note: muteNote },
+      { value: "happy", bg: happyBack, note: happyNote },
+      { value: "calm", bg: calmBack, note: calmNote },
+      { value: "noise", bg: wnBack, note: wnNote },
+    ];
 
-  //const [muted, setMuted] = useState(false);
-
-  // Handle sound switching
-  useEffect(() => {
-    // Stop previous sound
-    if (
-      currentSoundKeyRef.current &&
-      soundsRef.current[currentSoundKeyRef.current]
-    ) {
-      soundsRef.current[currentSoundKeyRef.current].stop();
-    }
-
-    if (selectedSound.value !== "silent") {
-      const sound = soundsRef.current[selectedSound.value];
-      if (sound) {
-        sound.play();
-        currentSoundKeyRef.current = selectedSound.value;
-      }
-    } else {
-      currentSoundKeyRef.current = null;
-    }
-  }, [selectedSound.value]);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setIsLoading(false), 2000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // useEffect(() => {
-  //   // Simulate loading for a few seconds (or until your audio is ready)
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 3000); // Adjust time as needed
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (isLoading) {
-  //   return <LoadingScreen />;
-  // }
+    return (
+      <div className="sound-buttons">
+        {buttons.map(({ value, bg, note }) => {
+          const isMute = value === "silent";
+          return (
+            <button
+              key={value}
+              className={`sound-button ${value} ${
+                selectedSound.value === value ? "selected" : ""
+              }`}
+              onClick={() => onSelect({ value })}
+            >
+              <div
+                className="background"
+                style={{ backgroundImage: `url(${bg})` }}
+              />
+              <div
+                className="note"
+                style={{
+                  backgroundImage: `url(${note})`,
+                  width: isMute ? "65%" : "96%",
+                  height: isMute ? "65%" : "96%",
+                  marginTop: isMute ? "10px" : "7px",
+                  marginLeft: isMute ? "2px" : "-2px",
+                }}
+              />
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <div className="relax-container">
@@ -505,13 +531,7 @@ const Relax = () => {
       </div>
       <Sunrays count={10} />
       <BubbleParticles count={25} />
-
-      <CustomSelect
-        options={soundOptions}
-        selected={selectedSound}
-        onSelect={setSelectedSound}
-      />
-
+      <SoundButtons selectedSound={selectedSound} onSelect={setSelectedSound} />
       <div className="bubble-screen">
         {bubbles.map((bubble) => (
           <Bubble

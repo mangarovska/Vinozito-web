@@ -117,7 +117,7 @@
   align-items: center;
   width: 100%;
   padding: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .mobile-carousel {
@@ -185,7 +185,7 @@
 }
 
 .mobile-phone-container {
-  margin-top: 50px;
+  margin-top: 30px;
   width: 100%;
   max-width: 300px;
   display: flex;
@@ -249,4 +249,84 @@
   .phone-container {
     order: -1;
   }
+}
+/* Slide In from Right */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide Out to Left */
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Slide In from Left */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide Out to Right */
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Animation Classes */
+.slide-in-right {
+  animation: slideInRight 0.3s forwards ease-out;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.3s forwards ease-in;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s forwards ease-out;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.3s forwards ease-in;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }

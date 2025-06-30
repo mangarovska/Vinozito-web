@@ -1,0 +1,16 @@
+.game-container {
+  position: relative;
+  padding: 80px 2rem 2rem 2rem;
+  width: 100vw;     
+  height: 100vh;    
+  background-image: url('/nature.jpg');
+  /* opacity: 0.9; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;           /* allow page scrolling if needed */
+  box-sizing: border-box;
+}

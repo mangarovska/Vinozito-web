@@ -1,0 +1,105 @@
+.floating-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.floating-shape {
+  position: absolute;
+  opacity: 0.3;
+}
+
+/* shape backgrounds default to inline style, or fallback */
+/* .sparkle,
+.wavy-circle,
+.arc {
+  aspect-ratio: 1;
+  background: #eee;
+} */
+
+/* Subtle animation */
+/* @keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+} */
+
+.sparkle {
+  height: 110px;
+  width: 70px;
+  background: #ffc400;
+  mask: radial-gradient(#0000 71%, #000 72%) 10000% 10000%/99.5% 99.5%;
+
+  /* if you will use a different unit than px consider round()
+   height: round(__,1px);
+   width: round(__,1px);
+  */
+}
+
+.grid-lines {
+  --s: 75px; /* control the size of the grid */
+  --n: 4; /* control the granularity */
+  --t: 2px; /* the thickness */
+  --g: 10px; /* the gap between dashes */
+
+  --c: #556270 25%, #0000 0;
+  background: conic-gradient(at var(--g) var(--t), var(--c))
+      calc((var(--s) / var(--n) - var(--g) + var(--t)) / 2) 0 /
+      calc(var(--s) / var(--n)) var(--s),
+    conic-gradient(from 180deg at var(--t) var(--g), var(--c)) 0
+      calc((var(--s) / var(--n) - var(--g) + var(--t)) / 2) / var(--s)
+      calc(var(--s) / var(--n));
+  /* you probably don't need to set any size in your case */
+  width: calc(round(down, 100%, var(--s)) + var(--t));
+  height: calc(4 * var(--s) + var(--t));
+}
+
+.wavy-circle {
+  --s: 150px; /* adjust to control the size */
+
+  width: var(--s);
+  aspect-ratio: 1;
+  background: #6084d8;
+  --g: /calc(var(--s) * 0.287) calc(var(--s) * 0.287) radial-gradient(
+      50% 50%,
+      #000 99%,
+      #0000 101%
+    ) no-repeat;
+  mask: calc(50% + var(--s) * 0.319) calc(50% + var(--s) * 0) var(--g),
+    calc(50% + var(--s) * 0.099) calc(50% + var(--s) * 0.304) var(--g),
+    calc(50% + var(--s) * -0.258) calc(50% + var(--s) * 0.188) var(--g),
+    calc(50% + var(--s) * -0.258) calc(50% + var(--s) * -0.188) var(--g),
+    calc(50% + var(--s) * 0.099) calc(50% + var(--s) * -0.304) var(--g),
+    radial-gradient(calc(var(--s) * 0.379), #000 99%, #0000 101%) subtract,
+    calc(50% + var(--s) * 0.384) calc(50% + var(--s) * 0.279) var(--g),
+    calc(50% + var(--s) * -0.147) calc(50% + var(--s) * 0.452) var(--g),
+    calc(50% + var(--s) * -0.475) calc(50% + var(--s) * 0) var(--g),
+    calc(50% + var(--s) * -0.147) calc(50% + var(--s) * -0.452) var(--g),
+    calc(50% + var(--s) * 0.384) calc(50% + var(--s) * -0.279) var(--g);
+}
+
+.arc {
+  --b: 15px; /* the boder thickness */
+  --a: 240deg; /* control the progression */
+
+  width: 250px;
+  aspect-ratio: 1;
+  padding: var(--b);
+  border-radius: 50%;
+  background: #c0d860;
+  --_g: /var(--b) var(--b) no-repeat radial-gradient(50% 50%, #000 97%, #0000);
+  mask: top var(--_g),
+    calc(50% + 50% * sin(var(--a))) calc(50% - 50% * cos(var(--a))) var(--_g),
+    linear-gradient(#0000 0 0) content-box intersect,
+    conic-gradient(#000 var(--a), #0000 0);
+}

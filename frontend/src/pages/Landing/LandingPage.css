@@ -1,0 +1,21 @@
+.shape-section-wrapper {
+  position: relative;
+}
+
+.shapes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1000; /* deep in the back */
+  pointer-events: none;
+}
+
+
+@media (max-width: 768px) {
+  .floating-shape.hide-mobile {
+    display: none;
+  }
+}

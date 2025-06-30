@@ -1,0 +1,193 @@
+.phone-wrapper {
+  position: relative;
+  width: 320px;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.95);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.slide-top-left {
+  animation-name: slideFromTopLeft;
+}
+.slide-left {
+  animation-name: slideFromLeft;
+}
+.slide-bottom-left {
+  animation-name: slideFromBottomLeft;
+}
+.slide-top-right {
+  animation-name: slideFromTopRight;
+}
+.slide-right {
+  animation-name: slideFromRight;
+}
+.slide-bottom-right {
+  animation-name: slideFromBottomRight;
+}
+
+.background-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-img {
+  object-fit: cover;
+  transform: scale(1.6);
+  opacity: 0.9;
+}
+
+.phone-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .phone-shadow {
+  position: absolute;
+  bottom: -24px;
+  width: 13rem;
+  height: 3.5rem;
+  background-color: black;
+  opacity: 0.2;
+  border-radius: 9999px;
+  filter: blur(12px);
+  z-index: 0;
+} */
+
+.phone-body {
+  position: relative;
+  z-index: 10;
+}
+
+.side-button {
+  position: absolute;
+  right: -4px;
+  width: 8px;
+  border: 4px solid black;
+  background: white;
+  border-radius: 4px;
+  z-index: 20;
+}
+
+.side-button.top-1 {
+  top: 72px;
+  height: 28px;
+}
+.side-button.top-2 {
+  top: 128px;
+  height: 28px;
+}
+.side-button.bottom-1 {
+  bottom: 144px;
+  height: 40px;
+}
+
+.phone-screen {
+  position: relative;
+  width: 200px;
+  height: 430px;
+  background-color: #f8f8f8;
+  border: 4px solid black;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
+
+.notch {
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 8px;
+  background-color: black;
+  border-radius: 0 0 12px 12px;
+  z-index: 20;
+}
+
+@keyframes slideFromTopLeft {
+  0% {
+    transform: translate(-40px, -40px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-50px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromBottomLeft {
+  0% {
+    transform: translate(-40px, 40px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromTopRight {
+  0% {
+    transform: translate(40px, -40px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(50px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromBottomRight {
+  0% {
+    transform: translate(40px, 40px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}

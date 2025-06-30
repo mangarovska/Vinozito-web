@@ -1,7 +1,11 @@
 // import reactLogo from "./assets/react.svg";
-import feature1 from "/f1.png";
-import feature2 from "/f2.png";
-import feature3 from "/f3.png";
+// import feature1 from "/f1.png";
+// import feature2 from "/f2.png";
+// import feature3 from "/f3.png";
+
+import feature1 from "/design2.png";
+import feature2 from "/clock2.png";
+import feature3 from "/kids2-alt.png";
 
 import communication from "/communication.png";
 import coloring from "/coloring.png";
@@ -27,18 +31,21 @@ import blue from "/blue.svg";
 export const FEATURES = [
   {
     image: feature1,
+    color: "#E9F6F8", //DCF4DB E9F6F8
     title: "Лесен и интуитивен дизајн",
     description: "Дизајнирана за лесно користење од секое дете",
   },
   {
     image: feature2,
+    color: "#FEF6E3", // FFEFF0 FEF6E3
     title: "Достапна во секое време",
-    description: "Користи ја на телефон, таблет или веб каде и да си",
+    description: "Достапна на телефон, таблет или веб каде и да си",
   },
   {
     image: feature3,
+    color: "#F5EDFF", //F5EDFF FFD4D5 FFDFE7
     title: "Прилагодена за секое дете",
-    description: "Персонализирај ја апликацијата според потребите на детето",
+    description: "Овозможена персонализација согласно со потребите на детето",
   },
 ];
 
@@ -126,5 +133,44 @@ export const MainFeatures = [
     paddingLeft: 1,
     paddingTop: 0,
     background: orange,
+  },
+];
+
+export const flowers = [
+  {
+    id: "flower1",
+    image: "/connect-assets/flowers/flower1.png",
+    shadow: "/connect-assets/flower_shadows/flower1_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_2_preview.png",
+  },
+  {
+    id: "flower2",
+    image: "/connect-assets/flowers/flower2.png",
+    shadow: "/connect-assets/flower_shadows/flower2_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_3_preview.png",
+  },
+  {
+    id: "flower3",
+    image: "/connect-assets/flowers/flower3.png",
+    shadow: "/connect-assets/flower_shadows/flower3_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_4_preview.png",
+  },
+  {
+    id: "flower4",
+    image: "/connect-assets/flowers/flower4.png",
+    shadow: "/connect-assets/flower_shadows/flower4_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_5_preview.png",
+  },
+  {
+    id: "flower5",
+    image: "/connect-assets/flowers/flower5.png",
+    shadow: "/connect-assets/flower_shadows/flower5_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_6_preview.png",
+  },
+  {
+    id: "flower6",
+    image: "/connect-assets/flowers/flower6.png",
+    shadow: "/connect-assets/flower_shadows/flower6_shadow.png",
+    preview: "/connect-assets/flower-previews/flower_7_preview.png",
   },
 ];

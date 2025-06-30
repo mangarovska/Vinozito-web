@@ -1,15 +1,22 @@
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
 body {
   font-family: "Rubik", Arial, sans-serif;
   margin: 0;
   padding: 0;
   padding-top: 60px;
   overflow-x: hidden;
+  overflow-y: scroll;
+  /* scrollbar-gutter: stable; */
+}
+html {
+  overflow-y: scroll; /* ensure scrollbar is part of layout flow */
+}
+
+.navbar-hidden {
+  display: none !important;
+}
+
+.no-pointer {
+  cursor: default !important;
 }
 
 .navbar-container {
@@ -17,12 +24,9 @@ body {
   background-color: white; /* to hide the unfilled corner */
   top: 0;
   left: 0;
-  
-  /* width: calc(100vw - 15px);
-  right: auto; */
   width: 100%;
   height: 60px;
-  z-index: 1000;
+  z-index: 999;
   filter: drop-shadow(0 1.5px 10px rgba(0, 0, 0, 0.09));
 }
 
@@ -42,8 +46,6 @@ body {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 20px;
-
-  
 }
 
 .navbar-logo-container {
@@ -53,6 +55,7 @@ body {
   transform: translateY(-50%);
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .navbar-logo-circle {
@@ -133,28 +136,10 @@ body {
 }
   */
 
-/* Transparent background only */
-.relax-navbar {
-  /* opacity: 0.6; */
-  background-color: rgba(255, 255, 255, 0.431);
-  backdrop-filter: blur(15px);
-  /* box-shadow: none; */
-}
-
-.relax-navbar {
-  background: transparent;
-  box-shadow: none;
-}
-
 .relax-navbar .navbar-brand,
 .relax-navbar .navbar-logo-image {
   display: none;
 }
-
-/* Optional: remove the top curve */
-/* .relax-navbar-container .navbar-shape {
-  display: none;
-} */
 
 @media (max-width: 768px) {
   .navbar {
@@ -188,4 +173,16 @@ body {
   .navbar-logo-image:hover {
     transform: none;
   }
+}
+
+.back-button-image {
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.back-button-image:hover {
+  transform: scale(1.1);
 }
