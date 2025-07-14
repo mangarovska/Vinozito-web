@@ -153,7 +153,7 @@ function Card({ item, index }) {
       <h3 className="text-[1.1rem] uppercase font-semibold text-gray-700 z-10 mb-3 px-0 leading-relaxed">
         {item.title}
       </h3>
-      <p className="text-[0.95rem] text-gray-600 px-3 z-10 leading-relaxed">
+      <p className="text-[0.95rem] text-gray-700 px-3 z-10 leading-relaxed">
         {item.description}
       </p>
     </div>

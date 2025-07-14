@@ -5,20 +5,20 @@ import "./BlobRow.css";
 
 import ErrorBoundary from "./ErrorBoundary.jsx"; // adjust the path as needed
 
-import speak_hover from "/speakerNew.webm";
-import staticImage from "/speakerImg_start.png";
+import speak_hover from "/menu-assets/video/speakerNew.webm";
+import staticImage from "/menu-assets/speakerImg_start.png";
 
-import paint from "/paint_start.png";
-import paint_hover from "/paint_fin.webm";
+import paint from "/menu-assets/paint_start.png";
+import paint_hover from "/menu-assets/video/paint_fin.webm";
 
 // import connect from "/bee3d.png";
 // import connect_hover from "/bee4.webm";
 
-import connect from "/puzzle_start.png";
-import connect_hover from "/puzzle2.webm";
+import connect from "/menu-assets/puzzle_start.png";
+import connect_hover from "/menu-assets/video/puzzle2.webm";
 
-import relax from "/jelly.png";
-import relax_hover from "/jelly3.webm";
+import relax from "/menu-assets/jelly.png";
+import relax_hover from "/menu-assets/video/jelly3.webm";
 
 const blobsData = [
   {
@@ -28,7 +28,7 @@ const blobsData = [
     hoverVideo: speak_hover,
     pauseTime: 1.4,
     size: 300,
-    contentSize: 0.95,
+    contentSize: 1.18,
     bottomPadding: "20px",
   },
   {

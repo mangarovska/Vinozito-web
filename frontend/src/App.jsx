@@ -21,6 +21,7 @@ import Relax from "./pages/Relax Page/Relax.jsx";
 import ColoringPage from "./pages/Coloring Page/ColoringPage.jsx";
 import ColoringCanvas from "./pages/Coloring Page/ColoringCanvas.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import ParentPage from "./pages/ParentPage.jsx";
 
 function InnerApp() {
   const { isLoading } = useLoading();
@@ -43,6 +44,7 @@ function InnerApp() {
         <Route path="/memory" element={<MemoryGame />} />
         <Route path="/connect" element={<ConnectingGame />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/parent" element={<ParentPage />} />
       </Routes>
 
       {isLoading && <LoadingScreen />}

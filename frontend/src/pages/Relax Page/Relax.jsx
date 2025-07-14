@@ -1,25 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Howl } from "howler";
-import { useSounds } from "../../SoundProvider"; // adjust path as needed
-import { useLoading } from "../../LoadingContext"; // update the path as needed
+import { useSounds } from "../../SoundProvider";
+import { useLoading } from "../../LoadingContext";
 
 import "./Relax.css";
-import bubbleImage from "/bubble_pop_frame_01.png";
-import popAnimation from "/bubble-pop.webm";
+import bubbleImage from "/relax-assets/bubble_pop_frame_01.png";
+import popAnimation from "/relax-assets/bubble-pop.webm";
 import LoadingScreen from "../LoadingScreen.jsx";
 
 import useSound from "use-sound";
 import popSfx from "/audio/pop.m4a";
 
-import happyNote from "../../assets/relax-assets/happy.png";
-import happyBack from "../../assets/relax-assets/happy_back.png";
-import calmNote from "../../assets/relax-assets/calm.png";
-import calmBack from "../../assets/relax-assets/calm_back.png";
-import wnNote from "../../assets/relax-assets/wn.png";
-import wnBack from "../../assets/relax-assets/wn_back.png";
-import muteNote from "../../assets/relax-assets/mute.png";
-import muteBack from "../../assets/relax-assets/mute_back.png";
-import layer1Img from "../../assets/relax-assets/fin.png";
+import happyNote from "/relax-assets/happy.png";
+import happyBack from "/relax-assets/happy_back.png";
+import calmNote from "/relax-assets/calm.png";
+import calmBack from "/relax-assets/calm_back.png";
+import wnNote from "/relax-assets/wn.png";
+import wnBack from "/relax-assets/wn_back.png";
+import muteNote from "/relax-assets/mute.png";
+import muteBack from "/relax-assets/mute_back.png";
+
+import layer1Img from "/relax-assets/fin.png"; // background
 
 const Bubble = ({ x, y, size }) => {
   const [isPopped, setIsPopped] = useState(false);
@@ -42,7 +43,6 @@ const Bubble = ({ x, y, size }) => {
   const xMovement = useRef(Math.random() * 5 + 3);
   const yMovement = useRef(Math.random() * 5 + 3);
 
-  // Animation logic
   useEffect(() => {
     let startTime = null;
     let timeoutId;
@@ -387,7 +387,7 @@ const SeaweedField = () => {
 
 const Relax = () => {
   const { sounds, isLoaded } = useSounds();
-  const { incrementLoading, decrementLoading } = useLoading(); // Use global methods
+  const { incrementLoading, decrementLoading } = useLoading();
   const [localLoading, setLocalLoading] = useState(true);
   const currentSoundKeyRef = useRef(null);
 
@@ -451,11 +451,11 @@ const Relax = () => {
 
     // Set up loading state
     setLocalLoading(false);
-    
+
     // Cleanup all sounds when unmounting
     return () => {
-      Object.values(sounds).forEach(sound => {
-        if (sound && typeof sound.stop === 'function') {
+      Object.values(sounds).forEach((sound) => {
+        if (sound && typeof sound.stop === "function") {
           sound.stop();
         }
       });

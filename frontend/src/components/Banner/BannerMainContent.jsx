@@ -39,7 +39,7 @@ const BannerMainContent = () => {
         </div>
 
         <div className="banner-right">
-          <Phone video="/fin.mp4" />
+          <Phone video="/landing-assets/fin2.mp4" />
 
           <div className="small-circle-1"></div>
           <div className="small-circle-2"></div>

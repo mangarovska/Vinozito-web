@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import PopUp from "./PopUpSave";
 
 import "./ColoringCanvas.css";
 
@@ -41,8 +42,8 @@ export default function ColoringCanvas() {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
   const wasClearedRef = useRef(false);
-  const location = useLocation();
-  const hasSavedRef = useRef(false);
+  // const location = useLocation();
+  // const hasSavedRef = useRef(false);
 
   const [selectedColor, setSelectedColor] = useState("#FF4D4D");
   const [isDrawing, setIsDrawing] = useState(false);
@@ -101,6 +102,46 @@ export default function ColoringCanvas() {
   //   freehandPathsRef.current = freehandPaths;
   // }, [freehandPaths]);
 
+  const [initialColoredPaths, setInitialColoredPaths] = useState({});
+  const [initialFreehandPaths, setInitialFreehandPaths] = useState([]);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [pendingBack, setPendingBack] = useState(false);
+
+  const [saveSilent, setSaveSilent] = useState(false); // whether to actually save or not
+  const backCallbackRef = useRef(null); // to store onConfirm function
+
+  useEffect(() => {
+    const handleBackConfirmation = (e) => {
+      const isSameColored =
+        JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
+      const isSameFreehand =
+        JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
+
+      const noChanges = isSameColored && isSameFreehand;
+      const noHistory = historyPointer < 0;
+
+      // If no changes and no history, skip modal and go back immediately
+      if (noChanges && noHistory) {
+        if (e.detail?.onConfirm) e.detail.onConfirm(false);
+        return;
+      }
+
+      // Otherwise, if there are changes or history, show modal
+      backCallbackRef.current = e.detail?.onConfirm || null;
+      setShowSaveModal(true);
+    };
+
+    window.addEventListener("confirm-canvas-back", handleBackConfirmation);
+    return () =>
+      window.removeEventListener("confirm-canvas-back", handleBackConfirmation);
+  }, [
+    coloredPaths,
+    freehandPaths,
+    initialColoredPaths,
+    initialFreehandPaths,
+    historyPointer,
+  ]);
+
   useEffect(() => {
     return () => {
       saveProgress(true); // silent save -> save progress on unmount
@@ -130,7 +171,14 @@ export default function ColoringCanvas() {
           if (saved) {
             setColoredPaths(saved.paths || {});
             setFreehandPaths(saved.freehandPaths || []);
+
+            setInitialColoredPaths(saved.paths || {});
+            setInitialFreehandPaths(saved.freehandPaths || []);
           }
+        } else {
+          // New/empty session: store empty initial state
+          setInitialColoredPaths({});
+          setInitialFreehandPaths([]);
         }
 
         svgData.paths = [backgroundPath, ...svgData.paths];
@@ -480,22 +528,38 @@ export default function ColoringCanvas() {
   };
 
   const saveProgress = (silent = false) => {
+    const isSameColored =
+      JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
+    const isSameFreehand =
+      JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
+
+    if (isSameColored && isSameFreehand) {
+      return;
+    }
+
+    if (!silent) {
+      if (wasClearedRef.current) {
+        // don't save if cleared, just silently accept
+        return;
+      }
+
+      setShowSaveModal(true);
+      setSaveSilent(false);
+      return;
+    }
+
+    // Perform actual save
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Use current state values directly
     const data = {
-      paths: coloredPaths, // Direct state value
-      freehandPaths: freehandPaths, // Direct state value
+      paths: coloredPaths,
+      freehandPaths: freehandPaths,
       drawing: canvas.toDataURL("image/png"),
-      cleared: wasClearedRef.current, // store the cleared flag
+      cleared: false,
     };
 
     localStorage.setItem(`saved_${imageSrc}`, JSON.stringify(data));
-
-    if (!silent) {
-      // alert("Прогрес зачуван!");
-    }
   };
 
   // Update cleanup effect to use current state
@@ -548,7 +612,22 @@ export default function ColoringCanvas() {
     setFreehandPaths([]);
     setColoredPaths({});
 
-    wasClearedRef.current = true; // mark as cleared
+    wasClearedRef.current = true;
+
+    localStorage.removeItem(`saved_${imageSrc}`);
+
+    /*
+  localStorage.setItem(
+    `saved_${imageSrc}`,
+    JSON.stringify({
+      cleared: true,
+    })
+  );
+  */
+
+    if (typeof onClear === "function") {
+      onClear(imageSrc);
+    }
   };
 
   const saveToPC = () => {
@@ -613,7 +692,7 @@ export default function ColoringCanvas() {
     window.addEventListener("save-coloring-progress", handleSaveRequest);
 
     const handlePopState = () => {
-      window.dispatchEvent(new Event("save-coloring-progress")); // Dispatch the same save event when user clicks browser back - not working
+      window.dispatchEvent(new Event("save-coloring-progress"));
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -627,6 +706,54 @@ export default function ColoringCanvas() {
   return (
     <div className="coloring-page">
       {!isBucketFill && <BrushPreview brushSize={brushSize} />}
+      {showSaveModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <p>Do you want to save progress?</p>
+            <div className="modal-buttons">
+              <button
+                className="modal-btn yes"
+                onClick={() => {
+                  const canvas = canvasRef.current;
+                  if (canvas) {
+                    const data = {
+                      paths: coloredPaths,
+                      freehandPaths: freehandPaths,
+                      drawing: canvas.toDataURL("image/png"),
+                      cleared: false,
+                    };
+                    localStorage.setItem(
+                      `saved_${imageSrc}`,
+                      JSON.stringify(data)
+                    );
+                  }
+
+                  setShowSaveModal(false);
+
+                  // wait until modal closes (just to be visually clean)
+                  setTimeout(() => {
+                    if (backCallbackRef.current) {
+                      backCallbackRef.current(true); //navigate back
+                    }
+                  }, 100);
+                }}
+              >
+                Yes
+              </button>
+
+              <button
+                className="modal-btn no"
+                onClick={() => {
+                  setShowSaveModal(false);
+                  if (backCallbackRef.current) backCallbackRef.current(false);
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="canvas-and-controls">
         <div className="canvas-palette-container">
@@ -635,7 +762,7 @@ export default function ColoringCanvas() {
             style={{
               aspectRatio: `${canvasSize.width} / ${canvasSize.height}`,
               maxWidth: "100%",
-              maxHeight: "70vh",
+              maxHeight: "85vh",
             }}
           >
             <canvas
@@ -677,31 +804,31 @@ export default function ColoringCanvas() {
             disabled={historyPointer < 0}
             title="Undo last action"
           >
-            <img src="/undo.png" alt="Undo" />
+            <img src="/coloring/undo.png" alt="Undo" />
           </button>
           <button onClick={clearAll} className="action-button">
-            <img src="/trash.png" alt="Clear All" />
+            <img src="/coloring/trash.png" alt="Clear All" />
           </button>
 
           <button onClick={() => saveProgress()} className="action-button">
-            <img src="/check.png" alt="Save Progress" />
+            <img src="/coloring/check.png" alt="Save Progress" />
           </button>
           <button onClick={saveToPC} className="action-button">
-            <img src="/save.png" alt="Save to PC" />
+            <img src="/coloring/save.png" alt="Save to PC" />
           </button>
 
           <button
             onClick={() => setIsBucketFill(true)}
             className={`tool-button ${isBucketFill ? "active" : ""}`}
           >
-            <img src="/bucket.png" alt="Bucket Fill" />
+            <img src="/coloring/bucket.png" alt="Bucket Fill" />
           </button>
 
           <button
             onClick={() => setIsBucketFill(false)}
             className={`tool-button ${!isBucketFill ? "active" : ""}`}
           >
-            <img src="/pencil.png" alt="Pencil Draw" />
+            <img src="/coloring/pencil.png" alt="Pencil Draw" />
           </button>
 
           <div className={`brush-sizes-column ${isBucketFill ? "hidden" : ""}`}>

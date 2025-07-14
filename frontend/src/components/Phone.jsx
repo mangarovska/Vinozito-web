@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import loading from "/loading.png";
+import loading from "/landing-assets/loading.png";
 import "./Phone.css";
 
 const Phone = ({ image, background, video, animationKey, animationClass }) => {

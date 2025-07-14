@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "lucide-react": "^0.510.0"
+  },
+  "devDependencies": {
+    "mongo-express": "^1.1.0-rc-3"
   }
 }

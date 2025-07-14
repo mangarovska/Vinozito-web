@@ -10,11 +10,11 @@ import ErrorBoundary from "../../components/ErrorBoundary.jsx";
 // import memoryImg from "/memory_start.png";
 // import memoryHover from "/memory_hover.webm";
 
-import connect from "/bee3d.png";
-import connect_hover from "/bee4.webm";
+import connect from "/menu-assets/bee3d.png";
+import connect_hover from "/menu-assets/video/bee4.webm";
 
-import memImg from "/crads-first.png";
-import memHover from "/cards2.webm";
+import memImg from "/menu-assets/crads-first.png";
+import memHover from "/menu-assets/video/cards2.webm";
 
 const gameBlobs = [
   {
@@ -49,32 +49,31 @@ const GamesMenu = () => {
 
   return (
     <div>
-
       <Banner>
         <Title>Виножито</Title>
       </Banner>
 
       <div className="menu-page">
-     
-      
-      <section className="w-full py-6 px-4 overflow-hidden">
-        <div className="flex flex-col items-center">
-          <div className="grid grid-cols-2 gap-10 max-w-[800px] w-full justify-items-center">
-            {gameBlobs.map((blob, idx) => (
-              <div
-                key={`game-blob-${idx}`}
-                className="flex justify-center"
-                onClick={() => handleClick(idx)}
-                style={{ cursor: "pointer" }}
-              >
-                <ErrorBoundary>
-                  <Blob {...blob} />
-                </ErrorBoundary>
-              </div>
-            ))}
+        <section className="w-full py-6 px-4 overflow-hidden">
+          <div className="flex flex-col items-center">
+            <div className="grid grid-cols-2 gap-10 max-w-[800px] w-full justify-items-center">
+              {gameBlobs.map((blob, idx) => (
+                <div
+                  key={`game-blob-${idx}`}
+                  className="flex justify-center"
+                  onClick={() => handleClick(idx)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <ErrorBoundary>
+                    <Blob {...blob} />
+                  </ErrorBoundary>
+                  
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section></div>
+        </section>
+      </div>
     </div>
   );
 };

@@ -182,7 +182,7 @@ const Blob = ({
             className="flex items-center justify-center"
             style={{
               width: `${contentSize * 100}%`,
-              height: `${contentSize * 100}%`,
+              height: `${contentSize * 70}%`,
               ...(contentSize > 1
                 ? {
                     maxWidth: "none",
@@ -196,12 +196,14 @@ const Blob = ({
               <video
                 ref={videoRef}
                 src={hoverVideo}
-                className="w-full h-full max-w-full max-h-full object-contain z-10"
+                className="w-full max-w-full max-h-full object-contain z-10"
                 style={{
-                  paddingBottom: bottomPadding,
-                  paddingLeft: leftPadding,
-                  transform:
-                    contentSize >= 1 ? `scale(${contentSize})` : "none", // scale up if contentSize > 1
+                  ...(bottomPadding !== "0px" && {
+                    paddingBottom: bottomPadding,
+                  }),
+                  ...(leftPadding !== "0px" && { paddingLeft: leftPadding }),
+
+                  transform: contentSize > 1 ? `scale(${contentSize})` : "none", // scale up if contentSize > 1
                 }}
                 muted
                 playsInline
@@ -214,8 +216,7 @@ const Blob = ({
                 className="w-full h-full object-contain"
                 draggable={false}
                 style={{
-                  transform:
-                    contentSize >= 1 ? `scale(${contentSize})` : "none",
+                  transform: contentSize > 1 ? `scale(${contentSize})` : "none",
                 }}
               />
             )}

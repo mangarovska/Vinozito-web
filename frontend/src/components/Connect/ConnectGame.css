@@ -1,16 +1,33 @@
 .game-container {
   position: relative;
-  padding: 80px 2rem 2rem 2rem;
-  width: 100vw;     
-  height: 100vh;    
-  background-image: url('/nature.jpg');
-  /* opacity: 0.9; */
+  padding: 68px 2rem 2rem 2rem;
+  width: 100vw;
+  height: calc(100vh );
+  background-image: url("/connect-assets/nature11.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: rgba(255, 255, 255, 0.15); 
+  background-blend-mode: lighten;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  overflow-y: auto;           /* allow page scrolling if needed */
+  overflow-y: auto;
   box-sizing: border-box;
+}
+
+.win-honey {
+  position: absolute;
+  top: -220px; /* offscreen above the container */
+  /* width: 150px;
+  height: 150px; */
+  opacity: 1;
+  animation: drop-star 3s ease-in forwards;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .bee {
+    display: none;
+  }
 }

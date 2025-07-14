@@ -32,22 +32,22 @@ const Footer = () => {
 
       <div className="absolute top-[40px] left-0 w-full h-65 pointer-events-none z-10">
         <img
-          src="tree2.png"
+          src="/landing-assets/tree2.png"
           alt="Tree"
           className="absolute right-3 bottom-51 w-28 transform scale-x-[-1]"
         />
         <img
-          src="tree.png"
+          src="/landing-assets/tree.png"
           alt="Tree"
           className="absolute left-[3%] bottom-42 w-36"
         />
         <img
-          src="tree.png"
+          src="/landing-assets/tree.png"
           alt="Tree"
           className="absolute left-[73%] bottom-49 w-28 transform scale-x-[-1]"
         />
         <img
-          src="tree2.png"
+          src="/landing-assets/tree2.png"
           alt="Tree"
           className="absolute right-[75%] bottom-49 w-24"
         />

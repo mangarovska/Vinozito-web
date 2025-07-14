@@ -1,86 +1,38 @@
-import React, { useState, useEffect } from "react"; // Add useState import here
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import "./ColoringPage.css";
 
 const images = [
-  "bug_fin.svg",
-  "cake_fin.svg",
-  "rocket_fin.svg",
-  "candy_fin.svg",
-  "rainbow_fin.svg",
-  "flower_fin.svg",
-  "butterfly_fin.svg",
-  // "dino.svg",
-  // "guitar.svg",
-  "ice_fin.svg",
+  "coloring/bug_fin.svg",
+  "coloring/cake_fin.svg",
+  "coloring/rocket_fin.svg",
+  "coloring/candy_fin.svg",
+  "coloring/rainbow_fin.svg",
+  "coloring/flower_fin.svg",
+  "coloring/butterfly_fin.svg",
+  // "coloring/guitar.svg",
+  "coloring/ice_fin.svg",
 ];
 
-// const thumbnail = [
-//   "bug_fin.png",
-//   "cake_fin.png",
-//   "rocket_fin.png",
-//   "candy_fin.png",
-//   "rainbow_fin.png",
-//   "flower_fin.png",
-//   "butterfly_fin.png",
-//   "ice_fin.png",
-// ];
-
 const tapeImages = [
-  "t11.png",
-  "t2.png",
-  // "t3.png",
-  "t4.png",
-  "t5.png",
-  "t8.png",
-  "t7.png",
-  "t9.png",
-  "t6.png",
-  "t10.png",
-  "t1.png",
-  "t12.png",
+  "coloring/tape/t11.png",
+  "coloring/tape/t2.png",
+  // "coloring/tape/t3.png",
+  "coloring/tape/t4.png",
+  "coloring/tape/t5.png",
+  "coloring/tape/t8.png",
+  "coloring/tape/t7.png",
+  "coloring/tape/t9.png",
+  "coloring/tape/t6.png",
+  "coloring/tape/t10.png",
+  "coloring/tape/t1.png",
+  "coloring/tape/t12.png",
 ];
 
 export default function ColoringPage() {
   const navigate = useNavigate();
   const [savedWorks, setSavedWorks] = useState([]);
-  // const showContinue = hasValidProgress();
-
-  // const hasValidProgress = () => {
-  //   const saved = localStorage.getItem(`saved_${imageName}`);
-  //   if (!saved) return false;
-
-  //   const data = JSON.parse(saved);
-  //   return !data.cleared; // Only show "Continue" if not cleared
-  // };
-
-  // Load saved works from localStorage on component mount
-  // useEffect(() => {
-  //   const saved = [];
-  //   images.forEach((img) => {
-  //     console.log(`Checking for saved data for: ${img}`);
-  //     const savedData = localStorage.getItem(`saved_${img}`);
-  //     console.log(`Saved data for ${img}:`, savedData);
-  //     if (savedData) {
-  //       try {
-  //         const parsedData = JSON.parse(savedData);
-  //         saved.push({
-  //           image: img,
-  //           thumbnail: parsedData.drawing,
-  //         });
-  //         console.log(`Pushed to saved:`, {
-  //           image: img,
-  //           thumbnail: parsedData.drawing,
-  //         });
-  //       } catch (error) {
-  //         console.error(`Error parsing saved data for ${img}:`, error);
-  //       }
-  //     }
-  //   });
-  //   setSavedWorks(saved);
-  //   console.log("Final savedWorks:", savedWorks);
-  // }, []);
 
   const loadSavedWorks = () => {
     const saved = [];
@@ -89,10 +41,14 @@ export default function ColoringPage() {
       if (savedData) {
         try {
           const parsedData = JSON.parse(savedData);
-          saved.push({
-            image: img,
-            thumbnail: parsedData.drawing,
-          });
+          // Only add to saved if it's NOT cleared.
+          // This ensures `savedWorks` only contains truly in-progress drawings.
+          if (!parsedData.cleared) {
+            saved.push({
+              image: img,
+              thumbnail: parsedData.drawing,
+            });
+          }
         } catch (error) {
           console.error(`Error parsing saved data for ${img}:`, error);
         }
@@ -101,11 +57,10 @@ export default function ColoringPage() {
     setSavedWorks(saved);
   };
 
-  
-  useEffect(() => { // load on component mount
+  useEffect(() => {
     loadSavedWorks();
-    
-    const handleStorage = (e) => { // listen for storage events to update when saved from other tabs
+
+    const handleStorage = (e) => {
       if (e.key && e.key.startsWith("saved_")) {
         loadSavedWorks();
       }
@@ -128,10 +83,19 @@ export default function ColoringPage() {
     navigate(`/canvas/${encodeURIComponent(imageSrc)}?continue=true`);
   };
 
+  // handleClearImage is not directly used in the current render logic,
+  // but it's good to keep if you have a "clear" button on this page.
+  const handleClearImage = (clearedImageSrc) => {
+    setSavedWorks((prev) =>
+      prev.filter((work) => work.image !== clearedImageSrc)
+    );
+    // clear from localStorage directly if this function is used to clear from the gallery
+    localStorage.removeItem(`saved_${clearedImageSrc}`);
+  };
+
   return (
     <div className="custom-gradient relative h-screen overflow-hidden">
       <div className="absolute inset-0 z-0 cloud-container">
-
         {/* clouds */}
         <div className="cloud continuous x1"></div>
         <div
@@ -173,72 +137,63 @@ export default function ColoringPage() {
       </div>
 
       <div className="relative z-10 pt-[150px] pb-[60px] px-4 sm:px-8 md:px-16 xl:px-32 h-full overflow-y-auto">
-
         <div className="mx-auto max-w-[1000px] grid grid-cols-2 md:grid-cols-3 gap-y-20 gap-x-8">
           {images.map((src, idx) => {
-            const savedWork = savedWorks.find((work) => work.image === src);
+            const savedWork = savedWorks.find((work) => work.image === src); // Check `savedWorks` state
+            let showDefaultImage = true;
+            let thumbnailSrc = "";
+
+            // get the localStorage data to determine the true state
+            const savedDataString = localStorage.getItem(`saved_${src}`);
+            if (savedDataString) {
+              try {
+                const parsed = JSON.parse(savedDataString);
+                if (!parsed.cleared && parsed.drawing) {
+                  showDefaultImage = false; // saved, non-cleared progress
+                  thumbnailSrc = parsed.drawing;
+                }
+              } catch (e) {
+                console.error("Failed to parse saved data", e);
+                // if parsing fails, treat as no valid saved data, show default
+                showDefaultImage = true;
+              }
+            }
 
             return (
               <div
                 key={idx}
-                className="relative bg-white rounded-2xl shadow-md py-3 flex justify-center items-center aspect-square 
-             w-full max-w-[300px] mx-auto cursor-pointer
-             transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-103 hover:shadow-xl"
+                className="relative bg-white rounded-2xl shadow-md py-3 flex justify-center items-center aspect-square w-full max-w-[300px] mx-auto cursor-pointer transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-103 hover:shadow-xl"
                 onClick={() => handleImageClick(src)}
               >
-                {/* tape on top */}
                 <img
                   src={`/${getTapeImage(idx)}`}
                   alt="Tape"
                   className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] pointer-events-none"
                 />
 
-                {/* thumbnail */}
-                {savedWork ? (
-                  (() => {
-                    const savedData = localStorage.getItem(`saved_${src}`);
-                    let showContinue = false;
-                    let isCleared = true;
-                    if (savedData) {
-                      try {
-                        const parsed = JSON.parse(savedData);
-                        isCleared = parsed.cleared;
-                        showContinue = !parsed.cleared;
-                      } catch (e) {
-                        console.error("Failed to parse saved data", e);
-                      }
-                    }
-
-                    return (
-                      <>
-                        <img
-                          src={savedWork.thumbnail}
-                          alt={`Saved ${src}`}
-                          className={`h-[80%] w-[88%] object-cover rounded-lg -mt-2.5 ${
-                            !isCleared
-                              ? "border-dashed border-2 border-gray-300"
-                              : ""
-                          }`}
-                        />
-
-                        {showContinue && (
-                          <button
-                            onClick={(e) => handleContinueClick(src, e)}
-                            className="continue-button absolute bottom-2 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-800 font-medium py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto"
-                          >
-                            Продолжи
-                            <ArrowRight className="w-5 h-5" />
-                          </button>
-                        )}
-                      </>
-                    );
-                  })()
-                ) : (
+                {showDefaultImage ? (
+                  // default image if no valid saved progress or if cleared
                   <img
                     src={`/${src}`}
                     alt={`Coloring ${idx}`}
                     className="w-full h-full object-cover"
                   />
+                ) : (
+                  // saved thumbnail
+                  <>
+                    <img
+                      src={thumbnailSrc}
+                      alt={`Saved ${src}`}
+                      className="h-[80%] w-[88%] object-cover rounded-lg -mt-2.5 border-dashed border-2 border-gray-300"
+                    />
+                    <button
+                      onClick={(e) => handleContinueClick(src, e)}
+                      className="continue-button absolute bottom-2 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-800 font-medium py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center gap-2 mx-auto"
+                    >
+                      Продолжи
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </>
                 )}
               </div>
             );

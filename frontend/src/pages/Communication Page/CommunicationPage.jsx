@@ -3,44 +3,66 @@ import React, { useRef, useState, useEffect } from "react";
 import Banner from "../../components/Banner/Banner";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./CommunicationPage.css";
-
-const categories = [
-  "Разговор",
-  "Чувства",
-  "Луѓеeee",
-  "Пијалоци",
-  "Храна",
-  "Зеленчук",
-  "Овошје",
-  "Активности",
-  "Животни",
-  "Облека",
-  "Боииии",
-];
-const allCards = [
-  { id: 1, name: "Мачка", category: "Животни", img: "/placeholder.png" },
-  { id: 2, name: "Куче", category: "Животни", img: "/placeholder.png" },
-  { id: 3, name: "Јаболко", category: "Овошје", img: "/placeholder.png" },
-  { id: 4, name: "Банана", category: "Овошје", img: "/placeholder.png" },
-  { id: 5, name: "Круша", category: "Овошје", img: "/placeholder.png" },
-  { id: 7, name: "Црвена", category: "Боја", img: "/placeholder.png" },
-];
+import { categories } from "../../data";
 
 const CommunicationPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("Животни");
   const [selectedCards, setSelectedCards] = useState([]);
+  const [allCards, setAllCards] = useState([]);
 
   const slotsRef = useRef(null);
   const [showArrows, setShowArrows] = useState(false);
   const categoriesRef = useRef(null);
   const categoryItemRef = useRef(null);
 
+  const categoryRefs = useRef([]);
+  categoryRefs.current = [];
+  
+  useEffect(() => {
+    async function fetchCards() { // fetch cards from backend API once on mount
+      try {
+        const response = await fetch("http://localhost:5100/api/DefaultCard/");
+        if (!response.ok) throw new Error("Failed to fetch cards");
+       
+        const data = await response.json();
+        
+        const cards = data.map((card) => ({
+          id: card.id,
+          name: card.name,
+          category: card.category,
+          img: card.image,
+          audioVoice: card.audioVoice,
+        }));
+
+        console.log("Fetched cards:", cards);
+
+        setAllCards(cards);
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchCards();
+  }, []);
+
+  // filter cards by selected category
   const filteredCards = allCards.filter(
-    (card) => card.category === selectedCategory
+    (card) =>
+      card.category?.toLowerCase().trim() ===
+      selectedCategory.toLowerCase().trim()
   );
 
   const handleCardClick = (card) => {
-    setSelectedCards([...selectedCards, card]);
+    setSelectedCards((prev) => [...prev, card]);
+
+    if (card.audioVoice) {
+      const audio = new Audio(card.audioVoice);
+      audio.play().catch((error) => {
+
+        console.warn(`Failed to play audio for ${card.name}:`, error);
+      });
+    }
   };
 
   const [showLeftFade, setShowLeftFade] = useState(false);
@@ -58,8 +80,8 @@ const CommunicationPage = () => {
   const scrollCategories = (direction) => {
     if (categoriesRef.current && categoryItemRef.current) {
       const categoryWidth = categoryItemRef.current.offsetWidth;
-      const padding = 18; // gap value
-      const scrollAmount = categoryWidth + padding;
+      const padding = 22; // gap value
+      const scrollAmount = (categoryWidth + padding) * 3;
 
       categoriesRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
@@ -76,7 +98,21 @@ const CommunicationPage = () => {
     setSelectedCards([]);
   };
 
-  const handlePlaySound = () => {};
+  const handlePlaySound = () => {
+    if (selectedCards.length === 0) return;
+
+    let i = 0;
+    const audio = new Audio();
+    audio.src = selectedCards[i].audioVoice;
+    audio.play();
+    audio.onended = () => { // playy all
+      i++;
+      if (i < selectedCards.length) {
+        audio.src = selectedCards[i].audioVoice;
+        audio.play();
+      }
+    };
+  };
 
   useEffect(() => {
     const container = categoriesRef.current;
@@ -117,26 +153,26 @@ const CommunicationPage = () => {
             <div className="slots-controls">
               <div className="slots-buttons-row">
                 <button
-                  onClick={handlePlaySound}
-                  disabled={selectedCards.length === 0}
-                  className="icon-button"
-                >
-                  <img src="/play.png" alt="Play Sound" />
-                </button>
-                <button
                   onClick={handleBackspace}
                   disabled={selectedCards.length === 0}
                   className="icon-button"
                 >
-                  <img src="/delete.png" alt="Backspace" />
+                  <img src="/comms-assets/delete.png" alt="Backspace" />
                 </button>
                 <button
                   onClick={handleClearAll}
                   disabled={selectedCards.length === 0}
                   className="icon-button"
                 >
-                  <img src="/clear.png" alt="Clear All" />
-                </button>
+                  <img src="/comms-assets/clear.png" alt="Clear All" />
+                </button>{" "}
+                <button
+                  onClick={handlePlaySound}
+                  disabled={selectedCards.length === 0}
+                  className="icon-button"
+                >
+                  <img src="/comms-assets/play.png" alt="Play Sound" />
+                </button>{" "}
               </div>
 
               <div className="slots">
@@ -146,8 +182,24 @@ const CommunicationPage = () => {
                       <img
                         key={`${card.id}-${index}`}
                         className="card"
-                        src={card.img}
-                        alt={card.name}
+                        src={card.img || "/comms-assets/placeholder.png"}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/comms-assets/placeholder.png";
+                        }}
+                        onClick={() => {
+                          if (card.audioVoice) {
+                            const audio = new Audio(card.audioVoice);
+                            audio
+                              .play()
+                              .catch((err) =>
+                                console.warn(
+                                  `Audio failed for ${card.name}:`,
+                                  err
+                                )
+                              );
+                          }
+                        }}
                       />
                     ))}
                   </div>
@@ -166,17 +218,43 @@ const CommunicationPage = () => {
                 </button>
               )}
 
-              <div className="category-buttons" ref={categoriesRef}>
+              <div
+                className="category-buttons"
+                ref={categoriesRef}
+                style={
+                  showArrows
+                    ? {
+                        WebkitMaskImage:
+                          "linear-gradient(to right, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%)",
+                        maskImage:
+                          "linear-gradient(to right, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%)",
+                      }
+                    : {}
+                }
+              >
                 {categories.map((cat, index) => (
                   <button
-                    key={cat}
+                    key={cat.value || index}
                     ref={index === 0 ? categoryItemRef : null}
                     className={`category-circle ${
-                      cat === selectedCategory ? "active" : ""
+                      cat.value === selectedCategory ? "active" : ""
                     }`}
-                    onClick={() => setSelectedCategory(cat)}
+                    onClick={() => setSelectedCategory(cat.value)}
                   >
-                    {cat}
+                    <img
+                      src={cat.img || "/comms-assets/placeholder-category.png"}
+                      alt={cat.label}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/comms-assets/placeholder-category.png";
+                      }}
+                      className="category-icon"
+                      style={{
+                        paddingBottom: cat.bottom || "0px",
+                        paddingLeft: cat.left || "0px",
+                        marginBottom: cat.margin_bottom || "0px",
+                      }}
+                    />
                   </button>
                 ))}
               </div>
@@ -203,8 +281,16 @@ const CommunicationPage = () => {
               className="category-card"
               onClick={() => handleCardClick(card)}
             >
-              <img src={card.img} alt={card.name} />
-              <div>{card.name}</div>
+              <img
+                src={card.img || "/comms-assets/placeholder.png"}
+                alt={card.name}
+                onError={(e) => {
+                  e.currentTarget.onerror = null; // prevent infinite loop
+                  e.currentTarget.src = "/comms-assets/placeholder.png";
+                }}
+              />
+
+              <div className="pt-1 pb-1">{card.name}</div>
             </div>
           ))}
         </div>

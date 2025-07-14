@@ -44,13 +44,33 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "AspNetCore.Identity.Mongo": {
               "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[9.0.0, )"
+            },
+            "IdGen": {
+              "target": "Package",
+              "version": "[3.0.7, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[3.3.0, )"
+              "version": "[2.28.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

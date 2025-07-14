@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./MainFeatures.css";
 import Phone from "../Phone";
 import { MainFeatures } from "../../data";
-import grey from "/grey.svg";
+import grey from "/landing-assets/grey.svg";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const FeatureSelector = () => {

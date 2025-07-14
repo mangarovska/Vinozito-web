@@ -7,9 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
-    <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
+    <!-- Authentication and Identity -->
+    <PackageReference Include="IdGen" Version="3.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
+    <PackageReference Include="AspNetCore.Identity.Mongo" Version="9.0.0" />
+    
+    <!-- MongoDB -->
+    <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
+
+    <!-- Swagger/OpenAPI -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+
+    <!-- Optional: configuration, hosting (included in .Sdk.Web but here if needed explicitly) -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Ensure appsettings.json is copied to output directory -->
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

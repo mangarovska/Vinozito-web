@@ -1,0 +1,66 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-card {
+  background-color: #B7DFFB;
+  border-radius: 1.5em;
+  padding: 2em;
+  width: 90%;
+  max-width: 700px;
+  min-width: 320px;
+  min-height: 250px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+
+.popup-message {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  color: #085991;
+  margin-bottom: 2em;
+  max-width: 30ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons container */
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+/* Individual button */
+.popup-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.popup-btn.yes {
+  background-color: #4caf50;
+  color: white;
+}
+
+.popup-btn.no {
+  background-color: #f44336;
+  color: white;
+}
+
+.popup-btn:hover {
+  opacity: 0.9;
+}

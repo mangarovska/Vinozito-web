@@ -86,8 +86,7 @@
   box-shadow: 0 6px 0 #d9d9d9, 0px 8px 12px rgba(0, 0, 0, 0.3);
   transform: translateY(0);
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.25s ease;
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
 }
 
 .banner-button:hover {
@@ -95,7 +94,7 @@
   box-shadow: 0 12px 0 #7391d1, 0 12px 18px rgba(0, 0, 0, 0.25);
   color: #7391d1;
   transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1.4),
-              box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.4, 1.4);
+    box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.4, 1.4);
 }
 
 .banner-button:active {
@@ -157,7 +156,7 @@
   max-width: 500px;
   max-height: 500px;
   border-radius: 50%;
-  background-image: url("/circles.png");
+  background-image: url("/landing-assets/circles.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -217,7 +216,8 @@
 }
 
 @keyframes floatY {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -226,7 +226,8 @@
 }
 
 @keyframes floatX {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   50% {
@@ -262,7 +263,7 @@
     max-width: 500px;
     max-height: 500px;
     aspect-ratio: 1 / 1;
-    background-image: url("/circles.png");
+    background-image: url("/landing-assets/circles.png");
     z-index: 0;
   }
 

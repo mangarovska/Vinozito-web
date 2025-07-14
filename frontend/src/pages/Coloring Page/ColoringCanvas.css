@@ -1,12 +1,13 @@
 .coloring-page {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  padding: 20px;
-  padding-top: 100px;
+  padding: 90px 20px 20px 20px;
+  /* margin-top: 25px; */
   box-sizing: border-box;
   background: linear-gradient(to bottom, #dce6ff, #f0f5ff);
-  align-items: center;
+  
 }
 
 .coloring-container {
@@ -166,8 +167,9 @@ canvas {
   display: flex;
   gap: 20px;
   justify-content: center;
+  /* align-items: center; */
   width: 100%;
-  max-width: min(1200px, 95vw);
+  max-width: min(1500px, 95vw);
 }
 
 .canvas-palette-container {
@@ -176,6 +178,54 @@ canvas {
   align-items: center;
   gap: 20px;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.modal-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-btn.yes {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-btn.no {
+  background-color: #f44336;
+  color: white;
+}
+
+
 
 @media (max-width: 940px) {
   .action-buttons-column {
