@@ -41,8 +41,7 @@ export default function ColoringPage() {
       if (savedData) {
         try {
           const parsedData = JSON.parse(savedData);
-          // Only add to saved if it's NOT cleared.
-          // This ensures `savedWorks` only contains truly in-progress drawings.
+          // only add to saved if it's NOT cleared -> this ensures `savedWorks` only contains truly in-progress drawings.
           if (!parsedData.cleared) {
             saved.push({
               image: img,

@@ -3,7 +3,7 @@ import "./Navbar.css";
 import logo from "/logo.png";
 import back from "/back1.png";
 import { Link, useLocation, useNavigate, useMatch } from "react-router-dom";
-import Padlock from "./Padlock"; // Adjust path if needed
+import Padlock from "./Padlock"; 
 
 export default function Navbar() {
   const location = useLocation();
@@ -39,7 +39,7 @@ export default function Navbar() {
 
     setLastClickTime(now);
 
-    // Reset click count timeout timer on every click
+    // reset click count timeout timer on every click
     if (clickResetTimerRef.current) {
       clearTimeout(clickResetTimerRef.current);
     }
@@ -58,11 +58,9 @@ export default function Navbar() {
         `${4 - nextCount} клик${4 - nextCount === 1 ? "" : "а"} до отклучување`
       );
 
-      // Reset click count after 5 seconds of inactivity
       clickResetTimerRef.current = setTimeout(() => {
         setClickCount(0);
-        // Do NOT clear message here
-      }, 5000);
+      }, 5000); // reset click count after 5 seconds of inactivity
     } else {
       showPadlockMessage("Отклучено");
     }
@@ -86,7 +84,6 @@ export default function Navbar() {
     }
   }, [isUnlocked, isHovering, padlockMessage]);
 
-  // Define route flags
   const isLandingPage = location.pathname === "/";
   const isAbout = location.pathname === "/about";
   const isRelaxPage = location.pathname === "/relax";
@@ -115,7 +112,16 @@ export default function Navbar() {
   const handleLogoClick = () => {
     if (isCanvasPage) {
       if (window.hasUnsavedCanvasChanges) {
-        const confirmEvent = new CustomEvent("confirm-canvas-back");
+        const confirmEvent = new CustomEvent("confirm-canvas-back", {
+          detail: {
+            onConfirm: (shouldSave) => {
+              if (shouldSave) {
+                window.dispatchEvent(new Event("save-coloring-progress"));
+              }
+              navigate(-1);
+            },
+          },
+        });
         window.dispatchEvent(confirmEvent);
       } else {
         navigate(-1);

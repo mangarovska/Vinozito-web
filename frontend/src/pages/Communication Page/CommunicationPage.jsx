@@ -17,27 +17,31 @@ const CommunicationPage = () => {
 
   const categoryRefs = useRef([]);
   categoryRefs.current = [];
-  
+
   useEffect(() => {
-    async function fetchCards() { // fetch cards from backend API once on mount
+    async function fetchCards() {
+      // fetch cards from backend API once on mount
       try {
         const response = await fetch("http://localhost:5100/api/DefaultCard/");
         if (!response.ok) throw new Error("Failed to fetch cards");
-       
+
         const data = await response.json();
-        
-        const cards = data.map((card) => ({
-          id: card.id,
-          name: card.name,
-          category: card.category,
-          img: card.image,
-          audioVoice: card.audioVoice,
-        }));
+
+        const cards = data
+          .map((card) => ({
+            id: card.id,
+            name: card.name,
+            category: card.category,
+            //img: card.image,
+            img: `${card.image}?v=${card.id}`, // add versioning
+            audioVoice: card.audioVoice,
+            position: card.position,
+          }))
+          .sort((a, b) => a.position - b.position); // order cards
 
         console.log("Fetched cards:", cards);
 
         setAllCards(cards);
-
       } catch (error) {
         console.error(error);
       }
@@ -59,7 +63,6 @@ const CommunicationPage = () => {
     if (card.audioVoice) {
       const audio = new Audio(card.audioVoice);
       audio.play().catch((error) => {
-
         console.warn(`Failed to play audio for ${card.name}:`, error);
       });
     }
@@ -105,7 +108,8 @@ const CommunicationPage = () => {
     const audio = new Audio();
     audio.src = selectedCards[i].audioVoice;
     audio.play();
-    audio.onended = () => { // playy all
+    audio.onended = () => {
+      // playy all
       i++;
       if (i < selectedCards.length) {
         audio.src = selectedCards[i].audioVoice;
@@ -246,7 +250,8 @@ const CommunicationPage = () => {
                       alt={cat.label}
                       onError={(e) => {
                         e.currentTarget.onerror = null;
-                        e.currentTarget.src = "/comms-assets/placeholder-category.png";
+                        e.currentTarget.src =
+                          "/comms-assets/placeholder-category.png";
                       }}
                       className="category-icon"
                       style={{

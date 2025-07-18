@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PopUp from "./PopUpSave";
+import SaveProgressModal from "./PopUp";
 
 import "./ColoringCanvas.css";
 
@@ -44,6 +45,8 @@ export default function ColoringCanvas() {
   const wasClearedRef = useRef(false);
   // const location = useLocation();
   // const hasSavedRef = useRef(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const backCallbackRef = useRef(null);
 
   const [selectedColor, setSelectedColor] = useState("#FF4D4D");
   const [isDrawing, setIsDrawing] = useState(false);
@@ -104,11 +107,27 @@ export default function ColoringCanvas() {
 
   const [initialColoredPaths, setInitialColoredPaths] = useState({});
   const [initialFreehandPaths, setInitialFreehandPaths] = useState([]);
-  const [showSaveModal, setShowSaveModal] = useState(false);
+  //const [showSaveModal, setShowSaveModal] = useState(false);
   const [pendingBack, setPendingBack] = useState(false);
 
   const [saveSilent, setSaveSilent] = useState(false); // whether to actually save or not
-  const backCallbackRef = useRef(null); // to store onConfirm function
+  //const backCallbackRef = useRef(null); // to store onConfirm function
+  useEffect(() => {
+    const isSameColored =
+      JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
+    const isSameFreehand =
+      JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
+    const noChanges = isSameColored && isSameFreehand;
+    const noHistory = historyPointer < 0;
+
+    window.hasUnsavedCanvasChanges = !(noChanges && noHistory);
+  }, [
+    coloredPaths,
+    freehandPaths,
+    initialColoredPaths,
+    initialFreehandPaths,
+    historyPointer,
+  ]);
 
   useEffect(() => {
     const handleBackConfirmation = (e) => {
@@ -116,24 +135,22 @@ export default function ColoringCanvas() {
         JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
       const isSameFreehand =
         JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
-
       const noChanges = isSameColored && isSameFreehand;
       const noHistory = historyPointer < 0;
 
-      // If no changes and no history, skip modal and go back immediately
       if (noChanges && noHistory) {
         if (e.detail?.onConfirm) e.detail.onConfirm(false);
         return;
       }
 
-      // Otherwise, if there are changes or history, show modal
       backCallbackRef.current = e.detail?.onConfirm || null;
       setShowSaveModal(true);
     };
 
     window.addEventListener("confirm-canvas-back", handleBackConfirmation);
-    return () =>
+    return () => {
       window.removeEventListener("confirm-canvas-back", handleBackConfirmation);
+    };
   }, [
     coloredPaths,
     freehandPaths,
@@ -176,7 +193,7 @@ export default function ColoringCanvas() {
             setInitialFreehandPaths(saved.freehandPaths || []);
           }
         } else {
-          // New/empty session: store empty initial state
+          // new/empty session: store empty initial state
           setInitialColoredPaths({});
           setInitialFreehandPaths([]);
         }
@@ -260,14 +277,14 @@ export default function ColoringCanvas() {
       // draw background with mask
       ctx.save();
 
-      // 1. Draw background color first
+      // draw background color first
       ctx.fillStyle = coloredPaths.background;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // 2. Erase areas covered by SVG paths
+      // erase areas covered by SVG paths
       ctx.globalCompositeOperation = "destination-out";
 
-      // Draw all SVG paths to create mask
+      // draw all SVG paths to create mask
       ctx.save();
       ctx.translate(xOffset, yOffset);
       ctx.scale(scale, scale);
@@ -277,7 +294,7 @@ export default function ColoringCanvas() {
       });
       ctx.restore();
 
-      // Reset composite operation
+      // reset composite operation
       ctx.globalCompositeOperation = "source-over";
       ctx.restore();
     } else {
@@ -285,7 +302,7 @@ export default function ColoringCanvas() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    // Draw SVG artwork normally
+    // draw SVG artwork normally
     ctx.save();
     ctx.translate(xOffset, yOffset);
     ctx.scale(scale, scale);
@@ -301,42 +318,56 @@ export default function ColoringCanvas() {
     });
 
     ctx.restore();
-    // Draw stored paths
+    // draw stored paths
     freehandPaths.forEach((path) => {
       ctx.save();
       ctx.translate(xOffset, yOffset);
       ctx.scale(scale, scale);
 
-      // Apply clipping if SVG path ID exists
-      if (path.svgPathId) {
+      if (path.type === "bucketFill") {
+        // Find the SVG path to fill
         const svgPath = svgData.paths.find((p) => p.id === path.svgPathId);
         if (svgPath) {
-          const clipPath = new Path2D(svgPath.d);
-          ctx.clip(clipPath);
+          const fillPath = new Path2D(svgPath.d);
+          ctx.fillStyle = path.color;
+          ctx.fill(fillPath);
         }
-      }
+      } else {
+        // normal freehand drawing stroke (array of points)
+        if (!path.points || path.points.length < 2) {
+          ctx.restore();
+          return;
+        }
 
-      // Draw the path
-      ctx.beginPath();
-      ctx.moveTo(path.points[0].x, path.points[0].y);
-      path.points.forEach((point) => ctx.lineTo(point.x, point.y));
-      ctx.strokeStyle = path.color;
-      ctx.lineWidth = path.size / scale; // Adjust line width for current scale
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.stroke();
+        if (path.svgPathId) {
+          const svgPath = svgData.paths.find((p) => p.id === path.svgPathId);
+          if (svgPath) {
+            const clipPath = new Path2D(svgPath.d);
+            ctx.clip(clipPath);
+          }
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(path.points[0].x, path.points[0].y);
+        path.points.forEach((point) => ctx.lineTo(point.x, point.y));
+        ctx.strokeStyle = path.color;
+        ctx.lineWidth = path.size / scale;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.stroke();
+      }
 
       ctx.restore();
     });
 
-    // Draw current path if it exists
+    // draw current path if it exists
     if (currentPathRef.current) {
       const path = currentPathRef.current;
       ctx.save();
       ctx.translate(xOffset, yOffset);
       ctx.scale(scale, scale);
 
-      // Apply clipping if SVG path ID exists
+      // apply clipping if SVG path ID exists
       if (path.svgPathId) {
         const svgPath = svgData.paths.find((p) => p.id === path.svgPathId);
         if (svgPath) {
@@ -376,21 +407,19 @@ export default function ColoringCanvas() {
     const clickedPath = findClickedPath(x, y);
 
     if (isBucketFill) {
-      // Bucket fill already works correctly
       if (clickedPath?.isOutline) return;
 
       if (clickedPath) {
-        saveToHistory({
-          type: "fill",
-          pathId: clickedPath.id,
-          prevColor: coloredPaths[clickedPath.id],
-          newColor: selectedColor,
-        });
-        setColoredPaths((prev) => ({
-          ...prev,
-          [clickedPath.id]: selectedColor,
-        }));
+        const bucketFillPath = {
+          id: `bucketfill-${Date.now()}`, // unique id
+          svgPathId: clickedPath.id,
+          color: selectedColor,
+          type: "bucketFill", // special type
+        };
+        saveToHistory({ type: "draw", path: bucketFillPath });
+        setFreehandPaths((prev) => [...prev, bucketFillPath]);
       } else {
+        // Fill background - can keep as before or create special background fill layer
         saveToHistory({
           type: "fillBackground",
           prevColor: coloredPaths.background,
@@ -404,10 +433,10 @@ export default function ColoringCanvas() {
       return;
     }
 
-    // Prevent drawing on outlines or outside all paths
-    if (clickedPath?.isOutline || !clickedPath) return; // Add !clickedPath check
+    // prevent drawing on outlines or outside all paths
+    if (clickedPath?.isOutline || !clickedPath) return;
 
-    // ✅ Normal drawing inside fill areas
+    // normal drawing inside fill areas
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -467,10 +496,10 @@ export default function ColoringCanvas() {
       const isStrokeOnly = !path.fill && path.stroke;
 
       if (isBlackFill || isStrokeOnly) {
-        ctx.save(); // Save current context state
+        ctx.save(); // save current context state
         ctx.lineWidth = parseFloat(path.strokeWidth) || 1; // Set correct stroke width
         const isInStroke = ctx.isPointInStroke(path2D, svgX, svgY);
-        ctx.restore(); // Restore context
+        ctx.restore(); // restore context
 
         if (isInStroke) {
           return { ...path, isOutline: true };
@@ -478,7 +507,7 @@ export default function ColoringCanvas() {
         continue;
       }
 
-      // For normal fill areas
+      // normal fill areas
       if (ctx.isPointInPath(path2D, svgX, svgY)) {
         return { ...path, isOutline: false };
       }
@@ -527,34 +556,22 @@ export default function ColoringCanvas() {
     window.removeEventListener("mouseup", stopDrawing);
   };
 
-  const saveProgress = (silent = false) => {
-    const isSameColored =
-      JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
-    const isSameFreehand =
-      JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
-
-    if (isSameColored && isSameFreehand) {
-      return;
-    }
-
-    if (!silent) {
-      if (wasClearedRef.current) {
-        // don't save if cleared, just silently accept
-        return;
-      }
-
-      setShowSaveModal(true);
-      setSaveSilent(false);
-      return;
-    }
-
-    // Perform actual save
+  const saveProgressNow = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // if cleared before, save cleared flag only
+    if (wasClearedRef.current) {
+      localStorage.setItem(
+        `saved_${imageSrc}`,
+        JSON.stringify({ cleared: true })
+      );
+      return;
+    }
+
     const data = {
       paths: coloredPaths,
-      freehandPaths: freehandPaths,
+      freehandPaths,
       drawing: canvas.toDataURL("image/png"),
       cleared: false,
     };
@@ -562,13 +579,39 @@ export default function ColoringCanvas() {
     localStorage.setItem(`saved_${imageSrc}`, JSON.stringify(data));
   };
 
-  // Update cleanup effect to use current state
+  const saveProgress = (silent = false) => {
+    const isSameColored =
+      JSON.stringify(coloredPaths) === JSON.stringify(initialColoredPaths);
+    const isSameFreehand =
+      JSON.stringify(freehandPaths) === JSON.stringify(initialFreehandPaths);
+    const noChanges = isSameColored && isSameFreehand;
+    const noHistory = historyPointer < 0;
+
+    if (wasClearedRef.current) {
+      // always save cleared state immediately (no modal needed)
+      saveProgressNow();
+      return;
+    }
+
+    if (noChanges && noHistory) {
+      // nothing to save
+      return;
+    }
+
+    if (!silent) {
+      setShowSaveModal(true); // show popup modal
+      return;
+    }
+
+    // silent save (direct save, no popup)
+    saveProgressNow();
+  };
+
   useEffect(() => {
     return () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      // Save using current state values
       const data = {
         paths: coloredPaths,
         freehandPaths: freehandPaths,
@@ -703,55 +746,33 @@ export default function ColoringCanvas() {
     };
   }, [coloredPaths, freehandPaths]);
 
+  const onModalConfirm = (save) => {
+    setShowSaveModal(false);
+    if (backCallbackRef.current) {
+      backCallbackRef.current(save);
+      backCallbackRef.current = null;
+    }
+
+    if (save) {
+      saveProgressNow(); // actually save progress here after confirmation "Yes"
+    }
+  };
+
+  const onModalCancel = () => {
+    setShowSaveModal(false);
+    // optionally, cancel action here or do nothing
+  };
+
   return (
     <div className="coloring-page">
       {!isBucketFill && <BrushPreview brushSize={brushSize} />}
       {showSaveModal && (
         <div className="modal-overlay">
-          <div className="modal-box">
-            <p>Do you want to save progress?</p>
-            <div className="modal-buttons">
-              <button
-                className="modal-btn yes"
-                onClick={() => {
-                  const canvas = canvasRef.current;
-                  if (canvas) {
-                    const data = {
-                      paths: coloredPaths,
-                      freehandPaths: freehandPaths,
-                      drawing: canvas.toDataURL("image/png"),
-                      cleared: false,
-                    };
-                    localStorage.setItem(
-                      `saved_${imageSrc}`,
-                      JSON.stringify(data)
-                    );
-                  }
-
-                  setShowSaveModal(false);
-
-                  // wait until modal closes (just to be visually clean)
-                  setTimeout(() => {
-                    if (backCallbackRef.current) {
-                      backCallbackRef.current(true); //navigate back
-                    }
-                  }, 100);
-                }}
-              >
-                Yes
-              </button>
-
-              <button
-                className="modal-btn no"
-                onClick={() => {
-                  setShowSaveModal(false);
-                  if (backCallbackRef.current) backCallbackRef.current(false);
-                }}
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <SaveProgressModal
+            isOpen={showSaveModal}
+            onConfirm={onModalConfirm}
+            onCancel={onModalCancel}
+          />
         </div>
       )}
 

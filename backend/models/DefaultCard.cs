@@ -13,4 +13,7 @@ public class DefaultCard
     public required string AudioVoice { get; set; }
     public required string Image { get; set; }
     public required string Category { get; set; }
+
+    [BsonIgnoreIfNull]
+    public int? Position { get; set; }
 }

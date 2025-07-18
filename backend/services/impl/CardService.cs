@@ -30,7 +30,9 @@ public class CardService(
                 audioVoice: customCard.VoiceAudio ?? dc.AudioVoice,
                 image: dc.Image,
                 category: dc.Category,
-                cardType: CardType.Custom
+                cardType: CardType.Custom,
+                position: dc.Position
+
             );
         }
 
@@ -40,7 +42,9 @@ public class CardService(
             audioVoice: dc.AudioVoice,
             image: dc.Image,
             category: dc.Category,
-            cardType: CardType.Default
+            cardType: CardType.Default,
+            position: dc.Position
+
         );
     })
     .ToList();

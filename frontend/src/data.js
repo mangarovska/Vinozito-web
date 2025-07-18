@@ -224,7 +224,7 @@ export const categories = [
   },
   {
     label: "Овошје",
-    value: "Fruit",
+    value: "Fruits",
     img: "/comms-assets/categories/fruits.png",
     bottom: "0px",
     left: "0px",
