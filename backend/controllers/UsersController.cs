@@ -1,16 +1,18 @@
 ﻿using backend.interfaces;
 using backend.models;
 using backend.services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.controllers
 {
+    [Authorize] // to protect all endpoints in this controller
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-     
+
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -36,6 +38,15 @@ namespace backend.controllers
                 return NotFound(new { message = "User not found" });
             }
         }
+
+        // [HttpGet("protected")]
+        // [Microsoft.AspNetCore.Authorization.Authorize]
+        // public IActionResult Protected()
+        // {
+        //     var userName = User?.Identity?.Name ?? "Unknown";
+        //     return Ok(new { message = "You are authorized!", user = userName });
+        // }
+
 
         [HttpPost]
         public async Task<ActionResult> AddUser(User user)
@@ -97,5 +108,14 @@ namespace backend.controllers
                 return NotFound(new { message = "User not found" });
             }
         }
+
+        [HttpGet("protected")]
+        [Microsoft.AspNetCore.Authorization.Authorize]
+        public IActionResult GetProtectedData()
+        {
+            var username = User.Identity?.Name;
+            return Ok(new { message = $"Hello {username}, you accessed a protected endpoint!" });
+        }
+
     }
 }

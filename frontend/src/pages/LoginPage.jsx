@@ -32,6 +32,29 @@ export default function LoginPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/parent");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("http://localhost:5100/api/user/protected", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error("Unauthorized");
+      })
+      .then((data) => alert(data.message))
+      .catch(() => alert("Unauthorized"));
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -48,9 +71,9 @@ export default function LoginPage() {
 
     if (response.ok) {
       alert("Login successful!");
-      console.log("Token or user ID:", data);
+      localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
-      navigate("/parent"); // redirect
+      navigate("/parent");
     } else {
       alert(data.message || "Login failed");
     }

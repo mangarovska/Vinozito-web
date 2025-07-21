@@ -40,11 +40,11 @@ namespace backend.data
                 // new DefaultCard
                 // {
                 //     //1
-                //     Name = "кога",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/кога.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/кога.png",
+                //     Name = "како",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/како.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/како.png",
                 //     Category = "Communication",
-                //     Position = 9
+                //     Position = 8
                 // },
                 // new DefaultCard
                 // {

@@ -20,11 +20,16 @@ public class AuthController : ControllerBase
     //private readonly string _key = "This is my test key"; // Use configuration
     //private readonly string _jwtSecret;
 
+    private readonly string _jwtSecret;
+    private readonly string _jwtIssuer;
+    private readonly string _jwtAudience;
+
     public AuthController(IUserService userService, IConfiguration configuration)
     {
         _userService = userService;
-
-        // _jwtSecret = configuration["JwtSettings:Secret"] ?? throw new ArgumentNullException("JwtSettings:Secret configuration is missing.");
+        _jwtSecret = configuration["JwtSettings:Secret"]!;
+        _jwtIssuer = configuration["JwtSettings:Issuer"]!;
+        _jwtAudience = configuration["JwtSettings:Audience"]!;
     }
 
 
@@ -32,16 +37,32 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] UserLoginDto userLogin)
     {
         var user = await _userService.AuthenticateAsync(userLogin.Username, userLogin.Password);
-        if (user == null)
+        if (user == null) return Unauthorized(new { message = "Invalid credentials" });
+
+        var token = GenerateJwtToken(user);
+        return Ok(new { token, userId = user.Id, username = user.UserName });
+    }
+
+    private string GenerateJwtToken(User user)
+    {
+        var key = Encoding.UTF8.GetBytes(_jwtSecret);
+        var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+
+        var claims = new[]
         {
-            return Unauthorized(new { message = "Invalid credentials" });
-        }
+        new Claim(ClaimTypes.NameIdentifier, user.Id!),
+        new Claim(ClaimTypes.Name, user.UserName!)
+    };
 
-        // var token = GenerateJwtToken(user);
-        // return Ok(new { Token = token });
+        var token = new JwtSecurityToken(
+            issuer: _jwtIssuer,
+            audience: _jwtAudience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(1),
+            signingCredentials: creds
+        );
 
-        return Ok(new { message = "Login successful", userId = user.Id, username = user.UserName  });
-
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
     [HttpPost("register")]
