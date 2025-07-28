@@ -41,93 +41,93 @@ namespace backend.data
                 // new DefaultCard
                 // {
                 //     //1
-                //     Name = "test",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/како.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/како.png",
-                //     Category = "Test",
+                //     Name = "нула",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/нуула.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/0.png",
+                //     Category = "Numbers",
                 //     Position = 1
                 // },
                 // new DefaultCard
                 // {
                 //     //2
-                //     Name = "колку",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/колку.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/колку.png",
-                //     Category = "Communication",
+                //     Name = "еден",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/еден.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/1.png",
+                //     Category = "Numbers",
                 //     Position = 13
                 // },
 
                 // new DefaultCard
                 // {
                 //     //3
-                //     Name = "ролерки",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/ролерки.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/ролерки.png",
-                //     Category = "Activities",
+                //     Name = "два",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/два.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/2.png",
+                //     Category = "Numbers",
                 //     Position = 3
                 // },
                 // new DefaultCard
                 // {
                 //     //4
-                //     Name = "тротинет",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/тротинет.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/тротинет.png",
-                //     Category = "Activities",
+                //     Name = "три",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/три.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/3.png",
+                //     Category = "Numbers",
                 //     Position = 4
                 // },
                 // new DefaultCard
                 // {
                 //     //5
-                //     Name = "фудбал",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/фудбал.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/фудбал.png",
-                //     Category = "Activities",
+                //     Name = "четири",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/четири.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/4.png",
+                //     Category = "Numbers",
                 //     Position = 5
                 // },
                 // new DefaultCard
                 // {
                 //     //6
-                //     Name = "кошарка",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/кошарка.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/кошарка.png",
-                //     Category = "Activities",
+                //     Name = "пет",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/пет.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/5.png",
+                //     Category = "Numbers",
                 //     Position = 6
                 // },
 
                 // new DefaultCard
                 // {
                 //     //7
-                //     Name = "одбојка",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/одбојка.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/одбојка.png",
-                //     Category = "Activities",
+                //     Name = "шест",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/шест.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/6.png",
+                //     Category = "Numbers",
                 //     Position = 7
                 // },
                 // new DefaultCard
                 // {
                 //     //8
-                //     Name = "тенис",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/тенис.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/тенис.png",
-                //     Category = "Activities",
+                //     Name = "седум",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/седум.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/7.png",
+                //     Category = "Numbers",
                 //     Position = 8
                 // },
                 // new DefaultCard
                 // {
                 //     //9
-                //     Name = "пливање",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/пливање.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/пливање.png",
-                //     Category = "Activities",
+                //     Name = "осум",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/осум.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/8.png",
+                //     Category = "Numbers",
                 //     Position = 9
                 // },
                 // new DefaultCard
                 // {
                 //     //10
-                //     Name = "боење",
-                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/боење.m4a",
-                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/боење.png",
-                //     Category = "Activities",
+                //     Name = "девет",
+                //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/activities/девет.m4a",
+                //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/9.png",
+                //     Category = "Numbers",
                 //     Position = 10
                 // },
                 // new DefaultCard

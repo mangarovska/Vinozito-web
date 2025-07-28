@@ -258,4 +258,12 @@ export const categories = [
     bottom: "0px",
     left: "0px",
   },
+
+  {
+    label: "Броеви",
+    value: "Numbers",
+    img: "/comms-assets/categories/numbers.png",
+    bottom: "0px",
+    left: "0px",
+  },
 ];

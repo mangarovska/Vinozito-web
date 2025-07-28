@@ -10,7 +10,6 @@ const AnalyticsPage = () => {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // Mock data for now - replace with actual API calls
   const mockData = {
     dailyUsage: [
       { date: 'Jan', cards: 1200, activities: 8 },
@@ -62,7 +61,6 @@ const AnalyticsPage = () => {
   const fetchAnalytics = async () => {
     setLoading(true);
     try {
-      // For now, use mock data
       // TODO: Replace with actual API call
       setTimeout(() => {
         setAnalytics(mockData);
