@@ -29,12 +29,12 @@ export default function VoiceRecorder({ onRecordingComplete, cardTitle }) {
       mediaRecorderRef.current.onstop = () => {
         const blob = new Blob(chunks.current, { type: "audio/webm" });
         
-        // Create a File object with unique filename based on card title
+        // make unique filename based on card title
         const filename = generateUniqueFilename();
         const file = new File([blob], filename, { type: "audio/webm" });
         
         chunks.current = [];
-        onRecordingComplete(file); // Pass the File object instead of blob
+        onRecordingComplete(file);
       };
       mediaRecorderRef.current.start();
       setRecording(true);
@@ -47,7 +47,7 @@ export default function VoiceRecorder({ onRecordingComplete, cardTitle }) {
     if (mediaRecorderRef.current && recording) {
       mediaRecorderRef.current.stop();
       
-      // Stop all tracks to release microphone
+      // stop all tracks to release microphone
       mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
       
       setRecording(false);

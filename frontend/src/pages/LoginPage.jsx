@@ -331,7 +331,6 @@ export default function LoginPage() {
                   required
                 />
                 <label htmlFor="login">Е-пошта</label>{" "}
-                {/* Changed label from "Корисничко име / Е-пошта" to just "Е-пошта" since it's type="email" */}
                 <input
                   type="email"
                   placeholder="пример@mail.com"
@@ -362,7 +361,6 @@ export default function LoginPage() {
                 <span>или</span>
               </div>
               <div className="social-buttons">
-                {/* Use the GoogleLogin component here for registration side too if you want the same flow */}
                 {/* <GoogleLogin
                   onSuccess={handleGoogleLoginSuccess}
                   onError={() => {

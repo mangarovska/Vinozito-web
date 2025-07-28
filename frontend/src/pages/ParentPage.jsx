@@ -165,7 +165,7 @@ export default function ParentPage() {
 
   const handleEdit = (card) => {
     setEditingCard(card);
-    setUpdatedTitle(card.title || card.name); // Use title first, fallback to name
+    setUpdatedTitle(card.title || card.name); // use title first, fallback to name
     setNewImageFile(null);
     setNewAudioFile(null);
   };
@@ -175,7 +175,7 @@ export default function ParentPage() {
       console.log(`Starting ${type} upload for file:`, file.name);
 
       const formData = new FormData();
-      formData.append("file", file); // Single file for ASP.NET controller
+      formData.append("file", file); // single file for ASP.NET controller
 
       const endpoint = type === "image" ? "/upload/image" : "/upload/audio";
       const uploadUrl = `http://localhost:5100/api${endpoint}?userId=${userId}`;
@@ -186,7 +186,6 @@ export default function ParentPage() {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          // Don't set Content-Type for FormData
         },
         body: formData,
       });
@@ -206,7 +205,6 @@ export default function ParentPage() {
       console.log(`Upload result URL:`, result.url);
       console.log(`Upload result message:`, result.message);
 
-      // ASP.NET proxy returns { url: "full_url", message: "success_message" }
       if (
         result &&
         result.url &&
@@ -241,14 +239,14 @@ export default function ParentPage() {
       let newImageUrl = editingCard.image;
       let newAudioUrl = editingCard.audioVoice;
 
-      // Upload new image if selected
+      // upload new image if selected
       if (newImageFile) {
         console.log("Uploading new image...");
         newImageUrl = await uploadFile(newImageFile, "image");
         console.log("Image uploaded to:", newImageUrl);
       }
 
-      // Upload new audio if selected
+      // upload new audio if selected
       if (newAudioFile) {
         console.log("Uploading new audio...");
         newAudioUrl = await uploadFile(newAudioFile, "audio");
@@ -259,11 +257,11 @@ export default function ParentPage() {
       const isCustom = editingCard.cardType === "Custom";
 
       if (isCustom) {
-        // Update existing custom card
+        // update existing custom card
         const updateData = {
           title: updatedTitle,
           voiceAudio: newAudioUrl,
-          image: newImageUrl, // Add this line
+          image: newImageUrl,
         };
 
         console.log(
@@ -281,18 +279,18 @@ export default function ParentPage() {
           }
         );
       } else {
-        // Check if a custom card already exists for this default card
+        // check if a custom card already exists for this default card
         const existingCustomCard = allCards.find(
           (card) =>
             card.cardType === "Custom" && card.defaultCardId === editingCard.id
         );
 
         if (existingCustomCard) {
-          // Update the existing custom card instead of creating a new one
+          // update the existing custom card instead of creating a new one
           const updateData = {
             title: updatedTitle,
             voiceAudio: newAudioUrl,
-            image: newImageUrl, // Add this line
+            image: newImageUrl,
           };
 
           console.log(
@@ -310,12 +308,12 @@ export default function ParentPage() {
             }
           );
         } else {
-          // Create new custom card from default card
+          // create new custom card from default card
           const createData = {
-            defaultCardId: editingCard.id, // This is the default card ID
+            defaultCardId: editingCard.id, // default card ID
             title: updatedTitle,
             voiceAudio: newAudioUrl,
-            image: newImageUrl, // Add this line
+            image: newImageUrl,
             userId: userId,
             category: editingCard.category,
           };
@@ -342,7 +340,7 @@ export default function ParentPage() {
       const result = await response.json();
       console.log("Save successful:", result);
 
-      // Refresh the cards after successful save
+      // refresh the cards after successful save
       console.log("Refreshing cards...");
       await fetchAllCards();
       console.log("Cards refreshed successfully");
@@ -391,7 +389,7 @@ export default function ParentPage() {
         throw new Error(`Revert failed: ${response.status} - ${errorText}`);
       }
 
-      // Refresh all cards after deletion
+      // refresh all cards after deletion
       await fetchAllCards();
       alert("Card reverted to default successfully!");
     } catch (err) {
@@ -400,19 +398,19 @@ export default function ParentPage() {
     }
   };
 
-  // Function to handle adding a new card (if applicable)
+  // handles adding a new card
   const handleAddNewCard = () => {
-    // Implement logic to open a new card creation modal/form
-    // For now, let's set a dummy card for editing with default values
+    // TODO: add new card logic
+    // dummy code
     setEditingCard({
-      id: "new", // A unique identifier for a new card
-      cardType: "New", // Indicate it's a new card being created
+      id: "new",
+      cardType: "New",
       title: "",
       name: "",
-      image: "/comms-assets/placeholder.png", // Default placeholder image
-      audioVoice: "", // No audio by default
-      category: activeCategory, // Pre-select current category
-      defaultCardId: null, // No associated default card yet
+      image: "/comms-assets/placeholder.png",
+      audioVoice: "",
+      category: activeCategory,
+      defaultCardId: null,
     });
     setUpdatedTitle("");
     setNewImageFile(null);
@@ -554,7 +552,7 @@ export default function ParentPage() {
                     </div>
                   );
                 })}
-                {/* Add New Card Button */}
+                {/* ADD NEW CARD */}
                 <button className="add-card-button" onClick={handleAddNewCard}>
                   <div className="add-card-content">
                     <FaPlus className="plus-icon" />
@@ -590,7 +588,7 @@ export default function ParentPage() {
             <div className="form-group">
               <label htmlFor="card-image-upload">Слика:</label>
               <input
-                id="card-image-upload" // Changed ID to avoid conflict
+                id="card-image-upload"
                 type="file"
                 accept="image/*"
                 onChange={(e) => {
@@ -611,7 +609,7 @@ export default function ParentPage() {
                   </div>
                 )}
                 {editingCard.image &&
-                  !newImageFile && ( // Only show current if no new file
+                  !newImageFile && ( 
                     <div className="current-file">
                       {/* <p>Тековна слика:</p> */}
                       <img
@@ -650,7 +648,7 @@ export default function ParentPage() {
                   </div>
                 )}
                 {editingCard.audioVoice &&
-                  !newAudioFile && ( // Only show current if no new file
+                  !newAudioFile && (
                     <div className="current-file">
                       {/* <p>Тековно аудио:</p> */}
                       <audio controls>
@@ -664,7 +662,7 @@ export default function ParentPage() {
                   )}
               </div>
 
-              {/* Voice Recorder Component */}
+              {/* Voice Recorder */}
               <div className="voice-recorder-section">
                 <VoiceRecorder
                   onRecordingComplete={(recordedFile) => {
