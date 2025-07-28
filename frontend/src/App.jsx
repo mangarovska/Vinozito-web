@@ -24,6 +24,9 @@ import LoginPage from "./pages/LoginPage.jsx";
 
 import ParentPage from "./pages/ParentPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function InnerApp() {
   const { isLoading } = useLoading();
@@ -46,11 +49,14 @@ function InnerApp() {
         <Route path="/memory" element={<MemoryGame />} />
         <Route path="/connect" element={<ConnectingGame />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        {/* <Route path="*" element={<div>404 - Page Not Found</div>} /> */}
+
         <Route
           path="/parent"
           element={
             <ProtectedRoute>
-              <ParentPage />
+              <ParentPage userId={localStorage.getItem("userId")} />
             </ProtectedRoute>
           }
         />
@@ -63,12 +69,14 @@ function InnerApp() {
 
 export default function App() {
   return (
-    <LoadingProvider>
-      <DndProvider backend={HTML5Backend}>
-        <Router>
-          <InnerApp />
-        </Router>
-      </DndProvider>
-    </LoadingProvider>
+    <GoogleOAuthProvider clientId="315741071456-7e1tml8ofp1a27sr18un4t0gnr0a8tcg.apps.googleusercontent.com">
+      <LoadingProvider>
+        <DndProvider backend={HTML5Backend}>
+          <Router>
+            <InnerApp />
+          </Router>
+        </DndProvider>
+      </LoadingProvider>
+    </GoogleOAuthProvider>
   );
 }

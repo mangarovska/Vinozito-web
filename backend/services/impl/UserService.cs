@@ -7,48 +7,20 @@ using backend.services;
 public class UserService(IUserRepository userRepository)
     : IUserService
 {
-
-    //TODO: FIX
-    // public async Task<User> AuthenticateAsync(string username, string password)
-    // {
-    //     var user = await userRepository.GetByUsernameAsync(username);
-
-    //     if (user == null || string.IsNullOrEmpty(user.PasswordHash))
-    //     {
-    //         return null; // User not found or invalid password hash
-    //     }
-
-    //     if (!VerifyPassword(password, user.PasswordHash))
-    //     {
-    //         return null; // Invalid credentials
-    //     }
-
-    //     return user; // Successful authentication
-    // }
-
-
     public async Task<User?> AuthenticateAsync(string username, string password)
     {
-        var user = await userRepository.GetByUsernameAsync(username); // find by username
-
+        var user = await userRepository.GetByUsernameAsync(username);
         if (user == null)
         {
-            // find by email
             user = await userRepository.GetByEmailAsync(username);
         }
 
         if (user == null || string.IsNullOrEmpty(user.PasswordHash))
             return null;
 
-        return VerifyPassword(password, user.PasswordHash) ? user : null;
+        // use BCrypt to verify password -> handles password verification internally
+        return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash) ? user : null;
     }
-
-    // private bool VerifyPassword(string password, string passwordHash)
-    // {
-    //     // Hash the input password and compare it with the stored password hash
-    //     var hashedPassword = HashPassword(password);
-    //     return hashedPassword == passwordHash;
-    // }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
     {
@@ -65,18 +37,6 @@ public class UserService(IUserRepository userRepository)
 
         return user;
     }
-
-    // public async Task AddUserAsync(User user)
-    // {
-    //     // Validation logic for unique username
-    //     var existingUser = await userRepository.GetByUsernameAsync(user.UserName);
-    //     if (existingUser != null)
-    //     {
-    //         throw new InvalidOperationException("Username already exists");
-    //     }
-
-    //     await userRepository.AddAsync(user);
-    // }
 
     public async Task AddUserAsync(User user)
     {
@@ -117,23 +77,15 @@ public class UserService(IUserRepository userRepository)
         await userRepository.DeleteAsync(id);
     }
 
-    // public async Task<User> GetUserByUsernameAsync(string username)
-    // {
-    //     var user = await userRepository.GetByUsernameAsync(username);
-    //     if (user == null)
-    //     {
-    //         throw new KeyNotFoundException("User not found");
-    //     }
-
-    //     return user;
-    // }
-
-    // In UserService.cs:
     public async Task<User?> GetUserByUsernameAsync(string username)
     {
         return await userRepository.GetByUsernameAsync(username);
     }
 
+    public async Task<User?> GetUserByEmailAsync(string email) // Changed return type to nullable User
+    {
+        return await userRepository.GetByEmailAsync(email);
+    }
 
     public async Task<User> RegisterUserAsync(string username, string password, string email)
     {
@@ -143,18 +95,58 @@ public class UserService(IUserRepository userRepository)
             throw new InvalidOperationException("Username already exists");
         }
 
-        var passwordHash = HashPassword(password); // hash the password before storing it
+        var existingEmailUser = await GetUserByEmailAsync(email);
+        if (existingEmailUser != null)
+        {
+            throw new InvalidOperationException("Email already exists.");
+        }
+
+        // hash password with BCrypt
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+
+        var user = new User
+        {
+            UserName = username,
+            PasswordHash = passwordHash, // store BCrypt hash
+            Email = email,
+        };
+
+        await userRepository.AddAsync(user);
+        return user;
+    }
+
+    public async Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false)
+    {
+        var existingUser = await userRepository.GetByUsernameAsync(username);
+        if (existingUser != null)
+        {
+            throw new InvalidOperationException("Username already exists");
+        }
+
+        var existingEmailUser = await GetUserByEmailAsync(email);
+        if (existingEmailUser != null)
+        {
+            throw new InvalidOperationException("Email already exists.");
+        }
+
+        string? passwordHash = null;
+
+        if (!isGoogleUser)
+        {
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException("Password is required for non-Google users");
+
+            passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        }
 
         var user = new User
         {
             UserName = username,
             PasswordHash = passwordHash,
-            Email = email
-            //Role = role // Default role is User
+            Email = email,
         };
 
         await userRepository.AddAsync(user);
-
         return user;
     }
 
@@ -166,43 +158,29 @@ public class UserService(IUserRepository userRepository)
     //     return Convert.ToBase64String(hashBytes); // Convert the hash to a Base64 string
     // }
 
-    private string HashPassword(string password)
-    {
-        // using (var sha512 = new SHA512CryptoServiceProvider())
-        using var sha512 = SHA512.Create();
+    // private string HashPassword(string password)
+    // {
+    //     // using (var sha512 = new SHA512CryptoServiceProvider())
+    //     using var sha512 = SHA512.Create();
 
-        {
-            var hashedBytes = sha512.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hashedBytes); // Convert the hashed bytes to a base64 string
-        }
-    }
+    //     {
+    //         var hashedBytes = sha512.ComputeHash(Encoding.UTF8.GetBytes(password));
+    //         return Convert.ToBase64String(hashedBytes); // Convert the hashed bytes to a base64 string
+    //     }
+    // }
 
-    private bool VerifyPassword(string password, string storedHash)
-    {
-        // using (var sha512 = new SHA512CryptoServiceProvider())
-        using var sha512 = SHA512.Create();
+    // private bool VerifyPassword(string password, string storedHash)
+    // {
+    //     // using (var sha512 = new SHA512CryptoServiceProvider())
+    //     using var sha512 = SHA512.Create();
 
-        {
-            var hashedBytes = sha512.ComputeHash(Encoding.UTF8.GetBytes(password));
-            var hashedPassword = Convert.ToBase64String(hashedBytes);
+    //     {
+    //         var hashedBytes = sha512.ComputeHash(Encoding.UTF8.GetBytes(password));
+    //         var hashedPassword = Convert.ToBase64String(hashedBytes);
 
-            return hashedPassword == storedHash; // Compare the stored hash with the newly hashed password
-        }
-    }
-
-
-    public async Task AddCustomCardToListAsync(string userId, string customCardId)
-    {
-        var user = await userRepository.GetByIdAsync(userId);
-        if (user == null)
-        {
-            throw new KeyNotFoundException("User not found");
-        }
-
-        user.CustomCardsIds?.Add(customCardId);
-
-        await userRepository.UpdateAsync(user);
-    }
+    //         return hashedPassword == storedHash; // Compare the stored hash with the newly hashed password
+    //     }
+    // }
 
     public async Task RemoveCustomCardFromListAsync(string userId, string customCardId)
     {
@@ -214,6 +192,27 @@ public class UserService(IUserRepository userRepository)
         user.CustomCardsIds?.Remove(customCardId);
 
         await userRepository.UpdateAsync(user);
+    }
+
+    public async Task AddCustomCardToListAsync(string userId, string customCardId)
+    {
+        var user = await userRepository.GetByIdAsync(userId);
+        if (user == null)
+        {
+            throw new KeyNotFoundException("User not found");
+        }
+
+        if (user.CustomCardsIds == null) // initialize list if it's null
+        {
+            user.CustomCardsIds = new List<string>();
+        }
+
+        // add the custom card ID if it's not already in the list
+        if (!user.CustomCardsIds.Contains(customCardId))
+        {
+            user.CustomCardsIds.Add(customCardId);
+            await userRepository.UpdateAsync(user);
+        }
     }
 
 }

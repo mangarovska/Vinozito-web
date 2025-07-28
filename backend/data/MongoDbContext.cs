@@ -10,7 +10,7 @@ namespace backend.data
     {
         private readonly IMongoDatabase _database;
 
-        public MongoDbContext(IConfiguration configuration)
+        public MongoDbContext(IConfiguration configuration) // configuration inn appsettings.json
         {
             var connectionString = configuration["MongoDB:ConnectionString"];
             var databaseName = configuration["MongoDB:DatabaseName"];
@@ -30,6 +30,7 @@ namespace backend.data
         public IMongoCollection<DefaultCard> DefaultCards => _database.GetCollection<DefaultCard>("DefaultCards");
         public IMongoCollection<CustomCard> CustomCards => _database.GetCollection<CustomCard>("CustomCards");
 
+
         public async Task InsertSampleDataAsync(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
@@ -40,11 +41,11 @@ namespace backend.data
                 // new DefaultCard
                 // {
                 //     //1
-                //     Name = "како",
+                //     Name = "test",
                 //     AudioVoice = "http://mangaserver.ddnsfree.com:5001/uploads/audio/communication/како.m4a",
                 //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/communication/како.png",
-                //     Category = "Communication",
-                //     Position = 8
+                //     Category = "Test",
+                //     Position = 1
                 // },
                 // new DefaultCard
                 // {
@@ -400,7 +401,6 @@ namespace backend.data
                 //     Image = "http://mangaserver.ddnsfree.com:5001/uploads/images/activities/жаба.png",
                 //     Category = "Activities"
                 // },
-
 
             };
             foreach (var dfCard in sampleData)

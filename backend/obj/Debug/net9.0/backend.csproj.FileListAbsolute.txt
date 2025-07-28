@@ -57,3 +57,11 @@ C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\System.Ide
 C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\runtimes\win\native\mongocrypt.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\Google.Apis.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\Google.Apis.Auth.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\Google.Apis.Core.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\System.Management.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\ana_m\OneDrive\Desktop\vinozito_web\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll

@@ -10,4 +10,5 @@ public interface ICustomCardService
     Task UpdateAsync(CustomCard entity);
     Task DeleteAsync(string id);
     Task<IEnumerable<CustomCard>> GetAllByUserId(string id);
+    Task<CustomCard?> GetByDefaultCardIdAndUserIdAsync(string defaultCardId, string userId); // new
 }

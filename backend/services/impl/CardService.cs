@@ -7,66 +7,58 @@ public class CardService(
     ICustomCardService customCardService,
     IDefaultCardService defaultCardService) : ICardService
 {
-   public async Task<IEnumerable<CardDto>> GetCardsByUserId(string id)
-{
-    // Fetch custom and default cards, assigning empty lists if they are null
-    var customCards = await customCardService.GetAllByUserId(id);
-    var defaultCards = await defaultCardService.GetAllDefaultCardsAsync();
-    
-    // Filter out any null entries and any CustomCard with a null DefaultCardId
-    var customCardDict = customCards
-        .Where(cc => true)  // Check for non-null entries and valid DefaultCardId
-        .ToDictionary(cc => cc.DefaultCardId);
-
-    var cards = defaultCards
-    .Where(dc => dc.Id != null)  // <-- Filter out null Ids here
-    .Select(dc =>
+    public async Task<IEnumerable<CardDto>> GetCardsByUserId(string userId)
     {
-        if (customCardDict.TryGetValue(dc.Id!, out var customCard)) // `dc.Id!` since filtered non-null
-        {
-            return new CardDto(
-                id: dc.Id!,  // null-forgiving operator since filtered
-                name: customCard.Title ?? dc.Name,
-                audioVoice: customCard.VoiceAudio ?? dc.AudioVoice,
-                image: dc.Image,
-                category: dc.Category,
-                cardType: CardType.Custom,
-                position: dc.Position
 
-            );
-        }
+        var defaultCards = await defaultCardService.GetAllDefaultCardsAsync(); // get all default cards
+        var customCards = await customCardService.GetAllByUserId(userId); // get all custom cards
 
-        return new CardDto(
-            id: dc.Id!,  // null-forgiving operator here too
-            name: dc.Name,
-            audioVoice: dc.AudioVoice,
-            image: dc.Image,
-            category: dc.Category,
-            cardType: CardType.Default,
-            position: dc.Position
+        // create a dictionary of custom cards by DefaultCardId for quick lookup
+        var customCardDict = customCards
+            .Where(cc => cc != null && !string.IsNullOrEmpty(cc.DefaultCardId))
+            .ToDictionary(cc => cc.DefaultCardId);
 
-        );
-    })
-    .ToList();
-
-
-    return cards;
-}
-
-
-    public async Task<IEnumerable<CardDto>> GetCardsByUserIdAndCategroyTask(string id, string category)
-    {
-        var cards = await GetCardsByUserId(id);
-        var cardsCategory = new List<CardDto>();
-        foreach (var card in cards)
-        {
-            if (card.Category == category)
+        // build the merged card list
+        var cards = defaultCards
+            .Where(dc => dc != null && !string.IsNullOrEmpty(dc.Id))
+            .Select(dc =>
             {
-                cardsCategory.Add(card);
-            }
-        }
-        return cardsCategory.ToList();
-        
+
+                if (customCardDict.TryGetValue(dc.Id!, out var customCard)) // check if there's a custom version of this default card
+                {
+                    return new CardDto( // return custom version -> this REPLACES the default card
+                        id: dc.Id!, // keep the default card ID as the main identifier
+                        name: customCard.Title, // custom title
+                        audioVoice: customCard.VoiceAudio, // custom audio
+                        image: customCard.Image ?? dc.Image, // custom image if available, otherwise default
+                        category: dc.Category, // keep default category
+                        cardType: CardType.Custom,
+                        position: dc.Position
+                    );
+                }
+
+                return new CardDto( // return default version
+                    id: dc.Id!,
+                    name: dc.Name,
+                    audioVoice: dc.AudioVoice,
+                    image: dc.Image,
+                    category: dc.Category,
+                    cardType: CardType.Default,
+                    position: dc.Position
+                );
+            })
+            .OrderBy(card => card.Position ?? int.MaxValue) // handle null positions
+            .ToList();
+
+        return cards;
     }
-    
+
+    public async Task<IEnumerable<CardDto>> GetCardsByUserIdAndCategroyTask(string userId, string category)
+    {
+        var allCards = await GetCardsByUserId(userId);
+        return allCards.Where(card =>
+            !string.IsNullOrEmpty(card.Category) &&
+            string.Equals(card.Category, category, StringComparison.OrdinalIgnoreCase) // case-insensitive comparison
+        ).ToList();
+    }
 }

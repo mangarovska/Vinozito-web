@@ -8,5 +8,5 @@ public class Settings
     public bool Vibrate { get; set; }
     public bool Animations { get; set; }
     public bool VibrantColors { get; set; }
-  
+
 }

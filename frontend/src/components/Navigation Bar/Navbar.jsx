@@ -3,7 +3,9 @@ import "./Navbar.css";
 import logo from "/logo.png";
 import back from "/back1.png";
 import { Link, useLocation, useNavigate, useMatch } from "react-router-dom";
-import Padlock from "./Padlock"; 
+import Padlock from "./Padlock";
+
+import placeholderImg from "/placeholder2.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -19,6 +21,46 @@ export default function Navbar() {
 
   const clickResetTimerRef = useRef(null);
   const padlockMessageTimeoutRef = useRef(null);
+
+  const [profilePic, setProfilePic] = useState(placeholderImg);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
+  useEffect(() => {
+    const savedPic = localStorage.getItem("profilePic");
+    console.log("Loaded profilePic in Navbar:", savedPic);
+    if (savedPic) setProfilePic(savedPic);
+  }, []);
+
+  useEffect(() => {
+    function handleProfilePicChange() {
+      const savedPic = localStorage.getItem("profilePic");
+      setProfilePic(savedPic || placeholderImg);
+    }
+    window.addEventListener("profilePicChanged", handleProfilePicChange);
+
+    return () => {
+      window.removeEventListener("profilePicChanged", handleProfilePicChange);
+    };
+  }, []);
 
   function showPadlockMessage(message) {
     setPadlockMessage(message);
@@ -183,35 +225,30 @@ export default function Navbar() {
           {(isLandingPage || isAbout || isDownloadApp) && (
             <>
               <li>
-                <Link to="/">Дома</Link>
+                <Link to="/" className="mt-1">
+                  Дома
+                </Link>
               </li>
               <li>
-                <Link to="/about">За нас</Link>
+                <Link to="/about" className="mt-1">
+                  За нас
+                </Link>
               </li>
             </>
           )}
-          {isParentPage ? (
-            <li className="login-button parent-logout-section">
-              <span className="greeting-text">
-                Здраво{username ? `, ${username}` : ""}!
-              </span>
-              <Link
-                to="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  localStorage.removeItem("authToken");
-                  localStorage.removeItem("username");
-                  navigate("/login");
-                }}
-              >
-                Одјави се
-              </Link>
-            </li>
-          ) : !isLandingPage && !isAbout && !isLoginPage && !isDownloadApp ? (
+          {!isLandingPage &&
+          !isAbout &&
+          !isLoginPage &&
+          !isDownloadApp &&
+          !isParentPage ? (
             <div className="lock-wrapper">
               <li
                 className={`login-button ${
-                  !isLandingPage && !isAbout && !isLoginPage && !isDownloadApp
+                  !isLandingPage &&
+                  !isAbout &&
+                  !isLoginPage &&
+                  !isDownloadApp &&
+                  !isParentPage
                     ? "with-padlock"
                     : ""
                 }`}
@@ -237,17 +274,117 @@ export default function Navbar() {
                   ) : null}
                 </div>
 
-                <Link
-                  to="/login"
-                  className={!isUnlocked ? "disabled" : ""}
-                  onClick={(e) => {
-                    if (!isUnlocked) e.preventDefault();
-                  }}
-                >
-                  Најави се
-                </Link>
+                {username ? (
+                  <div
+                    className={`parent-profile ${
+                      !isUnlocked ? "disabled" : ""
+                    }`}
+                    onClick={(e) => {
+                      if (!isUnlocked) return;
+                      setShowDropdown(!showDropdown);
+                    }}
+                  >
+                    <img
+                      src={profilePic || placeholderImg}
+                      alt="Profile"
+                      className="profile-image"
+                    />
+                    <span className="greeting-text username-text">
+                      {username}
+                    </span>
+                    <span className="dropdown-icon">▼</span>
+
+                    {showDropdown && isUnlocked && (
+                      <div className="dropdown-menu" ref={dropdownRef}>
+                        <button
+                          onClick={() => {
+                            setShowDropdown(false);
+                            navigate("/parent");
+                          }}
+                        >
+                          Мои картички
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowDropdown(false);
+                            navigate("/analytics");
+                          }}
+                        >
+                          Анализа
+                        </button>
+                        <button
+                          onClick={() => {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("username");
+                            localStorage.removeItem("profilePic");
+                            setShowDropdown(false);
+                            navigate("/login");
+                          }}
+                        >
+                          Одјави се
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className={!isUnlocked ? "disabled" : ""}
+                    onClick={(e) => {
+                      if (!isUnlocked) e.preventDefault();
+                    }}
+                  >
+                    Најави се
+                  </Link>
+                )}
               </li>
             </div>
+          ) : username ? (
+            <li className="parent-dropdown">
+              <div
+                className="parent-profile"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                <img
+                  src={profilePic || placeholderImg}
+                  alt="Profile"
+                  className="profile-image"
+                />
+                <span className="greeting-text username-text">{username}</span>
+                <span className="dropdown-icon">▼</span>
+              </div>
+              {showDropdown && (
+                <div className="dropdown-menu" ref={dropdownRef}>
+                  <button
+                    onClick={() => {
+                      setShowDropdown(false);
+                      navigate("/parent");
+                    }}
+                  >
+                    Мои картички
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowDropdown(false);
+                      navigate("/analytics");
+                    }}
+                  >
+                    Анализа
+                  </button>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("username");
+                      localStorage.removeItem("profilePic");
+                      setShowDropdown(false);
+                      navigate("/login");
+                    }}
+                  >
+                    Одјави се
+                  </button>
+                </div>
+              )}
+            </li>
           ) : (
             <li className="login-button">
               <Link to="/login">Најави се</Link>

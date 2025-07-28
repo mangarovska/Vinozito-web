@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   FaFacebookF,
   FaGoogle,
@@ -11,16 +10,19 @@ import {
 import Banner from "../components/Banner/Banner";
 import "./LoginPage.css";
 
+// Import GoogleLogin component
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google"; // Keep useGoogleLogin for now if you have other uses, but GoogleLogin is for ID Token
+
 export default function LoginPage() {
+  const handleSuccess = (response) => {
+    console.log(response.credential); // <--- ID token
+  };
+
   const navigate = useNavigate();
 
   const [isRegistering, setIsRegistering] = useState(false);
-
-  // const [loginEmail, setLoginEmail] = useState("");
-  const [loginInput, setLoginInput] = useState(""); // email or username
-
+  const [loginInput, setLoginInput] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -55,9 +57,128 @@ export default function LoginPage() {
       .catch(() => alert("Unauthorized"));
   }, []);
 
+  // This function is for handling the ID token from the GoogleLogin component
+  // const handleGoogleLoginSuccess = async (credentialResponse) => {
+  //   const googleIdToken = credentialResponse.credential; // This is the ID token
+
+  //   const response = await fetch(
+  //     "http://localhost:5100/api/auth/google-login",
+  //     {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ idToken: googleIdToken }), // Send as idToken
+  //     }
+  //   );
+
+  //   const data = await response.json();
+
+  //   if (response.ok) {
+  //     localStorage.setItem("token", data.token);
+  //     localStorage.setItem("username", data.username);
+  //     navigate("/parent");
+  //   } else {
+  //     alert(data.message || "Google login failed!");
+  //   }
+  // };
+
+  const handleGoogleLoginSuccess = async (tokenResponse) => {
+    const accessToken = tokenResponse.access_token;
+
+    const response = await fetch(
+      "http://localhost:5100/api/auth/google-login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accessToken }), // <-- send accessToken instead of idToken
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("profilePic", data.profilePic || "");
+      window.dispatchEvent(new Event("profilePicChanged"));
+      navigate("/parent");
+    } else {
+      alert(data.message || "Google login failed!");
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const accessToken = tokenResponse.access_token;
+
+      const response = await fetch(
+        "http://localhost:5100/api/auth/google-login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accessToken }), // 🔁 use accessToken instead
+        }
+      );
+
+      // const data = await response.json();
+      const contentType = response.headers.get("content-type");
+      let data = {};
+
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Server error:", text);
+        alert(text);
+        return;
+      }
+
+      console.log("Google login response data:", data);
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("profilePic", data.profilePic || "");
+        window.dispatchEvent(new Event("profilePicChanged"));
+        navigate("/parent");
+      } else {
+        alert(data.message || "Google login failed!");
+      }
+    },
+    onError: () => alert("Google login failed"),
+  });
+
+  // Remove or comment out this useGoogleLogin if you are using the GoogleLogin component for ID token flow
+  // const googleLogin = useGoogleLogin({
+  //   flow: "implicit", // or "auth-code" if your backend handles the exchange
+  //   onSuccess: async (tokenResponse) => {
+  //     const accessToken = tokenResponse.access_token;
+
+  //     // Send access token to backend
+  //     const response = await fetch("http://localhost:5100/api/auth/google-login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ accessToken }), // This sends accessToken, not idToken
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (response.ok) {
+  //       localStorage.setItem("token", data.token);
+  //       localStorage.setItem("username", data.username);
+  //       navigate("/parent");
+  //     } else {
+  //       alert(data.message || "Google login failed!");
+  //     }
+  //   },
+  //   onError: () => {
+  //     alert("Google Login Failed");
+  //   },
+  // });
+
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const response = await fetch("http://localhost:5100/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -67,12 +188,26 @@ export default function LoginPage() {
       }),
     });
 
-    const data = await response.json();
+    // const data = await response.json();
+    const contentType = response.headers.get("content-type");
+    let data = {};
+
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      console.error("Server error:", text);
+      alert(text);
+      return;
+    }
 
     if (response.ok) {
       alert("Login successful!");
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("profilePic", data.profilePic || "");
+      window.dispatchEvent(new Event("profilePicChanged"));
       navigate("/parent");
     } else {
       alert(data.message || "Login failed");
@@ -81,7 +216,6 @@ export default function LoginPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     const response = await fetch("http://localhost:5100/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -91,9 +225,7 @@ export default function LoginPage() {
         password: registerPassword,
       }),
     });
-
     const data = await response.json();
-
     if (response.ok) {
       alert("Registration successful!");
       setIsRegistering(false);
@@ -123,7 +255,6 @@ export default function LoginPage() {
                   onChange={(e) => setLoginInput(e.target.value)}
                   required
                 />
-
                 <label htmlFor="password">Лозинка</label>
                 <input
                   type="password"
@@ -132,7 +263,6 @@ export default function LoginPage() {
                   onChange={(e) => setLoginPassword(e.target.value)}
                   required
                 />
-
                 <div className="remember-forgot">
                   <label className="custom-checkbox">
                     <input type="checkbox" />
@@ -141,25 +271,44 @@ export default function LoginPage() {
                   </label>
                   <a href="/forgot-password">Заборавена Лозинка ?</a>
                 </div>
-
                 <button className="confirm-button-login submit-button">
                   Најави се
                 </button>
               </form>
-
               <div className="divider">
                 <span>или</span>
               </div>
-
               <div className="social-buttons">
-                <button className="social-icon google">
-                  <FaGoogle size={44} />
+                {/* Use the GoogleLogin component here */}
+                {/* <GoogleLogin
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={() => {
+                    alert("Google Login Failed");
+                  }}
+                  render={({ onClick, disabled }) => (
+                    <button
+                      className="social-icon google"
+                      onClick={onClick}
+                      disabled={disabled}
+                      aria-label="Login with Google"
+                    >
+                      <FaGoogle size={44} />
+                    </button>
+                  )}
+                /> */}
+
+                <button
+                  className="social-icon google"
+                  onClick={() => login()}
+                  aria-label="Login with Google"
+                >
+                  <FaGoogle size={20} />
                 </button>
+
                 <button className="social-icon facebook">
                   <FaFacebookF size={44} />
                 </button>
               </div>
-
               <div className="signup-link switch-link">
                 Немате профил?{" "}
                 <a onClick={() => setIsRegistering(true)}>Регистрирај се</a>
@@ -181,8 +330,8 @@ export default function LoginPage() {
                   onChange={(e) => setRegisterUsername(e.target.value)}
                   required
                 />
-
-                <label htmlFor="login">Корисничко име / Е-пошта</label>
+                <label htmlFor="login">Е-пошта</label>{" "}
+                {/* Changed label from "Корисничко име / Е-пошта" to just "Е-пошта" since it's type="email" */}
                 <input
                   type="email"
                   placeholder="пример@mail.com"
@@ -190,7 +339,6 @@ export default function LoginPage() {
                   onChange={(e) => setRegisterEmail(e.target.value)}
                   required
                 />
-
                 <label htmlFor="password">Лозинка</label>
                 <input
                   type="password"
@@ -199,7 +347,6 @@ export default function LoginPage() {
                   onChange={(e) => setRegisterPassword(e.target.value)}
                   required
                 />
-
                 <label className="custom-checkbox">
                   <input type="checkbox" required />
                   <span className="checkmark"></span>
@@ -207,25 +354,43 @@ export default function LoginPage() {
                     Ги прифаќам условите
                   </span>
                 </label>
-
                 <button className="confirm-button-register submit-button register-button">
                   Регистрирај се
                 </button>
               </form>
-
               <div className="divider">
                 <span>или</span>
               </div>
-
               <div className="social-buttons">
-                <button className="social-icon google">
+                {/* Use the GoogleLogin component here for registration side too if you want the same flow */}
+                {/* <GoogleLogin
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={() => {
+                    alert("Google Login Failed");
+                  }}
+                  render={({ onClick, disabled }) => (
+                    <button
+                      className="social-icon google"
+                      onClick={onClick}
+                      disabled={disabled}
+                      aria-label="Register with Google"
+                    >
+                      <FaGoogle size={20} />
+                    </button>
+                  )}
+                /> */}
+
+                <button
+                  className="social-icon google"
+                  onClick={() => login()}
+                  aria-label="Register with Google"
+                >
                   <FaGoogle size={20} />
                 </button>
                 <button className="social-icon facebook">
                   <FaFacebookF size={20} />
                 </button>
               </div>
-
               <div className="signup-link switch-link">
                 Веќе имате профил?{" "}
                 <a

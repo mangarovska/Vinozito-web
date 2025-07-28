@@ -5,6 +5,7 @@ using backend.repositories;
 using backend.services;
 using backend.services.impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 // using Microsoft.Extensions.FileProviders;
 
@@ -22,14 +23,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Controllers
+// controllers
 builder.Services.AddControllers();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Dependency Injection registrations
+// dependency Injection registrations
 builder.Services.AddSingleton<MongoDbContext>();
 builder.Services.AddScoped<IDefaultCardService, DefaultCardService>();
 builder.Services.AddScoped<IDefaultCardRepository, DefaultCardRepository>();
@@ -39,7 +40,9 @@ builder.Services.AddScoped<ICustomCardService, CustomCardService>();
 builder.Services.AddScoped<ICustomCardRepository, CustomCardRepository>();
 builder.Services.AddScoped<ICardService, CardService>();
 
-// Configure JWT Authentication
+builder.Services.AddHttpClient();
+
+// configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings.GetValue<string>("Secret");
 var audience = jwtSettings.GetValue<string>("Audience");
@@ -61,17 +64,18 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddMemoryCache(); // to prevent brute forcing 
 
 var app = builder.Build();
 
-// Seed sample data into MongoDB
+// seed sample data into MongoDB
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<MongoDbContext>();
     await context.InsertSampleDataAsync(scope.ServiceProvider);
 }
 
-// Use CORS
+// use CORS
 app.UseCors("ReactAppPolicy");
 
 // Swagger UI
@@ -88,7 +92,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Map Controllers
+// map Controllers
 app.MapControllers();
 
 // app.UseStaticFiles(new StaticFileOptions
@@ -97,6 +101,5 @@ app.MapControllers();
 //         Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
 //     RequestPath = "/uploads"
 // });
-
 
 app.Run();

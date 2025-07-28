@@ -13,9 +13,9 @@ namespace backend.services
         Task AddCustomCardToListAsync(string userId, string customCardId);
         Task RemoveCustomCardFromListAsync(string userId, string customCardId);
         //Task<IEnumerable<CustomCard>> GetAllCustomCardsAsync(string id);
-        // Task<User> AuthenticateAsync(string username, string password);
         Task<User?> AuthenticateAsync(string username, string password);
-
         Task<User> RegisterUserAsync(string username, string email, string password);
+        Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false); // new
+        Task<User?> GetUserByEmailAsync(string email); // new
     }
 }
