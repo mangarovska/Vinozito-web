@@ -4,9 +4,13 @@ import Banner from "../../components/Banner/Banner";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./CommunicationPage.css";
 import { categories } from "../../data";
+import CategoryScroller from "./CategoryScroller";
 
 const CommunicationPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Животни");
+  const [selectedCategory, setSelectedCategory] = useState(
+    categories.length > 0 ? categories[0].value : ""
+  );
+
   const [selectedCards, setSelectedCards] = useState([]);
   const [allCards, setAllCards] = useState([]);
 
@@ -19,6 +23,8 @@ const CommunicationPage = () => {
   categoryRefs.current = [];
 
   const categoryScrollRef = useRef(null);
+
+  const [activeIndex, setActiveIndex] = useState(null); // track active card -> card being read
 
   const handleCategoryScroll = () => {
     const el = categoryScrollRef.current;
@@ -41,7 +47,7 @@ const CommunicationPage = () => {
       const fetchDefaultCardsOnly = async () => {
         try {
           const response = await fetch(
-            "http://localhost:5100/api/DefaultCard/"
+            "https://api.mangaserver.ddnsfree.com/api/DefaultCard/" // IMPORTANT: http://localhost:5100/api/DefaultCard/
           );
           if (!response.ok) throw new Error("Failed to fetch default cards");
 
@@ -77,7 +83,7 @@ const CommunicationPage = () => {
         };
 
         const response = await fetch(
-          `http://localhost:5100/api/Card/${userId}`,
+          `https://api.mangaserver.ddnsfree.com/api/Card/${userId}`,
           {
             headers,
           }
@@ -142,28 +148,6 @@ const CommunicationPage = () => {
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(true);
 
-  const checkScrollPosition = () => {
-    if (categoriesRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = categoriesRef.current;
-      setShowLeftFade(scrollLeft > 0);
-      setShowRightFade(scrollLeft < scrollWidth - clientWidth);
-      setShowArrows(scrollWidth > clientWidth);
-    }
-  };
-
-  const scrollCategories = (direction) => {
-    if (categoriesRef.current && categoryItemRef.current) {
-      const categoryWidth = categoryItemRef.current.offsetWidth;
-      const padding = 26; // gap value
-      const scrollAmount = (categoryWidth + padding) * 3;
-
-      categoriesRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
   const handleBackspace = () => {
     setSelectedCards((prev) => prev.slice(0, -1));
   };
@@ -175,37 +159,28 @@ const CommunicationPage = () => {
   const handlePlaySound = () => {
     if (selectedCards.length === 0) return;
 
+    // preload all audios
+    const audios = selectedCards.map((card) => {
+      const a = new Audio(card.audioVoice);
+      a.playbackRate = 1.2; // optional speed-up
+      return a;
+    });
+
     let i = 0;
-    const audio = new Audio();
-    audio.src = selectedCards[i].audioVoice;
-    audio.play();
-    audio.onended = () => {
-      // play all
-      i++;
-      if (i < selectedCards.length) {
-        audio.src = selectedCards[i].audioVoice;
-        audio.play();
-      }
-    };
-  };
+    setActiveIndex(i);
+    audios[i].play();
 
-  useEffect(() => {
-    const container = categoriesRef.current;
-    const handleResize = () => {
-      checkScrollPosition();
-    };
-
-    if (container) {
-      container.addEventListener("scroll", checkScrollPosition);
-      window.addEventListener("resize", handleResize);
-      checkScrollPosition();
-
-      return () => {
-        container.removeEventListener("scroll", checkScrollPosition);
-        window.removeEventListener("resize", handleResize);
+    audios.forEach((audio, index) => {
+      audio.onended = () => {
+        if (index + 1 < audios.length) {
+          setActiveIndex(index + 1);
+          audios[index + 1].play();
+        } else {
+          setActiveIndex(null);
+        }
       };
-    }
-  }, []);
+    });
+  };
 
   useEffect(() => {
     if (slotsRef.current && selectedCards.length > 0) {
@@ -233,7 +208,9 @@ const CommunicationPage = () => {
                       {selectedCards.map((card, index) => (
                         <img
                           key={`${card.id}-${index}`}
-                          className="card"
+                          className={`card ${
+                            index === activeIndex ? "active-card" : ""
+                          }`}
                           src={card.img || "/comms-assets/placeholder.png"}
                           onError={(e) => {
                             e.currentTarget.onerror = null;
@@ -285,75 +262,11 @@ const CommunicationPage = () => {
               </div>
             </div>
 
-            <div className="category-scroller-wrapper">
-              <div className="category-background-bar" />
-              <div className="category-scroller-container">
-                {showArrows && (
-                  <button
-                    className={`scroll-button ${!showLeftFade ? "hidden" : ""}`}
-                    onClick={() => scrollCategories("left")}
-                    aria-label="Scroll categories left"
-                  >
-                    <FaChevronLeft className="arrow-icon" />
-                  </button>
-                )}
-                <div
-                  className="category-buttons"
-                  ref={categoriesRef}
-                  style={
-                    showArrows
-                      ? {
-                          WebkitMaskImage:
-                            "linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%)",
-                          maskImage:
-                            "linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%)",
-                        }
-                      : {}
-                  }
-                >
-                  {categories.map((cat, index) => (
-                    <button
-                      key={cat.value || index}
-                      ref={index === 0 ? categoryItemRef : null}
-                      className={`category-circle ${
-                        cat.value === selectedCategory ? "active" : ""
-                      }`}
-                      onClick={() => setSelectedCategory(cat.value)}
-                    >
-                      <img
-                        src={
-                          cat.img || "/comms-assets/placeholder-category.png"
-                        }
-                        alt={cat.label}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src =
-                            "/comms-assets/placeholder-category.png";
-                        }}
-                        className="category-icon"
-                        style={{
-                          paddingBottom: cat.bottom || "0px",
-                          paddingLeft: cat.left || "0px",
-                          marginBottom: cat.margin_bottom || "0px",
-                        }}
-                      />
-                    </button>
-                  ))}
-                </div>
-
-                {showArrows && (
-                  <button
-                    className={`scroll-button ${
-                      !showRightFade ? "hidden" : ""
-                    }`}
-                    onClick={() => scrollCategories("right")}
-                    aria-label="Scroll categories right"
-                  >
-                    <FaChevronRight className="arrow-icon" />
-                  </button>
-                )}
-              </div>
-            </div>
+            <CategoryScroller
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
           </div>
         </Banner>
       </div>

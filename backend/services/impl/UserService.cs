@@ -115,7 +115,46 @@ public class UserService(IUserRepository userRepository)
         return user;
     }
 
-    public async Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false)
+    // public async Task<User?> GetUserByFacebookIdAsync(string facebookId)
+    // {
+    //     return await userRepository.GetByFacebookIdAsync(facebookId);
+    // }
+
+    // public async Task<User> RegisterFacebookUserAsync(string facebookId, string name, string? profilePicture = null)
+    // {
+    //     // Check if Facebook user already exists
+    //     var existingFacebookUser = await GetUserByFacebookIdAsync(facebookId);
+    //     if (existingFacebookUser != null)
+    //     {
+    //         throw new InvalidOperationException("Facebook user already exists");
+    //     }
+
+    //     // Generate unique username if name is taken
+    //     var baseUsername = name.Replace(" ", "").ToLower();
+    //     var username = baseUsername;
+    //     var counter = 1;
+
+    //     while (await GetUserByUsernameAsync(username) != null)
+    //     {
+    //         username = $"{baseUsername}{counter}";
+    //         counter++;
+    //     }
+
+    //     var user = new User
+    //     {
+    //         UserName = username,
+    //         FacebookId = facebookId,
+    //         Email = null, // Facebook users might not have email
+    //         PasswordHash = null, // No password for social login
+    //         FirstName = name,
+    //         ProfilePicture = profilePicture
+    //     };
+
+    //     await userRepository.AddAsync(user);
+    //     return user;
+    // }
+
+    public async Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false, string? profilePicture = null) //  bool isFacebookUser = false, string? firstName = null
     {
         var existingUser = await userRepository.GetByUsernameAsync(username);
         if (existingUser != null)
@@ -144,11 +183,17 @@ public class UserService(IUserRepository userRepository)
             UserName = username,
             PasswordHash = passwordHash,
             Email = email,
+            ProfilePicture = profilePicture, // Save the profile picture URL
+            //FirstName = firstName, // Save the first name from Google
+            IsGoogleUser = isGoogleUser, // NEW
+            CreatedAt = DateTime.UtcNow
         };
 
         await userRepository.AddAsync(user);
         return user;
     }
+
+
 
     // private string HashPassword(string password)
     // {
@@ -214,5 +259,80 @@ public class UserService(IUserRepository userRepository)
             await userRepository.UpdateAsync(user);
         }
     }
+
+        // Password Management Methods
+    // public async Task SetPasswordResetTokenAsync(string userId, string token, DateTime expiry)
+    // {
+    //     var user = await userRepository.GetByIdAsync(userId);
+    //     if (user == null)
+    //     {
+    //         throw new KeyNotFoundException("User not found");
+    //     }
+
+    //     user.PasswordResetToken = token;
+    //     user.PasswordResetTokenExpiry = expiry;
+    //     user.UpdatedAt = DateTime.UtcNow;
+
+    //     await userRepository.UpdateAsync(user);
+    // }
+
+    // public async Task<bool> VerifyPasswordResetTokenAsync(string userId, string token)
+    // {
+    //     var user = await userRepository.GetByIdAsync(userId);
+    //     if (user == null)
+    //     {
+    //         return false;
+    //     }
+
+    //     // Check if token matches and is not expired
+    //     return user.PasswordResetToken == token && 
+    //            user.PasswordResetTokenExpiry.HasValue && 
+    //            user.PasswordResetTokenExpiry.Value > DateTime.UtcNow;
+    // }
+
+    // public async Task ClearPasswordResetTokenAsync(string userId)
+    // {
+    //     var user = await userRepository.GetByIdAsync(userId);
+    //     if (user == null)
+    //     {
+    //         throw new KeyNotFoundException("User not found");
+    //     }
+
+    //     user.PasswordResetToken = null;
+    //     user.PasswordResetTokenExpiry = null;
+    //     user.UpdatedAt = DateTime.UtcNow;
+
+    //     await userRepository.UpdateAsync(user);
+    // }
+
+    // public async Task UpdatePasswordAsync(string userId, string newPassword)
+    // {
+    //     var user = await userRepository.GetByIdAsync(userId);
+    //     if (user == null)
+    //     {
+    //         throw new KeyNotFoundException("User not found");
+    //     }
+
+    //     if (user.IsGoogleUser)
+    //     {
+    //         throw new InvalidOperationException("Cannot update password for Google users");
+    //     }
+
+    //     user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+    //     user.UpdatedAt = DateTime.UtcNow;
+
+    //     await userRepository.UpdateAsync(user);
+    // }
+
+    // public async Task<bool> VerifyPasswordAsync(string userId, string password)
+    // {
+    //     var user = await userRepository.GetByIdAsync(userId);
+    //     if (user == null || string.IsNullOrEmpty(user.PasswordHash))
+    //     {
+    //         return false;
+    //     }
+
+    //     return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+    // }
 
 }

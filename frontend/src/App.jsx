@@ -25,6 +25,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import ParentPage from "./pages/ParentPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+import ProfileEditor from "./components/ProfileEditor.jsx";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -50,6 +51,10 @@ function InnerApp() {
         <Route path="/connect" element={<ConnectingGame />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
+
+        <Route path="/profile" element={<ProfileEditor />} />
+        <Route path="/profile/edit" element={<ProfileEditor />} />
+
         {/* <Route path="*" element={<div>404 - Page Not Found</div>} /> */}
 
         <Route

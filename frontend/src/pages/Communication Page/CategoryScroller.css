@@ -1,0 +1,338 @@
+
+/* ==== CATEGORY BAR ==== */
+.category-scroller-wrapper {
+  position: relative;
+}
+
+.category-background-bar {
+  position: fixed;
+  top: 390px;
+  left: 0;
+  right: 0;
+  height: 47px;
+  background: #4766a0;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+}
+
+.category-scroller-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==== SCROLL BUTTONS ==== */
+.scroll-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  z-index: 2;
+  opacity: 1;
+}
+
+.scroll-button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-button .arrow-icon {
+  color: #272f38;
+  font-size: 24px;
+  transition: transform 0.2s;
+}
+
+.scroll-button:hover .arrow-icon {
+  transform: scale(1.2);
+}
+
+/* ==== CATEGORY BUTTONS ==== */
+.category-buttons {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: clamp(16px, 2vw, 32px);
+  padding: 10px 40px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  justify-content: flex-start;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
+}
+
+.category-buttons::-webkit-scrollbar {
+  display: none;
+}
+
+.category-circle {
+  width: 75px;
+  height: 75px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 2px solid #b0c8e4;
+  background-color: #b0c8e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.category-circle.active {
+  border-color: #4766a0;
+  background-color: #e4edf7;
+}
+
+.category-circle:hover {
+  transform: scale(1.05);
+}
+
+/* ==== CATEGORY CARDS ==== */
+.category-card-rectangle {
+  height: 100%;
+  position: relative;
+  display: grid;
+  width: 100%;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 16px 80px 12px 80px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  overflow-y: auto;
+}
+
+.category-card {
+  background: white;
+  max-height: 212px;
+  border: 3px solid #4766a054;
+  border-radius: 20px;
+  padding: 16px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.03);
+}
+
+.category-card img {
+  width: 100%;
+  max-height: 150px;
+  padding: 8px;
+  object-fit: contain;
+}
+
+.category-card div {
+  font-weight: bold;
+  color: #555;
+  font-size: 16px;
+  text-align: center;
+}
+
+
+/* ==== ICONS ==== */
+.category-icon {
+  width: 100%;
+  height: 50px;
+  object-fit: cover;
+  align-items: center;
+  display: block;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* ==== SCROLL FADING ==== */
+.scroll-fade-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.fade-top-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to bottom, #4766a093, transparent);
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+
+@media (max-width: 1024px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 20px 30px;
+  }
+}
+
+@media (max-width: 750px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    padding: 20px 20px;
+  }
+  .aac-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .slots-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .slots {
+    margin-left: -87px !important;
+    margin-right: 0 !important;
+    width: 100vw !important;
+    border-radius: 0;
+    padding: 20px 10px;
+  }
+
+  .icon-button {
+    /* margin-left: 100px; */
+    width: 60px;
+  }
+
+  .icon-button img {
+    margin: 0;
+    margin-bottom: 7px;
+    width: 43px;
+    height: 43px;
+    padding: 0;
+  }
+
+  .slots-buttons-row {
+    order: -1;
+    /* margin-right: 0 !important; */
+    justify-content: center;
+    display: flex;
+    gap: 0px;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    flex-direction: row;
+    margin-left: clamp(205px, 40vw, 600px);
+    /* margin-bottom: 15px; */
+    /* padding: 0 10px; */
+  }
+
+  .slots-controls {
+    margin-top: -40px;
+    margin-bottom: 20px;
+  }
+  
+  /* .banner.communication-banner {
+    padding: 8rem 2rem 0rem 2rem;
+  } */
+
+  .category-buttons {
+    padding: 10px 0; /* No horizontal padding */
+    margin: 0 10px; /* Use margin instead for some spacing from edges */
+    justify-content: flex-start;
+  }
+
+  .slots-buttons-row {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    padding: 0px 0;
+    /* margin-left: -24px;
+    margin-right: -24px; */
+    margin-bottom: -10px;
+  }
+
+  .icon-button {
+    flex: 1;
+    background-image: url("/comms-assets/back_btn.png");
+    /* font-size: 14px; */
+  }
+
+  .category-background-bar {
+    position: fixed;
+    top: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card-rectangle {
+    padding: 10px 10px;
+  }
+
+  .category-buttons {
+    padding: 10px 0; /* No horizontal padding */
+    margin: 0 10px; /* Use margin instead for some spacing from edges */
+    justify-content: flex-start;
+  }
+
+  .scroll-button {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .category-buttons {
+    /* Conditionally apply centering - will be controlled by JavaScript */
+    mask-image: none;
+    -webkit-mask-image: none;
+    padding: 10px 20px;
+    gap: clamp(20px, 3vw, 40px); /* Increased gap for more space */
+  }
+
+  /* Add a class for when content should be centered */
+  .category-buttons.centered {
+    justify-content: center;
+  }
+
+  .category-buttons.scrollable {
+    justify-content: flex-start;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 40px,
+      black calc(100% - 40px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 40px,
+      black calc(100% - 40px),
+      transparent 100%
+    );
+    padding: 10px 40px;
+  }
+}

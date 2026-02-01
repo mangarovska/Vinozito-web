@@ -6,8 +6,9 @@ const Padlock = ({ clickCount, handleClick, isUnlocked }) => {
     <StyledWrapper>
       <div>
         <input id="inpLock" type="checkbox" checked={isUnlocked} readOnly />
-        <label className="btn-lock" htmlFor="inpLock" onClick={handleClick}>
-          <svg width={26} height={26} viewBox="0 0 36 40">
+        <label className="btn-lock" htmlFor="inpLock" onClick={handleClick}  aria-label={isUnlocked ? "Unlock" : "Lock"}>
+          <svg width={26} height={26} viewBox="0 0 36 40" aria-hidden="true"
+    focusable="false">
             <path
               className="lockb"
               d="M27 27C27 34.1797 21.1797 40 14 40C6.8203 40 1 34.1797 1 27C1 19.8203 6.8203 14 14 14C21.1797 14 27 19.8203 27 27ZM15.6298 26.5191C16.4544 25.9845 17 25.056 17 24C17 22.3431 15.6569 21 14 21C12.3431 21 11 22.3431 11 24C11 25.056 11.5456 25.9845 12.3702 26.5191L11 32H17L15.6298 26.5191Z"
@@ -80,7 +81,7 @@ const StyledWrapper = styled.div`
   }
 
   #inpLock:checked + label {
-    background:rgb(102, 110, 128); // rgb(245, 85, 106)
+    background: rgb(102, 110, 128); // rgb(245, 85, 106)
   }
 
   #inpLock:checked + label svg .bling {

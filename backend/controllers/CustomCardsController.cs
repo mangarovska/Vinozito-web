@@ -151,8 +151,9 @@ public class CustomCardController(ICustomCardService customCardService) : Contro
         }
     }
 }
-
-public class CreateCustomCardDto // so internal data structure is not exposed
+// input DTOs that represent what the frontend is allowed to send when creating/updating
+// so internal data structure is not exposed -> what frontend (is allowed to) sends
+public class CreateCustomCardDto // all required fields when creating a card
 {
     public required string DefaultCardId { get; set; }
     public required string VoiceAudio { get; set; }
@@ -161,7 +162,7 @@ public class CreateCustomCardDto // so internal data structure is not exposed
     public string? Image { get; set; }
 }
 
-public class UpdateCustomCardDto
+public class UpdateCustomCardDto // optional fields when updating an existing card
 {
     public string? Title { get; set; }
     public string? VoiceAudio { get; set; }

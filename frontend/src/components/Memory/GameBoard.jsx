@@ -20,10 +20,39 @@ const playSound = (audioRef) => {
   audioRef.current.play();
 };
 
+// const shuffled = () => {
+//   const pairs = [...CARD_VALUES, ...CARD_VALUES];
+//   return pairs.sort(() => Math.random() - 0.5);
+// };
+
+const DEMO_MODE = true;
+
 const shuffled = () => {
   const pairs = [...CARD_VALUES, ...CARD_VALUES];
+
+  if (DEMO_MODE) {
+    return [
+      "/memory-assets/cards/solar.png",   // Row 1
+      "/memory-assets/cards/solar.png",
+      "/memory-assets/cards/rocket.png",
+      "/memory-assets/cards/astro.png",
+
+      "/memory-assets/cards/star.png",    // Row 2 (comet = star)
+      "/memory-assets/cards/planet.png",
+      "/memory-assets/cards/astro.png",
+      "/memory-assets/cards/earth.png",
+
+      "/memory-assets/cards/planet.png",  // Row 3
+      "/memory-assets/cards/star.png",
+      "/memory-assets/cards/rocket.png",
+      "/memory-assets/cards/earth.png",
+    ];
+  }
+
+  // normal random shuffle
   return pairs.sort(() => Math.random() - 0.5);
 };
+
 
 const WinAnimation = () => {
   // memoize once when component mounts

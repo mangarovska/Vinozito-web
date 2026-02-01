@@ -870,11 +870,15 @@ export default function ColoringCanvas() {
                     width: `${size}px`,
                     height: `${size}px`,
                     backgroundColor: selectedColor,
+                    // borderColor: "lightgrey",
+                    // borderWidth: "1px",
+                    // borderStyle: "solid",
                     borderRadius: "50%",
                     position: "absolute",
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
+                    boxShadow: "0 0 8px rgba(0, 0, 0, 0.15)" 
                   }}
                 />
               </button>

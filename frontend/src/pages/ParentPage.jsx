@@ -1,8 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaChevronLeft, FaChevronRight, FaPlus } from "react-icons/fa"; // Import FaPlus
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPlus,
+  FaTimes,
+  FaImage,
+  FaUndo,
+  FaMicrophone,
+  FaCloudUploadAlt,
+  FaEdit,
+} from "react-icons/fa";
 import { categories } from "../data";
 import "./ParentPage.css";
 import VoiceRecorder from "./VoiceRecorder";
+import CategoryScroller from "../pages/Communication Page/CategoryScroller";
 
 export default function ParentPage() {
   const [allCards, setAllCards] = useState([]);
@@ -13,7 +24,12 @@ export default function ParentPage() {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  const [activeCategory, setActiveCategory] = useState(
+    categories.length > 0 ? categories[0].value : null
+  );
+
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(true);
   const [showArrows, setShowArrows] = useState(false);
@@ -22,6 +38,7 @@ export default function ParentPage() {
   const token = localStorage.getItem("token");
   const categoriesRef = useRef(null);
   const categoryItemRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const checkScrollPosition = () => {
     if (categoriesRef.current) {
@@ -64,10 +81,15 @@ export default function ParentPage() {
       console.log("Fetching cards for user:", userId);
 
       const [defaultRes, customRes] = await Promise.all([
-        fetch("http://localhost:5100/api/DefaultCard", { headers }),
-        fetch(`http://localhost:5100/api/CustomCard/user/${userId}`, {
+        fetch("https://api.mangaserver.ddnsfree.com/api/DefaultCard", {
           headers,
         }),
+        fetch(
+          `https://api.mangaserver.ddnsfree.com/api/CustomCard/user/${userId}`,
+          {
+            headers,
+          }
+        ),
       ]);
 
       console.log("Default cards response:", defaultRes.status);
@@ -121,7 +143,7 @@ export default function ParentPage() {
               };
         }),
 
-        // NEW: Include any custom cards that don't map to a default card
+        // Include any custom cards that don't map to a default card
         ...customCards
           .filter((card) => !card.defaultCardId || card.defaultCardId === "new")
           .map((customCard) => ({
@@ -131,7 +153,7 @@ export default function ParentPage() {
             title: customCard.title,
             audioVoice: customCard.voiceAudio,
             image: customCard.image,
-            category: activeCategory || "Uncategorized", // or read category from form
+            category: activeCategory || "Uncategorized",
             cardType: "Custom",
           })),
       ];
@@ -165,9 +187,36 @@ export default function ParentPage() {
 
   const handleEdit = (card) => {
     setEditingCard(card);
-    setUpdatedTitle(card.title || card.name); // use title first, fallback to name
+    setUpdatedTitle(card.title || card.name);
     setNewImageFile(null);
     setNewAudioFile(null);
+  };
+
+  // Handle drag and drop
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files[0] && files[0].type.startsWith("image/")) {
+      setNewImageFile(files[0]);
+    }
+  };
+
+  const handleImageFileSelect = (file) => {
+    if (file && file.type.startsWith("image/")) {
+      setNewImageFile(file);
+    }
   };
 
   const uploadFile = async (file, type) => {
@@ -175,10 +224,10 @@ export default function ParentPage() {
       console.log(`Starting ${type} upload for file:`, file.name);
 
       const formData = new FormData();
-      formData.append("file", file); // single file for ASP.NET controller
+      formData.append("file", file);
 
       const endpoint = type === "image" ? "/upload/image" : "/upload/audio";
-      const uploadUrl = `http://localhost:5100/api${endpoint}?userId=${userId}`;
+      const uploadUrl = `https://api.mangaserver.ddnsfree.com/api${endpoint}?userId=${userId}`;
 
       console.log(`Uploading to: ${uploadUrl}`);
 
@@ -202,13 +251,11 @@ export default function ParentPage() {
 
       const result = await response.json();
       console.log(`Upload result:`, result);
-      console.log(`Upload result URL:`, result.url);
-      console.log(`Upload result message:`, result.message);
 
       if (
-        result &&
-        result.url &&
-        result.url !== "http://mangaserver.ddnsfree.com:5001"
+        result
+        // result.url &&
+        // result.url !== "https://uploader.mangaserver.ddnsfree.com" //https://mangaserver.ddnsfree.com:5001
       ) {
         console.log(`Upload successful: ${result.url}`);
         return result.url;
@@ -241,66 +288,71 @@ export default function ParentPage() {
 
       // upload new image if selected
       if (newImageFile) {
-        console.log("Uploading new image...");
         newImageUrl = await uploadFile(newImageFile, "image");
-        console.log("Image uploaded to:", newImageUrl);
       }
 
       // upload new audio if selected
       if (newAudioFile) {
-        console.log("Uploading new audio...");
         newAudioUrl = await uploadFile(newAudioFile, "audio");
-        console.log("Audio uploaded to:", newAudioUrl);
       }
 
       let response;
-      const isCustom = editingCard.cardType === "Custom";
 
-      if (isCustom) {
-        // update existing custom card
+      // Case 1: brand new card
+      if (editingCard.cardType === "New") {
+        const createData = {
+          defaultCardId: null,
+          title: updatedTitle,
+          voiceAudio: newAudioUrl,
+          image: newImageUrl,
+          userId,
+          category: activeCategory,
+        };
+
+        console.log("Creating brand new custom card:", createData);
+
+        response = await fetch(
+          `https://api.mangaserver.ddnsfree.com/api/CustomCard`,
+          {
+            method: "POST",
+            headers,
+            body: JSON.stringify(createData),
+          }
+        );
+      }
+      // Case 2: editing an existing custom card
+      else if (editingCard.cardType === "Custom") {
         const updateData = {
           title: updatedTitle,
           voiceAudio: newAudioUrl,
           image: newImageUrl,
         };
 
-        console.log(
-          "Updating existing custom card:",
-          editingCard.id,
-          updateData
-        );
-
         response = await fetch(
-          `http://localhost:5100/api/CustomCard/${editingCard.id}`,
+          `https://api.mangaserver.ddnsfree.com/api/CustomCard/${editingCard.id}`,
           {
             method: "PUT",
             headers,
             body: JSON.stringify(updateData),
           }
         );
-      } else {
-        // check if a custom card already exists for this default card
+      }
+      // Case 3: editing a default card
+      else {
         const existingCustomCard = allCards.find(
           (card) =>
             card.cardType === "Custom" && card.defaultCardId === editingCard.id
         );
 
         if (existingCustomCard) {
-          // update the existing custom card instead of creating a new one
           const updateData = {
             title: updatedTitle,
             voiceAudio: newAudioUrl,
             image: newImageUrl,
           };
 
-          console.log(
-            "Updating existing custom card found:",
-            existingCustomCard.id,
-            updateData
-          );
-
           response = await fetch(
-            `http://localhost:5100/api/CustomCard/${existingCustomCard.id}`,
+            `https://api.mangaserver.ddnsfree.com/api/CustomCard/${existingCustomCard.id}`,
             {
               method: "PUT",
               headers,
@@ -308,43 +360,35 @@ export default function ParentPage() {
             }
           );
         } else {
-          // create new custom card from default card
           const createData = {
-            defaultCardId: editingCard.id, // default card ID
+            defaultCardId: editingCard.id,
             title: updatedTitle,
             voiceAudio: newAudioUrl,
             image: newImageUrl,
-            userId: userId,
+            userId,
             category: editingCard.category,
           };
 
-          console.log("Creating new custom card:", createData);
-
-          response = await fetch(`http://localhost:5100/api/CustomCard`, {
-            method: "POST",
-            headers,
-            body: JSON.stringify(createData),
-          });
+          response = await fetch(
+            `https://api.mangaserver.ddnsfree.com/api/CustomCard`,
+            {
+              method: "POST",
+              headers,
+              body: JSON.stringify(createData),
+            }
+          );
         }
       }
 
-      console.log("Response status:", response.status);
-      console.log("Response ok:", response.ok);
-
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Server response:", errorText);
         throw new Error(`Request failed: ${response.status} - ${errorText}`);
       }
 
       const result = await response.json();
       console.log("Save successful:", result);
 
-      // refresh the cards after successful save
-      console.log("Refreshing cards...");
       await fetchAllCards();
-      console.log("Cards refreshed successfully");
-
       setEditingCard(null);
       alert("Card saved successfully!");
     } catch (err) {
@@ -377,7 +421,7 @@ export default function ParentPage() {
       console.log("Reverting custom card with ID:", card.id);
 
       const response = await fetch(
-        `http://localhost:5100/api/CustomCard/${card.id}`,
+        `https://api.mangaserver.ddnsfree.com/api/CustomCard/${card.id}`,
         {
           method: "DELETE",
           headers,
@@ -389,7 +433,6 @@ export default function ParentPage() {
         throw new Error(`Revert failed: ${response.status} - ${errorText}`);
       }
 
-      // refresh all cards after deletion
       await fetchAllCards();
       alert("Card reverted to default successfully!");
     } catch (err) {
@@ -398,10 +441,7 @@ export default function ParentPage() {
     }
   };
 
-  // handles adding a new card
   const handleAddNewCard = () => {
-    // TODO: add new card logic
-    // dummy code
     setEditingCard({
       id: "new",
       cardType: "New",
@@ -444,68 +484,18 @@ export default function ParentPage() {
 
   return (
     <div className="aac-page parent-page">
-      <div className="fixed-top-container pt-15">
-        <div className="communication-top-parent">
-          <div className="category-scroller-wrapper-parent">
-            <div className="category-background-bar-parent" />
-            <div className="category-scroller-container-parent">
-              {showArrows && (
-                <button
-                  className={`scroll-button ${!showLeftFade ? "hidden" : ""}`}
-                  onClick={() => scrollCategories("left")}
-                  aria-label="Scroll categories left"
-                >
-                  <FaChevronLeft className="arrow-icon" />
-                </button>
-              )}
-              <div className="category-buttons-parent" ref={categoriesRef}>
-                {categories.map((cat, index) => (
-                  <button
-                    key={cat.value || index}
-                    ref={index === 0 ? categoryItemRef : null}
-                    className={`category-circle ${
-                      cat.value === activeCategory ? "active" : ""
-                    }`}
-                    onClick={() => setActiveCategory(cat.value)}
-                    aria-label={`Select category ${cat.label}`}
-                  >
-                    <img
-                      src={cat.img || "/comms-assets/placeholder-category.png"}
-                      alt={cat.label}
-                      className="category-icon"
-                      style={{
-                        paddingBottom: cat.bottom || "0px",
-                        paddingLeft: cat.left || "0px",
-                        marginBottom: cat.margin_bottom || "0px",
-                      }}
-                    />
-                  </button>
-                ))}
-              </div>
-              {showArrows && (
-                <button
-                  className={`scroll-button-parent ${
-                    !showRightFade ? "hidden" : ""
-                  }`}
-                  onClick={() => scrollCategories("right")}
-                  aria-label="Scroll categories right"
-                >
-                  <FaChevronRight className="arrow-icon" />
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
+      <div className="fixed-top-container pt-25">
+        <CategoryScroller
+          categories={categories}
+          selectedCategory={activeCategory}
+          setSelectedCategory={(value) => setActiveCategory(value)}
+          barStyle={{ top: "148px" }}
+        />
       </div>
 
       <div className="aac-container-parent">
         {activeCategory && (
           <div className="category-view">
-            {/* <div className="category-header">
-              <h2 className="category-title">
-                {categories.find((c) => c.value === activeCategory)?.label} Картички
-              </h2>
-            </div> */}
             <div className="cards-scroll-container">
               <div className="parent-card-grid">
                 {filteredCards.map((card) => {
@@ -545,14 +535,13 @@ export default function ParentPage() {
                             className="revert-btn"
                             onClick={() => revertToDefault(card)}
                           >
-                            Врати
+                            <FaUndo />
                           </button>
                         )}
                       </div>
                     </div>
                   );
                 })}
-                {/* ADD NEW CARD */}
                 <button className="add-card-button" onClick={handleAddNewCard}>
                   <div className="add-card-content">
                     <FaPlus className="plus-icon" />
@@ -567,129 +556,145 @@ export default function ParentPage() {
 
       {editingCard && (
         <div className="modal-overlay" onClick={() => setEditingCard(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* <h2>
-              {editingCard.cardType === "New"
-                ? "Креирај нова картичка"
-                : `Подеси картичка: ${editingCard.name}`}
-            </h2> */}
-
-            <div className="form-group">
-              <label htmlFor="card-title">Име:</label>
-              <input
-                id="card-title"
-                type="text"
-                value={updatedTitle}
-                onChange={(e) => setUpdatedTitle(e.target.value)}
-                placeholder="Внесете име на картичка"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="card-image-upload">Слика:</label>
-              <input
-                id="card-image-upload"
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    setNewImageFile(e.target.files[0]);
-                  }
-                }}
-              />
-              <div className="file-previews-container">
-                {newImageFile && (
-                  <div className="file-preview">
-                    <p>Нова слика:</p>
-                    <img
-                      src={URL.createObjectURL(newImageFile)}
-                      alt="Preview"
-                      className="preview-image"
-                    />
-                  </div>
-                )}
-                {editingCard.image &&
-                  !newImageFile && ( 
-                    <div className="current-file">
-                      {/* <p>Тековна слика:</p> */}
-                      <img
-                        src={editingCard.image}
-                        alt="Current"
-                        className="current-image"
-                      />
-                    </div>
-                  )}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="card-audio-upload">Аудио:</label>
-              {/* <input
-                id="card-audio-upload" // Changed ID to avoid conflict
-                type="file"
-                accept="audio/*"
-                onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    setNewAudioFile(e.target.files[0]);
-                  }
-                }}
-              /> */}
-              <div className="file-previews-container">
-                {newAudioFile && (
-                  <div className="file-preview">
-                    {/* <p>Ново аудио:</p> */}
-                    <audio controls>
-                      <source
-                        src={URL.createObjectURL(newAudioFile)}
-                        type={newAudioFile.type}
-                      />
-                      Your browser does not support the audio element.
-                    </audio>
-                  </div>
-                )}
-                {editingCard.audioVoice &&
-                  !newAudioFile && (
-                    <div className="current-file">
-                      {/* <p>Тековно аудио:</p> */}
-                      <audio controls>
-                        <source
-                          src={editingCard.audioVoice}
-                          type="audio/mpeg"
-                        />
-                        Your browser does not support the audio element.
-                      </audio>
-                    </div>
-                  )}
-              </div>
-
-              {/* Voice Recorder */}
-              <div className="voice-recorder-section">
-                <VoiceRecorder
-                  onRecordingComplete={(recordedFile) => {
-                    console.log("Recorded file name:", recordedFile.name);
-                    setNewAudioFile(recordedFile);
-                  }}
-                  cardTitle={
-                    updatedTitle || editingCard.name || editingCard.title
-                  }
+          <div
+            className="modal-content-card compact-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-body">
+              {/* Title Input */}
+              <div className="form-group">
+                <div className="card-title">
+                  <h3>Име:</h3>
+                </div>
+                <input
+                  type="text"
+                  value={updatedTitle}
+                  onChange={(e) => setUpdatedTitle(e.target.value)}
+                  placeholder="Внесете име на картичка"
+                  className="title-input mt-1"
                 />
               </div>
+
+              <div className="edit-sections-grid">
+                {/* Image Section */}
+                <div className="card-title mt-3">
+                  <h3>Слика:</h3>
+                </div>
+                <div className="edit-section">
+                  <div className="image-preview-container">
+                    {/* Always show image preview */}
+                    <div className="current-image-preview">
+                      <img
+                        src={
+                          newImageFile
+                            ? URL.createObjectURL(newImageFile)
+                            : editingCard.image ||
+                              "/comms-assets/placeholder.png"
+                        }
+                        alt="Preview"
+                        className="preview-image"
+                      />
+                      {(newImageFile ||
+                        (editingCard.image &&
+                          editingCard.image !==
+                            "/comms-assets/placeholder.png")) && (
+                        <div className="image-overlay">
+                          <button
+                            className="overlay-btn revert"
+                            onClick={() => setNewImageFile(null)}
+                            disabled={!newImageFile}
+                          >
+                            <FaUndo />
+                            {/* Врати */}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Always show upload zone below preview */}
+                    <div
+                      className={`image-upload-zone ${
+                        dragOver ? "drag-over" : ""
+                      }`}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      <div className="upload-icon"></div>
+                      <p className="upload-text">
+                        Повлечи слика овде, или{" "}
+                        <span className="upload-browse">пребарај</span>
+                      </p>
+                      <p className="upload-subtext">
+                        Поддржува: JPG, JPEG, PNG
+                      </p>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            handleImageFileSelect(e.target.files[0]);
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Audio Section */}
+                <div className="card-title mt-3">
+                  <h3>Аудио:</h3>
+                </div>
+                <div className="edit-section">
+                  <div className="audio-controls">
+                    {!newAudioFile && editingCard.audioVoice && (
+                      <div className="current-audio">
+                        <audio controls className="audio-player">
+                          <source
+                            src={editingCard.audioVoice}
+                            type="audio/mpeg"
+                          />
+                          Вашиот прелистувач не поддржува аудио елемент.
+                        </audio>
+                      </div>
+                    )}
+
+                    <div className="voice-recorder-section">
+                      <VoiceRecorder
+                        onRecordingComplete={(recordedFile) => {
+                          console.log("Recorded file name:", recordedFile.name);
+                          setNewAudioFile(recordedFile);
+                        }}
+                        cardTitle={
+                          updatedTitle || editingCard.name || editingCard.title
+                        }
+                        existingAudio={editingCard.audioVoice}
+                        newAudioFile={newAudioFile}
+                        onRevertAudio={() => setNewAudioFile(null)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            {/* Modal Footer */}
             <div className="modal-actions">
-              <button
-                className="save-btn"
-                onClick={saveEdit}
-                disabled={uploading}
-              >
-                {uploading ? "Се зачувува..." : "Зачувај"}
-              </button>
               <button
                 className="cancel-btn"
                 onClick={() => setEditingCard(null)}
                 disabled={uploading}
               >
                 Откажи
+              </button>
+              <button
+                className="save-btn"
+                onClick={saveEdit}
+                disabled={uploading || !updatedTitle.trim()}
+              >
+                {uploading ? "Зачувува..." : "Зачувај"}
               </button>
             </div>
           </div>

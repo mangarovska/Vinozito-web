@@ -1,0 +1,62 @@
+/* VoiceRecorder component styles */
+.voice-recorder {
+  margin: 10px 0;
+}
+
+.record-button, .stop-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stop-button {
+  background: #f44336;
+}
+
+.record-button:hover {
+  background: #45a049;
+}
+
+.stop-button:hover {
+  background: #da190b;
+}
+
+.recording-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f44336;
+  font-weight: 500;
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background: #f44336;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}

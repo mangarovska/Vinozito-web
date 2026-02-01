@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Google.Apis.Auth;
 using System.Text.Json;
 using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
+// using Microsoft.Extensions.Caching.Memory;
 
 namespace backend.controllers;
 
@@ -27,15 +27,15 @@ public class AuthController : ControllerBase
 
 
     private readonly IUserService _userService;
-    private readonly IMemoryCache _memoryCache; // to store failed login attempts temporarily
+    // private readonly IMemoryCache _memoryCache; // to store failed login attempts temporarily
     private readonly string _jwtSecret;
     private readonly string _jwtIssuer;
     private readonly string _jwtAudience;
 
-    public AuthController(IUserService userService, IConfiguration configuration, IMemoryCache memoryCache)
+    public AuthController(IUserService userService, IConfiguration configuration) //IMemoryCache memoryCache
     {
         _userService = userService;
-        _memoryCache = memoryCache;
+        // _memoryCache = memoryCache;
         _jwtSecret = configuration["JwtSettings:Secret"]!;
         _jwtIssuer = configuration["JwtSettings:Issuer"]!;
         _jwtAudience = configuration["JwtSettings:Audience"]!;
@@ -57,6 +57,8 @@ public class AuthController : ControllerBase
     [HttpPost("google-login")]
     public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDto dto)
     {
+        Console.WriteLine("🔥 GOOGLE LOGIN METHOD CALLED - NEW VERSION");
+
         if (string.IsNullOrEmpty(dto.AccessToken))
             return BadRequest(new { message = "Missing access token" });
 
@@ -88,28 +90,225 @@ public class AuthController : ControllerBase
         var name = string.IsNullOrEmpty(userInfo.Name) ? email : userInfo.Name;
         var profilePic = userInfo.Picture;
 
+        Console.WriteLine($"📧 Processing email: {email}");
+
+        // SIMPLE USERNAME EXTRACTION - STEP BY STEP
+        Console.WriteLine($"🔍 STEP 1: Original email = '{email}'");
+
+        var emailParts = email.Split('@');
+        Console.WriteLine($"🔍 STEP 2: Split by @, got {emailParts.Length} parts");
+        for (int i = 0; i < emailParts.Length; i++)
+        {
+            Console.WriteLine($"   Part {i}: '{emailParts[i]}'");
+        }
+
+        var usernameFromEmail = emailParts[0];
+        Console.WriteLine($"🔍 STEP 3: Username before @ = '{usernameFromEmail}'");
+
+        // Clean the username (optional - remove dots)
+        // var cleanUsername = usernameFromEmail.Replace(".", "");
+        // Console.WriteLine($"🔍 STEP 4: Clean username (no dots) = '{cleanUsername}'");
+
+        // Make sure it's not too short
+        var finalUsernameToUse = usernameFromEmail.Length >= 3 ? usernameFromEmail : usernameFromEmail;
+        Console.WriteLine($"🔍 STEP 5: Final username to use = '{finalUsernameToUse}'");
+
         var user = await _userService.GetUserByEmailAsync(email);
+        Console.WriteLine($"🔍 User lookup result: {(user == null ? "NO EXISTING USER" : $"FOUND USER: {user.UserName}")}");
 
         if (user == null)
         {
+            Console.WriteLine("✨ CREATING NEW USER");
+
+            // Check if username is available
+            var existingUserWithUsername = await _userService.GetUserByUsernameAsync(finalUsernameToUse);
+            if (existingUserWithUsername != null)
+            {
+                Console.WriteLine($"⚠️  Username '{finalUsernameToUse}' is taken, adding number suffix");
+                finalUsernameToUse = finalUsernameToUse + "1";
+            }
+
+            Console.WriteLine($"🎯 Creating user with final username: '{finalUsernameToUse}'");
+            Console.WriteLine($"🖼️  Will save Google profile picture: '{profilePic ?? "NULL"}'");
+
+            // Create new user with Google profile picture
             user = await _userService.RegisterUserAsync(
-                username: email,
-                password: null, // google users don't have passwords
+                username: finalUsernameToUse,
+                password: null,
                 email: email,
-                isGoogleUser: true
+                isGoogleUser: true,
+                profilePicture: profilePic // Save Google profile picture to database
+                                           //firstName: name
             );
+
+            Console.WriteLine($"✅ NEW USER CREATED:");
+            Console.WriteLine($"   ID: {user.Id}");
+            Console.WriteLine($"   Username: '{user.UserName}'");
+            Console.WriteLine($"   Email: '{user.Email}'");
+            Console.WriteLine($"   ProfilePicture: '{user.ProfilePicture ?? "NULL"}'");
+        }
+        else
+        {
+            Console.WriteLine($"👤 EXISTING USER FOUND: '{user.UserName}'");
+
+            // Check if this user has email as username (old format)
+            if (user.UserName == user.Email)
+            {
+                Console.WriteLine("🔄 UPDATING OLD USER - USERNAME IS EMAIL, NEED TO FIX");
+
+                // Check if the clean username is available
+                var existingUserWithUsername = await _userService.GetUserByUsernameAsync(finalUsernameToUse);
+                if (existingUserWithUsername != null && existingUserWithUsername.Id != user.Id)
+                {
+                    Console.WriteLine($"⚠️  Username '{finalUsernameToUse}' is taken by another user, adding suffix");
+                    finalUsernameToUse = finalUsernameToUse + "1";
+                }
+
+                Console.WriteLine($"📝 UPDATING USERNAME FROM '{user.UserName}' TO '{finalUsernameToUse}'");
+
+                // Update the username
+                user.UserName = finalUsernameToUse;
+                user.UpdatedAt = DateTime.UtcNow;
+
+                try
+                {
+                    await _userService.UpdateUserAsync(user);
+                    Console.WriteLine("✅ USERNAME UPDATE SUCCESS!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ USERNAME UPDATE FAILED: {ex.Message}");
+                }
+            }
+
+            // Update profile picture if needed - but be smart about it
+            if (!string.IsNullOrEmpty(profilePic))
+            {
+                bool shouldUpdateProfilePicture = false;
+                string updateReason = "";
+
+                if (string.IsNullOrEmpty(user.ProfilePicture))
+                {
+                    // User has no profile picture, use Google's
+                    shouldUpdateProfilePicture = true;
+                    updateReason = "User has no profile picture";
+                }
+                else if (user.ProfilePicture.Contains("googleusercontent.com") && user.ProfilePicture != profilePic)
+                {
+                    // User has Google profile picture but it's different (maybe Google updated it)
+                    shouldUpdateProfilePicture = true;
+                    updateReason = "Google profile picture changed";
+                }
+                else if (!user.ProfilePicture.Contains("googleusercontent.com") && !user.ProfilePicture.Contains(user.Id))
+                {
+                    // User might have old Google profile picture, but no custom uploaded picture
+                    // This is a bit tricky to detect, so we'll be conservative and not update
+                    shouldUpdateProfilePicture = false;
+                    updateReason = "User might have custom profile picture, keeping existing";
+                }
+
+                Console.WriteLine($"🖼️  Profile picture update decision:");
+                Console.WriteLine($"   Current DB picture: '{user.ProfilePicture ?? "NULL"}'");
+                Console.WriteLine($"   New Google picture: '{profilePic}'");
+                Console.WriteLine($"   Should update: {shouldUpdateProfilePicture}");
+                Console.WriteLine($"   Reason: {updateReason}");
+
+                if (shouldUpdateProfilePicture)
+                {
+                    Console.WriteLine("🖼️  Updating profile picture from Google");
+                    user.ProfilePicture = profilePic;
+                    user.UpdatedAt = DateTime.UtcNow;
+                    await _userService.UpdateUserAsync(user);
+                }
+            }
         }
 
         var token = GenerateJwtToken(user);
+
+        // Always use the profile picture from database, not from Google API response
+        var profilePictureToReturn = user.ProfilePicture;
+
+        Console.WriteLine($"🖼️  Profile picture decision:");
+        Console.WriteLine($"   Database has: '{user.ProfilePicture ?? "NULL"}'");
+        Console.WriteLine($"   Google API returned: '{profilePic ?? "NULL"}'");
+        Console.WriteLine($"   Will return to client: '{profilePictureToReturn ?? "NULL"}'");
+
+        Console.WriteLine($"🎯 FINAL RESULT: Returning username='{user.UserName}', profilePic='{profilePictureToReturn ?? "NULL"}' to client");
 
         return Ok(new
         {
             token,
             userId = user.Id,
             username = user.UserName,
-            profilePic = profilePic
+            profilePic = profilePictureToReturn // Use database value, not fresh Google API response
         });
     }
+
+    //     [HttpPost("facebook-login")]
+    // public async Task<IActionResult> FacebookLogin([FromBody] FacebookLoginDto dto)
+    // {
+    //     if (string.IsNullOrEmpty(dto.AccessToken))
+    //         return BadRequest(new { message = "Missing access token" });
+
+    //     using var httpClient = new HttpClient();
+
+    //     // Only request public profile data (id, name, picture) - no email
+    //     var response = await httpClient.GetAsync($"https://graph.facebook.com/me?access_token={dto.AccessToken}&fields=id,name,picture");
+
+    //     if (!response.IsSuccessStatusCode)
+    //         return BadRequest(new { message = "Invalid Facebook access token" });
+
+    //     var content = await response.Content.ReadAsStringAsync();
+    //     FacebookUserInfo? userInfo;
+
+    //     try
+    //     {
+    //         userInfo = JsonSerializer.Deserialize<FacebookUserInfo>(
+    //             content,
+    //             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    //     }
+    //     catch (JsonException)
+    //     {
+    //         return BadRequest(new { message = "Invalid JSON from Facebook user info" });
+    //     }
+
+    //     if (userInfo == null || string.IsNullOrEmpty(userInfo.Id))
+    //         return BadRequest(new { message = "User info from Facebook is incomplete" });
+
+    //     // Use Facebook ID as unique identifier instead of email
+    //     var facebookId = userInfo.Id;
+    //     var name = userInfo.Name ?? $"facebook_user_{facebookId}";
+    //     var profilePic = userInfo.Picture?.Data?.Url;
+
+    //     // Check if user exists by Facebook ID (you'll need to add this field to your User model)
+    //     var user = await _userService.GetUserByFacebookIdAsync(facebookId);
+
+    //     if (user == null)
+    //     {
+    //         // Create user with Facebook ID and profile picture
+    //         user = await _userService.RegisterFacebookUserAsync(
+    //             facebookId: facebookId,
+    //             name: name,
+    //             profilePicture: profilePic // Save Facebook profile picture
+    //         );
+    //     }
+    //     else if (user.ProfilePicture != profilePic && !string.IsNullOrEmpty(profilePic))
+    //     {
+    //         // Update existing user's profile picture if it changed
+    //         user.ProfilePicture = profilePic;
+    //         await _userService.UpdateUserAsync(user);
+    //     }
+
+    //     var token = GenerateJwtToken(user);
+
+    //     return Ok(new
+    //     {
+    //         token,
+    //         userId = user.Id,
+    //         username = user.UserName,
+    //         profilePic = profilePic
+    //     });
+    // }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegister)
@@ -203,7 +402,7 @@ public class AuthController : ControllerBase
             issuer: _jwtIssuer,
             audience: _jwtAudience,
             claims: claims,
-            expires: DateTime.UtcNow.AddHours(1),
+            expires: DateTime.UtcNow.AddHours(240),
             signingCredentials: creds
         );
 

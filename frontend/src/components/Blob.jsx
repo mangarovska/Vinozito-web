@@ -208,6 +208,9 @@ const Blob = ({
                 muted
                 playsInline
                 preload="auto"
+                // loop
+                aria-hidden="true"
+                tabIndex={-1}
               />
             ) : (
               <img

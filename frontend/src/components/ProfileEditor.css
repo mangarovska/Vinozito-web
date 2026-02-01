@@ -1,0 +1,1174 @@
+/* ProfileEditor.css */
+
+.profile-editor-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+  padding: 2rem 1rem;
+  padding-top: 7.5rem;
+}
+
+.profile-editor-card {
+  max-width: 42rem;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.main-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+}
+
+.card-content {
+  padding: 2rem;
+}
+
+/* Loading Styles */
+.loading-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid #bfdbfe;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loading-text {
+  color: #64748b;
+  font-size: 1.125rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Message Styles */
+.message-alert {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  border: 1px solid;
+  transition: all 0.3s ease;
+}
+
+.message-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.message-error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+}
+
+.message-icon {
+  margin-right: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.message-success .message-icon {
+  color: #10b981;
+}
+
+.message-error .message-icon {
+  color: #ef4444;
+}
+
+/* Profile Picture Section */
+.profile-picture-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-picture-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-picture-circle {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e3f0ff 0%, #9ac4ff 100%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 4px solid rgb(96, 101, 116);
+}
+
+.profile-image-edit {
+  width: 100%;
+  height: 100%;
+  /* margin-top: 10px; */
+  object-fit: cover;
+}
+
+/* .profile-image-margin {
+margin-top: 15px; 
+} */
+
+.user-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.user-icon.hidden {
+  display: none;
+}
+
+.user-icon svg{
+  height: 3rem;
+  width: 3rem;
+  color: #4a5565;
+}
+
+/* Edit Button - CIRCULAR with PENCIL */
+/* .edit-button {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -0.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: rgb(77, 77, 77);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%);
+  transform: scale(1.05);
+} */
+
+/* Smooth transitions */
+.avatar-button,
+.upload-button,
+.edit-button,
+.save-button,
+.cancel-button {
+  transition: all 0.3s ease;
+}
+
+.profile-picture-container:hover .edit-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edit-button svg {
+  height: 2rem;
+  width: 2rem;
+  color: white;
+}
+
+/* Avatar Selector */
+.avatar-selector {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-radius: 1rem;
+  border: 2px solid #e5e7eb;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.avatar-selector-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.avatar-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.avatar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-button {
+  width: 4rem;
+  height: 4rem;
+  border: 2px solid #d1d5db;
+  overflow: hidden;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  background-color: #f9fafb;
+}
+
+.avatar-button:hover {
+  border-color: #3482ff;
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-button.avatar-selected {
+  border-color: #6d9eff;
+  border-width: 3px;
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar Image - CIRCULAR */
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* margin-top: 5px; */
+  border-radius: 50%;
+  display: block;
+}
+
+.upload-button {
+  width: 4rem;
+  height: 4rem;
+  /* background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); */
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-button:hover {
+  /* background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%); */
+  border-color: #5898fd;
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button svg {
+  height: 2rem;
+  width: 2rem;
+  color: #6b7280;
+}
+
+.upload-input {
+  display: none;
+}
+
+.member-since {
+  margin-top: 1rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-since svg {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+  color: #537cbe;
+}
+
+/* Form Fields */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s ease;
+  outline: none;
+  color: #374151;
+  background-color: #f8fafc;
+  font-size: 1rem;
+}
+
+.field-input:focus {
+  border-color: #2563eb;
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.field-input.field-error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.field-input.field-error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+.error-message svg {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.cancel-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #f3f4f6;
+  color: #374151;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.save-button:focus {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.saving-content {
+  display: flex;
+  align-items: center;
+}
+
+.saving-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+/* Required Note */
+.required-note {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .profile-editor-container {
+    padding: 1rem 0.5rem;
+    padding-top: 6rem;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%;
+  }
+
+  .avatar-options {
+    gap: 0.75rem;
+  }
+
+  .avatar-button,
+  .upload-button {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .upload-button svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+/* Animation keyframes */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal overlay with darker background instead of blur */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Darker semi-transparent background */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeInDark 0.3s ease;
+}
+
+@keyframes fadeInDark {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content-avatar{
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Update avatar options grid - 4 avatars per row, centered */
+.avatar-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Update avatar option positioning for tick badge */
+.avatar-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Add padding to accommodate the protruding tick badge */
+  padding: 5px;
+}
+
+/* Update avatar button styles */
+.avatar-button {
+  width: 4rem;
+  height: 4rem;
+  border: 2px solid #d1d5db;
+  overflow: hidden;
+  background: #f9fafb;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  /* Remove position: relative - tick badge will be positioned relative to .avatar-option */
+}
+
+.avatar-button:hover {
+  border-color: #5898fd;
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-button.avatar-selected {
+  border-color: #10b981; /* Green border for selected */
+  border-width: 3px;
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+.tick-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #10b981; /* Green background */
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy animation */
+  z-index: 10; /* Higher z-index to ensure it's on top */
+  /* box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);  */
+  pointer-events: none; /* Prevent interfering with button clicks */
+}
+
+.tick-badge.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tick-badge svg {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+  stroke-width: 2.5;
+}
+
+/* Close button for modal */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.close-button:hover {
+  background: #e5e7eb;
+}
+
+/* Add these styles to your existing ProfileEditor.css */
+
+/* Security Section */
+.security-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.security-section h3 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.security-section h3::before {
+  content: "🔒";
+  font-size: 1.1rem;
+}
+
+/* Security Items */
+.security-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.security-toggle-button {
+  width: 100%;
+  background: #f7fafc;
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  color: #2d3748;
+  transition: background-color 0.2s ease;
+}
+
+.security-toggle-button:hover {
+  background: #edf2f7;
+}
+
+.security-toggle-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #718096;
+}
+
+/* Danger Section */
+.danger-section {
+  border-color: #fed7d7;
+}
+
+.danger-button {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.danger-button:hover {
+  background: #fbb6ce;
+}
+
+/* Password Form */
+.password-form {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 1;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.password-toggle:hover {
+  background-color: #f7fafc;
+}
+
+.password-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Password Requirements */
+.password-requirements {
+  background-color: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+
+.password-requirements p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 0.5rem 0;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #718096;
+  transition: color 0.2s ease;
+}
+
+.password-requirements li::before {
+  content: "✗";
+  color: #e53e3e;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.password-requirements li.valid {
+  color: #38a169;
+}
+
+.password-requirements li.valid::before {
+  content: "✓";
+  color: #38a169;
+}
+
+/* Delete Account Section */
+.delete-account-section {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #fed7d7;
+}
+
+.warning-box {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.warning-box svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #e53e3e;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.warning-box h4 {
+  color: #c53030;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.warning-box p {
+  color: #742a2a;
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Delete Form */
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.delete-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(229, 62, 62, 0.3);
+}
+
+.delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .security-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  
+  .password-form,
+  .delete-account-section {
+    padding: 1rem;
+  }
+  
+  .warning-box {
+    padding: 0.875rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .warning-box svg {
+    align-self: flex-start;
+  }
+}
+
+/* Security Section */
+.security-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.security-section h3 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.security-section h3::before {
+  content: "🔒";
+  font-size: 1.1rem;
+}
+
+/* Security Items */
+.security-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.security-toggle-button {
+  width: 100%;
+  background: #f7fafc;
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  color: #2d3748;
+  transition: background-color 0.2s ease;
+}
+
+.security-toggle-button:hover {
+  background: #edf2f7;
+}
+
+.security-toggle-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #718096;
+}
+
+/* Danger Section */
+.danger-section {
+  border-color: #fed7d7;
+}
+
+.danger-button {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.danger-button:hover {
+  background: #fbb6ce;
+}
+
+/* Password Form */
+.password-form {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 1;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.password-toggle:hover {
+  background-color: #f7fafc;
+}
+
+.password-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Password Requirements */
+.password-requirements {
+  background-color: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+
+.password-requirements p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 0.5rem 0;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #718096;
+  transition: color 0.2s ease;
+}
+
+.password-requirements li::before {
+  content: "✗";
+  color: #e53e3e;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.password-requirements li.valid {
+  color: #38a169;
+}
+
+.password-requirements li.valid::before {
+  content: "✓";
+  color: #38a169;
+}
+
+/* Delete Account Section */
+.delete-account-section {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #fed7d7;
+}
+
+.warning-box {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.warning-box svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #e53e3e;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.warning-box h4 {
+  color: #c53030;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.warning-box p {
+  color: #742a2a;
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Delete Form */
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.delete-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(229, 62, 62, 0.3);
+}
+
+.delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .security-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  
+  .password-form,
+  .delete-account-section {
+    padding: 1rem;
+  }
+  
+  .warning-box {
+    padding: 0.875rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .warning-box svg {
+    align-self: flex-start;
+  }
+}

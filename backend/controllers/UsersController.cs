@@ -3,8 +3,11 @@ using backend.models;
 using backend.services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using backend.dto;
 
 namespace backend.controllers
+
 {
     [Authorize] // to protect all endpoints in this controller
     // must include a valid JWT or other auth token
@@ -110,6 +113,117 @@ namespace backend.controllers
         }
 
 
+        [HttpGet("profile")]
+        public async Task<ActionResult<object>> GetCurrentUserProfile()
+        {
+            try
+            {
+                // Get current user ID from JWT token
+                var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ??
+                                   User.FindFirst("sub")?.Value;
 
+                if (string.IsNullOrEmpty(currentUserId))
+                {
+                    return Unauthorized(new { message = "User not authenticated" });
+                }
+
+                var user = await _userService.GetUserByIdAsync(currentUserId);
+
+                // Return only safe profile data
+                var profileData = new
+                {
+                    id = user.Id,
+                    userName = user.UserName,
+                    email = user.Email,
+                    firstName = user.FirstName,
+                    lastName = user.LastName,
+                    profilePicture = user.ProfilePicture,
+                    createdAt = user.CreatedAt,
+                    isGoogleUser = user.IsGoogleUser  // NEW
+
+                };
+
+                return Ok(profileData);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error in GetCurrentUserProfile: {ex.Message}");
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        [HttpPut("profile")]
+        public async Task<ActionResult> UpdateCurrentUserProfile([FromBody] ProfileUpdateDto profileDto)
+        {
+            try
+            {
+                // Get current user ID from JWT token
+                var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ??
+                                   User.FindFirst("sub")?.Value;
+
+                if (string.IsNullOrEmpty(currentUserId))
+                {
+                    return Unauthorized(new { message = "User not authenticated" });
+                }
+
+                var user = await _userService.GetUserByIdAsync(currentUserId);
+
+                // Check if username is being changed and if it's available
+                if (!string.IsNullOrEmpty(profileDto.UserName) &&
+                    profileDto.UserName != user.UserName)
+                {
+                    var existingUser = await _userService.GetUserByUsernameAsync(profileDto.UserName);
+                    if (existingUser != null)
+                    {
+                        return BadRequest(new { message = "Username already exists" });
+                    }
+                    user.UserName = profileDto.UserName;
+                }
+
+                // Check if email is being changed and if it's available
+                if (!string.IsNullOrEmpty(profileDto.Email) &&
+                    profileDto.Email != user.Email)
+                {
+                    var existingEmailUser = await _userService.GetUserByEmailAsync(profileDto.Email);
+                    if (existingEmailUser != null)
+                    {
+                        return BadRequest(new { message = "Email already exists" });
+                    }
+                    user.Email = profileDto.Email;
+                }
+
+                // Update profile fields
+                if (profileDto.FirstName != null)
+                    user.FirstName = profileDto.FirstName;
+
+                if (profileDto.LastName != null)
+                    user.LastName = profileDto.LastName;
+
+                // Handle profile picture - accept both URLs and base64
+                if (profileDto.ProfilePicture != null)
+                {
+                    user.ProfilePicture = profileDto.ProfilePicture;
+                }
+
+                user.UpdatedAt = DateTime.UtcNow;
+
+                await _userService.UpdateUserAsync(user);
+
+                return Ok(new { message = "Profile updated successfully" });
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

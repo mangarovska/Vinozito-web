@@ -11,7 +11,8 @@ namespace backend.interfaces
         Task DeleteAsync(string id);
         Task<User> GetByUsernameAsync(string username);
         Task<User?> GetByEmailAsync(string email); // neew
-
+        
+        // Task<User?> GetByFacebookIdAsync(string facebookId); // new
         //Task<IEnumerable<CustomCard>> GetCustomCardsAsync(string id);
     }
 }

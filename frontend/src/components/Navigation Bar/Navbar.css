@@ -1,13 +1,3 @@
-body {
-  font-family: "Rubik", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  padding-top: 60px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  /* scrollbar-gutter: stable; */
-}
-
 html {
   overflow-y: scroll; /* ensure scrollbar is part of layout flow */
 }
@@ -102,11 +92,12 @@ html {
 .navbar-links li {
   display: flex;
   align-items: center;
+  justify-content: center;
+  align-self: center;
   height: 100%;
   margin-right: 10px;
   /* padding: 0 10px; */
 }
-
 
 .navbar-links a {
   color: #353535;
@@ -135,7 +126,7 @@ html {
 .login-button.with-padlock {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
 }
 
 .navbar-links .login-button a:hover {
@@ -228,6 +219,7 @@ html {
   font-size: 13px;
   white-space: nowrap;
   pointer-events: none;
+  z-index: 1001; /* Ensure it appears above other elements */
 }
 
 .padlock-message.persistent {
@@ -261,20 +253,6 @@ html {
   user-select: none;
 }
 
-.lock-wrapper {
-  display: flex;
-  align-items: center;
-  padding-left: 9px;
-  background-color: rgba(72, 74, 95, 0.07);
-  border-radius:25px; /* TL: full round, TR: 100px, BR: 100px, BL: full round */
-  height: 100%;
-}
-
-.lock-wrapper:hover {
-  background-color: rgba(55, 56, 70, 0.1)
-  /* border-color: rgba(72, 74, 95, 0.2); */
-}
-
 .parent-logout-section {
   display: flex;
   align-items: center;
@@ -295,75 +273,237 @@ html {
 .parent-profile {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  /* background-color: #e9f3ff; */
-  padding: 8px 12px;
-  border-radius: 20px;
+  gap: 0.75rem;
+  padding: 0px 12px 0px 0px;
+  /* padding: 6px 10px 6px 6px; */
+  border-radius: 35px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
+.parent-profile:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Clean profile image */
 .profile-image {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 1);
+  background-color: #ffffff;
   object-fit: cover;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.parent-profile:hover .profile-image {
+  transform: scale(1.02);
+}
+
+/* Clean username text */
+.username-text {
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  flex-shrink: 0; /* Prevent text from shrinking */
+  min-width: 0; /* Allow text to be flexible within container */
+}
+
+.parent-profile:hover .username-text {
+  color: #111827;
 }
 
 .dropdown-icon {
-  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+  margin-left: 4px;
+  position: relative;
 }
 
+.dropdown-icon::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
+  border-radius: 0 0 1px 0;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Додајте го ова за ротација кога е отворен dropdown */
+.dropdown-icon.rotated::before {
+  transform: rotate(225deg); /* 45deg + 180deg */
+}
+
+.parent-profile:hover .dropdown-icon {
+  color: #6b7280;
+}
+
+.parent-profile:hover .dropdown-icon::before {
+  transform: rotate(45deg) translateY(-0.5px);
+}
+
+/* За hover кога е ротиран */
+.parent-profile:hover .dropdown-icon.rotated::before {
+  transform: rotate(225deg) translateY(-0.5px);
+}
+
+/* Clean dropdown menu */
 .dropdown-menu {
   position: absolute;
-  top: 110%;
-  right: 2%;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 10px;
-  z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  top: calc(100% + 19px);
+  right: 0;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 6px 0;
+  min-width: 160px;
+  z-index: 1010;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
 }
 
 .dropdown-menu button {
   background: none;
   border: none;
-  padding: 8px;
+  padding: 10px 16px;
   width: 100%;
   text-align: left;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 400;
+  color: #374151;
+  transition: background-color 0.15s ease;
 }
 
-.locked {
-  pointer-events: none;
-  opacity: 0.5;
+.dropdown-menu button:hover {
+  background-color: #f9fafb;
 }
 
-.padlock-user-wrapper {
-  display: flex;
-  align-items: center;
-  position: relative;
+.dropdown-menu button:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
+
+.dropdown-menu button:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-top: 1px solid #f3f4f6;
+  color: #dc2626;
+}
+
+.dropdown-menu button:last-child:hover {
+  background-color: #fef2f2;
+}
+
+/* Clean disabled state */
 .parent-profile.disabled {
   opacity: 0.5;
   pointer-events: none;
   cursor: default;
+  background: #f9fafb;
+  border-color: #e5e7eb;
 }
+
+.parent-profile.disabled .username-text {
+  color: #9ca3af;
+}
+
+.parent-profile.disabled .dropdown-icon {
+  color: #d1d5db;
+}
+
+/* Simplified lock wrapper */
+.lock-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+  /* padding-right: 6px; */
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 28px;
+  height: 52px;
+  width: 99%;
+  transition: background-color 0.2s ease;
+}
+
+.lock-wrapper:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive adjustments */
 @media (max-width: 670px) {
   .username-text {
     display: none;
   }
 
-   .parent-profile {
-    gap: 8px; /* optional: reduce spacing */
+  .parent-profile {
+    gap: 0.5rem;
+    padding: 6px 10px 6px 6px;
   }
 
-  /* .profile-image {
+  .profile-image {
     width: 36px;
     height: 36px;
+  }
+
+  .dropdown-menu {
+    right: -6px;
+    min-width: 140px;
+  }
+
+  .dropdown-menu::before {
+    right: 18px;
+  }
+
+  /* .lock-wrapper {
+    height: 48px;
+    padding-left: 8px;
+    padding-right: 4px;
   } */
+}
+
+@media (max-width: 480px) {
+  .parent-profile {
+    padding: 4px 8px 4px 4px;
+  }
+
+  .profile-image {
+    width: 32px;
+    height: 32px;
+  }
 
   .dropdown-icon {
-    font-size: 12px;
+    font-size: 9px;
   }
+
+  /* .lock-wrapper {
+    height: 44px;
+  } */
 }

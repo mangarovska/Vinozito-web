@@ -5,23 +5,35 @@ using backend.repositories;
 using backend.services;
 using backend.services.impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
-// using Microsoft.Extensions.FileProviders;
-
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Remove manual Kestrel configuration - let Docker handle it via ASPNETCORE_URLS
 
 // CORS for React
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(
+                "http://localhost:3000",
+                "http://localhost:5173",
+                // "http://mangaserver.ddnsfree.com:3000"
+                "https://mangaserver.ddnsfree.com"
+              )
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
+
+builder.Services.Configure<FormOptions>(o => {
+    o.MultipartBodyLengthLimit = 50_000_000; // 50 MB
+});
+
 
 // controllers
 builder.Services.AddControllers();
@@ -64,8 +76,6 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddMemoryCache(); // to prevent brute forcing 
-
 var app = builder.Build();
 
 // seed sample data into MongoDB
@@ -78,14 +88,11 @@ using (var scope = app.Services.CreateScope())
 // use CORS
 app.UseCors("ReactAppPolicy");
 
-// Swagger UI
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Always enable Swagger for easier testing
+app.UseSwagger();
+app.UseSwaggerUI();
 
-// HTTPS redirection
+// Skip HTTPS redirection in Docker
 // app.UseHttpsRedirection();
 
 // Authentication and Authorization
@@ -95,11 +102,7 @@ app.UseAuthorization();
 // map Controllers
 app.MapControllers();
 
-// app.UseStaticFiles(new StaticFileOptions
-// {
-//     FileProvider = new PhysicalFileProvider(
-//         Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-//     RequestPath = "/uploads"
-// });
+// Health check endpoint
+app.MapGet("/", () => "Backend is running ✅");
 
 app.Run();

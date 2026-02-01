@@ -12,6 +12,24 @@ import "./LoginPage.css";
 
 // Import GoogleLogin component
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google"; // Keep useGoogleLogin for now if you have other uses, but GoogleLogin is for ID Token
+//import FacebookLogin from "react-facebook-login";
+
+// function LoginWithFacebook() {
+//   const responseFacebook = (response) => {
+//     console.log("Facebook response:", response);
+//     // send accessToken to your backend for verification
+//   };
+
+//   return (
+//     <FacebookLogin
+//       appId="1308449874241809"
+//       autoLoad={false}
+//       fields="name,email,picture"
+//       callback={responseFacebook}
+//       icon="fa-facebook"
+//     />
+//   );
+// }
 
 export default function LoginPage() {
   const handleSuccess = (response) => {
@@ -44,7 +62,7 @@ export default function LoginPage() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:5100/api/user/protected", {
+    fetch("https://api.mangaserver.ddnsfree.com/api/user/protected", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -85,7 +103,7 @@ export default function LoginPage() {
     const accessToken = tokenResponse.access_token;
 
     const response = await fetch(
-      "http://localhost:5100/api/auth/google-login",
+      "https://api.mangaserver.ddnsfree.com/api/auth/google-login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -107,20 +125,21 @@ export default function LoginPage() {
     }
   };
 
+  // Update your Google login success handler in LoginPage.jsx
+
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const accessToken = tokenResponse.access_token;
 
       const response = await fetch(
-        "http://localhost:5100/api/auth/google-login",
+        "https://api.mangaserver.ddnsfree.com/api/auth/google-login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ accessToken }), // 🔁 use accessToken instead
+          body: JSON.stringify({ accessToken }),
         }
       );
 
-      // const data = await response.json();
       const contentType = response.headers.get("content-type");
       let data = {};
 
@@ -136,10 +155,33 @@ export default function LoginPage() {
       console.log("Google login response data:", data);
 
       if (response.ok) {
+        console.log("Storing login data in localStorage:");
+        console.log("  Token:", data.token ? "✅ Present" : "❌ Missing");
+        console.log("  UserID:", data.userId);
+        console.log("  Username:", data.username);
+        console.log("  ProfilePic:", data.profilePic || "NULL");
+
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("username", data.username);
-        localStorage.setItem("profilePic", data.profilePic || "");
+
+        // Handle profile picture - this should be the database value, not fresh Google API
+        if (
+          data.profilePic &&
+          data.profilePic !== "null" &&
+          data.profilePic !== "undefined"
+        ) {
+          console.log(
+            "Saving profile picture to localStorage:",
+            data.profilePic
+          );
+          localStorage.setItem("profilePic", data.profilePic);
+        } else {
+          console.log("No profile picture in response, clearing localStorage");
+          localStorage.removeItem("profilePic");
+        }
+
+        // Notify navbar to update
         window.dispatchEvent(new Event("profilePicChanged"));
         navigate("/parent");
       } else {
@@ -179,7 +221,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5100/api/auth/login", {
+    const response = await fetch("https://api.mangaserver.ddnsfree.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -216,7 +258,7 @@ export default function LoginPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5100/api/auth/register", {
+    const response = await fetch("https://api.mangaserver.ddnsfree.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -305,9 +347,56 @@ export default function LoginPage() {
                   <FaGoogle size={20} />
                 </button>
 
-                <button className="social-icon facebook">
+                {/* <button className="social-icon facebook">
                   <FaFacebookF size={44} />
-                </button>
+                </button> */}
+
+                {/* <FacebookLogin
+                  appId="1308449874241809"
+                  autoLoad={false}
+                  fields="name,picture" // Remove email from here
+                  callback={(response) => {
+                    console.log("Facebook response:", response);
+
+                    if (response.accessToken) {
+                      // Call your backend API
+                      fetch("http://localhost:5100/api/auth/facebook-login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          accessToken: response.accessToken,
+                        }),
+                      })
+                        .then(async (res) => {
+                          const data = await res.json();
+                          if (res.ok) {
+                            localStorage.setItem("token", data.token);
+                            localStorage.setItem("userId", data.userId);
+                            localStorage.setItem("username", data.username);
+                            localStorage.setItem(
+                              "profilePic",
+                              data.profilePic || ""
+                            );
+                            window.dispatchEvent(
+                              new Event("profilePicChanged")
+                            );
+                            navigate("/parent");
+                          } else {
+                            alert(data.message || "Facebook login failed!");
+                          }
+                        })
+                        .catch((err) => {
+                          console.error(err);
+                          alert("Facebook login error");
+                        });
+                    } else {
+                      alert("Facebook login failed or cancelled.");
+                    }
+                  }}
+                  cssClass="social-icon facebook"
+                  icon={<FaFacebookF size={20} />}
+                  textButton=""
+                /> */}
               </div>
               <div className="signup-link switch-link">
                 Немате профил?{" "}
@@ -385,9 +474,9 @@ export default function LoginPage() {
                 >
                   <FaGoogle size={20} />
                 </button>
-                <button className="social-icon facebook">
+                {/* <button className="social-icon facebook">
                   <FaFacebookF size={20} />
-                </button>
+                </button> */}
               </div>
               <div className="signup-link switch-link">
                 Веќе имате профил?{" "}

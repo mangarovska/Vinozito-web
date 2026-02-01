@@ -44,19 +44,27 @@ export default function Navbar() {
     };
   }, [showDropdown]);
 
+  // loads the initial profile picture
   useEffect(() => {
     const savedPic = localStorage.getItem("profilePic");
-    console.log("Loaded profilePic in Navbar:", savedPic);
-    if (savedPic) setProfilePic(savedPic);
+    if (savedPic && savedPic !== "null" && savedPic !== "undefined") {
+      setProfilePic(savedPic);
+    } else {
+      setProfilePic(placeholderImg);
+    }
   }, []);
 
   useEffect(() => {
     function handleProfilePicChange() {
       const savedPic = localStorage.getItem("profilePic");
-      setProfilePic(savedPic || placeholderImg);
+      if (savedPic && savedPic !== "null" && savedPic !== "undefined") {
+        setProfilePic(savedPic);
+      } else {
+        setProfilePic(placeholderImg);
+      }
     }
-    window.addEventListener("profilePicChanged", handleProfilePicChange);
 
+    window.addEventListener("profilePicChanged", handleProfilePicChange);
     return () => {
       window.removeEventListener("profilePicChanged", handleProfilePicChange);
     };
@@ -64,11 +72,6 @@ export default function Navbar() {
 
   function showPadlockMessage(message) {
     setPadlockMessage(message);
-
-    // if (padlockMessageTimeoutRef.current) {
-    //   clearTimeout(padlockMessageTimeoutRef.current);
-    // }
-
     padlockMessageTimeoutRef.current = setTimeout(() => {
       setPadlockMessage(null);
       padlockMessageTimeoutRef.current = null;
@@ -77,11 +80,10 @@ export default function Navbar() {
 
   const handlePadlockClick = () => {
     const now = Date.now();
-    if (now - lastClickTime < 250) return; // debounce quick clicks
+    if (now - lastClickTime < 250) return;
 
     setLastClickTime(now);
 
-    // reset click count timeout timer on every click
     if (clickResetTimerRef.current) {
       clearTimeout(clickResetTimerRef.current);
     }
@@ -102,7 +104,7 @@ export default function Navbar() {
 
       clickResetTimerRef.current = setTimeout(() => {
         setClickCount(0);
-      }, 5000); // reset click count after 5 seconds of inactivity
+      }, 5000);
     } else {
       showPadlockMessage("Отклучено");
     }
@@ -139,6 +141,10 @@ export default function Navbar() {
   const isLoginPage = location.pathname === "/login";
   const isDownloadApp = location.pathname === "/app";
   const isParentPage = location.pathname === "/parent";
+  const isEditProfile = location.pathname === "/profile/edit";
+
+  // ✅ New combined flag
+  const isEditCardsPage = isParentPage || isEditProfile;
 
   const showBackButton =
     isCommunicationPage ||
@@ -152,7 +158,9 @@ export default function Navbar() {
   const username = localStorage.getItem("username");
 
   const handleLogoClick = () => {
-    if (isCanvasPage) {
+    if (isEditCardsPage) {
+      navigate("/menu"); // ✅ always go to kids menu
+    } else if (isCanvasPage) {
       if (window.hasUnsavedCanvasChanges) {
         const confirmEvent = new CustomEvent("confirm-canvas-back", {
           detail: {
@@ -175,22 +183,25 @@ export default function Navbar() {
     }
   };
 
-  function renderLogo() {
-    return (
-      <div className="navbar-logo-container">
-        <div className="navbar-logo-circle">
-          <img
-            src={showBackButton ? back : logo}
-            alt={showBackButton ? "Назад" : "Лого"}
-            className={`navbar-logo-image ${
-              showBackButton ? "back-button-image" : ""
-            } ${isMenuPage ? "no-pointer" : ""}`}
-            onClick={showBackButton ? handleLogoClick : undefined}
-          />
-        </div>
+function renderLogo() {
+  return (
+    <div className="navbar-logo-container">
+      <div className="navbar-logo-circle">
+        <img
+          src={showBackButton ? back : logo}
+          alt={showBackButton ? "Назад" : "Лого"}
+          className={`navbar-logo-image ${
+            showBackButton ? "back-button-image" : ""
+          } ${isMenuPage ? "no-pointer" : ""}`} // prevent pointer in menu
+          onClick={
+            isMenuPage ? undefined : handleLogoClick // 🚀 disable click in menu
+          }
+        />
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
   return (
     <div className="navbar-container">
@@ -209,11 +220,11 @@ export default function Navbar() {
           isAbout ||
           isLoginPage ||
           isDownloadApp ||
-          isParentPage ? (
-          <Link to="/" className="navbar-home-link">
+          isEditCardsPage ? ( 
+          <div className="navbar-home-link" onClick={() => navigate("/menu")}>
             {renderLogo()}
             <div className="navbar-brand">Виножито</div>
-          </Link>
+          </div>
         ) : (
           <>
             {renderLogo()}
@@ -225,12 +236,12 @@ export default function Navbar() {
           {(isLandingPage || isAbout || isDownloadApp) && (
             <>
               <li>
-                <Link to="/" className="mt-1">
+                <Link to="/" className="">
                   Дома
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="mt-1">
+                <Link to="/about" className="">
                   За нас
                 </Link>
               </li>
@@ -240,7 +251,8 @@ export default function Navbar() {
           !isAbout &&
           !isLoginPage &&
           !isDownloadApp &&
-          !isParentPage ? (
+          !isParentPage &&
+          !isEditProfile ? (
             <div className="lock-wrapper">
               <li
                 className={`login-button ${
@@ -248,7 +260,8 @@ export default function Navbar() {
                   !isAbout &&
                   !isLoginPage &&
                   !isDownloadApp &&
-                  !isParentPage
+                  !isParentPage &&
+                  !isEditProfile
                     ? "with-padlock"
                     : ""
                 }`}
@@ -292,7 +305,12 @@ export default function Navbar() {
                     <span className="greeting-text username-text">
                       {username}
                     </span>
-                    <span className="dropdown-icon">▼</span>
+                    {/* <span className="dropdown-icon"></span> */}
+                    <span
+                      className={`dropdown-icon ${
+                        showDropdown ? "rotated" : ""
+                      }`}
+                    ></span>
 
                     {showDropdown && isUnlocked && (
                       <div className="dropdown-menu" ref={dropdownRef}>
@@ -304,14 +322,26 @@ export default function Navbar() {
                         >
                           Мои картички
                         </button>
-                        <button
+                        {/* <button
                           onClick={() => {
                             setShowDropdown(false);
                             navigate("/analytics");
                           }}
                         >
                           Анализа
+                        </button> */}
+                        {/* <button
+                          onClick={() => {
+                            setShowDropdown(false);
+                            navigate("/profile");
+                          }}
+                        >
+                          Уреди профил
+                        </button> */}
+                        <button onClick={() => navigate("/profile/edit")}>
+                          Уреди профил
                         </button>
+
                         <button
                           onClick={() => {
                             localStorage.removeItem("token");
@@ -351,7 +381,10 @@ export default function Navbar() {
                   className="profile-image"
                 />
                 <span className="greeting-text username-text">{username}</span>
-                <span className="dropdown-icon">▼</span>
+                {/* <span className="dropdown-icon"></span> */}
+                <span
+                  className={`dropdown-icon ${showDropdown ? "rotated" : ""}`}
+                ></span>
               </div>
               {showDropdown && (
                 <div className="dropdown-menu" ref={dropdownRef}>
@@ -363,13 +396,16 @@ export default function Navbar() {
                   >
                     Мои картички
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => {
                       setShowDropdown(false);
                       navigate("/analytics");
                     }}
                   >
                     Анализа
+                  </button> */}
+                  <button onClick={() => navigate("/profile/edit")}>
+                    Уреди профил
                   </button>
                   <button
                     onClick={() => {

@@ -6,7 +6,7 @@ export default function PopUp({ isOpen, onConfirm, onCancel }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content-color">
         <button onClick={onCancel} className="close-button">
           ×
         </button>

@@ -236,6 +236,20 @@ export const categories = [
     bottom: "0px",
     left: "3px",
   },
+{
+    label: "Дневни активности",
+    value: "Routines",
+    img: "/comms-assets/categories/routines.png",
+    bottom: "1px",
+    left: "0px",
+  },
+  {
+    label: "Облека",
+    value: "Clothes",
+    img: "/comms-assets/categories/clothes.png",
+    bottom: "0px",
+    left: "0px",
+  },
   {
     label: "Животни",
     value: "Animals",
@@ -245,11 +259,12 @@ export const categories = [
     margin_bottom: "7px",
   },
   {
-    label: "Облека",
-    value: "Clothes",
-    img: "/comms-assets/categories/clothes.png",
-    bottom: "0px",
+    label: "Делови од телото",
+    value: "Body",
+    img: "/comms-assets/categories/body.png",
+    bottom: "1px",
     left: "0px",
+    margin_bottom: "0px",
   },
   {
     label: "Бои",

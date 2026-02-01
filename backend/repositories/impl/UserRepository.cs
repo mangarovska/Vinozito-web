@@ -43,4 +43,9 @@ public class UserRepository(MongoDbContext context) : IUserRepository
         return await context.Users.Find(u => u.Email == email).FirstOrDefaultAsync();
     }
 
+//     public async Task<User?> GetByFacebookIdAsync(string facebookId)
+// {
+//     return await context.Users.Find(u => u.FacebookId == facebookId).FirstOrDefaultAsync();
+// }
+
 }

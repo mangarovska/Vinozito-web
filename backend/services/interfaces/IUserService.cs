@@ -15,7 +15,9 @@ namespace backend.services
         //Task<IEnumerable<CustomCard>> GetAllCustomCardsAsync(string id);
         Task<User?> AuthenticateAsync(string username, string password);
         Task<User> RegisterUserAsync(string username, string email, string password);
-        Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false); // new
+        Task<User> RegisterUserAsync(string username, string? password, string email, bool isGoogleUser = false, string? profilePicture = null); // new
         Task<User?> GetUserByEmailAsync(string email); // new
+        // Task<User> RegisterFacebookUserAsync(string facebookId, string name, string? profilePicture = null); // new
+        // Task<User?> GetUserByFacebookIdAsync(string facebookId); // new
     }
 }
