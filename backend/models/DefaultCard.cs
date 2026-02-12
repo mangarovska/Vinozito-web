@@ -6,12 +6,12 @@ using MongoDB.Bson.Serialization.Attributes;
 public class DefaultCard
 {
     [BsonId]
-    [BsonRepresentation(BsonType.String)]
+    [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
 
     public required string Name { get; set; }
 
-    public required string AudioVoice { get; set; }
+    public string? AudioVoice { get; set; }
 
     public required string Image { get; set; }
 

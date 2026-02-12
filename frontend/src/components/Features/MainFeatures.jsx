@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./MainFeatures.css";
 import Phone from "../Phone";
 import { MainFeatures } from "../../data";
@@ -13,7 +13,8 @@ const FeatureSelector = () => {
   const [hasSelected, setHasSelected] = useState(false);
   const [imageAnimationKey, setImageAnimationKey] = useState(0);
   const [slideDirection, setSlideDirection] = useState("slide-top-left");
-  const [carouselDirection, setCarouselDirection] = useState(null);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   const directionMap = {
     feature1: "slide-top-left",
@@ -51,11 +52,18 @@ const FeatureSelector = () => {
     if (transitioning) {
       const timeout = setTimeout(() => {
         setTransitioning(false);
-        setCarouselDirection(null);
       }, 300);
       return () => clearTimeout(timeout);
     }
   }, [transitioning]);
+
+  // Auto-select first feature on mobile if none selected
+  useEffect(() => {
+    if (isMobile && !hasSelected && MainFeatures.length > 0) {
+      setSelectedFeature(MainFeatures[0].id);
+      setHasSelected(true);
+    }
+  }, [isMobile, hasSelected]);
 
   const handleSelect = (id) => {
     setSelectedFeature(id);
@@ -65,7 +73,6 @@ const FeatureSelector = () => {
   const handlePrev = () => {
     if (transitioning) return;
     setTransitioning(true);
-    setCarouselDirection("left");
     const newIndex =
       (carouselIndex - 1 + MainFeatures.length) % MainFeatures.length;
     setCarouselIndex(newIndex);
@@ -75,86 +82,45 @@ const FeatureSelector = () => {
   const handleNext = () => {
     if (transitioning) return;
     setTransitioning(true);
-    setCarouselDirection("right");
     const newIndex = (carouselIndex + 1) % MainFeatures.length;
     setCarouselIndex(newIndex);
     if (hasSelected) setSelectedFeature(MainFeatures[newIndex].id);
   };
 
-  const getVisibleFeatures = () => {
-    return [-1, 0, 1].map((offset) => {
-      const index =
-        (carouselIndex + offset + MainFeatures.length) % MainFeatures.length;
-      return { ...MainFeatures[index], position: offset };
-    });
+  const handleDotClick = (index) => {
+    if (transitioning || index === carouselIndex) return;
+    setTransitioning(true);
+    setCarouselIndex(index);
+    if (hasSelected) setSelectedFeature(MainFeatures[index].id);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diff = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+    if (diff > minSwipeDistance) {
+      handleNext();
+    } else if (diff < -minSwipeDistance) {
+      handlePrev();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   const selectedFeatureData =
     MainFeatures.find((f) => f.id === selectedFeature) || {};
 
   if (isMobile) {
-    const visibleFeatures = getVisibleFeatures();
-
     return (
       <div className="mobile-feature-container">
-        <div className="mobile-carousel">
-          <button className="carousel-arrow left" onClick={handlePrev}>
-            <FaChevronLeft />
-          </button>
-
-          <div className="mobile-features-viewport">
-            <div
-              className={`mobile-features-track ${
-                transitioning ? `transitioning ${carouselDirection}` : ""
-              }`}
-            >
-              {visibleFeatures.map((feature) => (
-                <div
-                  key={`${feature.id}-${feature.position}`}
-                  className={`mobile-feature-item ${
-                    hasSelected && selectedFeature === feature.id
-                      ? "center"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    if (!hasSelected) setHasSelected(true);
-                    setSelectedFeature(feature.id);
-                  }}
-                >
-                  <div
-                    className="mobile-feature-icon"
-                    style={{
-                      borderColor: feature.borderColor,
-                      backgroundColor:
-                        selectedFeature === feature.id
-                          ? feature.borderColor
-                          : "#ffffff",
-                    }}
-                  >
-                    <img
-                      src={feature.icon}
-                      alt={feature.name}
-                      className="mobile-icon-image"
-                      style={{
-                        paddingLeft: feature.paddingLeft
-                          ? `${feature.paddingLeft}px`
-                          : "0",
-                        paddingTop: feature.paddingTop
-                          ? `${feature.paddingTop}px`
-                          : "0",
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button className="carousel-arrow right" onClick={handleNext}>
-            <FaChevronRight />
-          </button>
-        </div>
-
         <div className="mobile-feature-text-container">
           <h3 className="mobile-feature-title">{selectedFeatureData?.name}</h3>
           <p className="mobile-feature-description">
@@ -162,13 +128,39 @@ const FeatureSelector = () => {
           </p>
         </div>
 
-        <div className="mobile-phone-container">
-          <Phone
-            image={selectedFeatureData?.screen}
-            background={selectedFeatureData?.background || grey}
-            animationKey={imageAnimationKey}
-            animationClass={slideDirection}
-          />
+        <div 
+          className="mobile-phone-carousel"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <button className="carousel-arrow left" onClick={handlePrev} aria-label="Previous feature">
+            <FaChevronLeft />
+          </button>
+
+          <div className="mobile-phone-wrapper">
+            <Phone
+              image={selectedFeatureData?.screen}
+              background={selectedFeatureData?.background || grey}
+              animationKey={imageAnimationKey}
+              animationClass={slideDirection}
+            />
+          </div>
+
+          <button className="carousel-arrow right" onClick={handleNext} aria-label="Next feature">
+            <FaChevronRight />
+          </button>
+        </div>
+
+        <div className="mobile-carousel-dots">
+          {MainFeatures.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${index === carouselIndex ? "active" : ""}`}
+              onClick={() => handleDotClick(index)}
+              aria-label={`Go to feature ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     );

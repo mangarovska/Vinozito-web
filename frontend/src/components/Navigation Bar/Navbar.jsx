@@ -11,6 +11,10 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
+  const hamburgerRef = useRef(null);
+
   const [clickCount, setClickCount] = useState(0);
   const [padlockMessage, setPadlockMessage] = useState(null);
   const [hoverMessage, setHoverMessage] = useState(null);
@@ -31,9 +35,17 @@ export default function Navbar() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
     }
 
-    if (showDropdown) {
+    if (showDropdown || mobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -42,7 +54,15 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showDropdown]);
+  }, [showDropdown, mobileMenuOpen]);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   // loads the initial profile picture
   useEffect(() => {
@@ -232,16 +252,27 @@ function renderLogo() {
           </>
         )}
 
-        <ul className="navbar-links">
+        <button 
+          ref={hamburgerRef}
+          className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul className={`navbar-links ${mobileMenuOpen ? 'mobile-open' : ''}`} ref={mobileMenuRef}>
           {(isLandingPage || isAbout || isDownloadApp) && (
             <>
               <li>
-                <Link to="/" className="">
+                <Link to="/" className="" onClick={closeMobileMenu}>
                   Дома
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="">
+                <Link to="/about" className="" onClick={closeMobileMenu}>
                   За нас
                 </Link>
               </li>
@@ -292,7 +323,7 @@ function renderLogo() {
                     className={`parent-profile ${
                       !isUnlocked ? "disabled" : ""
                     }`}
-                    onClick={(e) => {
+                    onClick={() => {
                       if (!isUnlocked) return;
                       setShowDropdown(!showDropdown);
                     }}
@@ -361,7 +392,11 @@ function renderLogo() {
                     to="/login"
                     className={!isUnlocked ? "disabled" : ""}
                     onClick={(e) => {
-                      if (!isUnlocked) e.preventDefault();
+                      if (!isUnlocked) {
+                        e.preventDefault();
+                      } else {
+                        closeMobileMenu();
+                      }
                     }}
                   >
                     Најави се
@@ -373,7 +408,10 @@ function renderLogo() {
             <li className="parent-dropdown">
               <div
                 className="parent-profile"
-                onClick={() => setShowDropdown(!showDropdown)}
+                onClick={() => {
+                  setShowDropdown(!showDropdown);
+                  closeMobileMenu();
+                }}
               >
                 <img
                   src={profilePic || placeholderImg}
@@ -423,7 +461,7 @@ function renderLogo() {
             </li>
           ) : (
             <li className="login-button">
-              <Link to="/login">Најави се</Link>
+              <Link to="/login" onClick={closeMobileMenu}>Најави се</Link>
             </li>
           )}
         </ul>

@@ -236,6 +236,10 @@
 }
 
 @media (max-width: 900px) {
+  .banner {
+    padding: 5rem 2rem 2.5rem 2rem;
+  }
+
   .banner-content {
     display: flex;
     flex-direction: column;
@@ -302,6 +306,18 @@
   .banner-right img {
     width: 60vw;
     max-width: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .banner {
+    padding: 4rem 1.5rem 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner {
+    padding: 3rem 1rem 1.5rem 1rem;
   }
 }
 

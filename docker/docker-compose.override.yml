@@ -1,0 +1,39 @@
+# ============================================
+# Development Override for Docker Compose
+# ============================================
+# This file is automatically picked up by docker-compose
+# for development-specific configurations.
+#
+# Usage:
+#   docker-compose up -d          (uses both files)
+#   docker-compose -f docker-compose.yml up  (production only)
+#
+# ============================================
+
+version: '3.8'
+
+services:
+  # Backend in Development Mode
+  backend:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      # Mount source code for hot reload during development
+      - ../backend:/src:ro
+    # Override command for hot reload (requires dotnet-watch)
+    # command: ["dotnet", "watch", "run", "--urls", "http://+:8080"]
+
+  # Frontend in Development Mode (Optional)
+  # Uncomment the following to use Vite dev server instead of Nginx
+  # frontend:
+  #   image: node:18-alpine
+  #   working_dir: /app
+  #   command: ["sh", "-c", "npm install && npm run dev"]
+  #   volumes:
+  #     - ../frontend:/app
+  #   ports:
+  #     - "5173:5173"
+  #   environment:
+  #     - VITE_API_BASE_URL=http://localhost:5000
+  #   networks:
+  #     - vinozito-network

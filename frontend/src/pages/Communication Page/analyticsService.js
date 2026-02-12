@@ -11,7 +11,7 @@ class AnalyticsService {
     if (!userId || !token) return;
 
     try {
-      const response = await fetch('http://localhost:5100/api/analytics/track-card-usage', {
+      const response = await fetch('/api/analytics/track-card-usage', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -42,7 +42,7 @@ class AnalyticsService {
     if (!userId || !token) return;
 
     try {
-      const response = await fetch('http://localhost:5100/api/analytics/start-session', {
+      const response = await fetch('/api/analytics/start-session', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -72,7 +72,7 @@ class AnalyticsService {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:5100/api/analytics/end-session/${this.currentSessionId}`, {
+      const response = await fetch(`/api/analytics/end-session/${this.currentSessionId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -97,7 +97,7 @@ class AnalyticsService {
     if (!userId || !token) return null;
 
     try {
-      const response = await fetch(`http://localhost:5100/api/analytics/${userId}?timeframe=${timeframe}`, {
+      const response = await fetch(`/api/analytics/${userId}?timeframe=${timeframe}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',

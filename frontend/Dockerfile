@@ -1,35 +1,42 @@
 # ==========================
 # Stage 1: Build the Vite app
 # ==========================
-FROM node:18 AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
-# Copy only package.json (NOT package-lock.json!)
-COPY package.json ./
+# Copy package files first for optimal layer caching
+# This layer is cached unless package.json changes
+COPY package.json package-lock.json* ./
 
-# Fresh install inside Docker (gets Linux-compatible rollup/esbuild)
-RUN npm install --legacy-peer-deps
+# Install dependencies
+# Uses npm ci for faster, reproducible builds when lockfile exists
+RUN if [ -f package-lock.json ]; then \
+        npm ci --legacy-peer-deps --prefer-offline --no-audit; \
+    else \
+        npm install --legacy-peer-deps --prefer-offline --no-audit; \
+    fi
 
-# Copy rest of the app (but exclude lockfile & node_modules via .dockerignore)
+# Copy source files (including public/ which contains static assets)
 COPY . .
 
-# Rebuild native deps for Linux
-RUN npm rebuild esbuild
-
 # Build production files
+# Vite will copy public/ to dist/ automatically
 RUN npm run build
 
-
 # ==========================
-# Stage 2: Serve with Nginx
+# Stage 2: Serve with Nginx (Alpine = smaller)
 # ==========================
 FROM nginx:alpine
 
+# Copy built assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Optional: custom nginx.conf for React Router
+# Copy custom nginx.conf for React Router
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Remove unnecessary nginx modules to reduce image size
+RUN rm -rf /usr/share/nginx/html/*.md /usr/share/nginx/html/50x.html /usr/share/nginx/html/index.html.default 2>/dev/null || true
 
 EXPOSE 80
 

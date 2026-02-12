@@ -5,32 +5,79 @@ body {
   padding: 0;
 }
 
-/* * {
-  outline: 1px solid red;
-} */
-
-/* .blob-container {
-  transition: transform 0.3s ease-in-out;
-} 
-
-.blob-container:hover {
-  transform: scale(1.05);
-} */
-
-/* 
-@media (max-width: 1024px) {
-
-  .blob-container {
-    width: 180px !important;
+/* Mobile-specific styles for blob row */
+@media (max-width: 768px) {
+  /* Increase touch targets and improve spacing on mobile */
+  .blob-row-grid {
+    gap: 1.5rem !important;
+    padding: 0 0.5rem;
   }
-} */
 
-/* @media (max-width: 640px) {
-
-  .blob-container:nth-child(3),
-  .blob-container:nth-child(4) {
-    flex-basis: 100%;
-    justify-content: center;
-    display: flex;
+  /* Make blob containers larger for better touch interaction */
+  .blob-row-grid > div {
+    min-width: 140px;
+    max-width: 160px;
   }
-} */
+
+  /* Increase label size for better readability */
+  .blob-label {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin-top: 0.75rem !important;
+  }
+
+  /* Adjust blob sizes for consistent 2-column layout */
+  .blob-wrapper {
+    max-width: 160px !important;
+    min-width: 140px !important;
+  }
+
+  .blob-wrapper .relative {
+    max-width: 160px !important;
+    min-width: 140px !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .blob-row-grid {
+    gap: 1rem !important;
+  }
+
+  .blob-row-grid > div {
+    min-width: 130px;
+    max-width: 150px;
+  }
+
+  .blob-wrapper {
+    max-width: 150px !important;
+    min-width: 130px !important;
+  }
+
+  .blob-wrapper .relative {
+    max-width: 150px !important;
+    min-width: 130px !important;
+  }
+
+  .blob-label {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .blob-row-grid > div {
+    min-width: 120px;
+    max-width: 135px;
+  }
+
+  .blob-wrapper {
+    max-width: 135px !important;
+    min-width: 120px !important;
+  }
+
+  .blob-wrapper .relative {
+    max-width: 135px !important;
+    min-width: 120px !important;
+  }
+}

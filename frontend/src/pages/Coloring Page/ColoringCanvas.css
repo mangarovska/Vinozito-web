@@ -30,6 +30,9 @@ canvas {
   border-radius: 10px;
   image-rendering: crisp-edges; /* prevents anti-aliasing */
   background-color: white; 
+  touch-action: none; /* Prevent scrolling/zooming while drawing on mobile */
+  -webkit-user-select: none; /* Prevent text selection on mobile */
+  user-select: none;
 }
 
 .brush-sizes-column {

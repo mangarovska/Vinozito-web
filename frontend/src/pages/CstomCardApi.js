@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:5100/api/CustomCard"; // Adjust base URL as needed
+const API_BASE = "/api/CustomCard"; // Uses relative URL - Nginx proxies to backend
 
 export const getAllCustomCardsByUser = async (userId) => {
   const res = await axios.get(`${API_BASE}/user/${userId}`);

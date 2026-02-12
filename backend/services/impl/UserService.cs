@@ -87,7 +87,7 @@ public class UserService(IUserRepository userRepository)
         return await userRepository.GetByEmailAsync(email);
     }
 
-    public async Task<User> RegisterUserAsync(string username, string password, string email)
+    public async Task<User> RegisterUserAsync(string username, string email, string password)
     {
         var existingUser = await userRepository.GetByUsernameAsync(username);
         if (existingUser != null)

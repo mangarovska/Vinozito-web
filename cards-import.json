@@ -1,0 +1,2242 @@
+[
+  {
+    "Name": "боење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%B1%D0%BE%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%B1%D0%BE%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 0
+  },
+  {
+    "Name": "велосипед",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%B2%D0%B5%D0%BB%D0%BE%D1%81%D0%B8%D0%BF%D0%B5%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%B2%D0%B5%D0%BB%D0%BE%D1%81%D0%B8%D0%BF%D0%B5%D0%B4.m4a",
+    "Category": "Activities",
+    "Position": 1
+  },
+  {
+    "Name": "видео игри",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B8%D0%B3%D1%80%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B8%D0%B3%D1%80%D0%B8.m4a",
+    "Category": "Activities",
+    "Position": 2
+  },
+  {
+    "Name": "игралиште",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%B8%D0%B3%D1%80%D0%B0%D0%BB%D0%B8%D1%88%D1%82%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%B8%D0%B3%D1%80%D0%B0%D0%BB%D0%B8%D1%88%D1%82%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 3
+  },
+  {
+    "Name": "карти",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BA%D0%B0%D1%80%D1%82%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BA%D0%B0%D1%80%D1%82%D0%B8.m4a",
+    "Category": "Activities",
+    "Position": 4
+  },
+  {
+    "Name": "коцки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BA%D0%BE%D1%86%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BA%D0%BE%D1%86%D0%BA%D0%B8.m4a",
+    "Category": "Activities",
+    "Position": 5
+  },
+  {
+    "Name": "кошарка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BA%D0%BE%D1%88%D0%B0%D1%80%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BA%D0%BE%D1%88%D0%B0%D1%80%D0%BA%D0%B0.m4a",
+    "Category": "Activities",
+    "Position": 6
+  },
+  {
+    "Name": "лаптоп",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BB%D0%B0%D0%BF%D1%82%D0%BE%D0%BF.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BB%D0%B0%D0%BF%D1%82%D0%BE%D0%BF.m4a",
+    "Category": "Activities",
+    "Position": 7
+  },
+  {
+    "Name": "музика",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BC%D1%83%D0%B7%D0%B8%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BC%D1%83%D0%B7%D0%B8%D0%BA%D0%B0.m4a",
+    "Category": "Activities",
+    "Position": 8
+  },
+  {
+    "Name": "одбојка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BE%D0%B4%D0%B1%D0%BE%D1%98%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BE%D0%B4%D0%B1%D0%BE%D1%98%D0%BA%D0%B0.m4a",
+    "Category": "Activities",
+    "Position": 9
+  },
+  {
+    "Name": "пишување",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BF%D0%B8%D1%88%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BF%D0%B8%D1%88%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 10
+  },
+  {
+    "Name": "пластелин",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BF%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D0%BB%D0%B8%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BF%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D0%BB%D0%B8%D0%BD.m4a",
+    "Category": "Activities",
+    "Position": 11
+  },
+  {
+    "Name": "пливање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D0%BF%D0%BB%D0%B8%D0%B2%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D0%BF%D0%BB%D0%B8%D0%B2%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 12
+  },
+  {
+    "Name": "ролерки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%80%D0%BE%D0%BB%D0%B5%D1%80%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%80%D0%BE%D0%BB%D0%B5%D1%80%D0%BA%D0%B8.m4a",
+    "Category": "Activities",
+    "Position": 13
+  },
+  {
+    "Name": "сложувалка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%81%D0%BB%D0%BE%D0%B6%D1%83%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%81%D0%BB%D0%BE%D0%B6%D1%83%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0.m4a",
+    "Category": "Activities",
+    "Position": 14
+  },
+  {
+    "Name": "танцување",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%82%D0%B0%D0%BD%D1%86%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%82%D0%B0%D0%BD%D1%86%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 15
+  },
+  {
+    "Name": "тв",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%82%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%82%D0%B5%D0%BB%D0%B5%D0%B2%D0%B8%D0%B7%D0%B8%D1%98%D0%B0.m4a",
+    "Category": "Activities",
+    "Position": 16
+  },
+  {
+    "Name": "тенис",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%82%D0%B5%D0%BD%D0%B8%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%82%D0%B5%D0%BD%D0%B8%D1%81.m4a",
+    "Category": "Activities",
+    "Position": 17
+  },
+  {
+    "Name": "тротинет",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%82%D1%80%D0%BE%D1%82%D0%B8%D0%BD%D0%B5%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%82%D1%80%D0%BE%D1%82%D0%B8%D0%BD%D0%B5%D1%82.m4a",
+    "Category": "Activities",
+    "Position": 18
+  },
+  {
+    "Name": "учење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%83%D1%87%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%83%D1%87%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 19
+  },
+  {
+    "Name": "фудбал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%84%D1%83%D0%B4%D0%B1%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%84%D1%83%D0%B4%D0%B1%D0%B0%D0%BB.m4a",
+    "Category": "Activities",
+    "Position": 20
+  },
+  {
+    "Name": "цртање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%86%D1%80%D1%82%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%86%D1%80%D1%82%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 21
+  },
+  {
+    "Name": "читање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%87%D0%B8%D1%82%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%87%D0%B8%D1%82%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 22
+  },
+  {
+    "Name": "шах",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%88%D0%B0%D1%85.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%88%D0%B0%D1%85.m4a",
+    "Category": "Activities",
+    "Position": 23
+  },
+  {
+    "Name": "шетање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/activities/%D1%88%D0%B5%D1%82%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/activities/%D1%88%D0%B5%D1%82%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Activities",
+    "Position": 24
+  },
+  {
+    "Name": "бубамара",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B1%D1%83%D0%B1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B1%D1%83%D0%B1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 25
+  },
+  {
+    "Name": "був",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B1%D1%83%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B1%D1%83%D0%B2.m4a",
+    "Category": "Animals",
+    "Position": 26
+  },
+  {
+    "Name": "верверица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B2%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B2%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 27
+  },
+  {
+    "Name": "глушец",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B3%D0%BB%D1%83%D1%88%D0%B5%D1%86.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B3%D0%BB%D1%83%D1%88%D0%B5%D1%86.m4a",
+    "Category": "Animals",
+    "Position": 28
+  },
+  {
+    "Name": "гулаб",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B3%D1%83%D0%BB%D0%B0%D0%B1.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B3%D1%83%D0%BB%D0%B0%D0%B1.m4a",
+    "Category": "Animals",
+    "Position": 29
+  },
+  {
+    "Name": "еж",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B5%D0%B6.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B5%D0%B6.m4a",
+    "Category": "Animals",
+    "Position": 30
+  },
+  {
+    "Name": "жаба",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B6%D0%B0%D0%B1%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B6%D0%B0%D0%B1%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 31
+  },
+  {
+    "Name": "желка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B6%D0%B5%D0%BB%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B6%D0%B5%D0%BB%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 32
+  },
+  {
+    "Name": "жирафа",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B6%D0%B8%D1%80%D0%B0%D1%84%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B6%D0%B8%D1%80%D0%B0%D1%84%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 33
+  },
+  {
+    "Name": "зајак",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B7%D0%B0%D1%98%D0%B0%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B7%D0%B0%D1%98%D0%B0%D0%BA.m4a",
+    "Category": "Animals",
+    "Position": 34
+  },
+  {
+    "Name": "зебра",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B7%D0%B5%D0%B1%D1%80%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B7%D0%B5%D0%B1%D1%80%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 35
+  },
+  {
+    "Name": "змија",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%B7%D0%BC%D0%B8%D1%98%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%B7%D0%BC%D0%B8%D1%98%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 36
+  },
+  {
+    "Name": "коза",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BA%D0%BE%D0%B7%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BA%D0%BE%D0%B7%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 37
+  },
+  {
+    "Name": "кокошка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BA%D0%BE%D0%BA%D0%BE%D1%88%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BA%D0%BE%D0%BA%D0%BE%D1%88%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 38
+  },
+  {
+    "Name": "коњ",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BA%D0%BE%D1%9A.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BA%D0%BE%D1%9A.m4a",
+    "Category": "Animals",
+    "Position": 39
+  },
+  {
+    "Name": "крава",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BA%D1%80%D0%B0%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BA%D1%80%D0%B0%D0%B2%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 40
+  },
+  {
+    "Name": "куче",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BA%D1%83%D1%87%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BA%D1%83%D1%87%D0%B5.m4a",
+    "Category": "Animals",
+    "Position": 41
+  },
+  {
+    "Name": "лав",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BB%D0%B0%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BB%D0%B0%D0%B2.m4a",
+    "Category": "Animals",
+    "Position": 42
+  },
+  {
+    "Name": "мачка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BC%D0%B0%D1%87%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BC%D0%B0%D1%87%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 43
+  },
+  {
+    "Name": "мајмун",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BC%D0%B0%D1%98%D0%BC%D1%83%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BC%D0%B0%D1%98%D0%BC%D1%83%D0%BD.m4a",
+    "Category": "Animals",
+    "Position": 44
+  },
+  {
+    "Name": "мечка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BC%D0%B5%D1%87%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BC%D0%B5%D1%87%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 45
+  },
+  {
+    "Name": "мравка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BC%D1%80%D0%B0%D0%B2%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BC%D1%80%D0%B0%D0%B2%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 46
+  },
+  {
+    "Name": "нилски коњ",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BD%D0%B8%D0%BB%D1%81%D0%BA%D0%B8%20%D0%BA%D0%BE%D1%9A.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BD%D0%B8%D0%BB%D1%81%D0%BA%D0%B8%20%D0%BA%D0%BE%D1%9A.m4a",
+    "Category": "Animals",
+    "Position": 47
+  },
+  {
+    "Name": "овца",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BE%D0%B2%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BE%D0%B2%D1%86%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 48
+  },
+  {
+    "Name": "панда",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B0%D0%BD%D0%B4%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B0%D0%BD%D0%B4%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 49
+  },
+  {
+    "Name": "папагал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B0%D0%BF%D0%B0%D0%B3%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B0%D0%BF%D0%B0%D0%B3%D0%B0%D0%BB.m4a",
+    "Category": "Animals",
+    "Position": 50
+  },
+  {
+    "Name": "патка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B0%D1%82%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B0%D1%82%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 51
+  },
+  {
+    "Name": "паун",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B0%D1%83%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B0%D1%83%D0%BD.m4a",
+    "Category": "Animals",
+    "Position": 52
+  },
+  {
+    "Name": "пајак",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B0%D1%98%D0%B0%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B0%D1%98%D0%B0%D0%BA.m4a",
+    "Category": "Animals",
+    "Position": 53
+  },
+  {
+    "Name": "пеперутка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B5%D0%BF%D0%B5%D1%80%D1%83%D1%82%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B5%D0%BF%D0%B5%D1%80%D1%83%D1%82%D0%BA%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 54
+  },
+  {
+    "Name": "пингвин",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%B8%D0%BD%D0%B3%D0%B2%D0%B8%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%B8%D0%BD%D0%B3%D0%B2%D0%B8%D0%BD.m4a",
+    "Category": "Animals",
+    "Position": 55
+  },
+  {
+    "Name": "полжав",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D0%BE%D0%BB%D0%B6%D0%B0%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D0%BE%D0%BB%D0%B6%D0%B0%D0%B2.m4a",
+    "Category": "Animals",
+    "Position": 56
+  },
+  {
+    "Name": "прасе",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D1%80%D0%B0%D1%81%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D1%80%D0%B0%D1%81%D0%B5.m4a",
+    "Category": "Animals",
+    "Position": 57
+  },
+  {
+    "Name": "пчела",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D0%BF%D1%87%D0%B5%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D0%BF%D1%87%D0%B5%D0%BB%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 58
+  },
+  {
+    "Name": "риба",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D1%80%D0%B8%D0%B1%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D1%80%D0%B8%D0%B1%D0%B0.m4a",
+    "Category": "Animals",
+    "Position": 59
+  },
+  {
+    "Name": "слон",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D1%81%D0%BB%D0%BE%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D1%81%D0%BB%D0%BE%D0%BD.m4a",
+    "Category": "Animals",
+    "Position": 60
+  },
+  {
+    "Name": "тигар",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D1%82%D0%B8%D0%B3%D0%B0%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D1%82%D0%B8%D0%B3%D0%B0%D1%80.m4a",
+    "Category": "Animals",
+    "Position": 61
+  },
+  {
+    "Name": "хрчак",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D1%85%D1%80%D1%87%D0%B0%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D1%85%D1%80%D1%87%D0%B0%D0%BA.m4a",
+    "Category": "Animals",
+    "Position": 62
+  },
+  {
+    "Name": "црв",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/animals/%D1%86%D1%80%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/animals/%D1%86%D1%80%D0%B2.m4a",
+    "Category": "Animals",
+    "Position": 63
+  },
+  {
+    "Name": "врат",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B2%D1%80%D0%B0%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B2%D1%80%D0%B0%D1%82.m4a",
+    "Category": "Body",
+    "Position": 64
+  },
+  {
+    "Name": "глава",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B3%D0%BB%D0%B0%D0%B2%D0%B0.m4a",
+    "Category": "Body",
+    "Position": 65
+  },
+  {
+    "Name": "грб",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B3%D1%80%D0%B1.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B3%D1%80%D0%B1.m4a",
+    "Category": "Body",
+    "Position": 66
+  },
+  {
+    "Name": "грло",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B3%D1%80%D0%BB%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B3%D1%80%D0%BB%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 67
+  },
+  {
+    "Name": "дланка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B4%D0%BB%D0%B0%D0%BD%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B4%D0%BB%D0%B0%D0%BD%D0%BA%D0%B0.m4a",
+    "Category": "Body",
+    "Position": 68
+  },
+  {
+    "Name": "заби",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B7%D0%B0%D0%B1%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B7%D0%B0%D0%B1%D0%B8.m4a",
+    "Category": "Body",
+    "Position": 69
+  },
+  {
+    "Name": "задник",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%B7%D0%B0%D0%B4%D0%BD%D0%B8%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%B7%D0%B0%D0%B4%D0%BD%D0%B8%D0%BA.m4a",
+    "Category": "Body",
+    "Position": 70
+  },
+  {
+    "Name": "колено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 71
+  },
+  {
+    "Name": "лакт",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BB%D0%B0%D0%BA%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BB%D0%B0%D0%BA%D1%82.m4a",
+    "Category": "Body",
+    "Position": 72
+  },
+  {
+    "Name": "лице",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BB%D0%B8%D1%86%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BB%D0%B8%D1%86%D0%B5.m4a",
+    "Category": "Body",
+    "Position": 73
+  },
+  {
+    "Name": "нога",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BD%D0%BE%D0%B3%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BD%D0%BE%D0%B3%D0%B0.m4a",
+    "Category": "Body",
+    "Position": 74
+  },
+  {
+    "Name": "нокт",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BD%D0%BE%D0%BA%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BD%D0%BE%D0%BA%D1%82.m4a",
+    "Category": "Body",
+    "Position": 75
+  },
+  {
+    "Name": "нос",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BD%D0%BE%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BD%D0%BE%D1%81.m4a",
+    "Category": "Body",
+    "Position": 76
+  },
+  {
+    "Name": "око",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BE%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BE%D0%BA%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 77
+  },
+  {
+    "Name": "прст",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D0%BF%D1%80%D1%81%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D0%BF%D1%80%D1%81%D1%82.m4a",
+    "Category": "Body",
+    "Position": 78
+  },
+  {
+    "Name": "рака",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%80%D0%B0%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%80%D0%B0%D0%BA%D0%B0.m4a",
+    "Category": "Body",
+    "Position": 79
+  },
+  {
+    "Name": "рамо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%80%D0%B0%D0%BC%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%80%D0%B0%D0%BC%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 80
+  },
+  {
+    "Name": "стапало",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%81%D1%82%D0%B0%D0%BF%D0%B0%D0%BB%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%81%D1%82%D0%B0%D0%BF%D0%B0%D0%BB%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 81
+  },
+  {
+    "Name": "стомак",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%81%D1%82%D0%BE%D0%BC%D0%B0%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%81%D1%82%D0%BE%D0%BC%D0%B0%D0%BA.m4a",
+    "Category": "Body",
+    "Position": 82
+  },
+  {
+    "Name": "уво",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%83%D0%B2%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%83%D0%B2%D0%BE.m4a",
+    "Category": "Body",
+    "Position": 83
+  },
+  {
+    "Name": "уста",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%83%D1%81%D1%82%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%83%D1%81%D1%82%D0%B0.m4a",
+    "Category": "Body",
+    "Position": 84
+  },
+  {
+    "Name": "јазик",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/body/%D1%98%D0%B0%D0%B7%D0%B8%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/body/%D1%98%D0%B0%D0%B7%D0%B8%D0%BA.m4a",
+    "Category": "Body",
+    "Position": 85
+  },
+  {
+    "Name": "апостолки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%B0%D0%BF%D0%BE%D1%81%D1%82%D0%BE%D0%BB%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%B0%D0%BF%D0%BE%D1%81%D1%82%D0%BE%D0%BB%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 86
+  },
+  {
+    "Name": "балетанки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%B1%D0%B0%D0%BB%D0%B5%D1%82%D0%B0%D0%BD%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%B1%D0%B0%D0%BB%D0%B5%D1%82%D0%B0%D0%BD%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 87
+  },
+  {
+    "Name": "долен веш",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%B4%D0%BE%D0%BB%D0%B5%D0%BD%20%D0%B2%D0%B5%D1%88.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%B4%D0%BE%D0%BB%D0%B5%D0%BD%20%D0%B2%D0%B5%D1%88.m4a",
+    "Category": "Clothes",
+    "Position": 88
+  },
+  {
+    "Name": "дуксер",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%B4%D1%83%D0%BA%D1%81%D0%B5%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%B4%D1%83%D0%BA%D1%81%D0%B5%D1%80.m4a",
+    "Category": "Clothes",
+    "Position": 89
+  },
+  {
+    "Name": "капа",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BA%D0%B0%D0%BF%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BA%D0%B0%D0%BF%D0%B0.m4a",
+    "Category": "Clothes",
+    "Position": 90
+  },
+  {
+    "Name": "костим за капење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BA%D0%BE%D1%81%D1%82%D0%B8%D0%BC%20%D0%B7%D0%B0%20%D0%BA%D0%B0%D0%BF%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BA%D0%BE%D1%81%D1%82%D0%B8%D0%BC%20%D0%B7%D0%B0%20%D0%BA%D0%B0%D0%BF%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Clothes",
+    "Position": 91
+  },
+  {
+    "Name": "кошула",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BA%D0%BE%D1%88%D1%83%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BA%D0%BE%D1%88%D1%83%D0%BB%D0%B0.m4a",
+    "Category": "Clothes",
+    "Position": 92
+  },
+  {
+    "Name": "маица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BC%D0%B0%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BC%D0%B0%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Clothes",
+    "Position": 93
+  },
+  {
+    "Name": "очила за гледање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BE%D1%87%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D0%B3%D0%BB%D0%B5%D0%B4%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BE%D1%87%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D0%B3%D0%BB%D0%B5%D0%B4%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Clothes",
+    "Position": 94
+  },
+  {
+    "Name": "очила за сонце",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BE%D1%87%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D1%81%D0%BE%D0%BD%D1%86%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BE%D1%87%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D1%81%D0%BE%D0%BD%D1%86%D0%B5.m4a",
+    "Category": "Clothes",
+    "Position": 95
+  },
+  {
+    "Name": "панталони",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BF%D0%B0%D0%BD%D1%82%D0%B0%D0%BB%D0%BE%D0%BD%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BF%D0%B0%D0%BD%D1%82%D0%B0%D0%BB%D0%BE%D0%BD%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 96
+  },
+  {
+    "Name": "папучи",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BF%D0%B0%D0%BF%D1%83%D1%87%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BF%D0%B0%D0%BF%D1%83%D1%87%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 97
+  },
+  {
+    "Name": "патики",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BF%D0%B0%D1%82%D0%B8%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BF%D0%B0%D1%82%D0%B8%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 98
+  },
+  {
+    "Name": "пижами",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D0%BF%D0%B8%D0%B6%D0%B0%D0%BC%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D0%BF%D0%B8%D0%B6%D0%B0%D0%BC%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 99
+  },
+  {
+    "Name": "ракавици",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%80%D0%B0%D0%BA%D0%B0%D0%B2%D0%B8%D1%86%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%80%D0%B0%D0%BA%D0%B0%D0%B2%D0%B8%D1%86%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 100
+  },
+  {
+    "Name": "ранец",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%80%D0%B0%D0%BD%D0%B5%D1%86.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%80%D0%B0%D0%BD%D0%B5%D1%86.m4a",
+    "Category": "Clothes",
+    "Position": 101
+  },
+  {
+    "Name": "ремен",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%80%D0%B5%D0%BC%D0%B5%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%80%D0%B5%D0%BC%D0%B5%D0%BD.m4a",
+    "Category": "Clothes",
+    "Position": 102
+  },
+  {
+    "Name": "сукња",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%81%D1%83%D0%BA%D1%9A%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%81%D1%83%D0%BA%D1%9A%D0%B0.m4a",
+    "Category": "Clothes",
+    "Position": 103
+  },
+  {
+    "Name": "тренерки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%82%D1%80%D0%B5%D0%BD%D0%B5%D1%80%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%82%D1%80%D0%B5%D0%BD%D0%B5%D1%80%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 104
+  },
+  {
+    "Name": "фармерки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%84%D0%B0%D1%80%D0%BC%D0%B5%D1%80%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%84%D0%B0%D1%80%D0%BC%D0%B5%D1%80%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 105
+  },
+  {
+    "Name": "фустан",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%84%D1%83%D1%81%D1%82%D0%B0%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%84%D1%83%D1%81%D1%82%D0%B0%D0%BD.m4a",
+    "Category": "Clothes",
+    "Position": 106
+  },
+  {
+    "Name": "хеланки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%85%D0%B5%D0%BB%D0%B0%D0%BD%D0%BA%D0%B8.png",
+    "AudioVoice": "",
+    "Category": "Clothes",
+    "Position": 107
+  },
+  {
+    "Name": "хулахопки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%85%D1%83%D0%BB%D0%B0%D1%85%D0%BE%D0%BF%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%85%D1%83%D0%BB%D0%B0%D1%85%D0%BE%D0%BF%D0%BA%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 108
+  },
+  {
+    "Name": "чадор",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%87%D0%B0%D0%B4%D0%BE%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%87%D0%B0%D0%B4%D0%BE%D1%80.m4a",
+    "Category": "Clothes",
+    "Position": 109
+  },
+  {
+    "Name": "часовник",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%87%D0%B0%D1%81%D0%BE%D0%B2%D0%BD%D0%B8%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%87%D0%B0%D1%81%D0%BE%D0%B2%D0%BD%D0%B8%D0%BA.m4a",
+    "Category": "Clothes",
+    "Position": 110
+  },
+  {
+    "Name": "чизми",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%87%D0%B8%D0%B7%D0%BC%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%87%D0%B8%D0%B7%D0%BC%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 111
+  },
+  {
+    "Name": "чорапи",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%87%D0%BE%D1%80%D0%B0%D0%BF%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%87%D0%BE%D1%80%D0%B0%D0%BF%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 112
+  },
+  {
+    "Name": "шал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%88%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%88%D0%B0%D0%BB.m4a",
+    "Category": "Clothes",
+    "Position": 113
+  },
+  {
+    "Name": "шорцеви",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%88%D0%BE%D1%80%D1%86%D0%B5%D0%B2%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%88%D0%BE%D1%80%D1%86%D0%B5%D0%B2%D0%B8.m4a",
+    "Category": "Clothes",
+    "Position": 114
+  },
+  {
+    "Name": "јакна",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%98%D0%B0%D0%BA%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%98%D0%B0%D0%BA%D0%BD%D0%B0.m4a",
+    "Category": "Clothes",
+    "Position": 115
+  },
+  {
+    "Name": "џемпер",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/clothes/%D1%9F%D0%B5%D0%BC%D0%BF%D0%B5%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/clothes/%D1%9F%D0%B5%D0%BC%D0%BF%D0%B5%D1%80.m4a",
+    "Category": "Clothes",
+    "Position": 116
+  },
+  {
+    "Name": "бела",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%B1%D0%B5%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%B1%D0%B5%D0%BB%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 117
+  },
+  {
+    "Name": "виолетова",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%B2%D0%B8%D0%BE%D0%BB%D0%B5%D1%82%D0%BE%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%B2%D0%B8%D0%BE%D0%BB%D0%B5%D1%82%D0%BE%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 118
+  },
+  {
+    "Name": "жолта",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%B6%D0%BE%D0%BB%D1%82%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%B6%D0%BE%D0%BB%D1%82%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 119
+  },
+  {
+    "Name": "зелена",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 120
+  },
+  {
+    "Name": "кафеава",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%BA%D0%B0%D1%84%D0%B5%D0%B0%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%BA%D0%B0%D1%84%D0%B5%D0%B0%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 121
+  },
+  {
+    "Name": "портокалова",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB%D0%BE%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB%D0%BE%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 122
+  },
+  {
+    "Name": "розева",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%80%D0%BE%D0%B7%D0%B5%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%80%D0%BE%D0%B7%D0%B5%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 123
+  },
+  {
+    "Name": "светлорозева",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D1%80%D0%BE%D0%B7%D0%B5%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D1%80%D0%BE%D0%B7%D0%B5%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 124
+  },
+  {
+    "Name": "светлосина",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D1%81%D0%B8%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D1%81%D0%B8%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 125
+  },
+  {
+    "Name": "сива",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%81%D0%B8%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%81%D0%B8%D0%B2%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 126
+  },
+  {
+    "Name": "сина",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%81%D0%B8%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%81%D0%B8%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 127
+  },
+  {
+    "Name": "темнозелена",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%82%D0%B5%D0%BC%D0%BD%D0%BE%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%82%D0%B5%D0%BC%D0%BD%D0%BE%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 128
+  },
+  {
+    "Name": "тиркизна",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%82%D0%B8%D1%80%D0%BA%D0%B8%D0%B7%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%82%D0%B8%D1%80%D0%BA%D0%B8%D0%B7%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 129
+  },
+  {
+    "Name": "црвена",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%86%D1%80%D0%B2%D0%B5%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%86%D1%80%D0%B2%D0%B5%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 130
+  },
+  {
+    "Name": "црна",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/colors/%D1%86%D1%80%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/colors/%D1%86%D1%80%D0%BD%D0%B0.m4a",
+    "Category": "Colors",
+    "Position": 131
+  },
+  {
+    "Name": "благодарам",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%B0%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%B0%D0%BC.m4a",
+    "Category": "Communication",
+    "Position": 132
+  },
+  {
+    "Name": "влези",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B2%D0%BB%D0%B5%D0%B7%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B2%D0%BB%D0%B5%D0%B7%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 133
+  },
+  {
+    "Name": "да",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B4%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B4%D0%B0.m4a",
+    "Category": "Communication",
+    "Position": 134
+  },
+  {
+    "Name": "здраво",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BE.m4a",
+    "Category": "Communication",
+    "Position": 135
+  },
+  {
+    "Name": "зошто",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B7%D0%BE%D1%88%D1%82%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B7%D0%BE%D1%88%D1%82%D0%BE.m4a",
+    "Category": "Communication",
+    "Position": 136
+  },
+  {
+    "Name": "извини",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B8%D0%B7%D0%B2%D0%B8%D0%BD%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B8%D0%B7%D0%B2%D0%B8%D0%BD%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 137
+  },
+  {
+    "Name": "излези",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%B8%D0%B7%D0%BB%D0%B5%D0%B7%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%B8%D0%B7%D0%BB%D0%B5%D0%B7%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 138
+  },
+  {
+    "Name": "каде",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BA%D0%B0%D0%B4%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BA%D0%B0%D0%B4%D0%B5.m4a",
+    "Category": "Communication",
+    "Position": 139
+  },
+  {
+    "Name": "како",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BA%D0%B0%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BA%D0%B0%D0%BA%D0%BE.m4a",
+    "Category": "Communication",
+    "Position": 140
+  },
+  {
+    "Name": "кога",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BA%D0%BE%D0%B3%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BA%D0%BE%D0%B3%D0%B0.m4a",
+    "Category": "Communication",
+    "Position": 141
+  },
+  {
+    "Name": "колку",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BA%D0%BE%D0%BB%D0%BA%D1%83.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BA%D0%BE%D0%BB%D0%BA%D1%83.m4a",
+    "Category": "Communication",
+    "Position": 142
+  },
+  {
+    "Name": "кој",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BA%D0%BE%D1%98.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BA%D0%BE%D1%98.m4a",
+    "Category": "Communication",
+    "Position": 143
+  },
+  {
+    "Name": "не сакам",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BD%D0%B5%20%D1%81%D0%B0%D0%BA%D0%B0%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BD%D0%B5%20%D1%81%D0%B0%D0%BA%D0%B0%D0%BC.m4a",
+    "Category": "Communication",
+    "Position": 144
+  },
+  {
+    "Name": "не",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BD%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BD%D0%B5.m4a",
+    "Category": "Communication",
+    "Position": 145
+  },
+  {
+    "Name": "повели",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D0%B2%D0%B5%D0%BB%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D0%B2%D0%B5%D0%BB%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 146
+  },
+  {
+    "Name": "повтори",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 147
+  },
+  {
+    "Name": "погледни",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D0%B3%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D0%B3%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 148
+  },
+  {
+    "Name": "помирисај",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D0%BC%D0%B8%D1%80%D0%B8%D1%81%D0%B0%D1%98.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D0%BC%D0%B8%D1%80%D0%B8%D1%81%D0%B0%D1%98.m4a",
+    "Category": "Communication",
+    "Position": 149
+  },
+  {
+    "Name": "помош",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D0%BC%D0%BE%D1%88.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D0%BC%D0%BE%D1%88.m4a",
+    "Category": "Communication",
+    "Position": 150
+  },
+  {
+    "Name": "почекај",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D0%BF%D0%BE%D1%87%D0%B5%D0%BA%D0%B0%D1%98.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D0%BF%D0%BE%D1%87%D0%B5%D0%BA%D0%B0%D1%98.m4a",
+    "Category": "Communication",
+    "Position": 151
+  },
+  {
+    "Name": "сакам",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%81%D0%B0%D0%BA%D0%B0%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%81%D0%B0%D0%BA%D0%B0%D0%BC.m4a",
+    "Category": "Communication",
+    "Position": 152
+  },
+  {
+    "Name": "слушни",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%81%D0%BB%D1%83%D1%88%D0%BD%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%81%D0%BB%D1%83%D1%88%D0%BD%D0%B8.m4a",
+    "Category": "Communication",
+    "Position": 153
+  },
+  {
+    "Name": "стоп",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%81%D1%82%D0%BE%D0%BF.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%81%D1%82%D0%BE%D0%BF.m4a",
+    "Category": "Communication",
+    "Position": 154
+  },
+  {
+    "Name": "те молам",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%82%D0%B5%20%D0%BC%D0%BE%D0%BB%D0%B0%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%82%D0%B5%20%D0%BC%D0%BE%D0%BB%D0%B0%D0%BC.m4a",
+    "Category": "Communication",
+    "Position": 155
+  },
+  {
+    "Name": "чао",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%87%D0%B0%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%87%D0%B0%D0%BE.m4a",
+    "Category": "Communication",
+    "Position": 156
+  },
+  {
+    "Name": "што",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/communication/%D1%88%D1%82%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/communication/%D1%88%D1%82%D0%BE.m4a",
+    "Category": "Communication",
+    "Position": 157
+  },
+  {
+    "Name": "вода",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D0%B2%D0%BE%D0%B4%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D0%B2%D0%BE%D0%B4%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 158
+  },
+  {
+    "Name": "газиран сок",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%B0%D0%BD%20%D1%81%D0%BE%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D0%B3%D0%B0%D0%B7%D0%B8%D1%80%D0%B0%D0%BD%20%D1%81%D0%BE%D0%BA.m4a",
+    "Category": "Drinks",
+    "Position": 159
+  },
+  {
+    "Name": "лимонада",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%D0%B4%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%D0%B4%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 160
+  },
+  {
+    "Name": "милкшејк",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D0%BC%D0%B8%D0%BB%D0%BA%D1%88%D0%B5%D1%98%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D0%BC%D0%B8%D0%BB%D0%BA%D1%88%D0%B5%D1%98%D0%BA.m4a",
+    "Category": "Drinks",
+    "Position": 161
+  },
+  {
+    "Name": "млеко",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D0%BC%D0%BB%D0%B5%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D0%BC%D0%BB%D0%B5%D0%BA%D0%BE.m4a",
+    "Category": "Drinks",
+    "Position": 162
+  },
+  {
+    "Name": "салеп",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%B0%D0%BB%D0%B5%D0%BF.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%B0%D0%BB%D0%B5%D0%BF.m4a",
+    "Category": "Drinks",
+    "Position": 163
+  },
+  {
+    "Name": "сламка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BB%D0%B0%D0%BC%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BB%D0%B0%D0%BC%D0%BA%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 164
+  },
+  {
+    "Name": "сок од ананас",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0%D1%81.m4a",
+    "Category": "Drinks",
+    "Position": 165
+  },
+  {
+    "Name": "сок од вишна",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%B2%D0%B8%D1%88%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%B2%D0%B8%D1%88%D0%BD%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 166
+  },
+  {
+    "Name": "сок од калинка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%BA%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 167
+  },
+  {
+    "Name": "сок од портокал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB.m4a",
+    "Category": "Drinks",
+    "Position": 168
+  },
+  {
+    "Name": "сок од праска",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BF%D1%80%D0%B0%D1%81%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D0%BF%D1%80%D0%B0%D1%81%D0%BA%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 169
+  },
+  {
+    "Name": "сок од јаболко",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D1%98%D0%B0%D0%B1%D0%BE%D0%BB%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA%20%D0%BE%D0%B4%20%D1%98%D0%B0%D0%B1%D0%BE%D0%BB%D0%BA%D0%BE.m4a",
+    "Category": "Drinks",
+    "Position": 170
+  },
+  {
+    "Name": "сок",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%81%D0%BE%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%81%D0%BE%D0%BA.m4a",
+    "Category": "Drinks",
+    "Position": 171
+  },
+  {
+    "Name": "топло чоколадо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%82%D0%BE%D0%BF%D0%BB%D0%BE%20%D1%87%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%82%D0%BE%D0%BF%D0%BB%D0%BE%20%D1%87%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BE.m4a",
+    "Category": "Drinks",
+    "Position": 172
+  },
+  {
+    "Name": "чаша со клунче",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%87%D0%B0%D1%88%D0%B0%20%D1%81%D0%BE%20%D0%BA%D0%BB%D1%83%D0%BD%D1%87%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%87%D0%B0%D1%88%D0%B0%20%D1%81%D0%BE%20%D0%BA%D0%BB%D1%83%D0%BD%D1%87%D0%B5.m4a",
+    "Category": "Drinks",
+    "Position": 173
+  },
+  {
+    "Name": "чаша со сламка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%87%D0%B0%D1%88%D0%B0%20%D1%81%D0%BE%20%D1%81%D0%BB%D0%B0%D0%BC%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%87%D0%B0%D1%88%D0%B0%20%D1%81%D0%BE%20%D1%81%D0%BB%D0%B0%D0%BC%D0%BA%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 174
+  },
+  {
+    "Name": "чаша",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%87%D0%B0%D1%88%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%87%D0%B0%D1%88%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 175
+  },
+  {
+    "Name": "чај",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%87%D0%B0%D1%98.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%87%D0%B0%D1%98.m4a",
+    "Category": "Drinks",
+    "Position": 176
+  },
+  {
+    "Name": "шише",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%88%D0%B8%D1%88%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%88%D0%B8%D1%88%D0%B5.m4a",
+    "Category": "Drinks",
+    "Position": 177
+  },
+  {
+    "Name": "шолја",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%88%D0%BE%D0%BB%D1%98%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%88%D0%BE%D0%BB%D1%98%D0%B0.m4a",
+    "Category": "Drinks",
+    "Position": 178
+  },
+  {
+    "Name": "јогурт",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/drinks/%D1%98%D0%BE%D0%B3%D1%83%D1%80%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/drinks/%D1%98%D0%BE%D0%B3%D1%83%D1%80%D1%82.m4a",
+    "Category": "Drinks",
+    "Position": 179
+  },
+  {
+    "Name": "болно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B1%D0%BE%D0%BB%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B1%D0%BE%D0%BB%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 180
+  },
+  {
+    "Name": "возбудено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B2%D0%BE%D0%B7%D0%B1%D1%83%D0%B4%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B2%D0%BE%D0%B7%D0%B1%D1%83%D0%B4%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 181
+  },
+  {
+    "Name": "гадно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B3%D0%B0%D0%B4%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B3%D0%B0%D0%B4%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 182
+  },
+  {
+    "Name": "гладно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B3%D0%BB%D0%B0%D0%B4%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B3%D0%BB%D0%B0%D0%B4%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 183
+  },
+  {
+    "Name": "засрамено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B7%D0%B0%D1%81%D1%80%D0%B0%D0%BC%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B7%D0%B0%D1%81%D1%80%D0%B0%D0%BC%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 184
+  },
+  {
+    "Name": "заљубено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B7%D0%B0%D1%99%D1%83%D0%B1%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B7%D0%B0%D1%99%D1%83%D0%B1%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 185
+  },
+  {
+    "Name": "збунето",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B7%D0%B1%D1%83%D0%BD%D0%B5%D1%82%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B7%D0%B1%D1%83%D0%BD%D0%B5%D1%82%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 186
+  },
+  {
+    "Name": "исплашено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%B8%D1%81%D0%BF%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%B8%D1%81%D0%BF%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 187
+  },
+  {
+    "Name": "луто",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%BB%D1%83%D1%82%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%BB%D1%83%D1%82%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 188
+  },
+  {
+    "Name": "мирно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%BC%D0%B8%D1%80%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%BC%D0%B8%D1%80%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 189
+  },
+  {
+    "Name": "повредено",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D0%BF%D0%BE%D0%B2%D1%80%D0%B5%D0%B4%D0%B5%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D0%BF%D0%BE%D0%B2%D1%80%D0%B5%D0%B4%D0%B5%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 190
+  },
+  {
+    "Name": "смешно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D1%81%D0%BC%D0%B5%D1%88%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D1%81%D0%BC%D0%B5%D1%88%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 191
+  },
+  {
+    "Name": "среќно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D1%81%D1%80%D0%B5%D1%9C%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D1%81%D1%80%D0%B5%D1%9C%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 192
+  },
+  {
+    "Name": "стресно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D1%81%D1%82%D1%80%D0%B5%D1%81%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D1%81%D1%82%D1%80%D0%B5%D1%81%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 193
+  },
+  {
+    "Name": "тажно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D1%82%D0%B0%D0%B6%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D1%82%D0%B0%D0%B6%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 194
+  },
+  {
+    "Name": "уморно",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/feelings/%D1%83%D0%BC%D0%BE%D1%80%D0%BD%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/feelings/%D1%83%D0%BC%D0%BE%D1%80%D0%BD%D0%BE.m4a",
+    "Category": "Feelings",
+    "Position": 195
+  },
+  {
+    "Name": "бибер",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%B1%D0%B8%D0%B1%D0%B5%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%B1%D0%B8%D0%B1%D0%B5%D1%80.m4a",
+    "Category": "Food",
+    "Position": 196
+  },
+  {
+    "Name": "бонбона",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%B1%D0%BE%D0%BD%D0%B1%D0%BE%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%B1%D0%BE%D0%BD%D0%B1%D0%BE%D0%BD%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 197
+  },
+  {
+    "Name": "бонбони",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%B1%D0%BE%D0%BD%D0%B1%D0%BE%D0%BD%D0%B8.png",
+    "AudioVoice": "",
+    "Category": "Food",
+    "Position": 198
+  },
+  {
+    "Name": "бургер",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%B1%D1%83%D1%80%D0%B3%D0%B5%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%B1%D1%83%D1%80%D0%B3%D0%B5%D1%80.m4a",
+    "Category": "Food",
+    "Position": 199
+  },
+  {
+    "Name": "вилушка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%B2%D0%B8%D0%BB%D1%83%D1%88%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%B2%D0%B8%D0%BB%D1%83%D1%88%D0%BA%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 200
+  },
+  {
+    "Name": "каша",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%B0%D1%88%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%B0%D1%88%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 201
+  },
+  {
+    "Name": "кашкавал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%B0%D1%88%D0%BA%D0%B0%D0%B2%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%B0%D1%88%D0%BA%D0%B0%D0%B2%D0%B0%D0%BB.m4a",
+    "Category": "Food",
+    "Position": 202
+  },
+  {
+    "Name": "кечап",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%B5%D1%87%D0%B0%D0%BF.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%B5%D1%87%D0%B0%D0%BF.m4a",
+    "Category": "Food",
+    "Position": 203
+  },
+  {
+    "Name": "кифла",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%B8%D1%84%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%B8%D1%84%D0%BB%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 204
+  },
+  {
+    "Name": "колаче",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%BE%D0%BB%D0%B0%D1%87%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%BE%D0%BB%D0%B0%D1%87%D0%B5.m4a",
+    "Category": "Food",
+    "Position": 205
+  },
+  {
+    "Name": "компири",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80%D0%B8.m4a",
+    "Category": "Food",
+    "Position": 206
+  },
+  {
+    "Name": "корнфлекс",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D0%BE%D1%80%D0%BD%D1%84%D0%BB%D0%B5%D0%BA%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D0%BE%D1%80%D0%BD%D1%84%D0%BB%D0%B5%D0%BA%D1%81.m4a",
+    "Category": "Food",
+    "Position": 207
+  },
+  {
+    "Name": "крем",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BA%D1%80%D0%B5%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BA%D1%80%D0%B5%D0%BC.m4a",
+    "Category": "Food",
+    "Position": 208
+  },
+  {
+    "Name": "лажица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BB%D0%B0%D0%B6%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BB%D0%B0%D0%B6%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 209
+  },
+  {
+    "Name": "леб",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BB%D0%B5%D0%B1.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BB%D0%B5%D0%B1.m4a",
+    "Category": "Food",
+    "Position": 210
+  },
+  {
+    "Name": "мајонез",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BC%D0%B0%D1%98%D0%BE%D0%BD%D0%B5%D0%B7.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BC%D0%B0%D1%98%D0%BE%D0%BD%D0%B5%D0%B7.m4a",
+    "Category": "Food",
+    "Position": 211
+  },
+  {
+    "Name": "мед",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BC%D0%B5%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BC%D0%B5%D0%B4.m4a",
+    "Category": "Food",
+    "Position": 212
+  },
+  {
+    "Name": "месо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BC%D0%B5%D1%81%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BC%D0%B5%D1%81%D0%BE.m4a",
+    "Category": "Food",
+    "Position": 213
+  },
+  {
+    "Name": "нож",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BD%D0%BE%D0%B6.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BD%D0%BE%D0%B6.m4a",
+    "Category": "Food",
+    "Position": 214
+  },
+  {
+    "Name": "ориз",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BE%D1%80%D0%B8%D0%B7.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BE%D1%80%D0%B8%D0%B7.m4a",
+    "Category": "Food",
+    "Position": 215
+  },
+  {
+    "Name": "палачинка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BF%D0%B0%D0%BB%D0%B0%D1%87%D0%B8%D0%BD%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BF%D0%B0%D0%BB%D0%B0%D1%87%D0%B8%D0%BD%D0%BA%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 216
+  },
+  {
+    "Name": "палента",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BF%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BF%D0%B0%D0%BB%D0%B5%D0%BD%D1%82%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 217
+  },
+  {
+    "Name": "перек",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA.m4a",
+    "Category": "Food",
+    "Position": 218
+  },
+  {
+    "Name": "риба",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%80%D0%B8%D0%B1%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%80%D0%B8%D0%B1%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 219
+  },
+  {
+    "Name": "салата",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%B0%D0%BB%D0%B0%D1%82%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%B0%D0%BB%D0%B0%D1%82%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 220
+  },
+  {
+    "Name": "салфетка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%B0%D0%BB%D1%84%D0%B5%D1%82%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%B0%D0%BB%D1%84%D0%B5%D1%82%D0%BA%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 221
+  },
+  {
+    "Name": "сендвич",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%B5%D0%BD%D0%B4%D0%B2%D0%B8%D1%87.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%B5%D0%BD%D0%B4%D0%B2%D0%B8%D1%87.m4a",
+    "Category": "Food",
+    "Position": 222
+  },
+  {
+    "Name": "сенф",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%B5%D0%BD%D1%84.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%B5%D0%BD%D1%84.m4a",
+    "Category": "Food",
+    "Position": 223
+  },
+  {
+    "Name": "сирење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%B8%D1%80%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%B8%D1%80%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Food",
+    "Position": 224
+  },
+  {
+    "Name": "сладолед",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%BB%D0%B0%D0%B4%D0%BE%D0%BB%D0%B5%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%BB%D0%B0%D0%B4%D0%BE%D0%BB%D0%B5%D0%B4.m4a",
+    "Category": "Food",
+    "Position": 225
+  },
+  {
+    "Name": "сол",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D0%BE%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D0%BE%D0%BB.m4a",
+    "Category": "Food",
+    "Position": 226
+  },
+  {
+    "Name": "супа",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%81%D1%83%D0%BF%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%81%D1%83%D0%BF%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 227
+  },
+  {
+    "Name": "тестенини",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%82%D0%B5%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D0%BD%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%82%D0%B5%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D0%BD%D0%B8.m4a",
+    "Category": "Food",
+    "Position": 228
+  },
+  {
+    "Name": "торта",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%82%D0%BE%D1%80%D1%82%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%82%D0%BE%D1%80%D1%82%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 229
+  },
+  {
+    "Name": "чинија",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%87%D0%B8%D0%BD%D0%B8%D1%98%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%87%D0%B8%D0%BD%D0%B8%D1%98%D0%B0.m4a",
+    "Category": "Food",
+    "Position": 230
+  },
+  {
+    "Name": "чоколадо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%87%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%87%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BE.m4a",
+    "Category": "Food",
+    "Position": 231
+  },
+  {
+    "Name": "ѓеврек",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%93%D0%B5%D0%B2%D1%80%D0%B5%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%93%D0%B5%D0%B2%D1%80%D0%B5%D0%BA.m4a",
+    "Category": "Food",
+    "Position": 232
+  },
+  {
+    "Name": "јајце",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%98%D0%B0%D1%98%D1%86%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%98%D0%B0%D1%98%D1%86%D0%B5.m4a",
+    "Category": "Food",
+    "Position": 233
+  },
+  {
+    "Name": "џем",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/food/%D1%9F%D0%B5%D0%BC.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/food/%D1%9F%D0%B5%D0%BC.m4a",
+    "Category": "Food",
+    "Position": 234
+  },
+  {
+    "Name": "ананас",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0%D1%81.m4a",
+    "Category": "Fruits",
+    "Position": 235
+  },
+  {
+    "Name": "банана",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%B1%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%B1%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 236
+  },
+  {
+    "Name": "грозје",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%B3%D1%80%D0%BE%D0%B7%D1%98%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%B3%D1%80%D0%BE%D0%B7%D1%98%D0%B5.m4a",
+    "Category": "Fruits",
+    "Position": 237
+  },
+  {
+    "Name": "диња",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%B4%D0%B8%D1%9A%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%B4%D0%B8%D1%9A%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 238
+  },
+  {
+    "Name": "калинка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%BA%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 239
+  },
+  {
+    "Name": "кајсија",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BA%D0%B0%D1%98%D1%81%D0%B8%D1%98%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BA%D0%B0%D1%98%D1%81%D0%B8%D1%98%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 240
+  },
+  {
+    "Name": "киви",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BA%D0%B8%D0%B2%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BA%D0%B8%D0%B2%D0%B8.m4a",
+    "Category": "Fruits",
+    "Position": 241
+  },
+  {
+    "Name": "круша",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BA%D1%80%D1%83%D1%88%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BA%D1%80%D1%83%D1%88%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 242
+  },
+  {
+    "Name": "лимон",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD.m4a",
+    "Category": "Fruits",
+    "Position": 243
+  },
+  {
+    "Name": "лубеница",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BB%D1%83%D0%B1%D0%B5%D0%BD%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BB%D1%83%D0%B1%D0%B5%D0%BD%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 244
+  },
+  {
+    "Name": "малина",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BC%D0%B0%D0%BB%D0%B8%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BC%D0%B0%D0%BB%D0%B8%D0%BD%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 245
+  },
+  {
+    "Name": "манго",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BC%D0%B0%D0%BD%D0%B3%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BC%D0%B0%D0%BD%D0%B3%D0%BE.m4a",
+    "Category": "Fruits",
+    "Position": 246
+  },
+  {
+    "Name": "мандарина",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D0%B8%D0%BD%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D0%B8%D0%BD%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 247
+  },
+  {
+    "Name": "портокал",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB.m4a",
+    "Category": "Fruits",
+    "Position": 248
+  },
+  {
+    "Name": "портокал1",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%BA%D0%B0%D0%BB1.png",
+    "AudioVoice": "",
+    "Category": "Fruits",
+    "Position": 249
+  },
+  {
+    "Name": "праска",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D0%BF%D1%80%D0%B0%D1%81%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D0%BF%D1%80%D0%B0%D1%81%D0%BA%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 250
+  },
+  {
+    "Name": "смоква",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%81%D0%BC%D0%BE%D0%BA%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%81%D0%BC%D0%BE%D0%BA%D0%B2%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 251
+  },
+  {
+    "Name": "тиква",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%82%D0%B8%D0%BA%D0%B2%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%82%D0%B8%D0%BA%D0%B2%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 252
+  },
+  {
+    "Name": "цитрон",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%86%D0%B8%D1%82%D1%80%D0%BE%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%86%D0%B8%D1%82%D1%80%D0%BE%D0%BD.m4a",
+    "Category": "Fruits",
+    "Position": 253
+  },
+  {
+    "Name": "цреша",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%86%D1%80%D0%B5%D1%88%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%86%D1%80%D0%B5%D1%88%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 254
+  },
+  {
+    "Name": "јаболко",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%98%D0%B0%D0%B1%D0%BE%D0%BB%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%98%D0%B0%D0%B1%D0%BE%D0%BB%D0%BA%D0%BE.m4a",
+    "Category": "Fruits",
+    "Position": 255
+  },
+  {
+    "Name": "јагода",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/fruits/%D1%98%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/fruits/%D1%98%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0.m4a",
+    "Category": "Fruits",
+    "Position": 256
+  },
+  {
+    "Name": "0",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/0.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 257
+  },
+  {
+    "Name": "1",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/1.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 258
+  },
+  {
+    "Name": "2",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/2.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 259
+  },
+  {
+    "Name": "3",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/3.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 260
+  },
+  {
+    "Name": "4",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/4.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 261
+  },
+  {
+    "Name": "5",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/5.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 262
+  },
+  {
+    "Name": "6",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/6.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 263
+  },
+  {
+    "Name": "7",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/7.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 264
+  },
+  {
+    "Name": "8",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/8.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 265
+  },
+  {
+    "Name": "9",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/numbers/9.png",
+    "AudioVoice": "",
+    "Category": "Numbers",
+    "Position": 266
+  },
+  {
+    "Name": "баба",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B1%D0%B0%D0%B1%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B1%D0%B0%D0%B1%D0%B0.m4a",
+    "Category": "People",
+    "Position": 267
+  },
+  {
+    "Name": "бебе",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B1%D0%B5%D0%B1%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B1%D0%B5%D0%B1%D0%B5.m4a",
+    "Category": "People",
+    "Position": 268
+  },
+  {
+    "Name": "брат",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B1%D1%80%D0%B0%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B1%D1%80%D0%B0%D1%82.m4a",
+    "Category": "People",
+    "Position": 269
+  },
+  {
+    "Name": "братучеди",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B1%D1%80%D0%B0%D1%82%D1%83%D1%87%D0%B5%D0%B4%D0%B8.png",
+    "AudioVoice": "",
+    "Category": "People",
+    "Position": 270
+  },
+  {
+    "Name": "дедо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B4%D0%B5%D0%B4%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B4%D0%B5%D0%B4%D0%BE.m4a",
+    "Category": "People",
+    "Position": 271
+  },
+  {
+    "Name": "доктор",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B4%D0%BE%D0%BA%D1%82%D0%BE%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B4%D0%BE%D0%BA%D1%82%D0%BE%D1%80.m4a",
+    "Category": "People",
+    "Position": 272
+  },
+  {
+    "Name": "другар",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%B4%D1%80%D1%83%D0%B3%D0%B0%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%B4%D1%80%D1%83%D0%B3%D0%B0%D1%80.m4a",
+    "Category": "People",
+    "Position": 273
+  },
+  {
+    "Name": "логопед",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BF%D0%B5%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%BB%D0%BE%D0%B3%D0%BE%D0%BF%D0%B5%D0%B4.m4a",
+    "Category": "People",
+    "Position": 274
+  },
+  {
+    "Name": "мајка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D0%BC%D0%B0%D1%98%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D0%BC%D0%B0%D1%98%D0%BA%D0%B0.m4a",
+    "Category": "People",
+    "Position": 275
+  },
+  {
+    "Name": "семејство",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%81%D0%B5%D0%BC%D0%B5%D1%98%D1%81%D1%82%D0%B2%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%81%D0%B5%D0%BC%D0%B5%D1%98%D1%81%D1%82%D0%B2%D0%BE.m4a",
+    "Category": "People",
+    "Position": 276
+  },
+  {
+    "Name": "сестра",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0.m4a",
+    "Category": "People",
+    "Position": 277
+  },
+  {
+    "Name": "симпатија",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%81%D0%B8%D0%BC%D0%BF%D0%B0%D1%82%D0%B8%D1%98%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%81%D0%B8%D0%BC%D0%BF%D0%B0%D1%82%D0%B8%D1%98%D0%B0.m4a",
+    "Category": "People",
+    "Position": 278
+  },
+  {
+    "Name": "татко",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%82%D0%B0%D1%82%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%82%D0%B0%D1%82%D0%BA%D0%BE.m4a",
+    "Category": "People",
+    "Position": 279
+  },
+  {
+    "Name": "тетка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%82%D0%B5%D1%82%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%82%D0%B5%D1%82%D0%BA%D0%B0.m4a",
+    "Category": "People",
+    "Position": 280
+  },
+  {
+    "Name": "учител",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%83%D1%87%D0%B8%D1%82%D0%B5%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%83%D1%87%D0%B8%D1%82%D0%B5%D0%BB.m4a",
+    "Category": "People",
+    "Position": 281
+  },
+  {
+    "Name": "учителка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%83%D1%87%D0%B8%D1%82%D0%B5%D0%BB%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%83%D1%87%D0%B8%D1%82%D0%B5%D0%BB%D0%BA%D0%B0.m4a",
+    "Category": "People",
+    "Position": 282
+  },
+  {
+    "Name": "чичко",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/people/%D1%87%D0%B8%D1%87%D0%BA%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/people/%D1%87%D0%B8%D1%87%D0%BA%D0%BE.m4a",
+    "Category": "People",
+    "Position": 283
+  },
+  {
+    "Name": "вежбање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%B2%D0%B5%D0%B6%D0%B1%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%B2%D0%B5%D0%B6%D0%B1%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 284
+  },
+  {
+    "Name": "готвење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%B3%D0%BE%D1%82%D0%B2%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%B3%D0%BE%D1%82%D0%B2%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 285
+  },
+  {
+    "Name": "капење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%BA%D0%B0%D0%BF%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%BA%D0%B0%D0%BF%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 286
+  },
+  {
+    "Name": "миење заби",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D0%B7%D0%B0%D0%B1%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D0%B7%D0%B0%D0%B1%D0%B8.m4a",
+    "Category": "Routines",
+    "Position": 287
+  },
+  {
+    "Name": "миење лице",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D0%BB%D0%B8%D1%86%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D0%BB%D0%B8%D1%86%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 288
+  },
+  {
+    "Name": "миење раце",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D1%80%D0%B0%D1%86%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%BC%D0%B8%D0%B5%D1%9A%D0%B5%20%D1%80%D0%B0%D1%86%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 289
+  },
+  {
+    "Name": "облекување",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D0%BE%D0%B1%D0%BB%D0%B5%D0%BA%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D0%BE%D0%B1%D0%BB%D0%B5%D0%BA%D1%83%D0%B2%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 290
+  },
+  {
+    "Name": "спиење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D1%81%D0%BF%D0%B8%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D1%81%D0%BF%D0%B8%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 291
+  },
+  {
+    "Name": "тоалет",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D1%82%D0%BE%D0%B0%D0%BB%D0%B5%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D1%82%D0%BE%D0%B0%D0%BB%D0%B5%D1%82.m4a",
+    "Category": "Routines",
+    "Position": 292
+  },
+  {
+    "Name": "чешлање",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D1%87%D0%B5%D1%88%D0%BB%D0%B0%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D1%87%D0%B5%D1%88%D0%BB%D0%B0%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 293
+  },
+  {
+    "Name": "чистење",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/routines/%D1%87%D0%B8%D1%81%D1%82%D0%B5%D1%9A%D0%B5.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/routines/%D1%87%D0%B8%D1%81%D1%82%D0%B5%D1%9A%D0%B5.m4a",
+    "Category": "Routines",
+    "Position": 294
+  },
+  {
+    "Name": "авокадо",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B0%D0%B2%D0%BE%D0%BA%D0%B0%D0%B4%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B0%D0%B2%D0%BE%D0%BA%D0%B0%D0%B4%D0%BE.m4a",
+    "Category": "Vegetables",
+    "Position": 295
+  },
+  {
+    "Name": "аспарагус",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B0%D1%81%D0%BF%D0%B0%D1%80%D0%B0%D0%B3%D1%83%D1%81.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B0%D1%81%D0%BF%D0%B0%D1%80%D0%B0%D0%B3%D1%83%D1%81.m4a",
+    "Category": "Vegetables",
+    "Position": 296
+  },
+  {
+    "Name": "брокула",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B1%D1%80%D0%BE%D0%BA%D1%83%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B1%D1%80%D0%BE%D0%BA%D1%83%D0%BB%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 297
+  },
+  {
+    "Name": "грав",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B3%D1%80%D0%B0%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B3%D1%80%D0%B0%D0%B2.m4a",
+    "Category": "Vegetables",
+    "Position": 298
+  },
+  {
+    "Name": "грашок",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B3%D1%80%D0%B0%D1%88%D0%BE%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B3%D1%80%D0%B0%D1%88%D0%BE%D0%BA.m4a",
+    "Category": "Vegetables",
+    "Position": 299
+  },
+  {
+    "Name": "домат",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B4%D0%BE%D0%BC%D0%B0%D1%82.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B4%D0%BE%D0%BC%D0%B0%D1%82.m4a",
+    "Category": "Vegetables",
+    "Position": 300
+  },
+  {
+    "Name": "зелка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%B7%D0%B5%D0%BB%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%B7%D0%B5%D0%BB%D0%BA%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 301
+  },
+  {
+    "Name": "карфиол",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BA%D0%B0%D1%80%D1%84%D0%B8%D0%BE%D0%BB.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BA%D0%B0%D1%80%D1%84%D0%B8%D0%BE%D0%BB.m4a",
+    "Category": "Vegetables",
+    "Position": 302
+  },
+  {
+    "Name": "компир",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80.m4a",
+    "Category": "Vegetables",
+    "Position": 303
+  },
+  {
+    "Name": "краставица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BA%D1%80%D0%B0%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BA%D1%80%D0%B0%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 304
+  },
+  {
+    "Name": "кромид",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BA%D1%80%D0%BE%D0%BC%D0%B8%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BA%D1%80%D0%BE%D0%BC%D0%B8%D0%B4.m4a",
+    "Category": "Vegetables",
+    "Position": 305
+  },
+  {
+    "Name": "леќа",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BB%D0%B5%D1%9C%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BB%D0%B5%D1%9C%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 306
+  },
+  {
+    "Name": "лук",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BB%D1%83%D0%BA.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BB%D1%83%D0%BA.m4a",
+    "Category": "Vegetables",
+    "Position": 307
+  },
+  {
+    "Name": "марула",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BC%D0%B0%D1%80%D1%83%D0%BB%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BC%D0%B0%D1%80%D1%83%D0%BB%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 308
+  },
+  {
+    "Name": "млад кромид",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BC%D0%BB%D0%B0%D0%B4%20%D0%BA%D1%80%D0%BE%D0%BC%D0%B8%D0%B4.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BC%D0%BB%D0%B0%D0%B4%20%D0%BA%D1%80%D0%BE%D0%BC%D0%B8%D0%B4.m4a",
+    "Category": "Vegetables",
+    "Position": 309
+  },
+  {
+    "Name": "модар патлиџан",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BC%D0%BE%D0%B4%D0%B0%D1%80%20%D0%BF%D0%B0%D1%82%D0%BB%D0%B8%D1%9F%D0%B0%D0%BD.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BC%D0%BE%D0%B4%D0%B0%D1%80%20%D0%BF%D0%B0%D1%82%D0%BB%D0%B8%D1%9F%D0%B0%D0%BD.m4a",
+    "Category": "Vegetables",
+    "Position": 310
+  },
+  {
+    "Name": "морков",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BC%D0%BE%D1%80%D0%BA%D0%BE%D0%B2.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BC%D0%BE%D1%80%D0%BA%D0%BE%D0%B2.m4a",
+    "Category": "Vegetables",
+    "Position": 311
+  },
+  {
+    "Name": "печурки",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BF%D0%B5%D1%87%D1%83%D1%80%D0%BA%D0%B8.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BF%D0%B5%D1%87%D1%83%D1%80%D0%BA%D0%B8.m4a",
+    "Category": "Vegetables",
+    "Position": 312
+  },
+  {
+    "Name": "пиперка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BF%D0%B8%D0%BF%D0%B5%D1%80%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BF%D0%B8%D0%BF%D0%B5%D1%80%D0%BA%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 313
+  },
+  {
+    "Name": "пченка",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D0%BF%D1%87%D0%B5%D0%BD%D0%BA%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D0%BF%D1%87%D0%B5%D0%BD%D0%BA%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 314
+  },
+  {
+    "Name": "ротквица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D1%80%D0%BE%D1%82%D0%BA%D0%B2%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D1%80%D0%BE%D1%82%D0%BA%D0%B2%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 315
+  },
+  {
+    "Name": "сладок компир",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D1%81%D0%BB%D0%B0%D0%B4%D0%BE%D0%BA%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D1%81%D0%BB%D0%B0%D0%B4%D0%BE%D0%BA%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D1%80.m4a",
+    "Category": "Vegetables",
+    "Position": 316
+  },
+  {
+    "Name": "спанаќ",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D1%81%D0%BF%D0%B0%D0%BD%D0%B0%D1%9C.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D1%81%D0%BF%D0%B0%D0%BD%D0%B0%D1%9C.m4a",
+    "Category": "Vegetables",
+    "Position": 317
+  },
+  {
+    "Name": "тиквица",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D1%82%D0%B8%D0%BA%D0%B2%D0%B8%D1%86%D0%B0.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D1%82%D0%B8%D0%BA%D0%B2%D0%B8%D1%86%D0%B0.m4a",
+    "Category": "Vegetables",
+    "Position": 318
+  },
+  {
+    "Name": "цвекло",
+    "Image": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/images/vegetables/%D1%86%D0%B2%D0%B5%D0%BA%D0%BB%D0%BE.png",
+    "AudioVoice": "https://storage.googleapis.com/lunar-echo-storage/vinozito-data/audio/vegetables/%D1%86%D0%B2%D0%B5%D0%BA%D0%BB%D0%BE.m4a",
+    "Category": "Vegetables",
+    "Position": 319
+  }
+]

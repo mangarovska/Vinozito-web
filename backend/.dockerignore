@@ -1,0 +1,13 @@
+bin
+obj
+.git
+.gitignore
+*.user
+*.suo
+*.userprefs
+publish
+out
+TestResults
+.vs
+.idea
+.vscode

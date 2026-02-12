@@ -65,6 +65,18 @@ const ShadowTarget = ({
 
     shuffleSound.current = new Audio("/audio/memory/flip.ogg");
     shuffleSound.current.volume = 0.5;
+
+    // Cleanup function to stop and cleanup audio on unmount
+    return () => {
+      const audioRefs = [correctSound, wrongSound, winSound, shuffleSound];
+      audioRefs.forEach((ref) => {
+        if (ref.current) {
+          ref.current.pause();
+          ref.current.src = "";
+          ref.current = null;
+        }
+      });
+    };
   }, []);
 
   // Play win sound once when allMatched becomes true

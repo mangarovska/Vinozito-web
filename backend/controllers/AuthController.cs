@@ -330,9 +330,9 @@ public class AuthController : ControllerBase
         {
             var user = await _userService.RegisterUserAsync(
                 userRegister.Username,
-                userRegister.Password,  // UserService will handle password hashing    
-                                        //HashPassword(userRegister.Password),
-                userRegister.Email
+                userRegister.Email,
+                userRegister.Password   // UserService will handle password hashing    
+                                        //HashPassword(userRegister.Password)
             );
 
             return Ok(new { message = "User registered successfully", userId = user.Id });

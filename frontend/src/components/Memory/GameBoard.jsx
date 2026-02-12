@@ -190,6 +190,18 @@ export default function GameBoard() {
 
     resetSound.current = new Audio("/audio/memory/reset.mp3");
     resetSound.current.volume = 0.5;
+
+    // Cleanup function to stop and cleanup audio on unmount
+    return () => {
+      const audioRefs = [flipSound, correctSound, wrongSound, winSound, resetSound];
+      audioRefs.forEach((ref) => {
+        if (ref.current) {
+          ref.current.pause();
+          ref.current.src = "";
+          ref.current = null;
+        }
+      });
+    };
   }, []);
 
   return (

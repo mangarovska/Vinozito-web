@@ -175,80 +175,161 @@ body,
   padding: 0;
 }
 
-@media (max-width: 750px) {
-  .aac-container {
-    padding-left: 0;
-    padding-right: 0;
+/* ==== MOBILE STYLES (768px and below) ==== */
+@media (max-width: 768px) {
+  .aac-page {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
+
+  .fixed-top-container {
+    flex-shrink: 0;
+  }
+
+  .banner.communication-banner {
+    padding: 0.5rem;
+    background: linear-gradient(to bottom, #b8d6fa, #d2e3f7 60%, #ffffff);
+  }
+
+  .banner.communication-banner::before,
+  .banner.communication-banner::after {
+    display: none;
+  }
+
+  .communication-top-content {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Reorder: slots first, then buttons, then categories */
+  .slots-controls {
+    margin: 0;
+    padding: 0 8px;
+    width: 100%;
+    order: 1;
+  }
+
   .slots-container {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
 
   .slots {
-    margin-left: -87px !important;
+    min-height: 90px;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 12px;
+    width: 100%;
+    margin-left: 0 !important;
     margin-right: 0 !important;
-    width: 100vw !important;
-    border-radius: 0;
-    padding: 20px 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .card {
+    width: 70px;
+    height: 70px;
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .selected-cards {
+    gap: 10px;
+  }
+
+  /* Control buttons row */
+  .slots-buttons-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    margin: 0;
+    padding: 4px 0 8px 0;
+    width: 100%;
+    order: 2;
   }
 
   .icon-button {
-    /* margin-left: 100px; */
     width: 60px;
+    height: 44px;
+    background-image: url("/comms-assets/back_btn.png");
+    margin-bottom: 0;
   }
 
   .icon-button img {
-    margin: 0;
-    margin-bottom: 7px;
-    width: 43px;
-    height: 43px;
-    padding: 0;
+    width: 28px;
+    height: 28px;
+    margin-left: 24px;
+    margin-bottom: 3px;
   }
 
-  .slots-buttons-row {
-    order: -1;
-    /* margin-right: 0 !important; */
-    justify-content: center;
-    display: flex;
-    gap: 0px;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    flex-direction: row;
-    margin-left: clamp(205px, 40vw, 600px);
-    /* margin-bottom: 15px; */
-    /* padding: 0 10px; */
+  .icon-button:disabled {
+    opacity: 0.4;
   }
 
-  .slots-controls {
-    margin-top: -40px;
-    margin-bottom: 20px;
+  /* Category scroller comes after slots and buttons */
+  .category-scroller-wrapper {
+    order: 3;
+    margin-top: 2px;
   }
 
-  /* .banner.communication-banner {
-    padding: 8rem 2rem 0rem 2rem;
-  } */
-
-  .slots-buttons-row {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
-    padding: 0px 0;
-    /* margin-left: -24px;
-    margin-right: -24px; */
-    margin-bottom: -10px;
-  }
-
-  .icon-button {
+  /* Container takes remaining space for cards */
+  .aac-container {
     flex: 1;
-    background-image: url("/comms-assets/back_btn.png");
-    /* font-size: 14px; */
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    order: 4;
+  }
+
+  .scroll-fade-wrapper {
+    height: 100%;
+  }
+
+  .slots:empty::before {
+    font-size: 14px;
   }
 }
 
+/* ==== SMALL MOBILE (480px and below) ==== */
 @media (max-width: 480px) {
-  .scroll-button {
-    font-size: 20px;
+  .banner.communication-banner {
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .slots {
+    min-height: 80px;
+    padding: 8px;
+  }
+
+  .card {
+    width: 60px;
+    height: 60px;
+    padding: 4px;
+    border-radius: 8px;
+  }
+
+  .selected-cards {
+    gap: 8px;
+  }
+
+  .icon-button {
+    width: 52px;
+    height: 38px;
+  }
+
+  .icon-button img {
+    width: 24px;
+    height: 24px;
+    margin-left: 20px;
+  }
+
+  .slots-buttons-row {
+    gap: 10px;
+    padding: 2px 0 6px 0;
   }
 }

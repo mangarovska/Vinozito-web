@@ -191,3 +191,76 @@
     opacity: 1;
   }
 }
+
+/* === Mobile Styles === */
+@media (max-width: 1024px) {
+  .phone-wrapper {
+    width: 260px;
+    height: 450px;
+  }
+
+  .phone-screen {
+    width: 160px;
+    height: 340px;
+  }
+
+  .side-button {
+    right: -3px;
+    width: 6px;
+    border: 3px solid black;
+  }
+
+  .side-button.top-1 {
+    top: 56px;
+    height: 22px;
+  }
+
+  .side-button.top-2 {
+    top: 102px;
+    height: 22px;
+  }
+
+  .side-button.bottom-1 {
+    bottom: 114px;
+    height: 32px;
+  }
+
+  .notch {
+    width: 60px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-wrapper {
+    width: 220px;
+    height: 380px;
+  }
+
+  .phone-screen {
+    width: 135px;
+    height: 290px;
+    border: 3px solid black;
+    border-radius: 0.8rem;
+  }
+
+  .side-button.top-1 {
+    top: 48px;
+    height: 18px;
+  }
+
+  .side-button.top-2 {
+    top: 86px;
+    height: 18px;
+  }
+
+  .side-button.bottom-1 {
+    bottom: 98px;
+    height: 26px;
+  }
+
+  .notch {
+    width: 50px;
+    height: 5px;
+  }
+}

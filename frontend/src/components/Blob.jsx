@@ -37,72 +37,63 @@ const Blob = ({
 }) => {
   const [path1] = useState(generateBlobPath());
   const [path2] = useState(generateBlobPath());
-  const [current, setCurrent] = useState(true);
+  const [currentPath, setCurrentPath] = useState(true);
   const controls = useAnimation();
   const videoRef = useRef(null);
   const [hovering, setHovering] = useState(false);
-  const isMountedRef = useRef(true); // track mount state with ref
+  const isMountedRef = useRef(true);
 
-  // blob morphing loop -> prevent memory leak
+  // Fixed: Use interval instead of while loop
   useEffect(() => {
     isMountedRef.current = true;
-    const currentRef = { current }; // capture current value in ref
-
-    const loop = async () => {
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-
-      while (isMountedRef.current) {
-        const targetPath = currentRef.current ? path2 : path1;
-
-        if (typeof targetPath === "string" && targetPath.startsWith("M")) {
-          await controls
-            .start({
-              d: targetPath,
-              transition: { duration: 6, ease: "easeInOut" },
-            })
-            .catch(() => {}); // silence cancellation errors
-        }
-
-        if (isMountedRef.current) {
-          setCurrent((prev) => {
-            currentRef.current = !prev; // update ref with new value
-            return !prev;
+    
+    const animateMorph = async () => {
+      if (!isMountedRef.current) return;
+      
+      const targetPath = currentPath ? path2 : path1;
+      
+      if (typeof targetPath === "string" && targetPath.startsWith("M")) {
+        try {
+          await controls.start({
+            d: targetPath,
+            transition: { duration: 6, ease: "easeInOut" },
           });
+        } catch (e) {
+          // Animation was cancelled, ignore
         }
+      }
+      
+      if (isMountedRef.current) {
+        setCurrentPath(prev => !prev);
       }
     };
 
-    loop();
+    animateMorph();
 
     return () => {
       isMountedRef.current = false;
+      controls.stop();
     };
-  }, [path1, path2, controls]);
+  }, [currentPath, path1, path2, controls]);
 
-  // pause hover video logic
+  // Hover video logic
   useEffect(() => {
-    let checkInterval = null;
+    if (!hovering || !videoRef.current || typeof pauseTime !== "number") return;
 
-    if (hovering && videoRef.current && typeof pauseTime === "number") {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
+    videoRef.current.currentTime = 0;
+    videoRef.current.play();
 
-      checkInterval = setInterval(() => {
-        if (videoRef.current.currentTime >= pauseTime) {
-          videoRef.current.pause();
-          clearInterval(checkInterval);
-        }
-      }, 50);
-    }
+    const checkInterval = setInterval(() => {
+      if (videoRef.current && videoRef.current.currentTime >= pauseTime) {
+        videoRef.current.pause();
+        clearInterval(checkInterval);
+      }
+    }, 50);
 
-    return () => {
-      clearInterval(checkInterval);
-    };
+    return () => clearInterval(checkInterval);
   }, [hovering, pauseTime]);
 
-  const handleMouseEnter = () => {
-    setHovering(true);
-  };
+  const handleMouseEnter = () => setHovering(true);
 
   const handleMouseLeave = () => {
     setHovering(false);
@@ -111,29 +102,26 @@ const Blob = ({
       videoRef.current.play();
 
       const handleEnd = () => {
-        videoRef.current.currentTime = 0;
-        videoRef.current.pause();
-        videoRef.current.playbackRate = 1.0;
-        videoRef.current.removeEventListener("ended", handleEnd);
+        if (videoRef.current) {
+          videoRef.current.currentTime = 0;
+          videoRef.current.pause();
+          videoRef.current.playbackRate = 1.0;
+        }
+        videoRef.current?.removeEventListener("ended", handleEnd);
       };
 
       videoRef.current.addEventListener("ended", handleEnd);
     }
   };
 
-  // const contentWidth = `${contentSize * 100}%`;
-  // const contentHeight = `${contentSize * 100}%`;
-
-  //console.log({ path1, path2, pauseTime, imageUrl, hoverVideo }); // for testing
-
-  const selectedPath = current ? path1 : path2;
+  const selectedPath = currentPath ? path1 : path2;
 
   const isValidPath =
     typeof selectedPath === "string" && selectedPath.startsWith("M"); // ensure valid path
   const fallbackPath = "M 0 0 L 100 0 L 100 100 L 0 100 Z";
 
   return (
-    <div className="group flex flex-col items-center w-full max-w-[300px] max-h-[300px]">
+    <div className="blob-wrapper group flex flex-col items-center w-full max-w-[300px] max-h-[300px]">
       <div
         className="relative w-full aspect-square max-w-[250px] min-w-[170px]"
         onMouseEnter={handleMouseEnter}
@@ -142,7 +130,7 @@ const Blob = ({
       >
         <svg
           viewBox="0 0 240 270"
-          className="w-full h-full block pointer-ev ents-none"
+          className="w-full h-full block"
           style={overflowVisible ? { overflow: "visible" } : {}}
         >
           {!noShadow && (
@@ -227,7 +215,7 @@ const Blob = ({
         </motion.div>
       </div>
 
-      <p className="text-lg sm:text-xl font-semibold text-gray-700 text-center mt-2 drop-shadow-sm">
+      <p className="blob-label text-lg sm:text-xl font-semibold text-gray-700 text-center mt-2 drop-shadow-sm">
         {label}
       </p>
     </div>

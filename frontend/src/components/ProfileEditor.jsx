@@ -67,7 +67,7 @@ const ProfileEditor = () => {
   const fetchProfile = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("https://api.mangaserver.ddnsfree.com/api/User/profile", {
+      const response = await fetch("/api/User/profile", {
         headers: {
           Authorization: `Bearer ${getAuthToken()}`,
           "Content-Type": "application/json",
@@ -177,7 +177,7 @@ const ProfileEditor = () => {
       formData.append("file", selectedFile);
 
       const response = await fetch(
-        `https://api.mangaserver.ddnsfree.com/api/Upload/image?userId=${profile.id}&type=profile`,
+        `/api/Upload/image?userId=${profile.id}&type=profile`,
         {
           method: "POST",
           headers: {
@@ -278,7 +278,7 @@ const ProfileEditor = () => {
 
       console.log("Sending update data:", updateData);
 
-      const response = await fetch("https://api.mangaserver.ddnsfree.com/api/User/profile", {
+      const response = await fetch("/api/User/profile", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${getAuthToken()}`,

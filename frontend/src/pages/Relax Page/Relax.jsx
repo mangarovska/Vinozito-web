@@ -94,6 +94,10 @@ const Bubble = ({ x, y, size }) => {
 
   const handlePop = () => {
     if (isPopped) return;
+    
+    // Cancel animation frame to prevent memory leak
+    cancelAnimationFrame(animationRef.current.frameId);
+    
     playPop();
 
     const bubble = bubbleRef.current;
@@ -126,8 +130,25 @@ const Bubble = ({ x, y, size }) => {
     if (isPopped && videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play().catch(console.warn);
+    } else if (!isPopped && videoRef.current) {
+      // Cleanup video when bubble resets
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
     }
   }, [isPopped]);
+
+  // Cleanup video on unmount
+  useEffect(() => {
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.src = "";
+        videoRef.current.load();
+      }
+      // Also cancel any pending animation frame
+      cancelAnimationFrame(animationRef.current.frameId);
+    };
+  }, []);
 
   return (
     <>

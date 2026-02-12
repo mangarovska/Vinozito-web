@@ -87,11 +87,11 @@ const BlobsRow = () => {
   return (
     <section className="w-full py-6 px-4 overflow-hidden">
       <div className="flex flex-col items-center">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 max-w-[1200px] w-full justify-items-center">
+        <div className="blob-row-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 max-w-[1200px] w-full justify-items-center">
           {blobsData.map((blob, idx) => (
             <div
               key={`blob-${idx}`}
-              className="flex justify-center " // min-w-[190px] sm:min-w-[180px]
+              className="flex justify-center" // min-w-[190px] sm:min-w-[180px]
               onClick={() => handleBlobClick(idx)}
               style={{ cursor: "pointer" }}
             >

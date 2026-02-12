@@ -49,6 +49,25 @@
   box-sizing: border-box;
 }
 
+/* Mobile styles */
+@media (max-width: 768px) {
+  .drop-circle {
+    width: 180px;
+    height: 180px;
+    margin: 10px auto 30px auto;
+  }
+
+  .spinning-border {
+    width: 180px;
+    height: 180px;
+  }
+
+  .flower-shadow {
+    width: 90px;
+    height: 135px;
+  }
+}
+
 .drop-circle.correct .circle-content {
   animation: correctPulse 3s ease-in-out infinite;
 }

@@ -1,5 +1,18 @@
 version: '3.8'
 
+# ============================================================
+# Production Docker Compose - Uses Published Images from Docker Hub
+# ============================================================
+# 
+# Images used:
+#   - Frontend: nnikolovskii/vinozito-frontend:1.0.0
+#   - Backend:  nnikolovskii/vinozito-backend:1.0.0
+#
+# Usage:
+#   docker-compose -f docker-compose.prod.yml up -d
+#
+# ============================================================
+
 services:
   # MongoDB Database
   mongodb:
@@ -41,11 +54,9 @@ services:
       mongodb:
         condition: service_healthy
 
-  # Backend API (.NET 9.0)
+  # Backend API (.NET 9.0) - Using published Docker Hub image
   backend:
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
+    image: nnikolovskii/vinozito-backend:1.0.0
     container_name: vinozito-backend
     restart: unless-stopped
     environment:
@@ -71,11 +82,9 @@ services:
       timeout: 10s
       retries: 3
 
-  # Frontend (React + Vite + Nginx)
+  # Frontend (React + Vite + Nginx) - Using published Docker Hub image
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: nnikolovskii/vinozito-frontend:1.0.0
     container_name: vinozito-frontend
     restart: unless-stopped
     ports:

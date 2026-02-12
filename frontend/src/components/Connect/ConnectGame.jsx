@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { DndProvider } from "react-dnd";
+import { DndProvider, TouchTransition, MouseTransition } from "react-dnd-multi-backend";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 import { flowers } from "../../data.js";
 
 import Flower from "./Flower.jsx";
@@ -39,6 +40,23 @@ const WinAnimation = () => {
       ))}
     </>
   );
+};
+
+const HTML5toTouch = {
+  backends: [
+    {
+      id: 'html5',
+      backend: HTML5Backend,
+      transition: MouseTransition,
+    },
+    {
+      id: 'touch',
+      backend: TouchBackend,
+      options: { enableMouseEvents: true },
+      transition: TouchTransition,
+      preview: true,
+    },
+  ],
 };
 
 const ConnectGame = () => {
@@ -99,7 +117,7 @@ const ConnectGame = () => {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider options={HTML5toTouch}>
       <div
         className="game-container align-items-center justify-content-center"
         style={{ position: "relative", width: "100%" }}

@@ -27,6 +27,14 @@ body {
 
 @media (max-width: 768px) {
   .menu-page {
-    padding: 20px; /* Adjust padding on smaller screens */
+    padding: 16px 12px; /* Reduced padding for more content space */
+    min-height: auto; /* Allow content to determine height */
+    padding-bottom: 40px; /* Add bottom padding for better spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-page {
+    padding: 12px 8px;
   }
 }

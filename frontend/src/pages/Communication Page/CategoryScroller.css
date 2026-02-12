@@ -200,106 +200,106 @@
   }
 }
 
-@media (max-width: 750px) {
-  .category-card-rectangle {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    padding: 20px 20px;
-  }
-  .aac-container {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .slots-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .slots {
-    margin-left: -87px !important;
-    margin-right: 0 !important;
-    width: 100vw !important;
-    border-radius: 0;
-    padding: 20px 10px;
-  }
-
-  .icon-button {
-    /* margin-left: 100px; */
-    width: 60px;
-  }
-
-  .icon-button img {
-    margin: 0;
-    margin-bottom: 7px;
-    width: 43px;
-    height: 43px;
-    padding: 0;
-  }
-
-  .slots-buttons-row {
-    order: -1;
-    /* margin-right: 0 !important; */
-    justify-content: center;
-    display: flex;
-    gap: 0px;
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    flex-direction: row;
-    margin-left: clamp(205px, 40vw, 600px);
-    /* margin-bottom: 15px; */
-    /* padding: 0 10px; */
-  }
-
-  .slots-controls {
-    margin-top: -40px;
-    margin-bottom: 20px;
-  }
-  
-  /* .banner.communication-banner {
-    padding: 8rem 2rem 0rem 2rem;
-  } */
-
-  .category-buttons {
-    padding: 10px 0; /* No horizontal padding */
-    margin: 0 10px; /* Use margin instead for some spacing from edges */
-    justify-content: flex-start;
-  }
-
-  .slots-buttons-row {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
-    padding: 0px 0;
-    /* margin-left: -24px;
-    margin-right: -24px; */
-    margin-bottom: -10px;
-  }
-
-  .icon-button {
-    flex: 1;
-    background-image: url("/comms-assets/back_btn.png");
-    /* font-size: 14px; */
-  }
-
+/* ==== MOBILE STYLES (768px and below) ==== */
+@media (max-width: 768px) {
+  /* Category bar - relative positioning instead of fixed */
   .category-background-bar {
-    position: fixed;
-    top: 420px;
+    position: relative;
+    top: auto;
+    height: 36px;
+    margin: 0;
   }
-}
 
-@media (max-width: 480px) {
-  .category-card-rectangle {
-    padding: 10px 10px;
+  .category-scroller-container {
+    margin-top: -36px; /* Overlap the bar */
+    padding: 0;
+  }
+
+  .category-scroller-wrapper {
+    margin-bottom: 0;
+    background: transparent;
   }
 
   .category-buttons {
-    padding: 10px 0; /* No horizontal padding */
-    margin: 0 10px; /* Use margin instead for some spacing from edges */
-    justify-content: flex-start;
+    padding: 4px 8px;
+    gap: 10px;
+  }
+
+  .category-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .category-icon {
+    height: 32px;
   }
 
   .scroll-button {
-    font-size: 20px;
+    padding: 0 6px;
+  }
+
+  .scroll-button .arrow-icon {
+    font-size: 18px;
+  }
+
+  /* Card grid */
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .category-card {
+    max-height: 130px;
+    padding: 8px 4px 4px;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+
+  .category-card img {
+    max-height: 85px;
+    padding: 4px;
+  }
+
+  .category-card div {
+    font-size: 12px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .fade-top-overlay {
+    height: 6px;
+  }
+}
+
+/* ==== SMALL MOBILE (480px and below) ==== */
+@media (max-width: 480px) {
+  .category-card-rectangle {
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+    gap: 8px;
+    padding: 10px 8px;
+  }
+
+  .category-card {
+    max-height: 120px;
+    padding: 8px 4px 4px;
+    border-radius: 12px;
+  }
+
+  .category-card img {
+    max-height: 75px;
+    padding: 2px;
+  }
+
+  .category-card div {
+    font-size: 11px;
+  }
+
+  .category-buttons {
+    padding: 4px 6px;
+    gap: 8px;
   }
 }
 

@@ -25,6 +25,26 @@ const CommunicationPage = () => {
   const categoryScrollRef = useRef(null);
 
   const [activeIndex, setActiveIndex] = useState(null); // track active card -> card being read
+  
+  // Ref to track active audio objects for cleanup
+  const activeAudiosRef = useRef([]);
+  
+  // Cleanup function to stop all active audio
+  const cleanupAudio = () => {
+    activeAudiosRef.current.forEach((audio) => {
+      audio.pause();
+      audio.src = "";
+      audio.onended = null;
+    });
+    activeAudiosRef.current = [];
+  };
+  
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      cleanupAudio();
+    };
+  }, []);
 
   const handleCategoryScroll = () => {
     const el = categoryScrollRef.current;
@@ -47,7 +67,7 @@ const CommunicationPage = () => {
       const fetchDefaultCardsOnly = async () => {
         try {
           const response = await fetch(
-            "https://api.mangaserver.ddnsfree.com/api/DefaultCard/" // IMPORTANT: http://localhost:5100/api/DefaultCard/
+            "/api/DefaultCard/" // Uses relative URL - Nginx proxies to backend
           );
           if (!response.ok) throw new Error("Failed to fetch default cards");
 
@@ -83,7 +103,7 @@ const CommunicationPage = () => {
         };
 
         const response = await fetch(
-          `https://api.mangaserver.ddnsfree.com/api/Card/${userId}`,
+          `/api/Card/${userId}`,
           {
             headers,
           }
@@ -139,8 +159,21 @@ const CommunicationPage = () => {
 
     if (card.audioVoice) {
       const audio = new Audio(card.audioVoice);
+      activeAudiosRef.current.push(audio);
+      audio.onended = () => {
+        // Remove from active audios when finished
+        const index = activeAudiosRef.current.indexOf(audio);
+        if (index > -1) {
+          activeAudiosRef.current.splice(index, 1);
+        }
+      };
       audio.play().catch((error) => {
         console.warn(`Failed to play audio for ${card.name}:`, error);
+        // Remove from active audios on error
+        const index = activeAudiosRef.current.indexOf(audio);
+        if (index > -1) {
+          activeAudiosRef.current.splice(index, 1);
+        }
       });
     }
   };
@@ -159,6 +192,9 @@ const CommunicationPage = () => {
   const handlePlaySound = () => {
     if (selectedCards.length === 0) return;
 
+    // Clean up any existing audio before starting new sequence
+    cleanupAudio();
+
     // preload all audios
     const audios = selectedCards.map((card) => {
       const a = new Audio(card.audioVoice);
@@ -166,17 +202,28 @@ const CommunicationPage = () => {
       return a;
     });
 
+    // Track all audios in the ref
+    activeAudiosRef.current = audios;
+
     let i = 0;
     setActiveIndex(i);
     audios[i].play();
 
     audios.forEach((audio, index) => {
       audio.onended = () => {
+        // Remove finished audio from tracking
+        const idx = activeAudiosRef.current.indexOf(audio);
+        if (idx > -1) {
+          activeAudiosRef.current.splice(idx, 1);
+        }
+        
         if (index + 1 < audios.length) {
           setActiveIndex(index + 1);
           audios[index + 1].play();
         } else {
           setActiveIndex(null);
+          // Clear tracking when sequence completes
+          activeAudiosRef.current = [];
         }
       };
     });
@@ -220,14 +267,25 @@ const CommunicationPage = () => {
                           onClick={() => {
                             if (card.audioVoice) {
                               const audio = new Audio(card.audioVoice);
+                              activeAudiosRef.current.push(audio);
+                              audio.onended = () => {
+                                const index = activeAudiosRef.current.indexOf(audio);
+                                if (index > -1) {
+                                  activeAudiosRef.current.splice(index, 1);
+                                }
+                              };
                               audio
                                 .play()
-                                .catch((err) =>
+                                .catch((err) => {
                                   console.warn(
                                     `Audio failed for ${card.name}:`,
                                     err
-                                  )
-                                );
+                                  );
+                                  const index = activeAudiosRef.current.indexOf(audio);
+                                  if (index > -1) {
+                                    activeAudiosRef.current.splice(index, 1);
+                                  }
+                                });
                             }
                           }}
                         />

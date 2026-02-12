@@ -81,11 +81,11 @@ export default function ParentPage() {
       console.log("Fetching cards for user:", userId);
 
       const [defaultRes, customRes] = await Promise.all([
-        fetch("https://api.mangaserver.ddnsfree.com/api/DefaultCard", {
+        fetch("/api/DefaultCard", {
           headers,
         }),
         fetch(
-          `https://api.mangaserver.ddnsfree.com/api/CustomCard/user/${userId}`,
+          `/api/CustomCard/user/${userId}`,
           {
             headers,
           }
@@ -227,7 +227,7 @@ export default function ParentPage() {
       formData.append("file", file);
 
       const endpoint = type === "image" ? "/upload/image" : "/upload/audio";
-      const uploadUrl = `https://api.mangaserver.ddnsfree.com/api${endpoint}?userId=${userId}`;
+      const uploadUrl = `/api${endpoint}?userId=${userId}`;
 
       console.log(`Uploading to: ${uploadUrl}`);
 
@@ -312,7 +312,7 @@ export default function ParentPage() {
         console.log("Creating brand new custom card:", createData);
 
         response = await fetch(
-          `https://api.mangaserver.ddnsfree.com/api/CustomCard`,
+          `/api/CustomCard`,
           {
             method: "POST",
             headers,
@@ -329,7 +329,7 @@ export default function ParentPage() {
         };
 
         response = await fetch(
-          `https://api.mangaserver.ddnsfree.com/api/CustomCard/${editingCard.id}`,
+          `/api/CustomCard/${editingCard.id}`,
           {
             method: "PUT",
             headers,
@@ -352,7 +352,7 @@ export default function ParentPage() {
           };
 
           response = await fetch(
-            `https://api.mangaserver.ddnsfree.com/api/CustomCard/${existingCustomCard.id}`,
+            `/api/CustomCard/${existingCustomCard.id}`,
             {
               method: "PUT",
               headers,
@@ -370,7 +370,7 @@ export default function ParentPage() {
           };
 
           response = await fetch(
-            `https://api.mangaserver.ddnsfree.com/api/CustomCard`,
+            `/api/CustomCard`,
             {
               method: "POST",
               headers,
@@ -421,7 +421,7 @@ export default function ParentPage() {
       console.log("Reverting custom card with ID:", card.id);
 
       const response = await fetch(
-        `https://api.mangaserver.ddnsfree.com/api/CustomCard/${card.id}`,
+        `/api/CustomCard/${card.id}`,
         {
           method: "DELETE",
           headers,

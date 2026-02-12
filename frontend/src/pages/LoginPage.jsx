@@ -62,7 +62,7 @@ export default function LoginPage() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("https://api.mangaserver.ddnsfree.com/api/user/protected", {
+    fetch("/api/user/protected", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -103,7 +103,7 @@ export default function LoginPage() {
     const accessToken = tokenResponse.access_token;
 
     const response = await fetch(
-      "https://api.mangaserver.ddnsfree.com/api/auth/google-login",
+      "/api/auth/google-login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -132,7 +132,7 @@ export default function LoginPage() {
       const accessToken = tokenResponse.access_token;
 
       const response = await fetch(
-        "https://api.mangaserver.ddnsfree.com/api/auth/google-login",
+        "/api/auth/google-login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -221,7 +221,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://api.mangaserver.ddnsfree.com/api/auth/login", {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -258,7 +258,7 @@ export default function LoginPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://api.mangaserver.ddnsfree.com/api/auth/register", {
+    const response = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

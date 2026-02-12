@@ -396,13 +396,21 @@ export default function ColoringCanvas() {
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
+    // Handle touch events
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
     return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY,
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
     };
   };
 
   const startDrawing = (e) => {
+    // Prevent default to avoid scrolling on mobile
+    if (e.touches) {
+      e.preventDefault();
+    }
     const { x, y } = getCanvasMousePosition(e);
     const clickedPath = findClickedPath(x, y);
 
@@ -465,6 +473,8 @@ export default function ColoringCanvas() {
 
     window.addEventListener("mousemove", draw);
     window.addEventListener("mouseup", stopDrawing);
+    window.addEventListener("touchmove", draw, { passive: false });
+    window.addEventListener("touchend", stopDrawing);
   };
 
   const saveToHistory = (operation) => {
@@ -517,7 +527,13 @@ export default function ColoringCanvas() {
   };
 
   const draw = (e) => {
-    if (!isDrawing || !currentPathRef.current) return;
+    // FIX: Use isDrawingRef.current instead of isDrawing state
+    if (!isDrawingRef.current || !currentPathRef.current) return;
+    
+    // Prevent default to avoid scrolling on mobile
+    if (e.touches) {
+      e.preventDefault();
+    }
 
     const canvas = canvasRef.current;
     const { width, height } = canvas;
@@ -554,6 +570,8 @@ export default function ColoringCanvas() {
 
     window.removeEventListener("mousemove", draw); // detach global listeners
     window.removeEventListener("mouseup", stopDrawing);
+    window.removeEventListener("touchmove", draw);
+    window.removeEventListener("touchend", stopDrawing);
   };
 
   const saveProgressNow = () => {
@@ -746,6 +764,38 @@ export default function ColoringCanvas() {
     };
   }, [coloredPaths, freehandPaths]);
 
+  // Add this useEffect to handle touch events with { passive: false }
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const handleTouchStart = (e) => {
+      e.preventDefault();
+      startDrawing(e);
+    };
+
+    const handleTouchMove = (e) => {
+      if (isDrawingRef.current) {
+        e.preventDefault();
+      }
+      draw(e);
+    };
+
+    const handleTouchEnd = (e) => {
+      stopDrawing(e);
+    };
+
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   const onModalConfirm = (save) => {
     setShowSaveModal(false);
     if (backCallbackRef.current) {
@@ -794,6 +844,7 @@ export default function ColoringCanvas() {
               onMouseMove={draw}
               onMouseUp={stopDrawing}
               onMouseEnter={handleMouseEnter}
+              // Touch events are now handled by useEffect with { passive: false }
               style={{
                 cursor: isBucketFill ? "pointer" : "crosshair",
                 width: "100%",
